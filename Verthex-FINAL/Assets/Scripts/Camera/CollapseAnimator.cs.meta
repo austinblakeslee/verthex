@@ -1,0 +1,8 @@
+fileFormatVersion: 2
+guid: 131a997721726fc499d8c6367130eeba
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - soundEffect: {fileID: 8300000, guid: 85415db31ba5f2b49a97a1ebb551147a, type: 1}
+  executionOrder: 0
+  icon: {instanceID: 0}

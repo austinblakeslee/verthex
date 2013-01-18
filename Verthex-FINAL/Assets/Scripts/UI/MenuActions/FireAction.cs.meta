@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 80ea088e4da49c545a1d0591338a78e4
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - click: {instanceID: 0}
+  - emptyTexture: {instanceID: 0}
+  - fillTexture: {instanceID: 0}
+  - fireClip: {instanceID: 0}
+  - firingParticle: {fileID: 100000, guid: 14a6857ac819e214299a2c467539e77d, type: 2}
+  - hitParticle: {fileID: 100000, guid: 74ad7398b02800741ac0691dd44b60d4, type: 2}
+  - selectedSection: {instanceID: 0}
+  - GUILabel: {instanceID: 0}
+  - projectile: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}

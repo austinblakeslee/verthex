@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{4398B4CA-33D1-7E16-DAA9-0DFF472E3652}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_WEBPLAYER;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\Camera\CollapseAnimator.cs" />
+     <Compile Include="Assets\Scripts\Camera\MainCamera.cs" />
+     <Compile Include="Assets\Scripts\Camera\TutorialCamera.cs" />
+     <Compile Include="Assets\Scripts\Camera\WeaponAnimator.cs" />
+     <Compile Include="Assets\Scripts\Player\Player.cs" />
+     <Compile Include="Assets\Scripts\Tower\Section.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionController.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionMaterials\SectionMaterial.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionMaterials\Steel.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionMaterials\Stone.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionMaterials\Wood.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Ballista.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Cannon.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Catapult.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Effects\AreaOfEffect.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Effects\DamageOverTime.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Effects\DefaultEffect.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Effects\Dot.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Effects\DotManager.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Effects\Effect.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\Nothing.cs" />
+     <Compile Include="Assets\Scripts\Tower\SectionWeapons\SectionWeapon.cs" />
+     <Compile Include="Assets\Scripts\Tower\Tower.cs" />
+     <Compile Include="Assets\Scripts\Tower\TowerBase.cs" />
+     <Compile Include="Assets\Scripts\Tower\TowerController.cs" />
+     <Compile Include="Assets\Scripts\TowerStatus.cs" />
+     <Compile Include="Assets\Scripts\TurnOrder.cs" />
+     <Compile Include="Assets\Scripts\UI\CombatLog.cs" />
+     <Compile Include="Assets\Scripts\UI\GameValues.cs" />
+     <Compile Include="Assets\Scripts\UI\Menu.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\BuildAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\ChangeScene.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\DefaultMenuAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\FireAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\FortifyAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\MaterialCostBuildActions\SteelMaterialUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\MaterialCostBuildActions\StoneMaterialUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\MaterialCostBuildActions\WoodMaterialUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\MaterialCostLabelUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\MenuAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\PassAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\QuitGame.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\ResetGame.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\SwitchMenu.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\ToggleMenu.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\UpdateMenuItem.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\UpgradeActions\AoEAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\UpgradeActions\DamageAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\UpgradeActions\DoTAction.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\WeaponCostBuildActions\BallistaWeaponUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\WeaponCostBuildActions\CannonWeaponUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\WeaponCostBuildActions\CatapultWeaponUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\WeaponCostBuildActions\NothingWeaponUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuActions\WeaponCostLabelUpdate.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuItem.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuItemManager.cs" />
+     <Compile Include="Assets\Scripts\UI\PickMenu.cs" />
+     <Compile Include="Assets\Scripts\UI\PowerBar.cs" />
+     <Compile Include="Assets\Scripts\UI\SumLabel.cs" />
+     <Compile Include="Assets\Scripts\UI\TowerInspector.cs" />
+     <Compile Include="Assets\Scripts\UI\TowerSelection.cs" />
+     <Compile Include="Assets\Scripts\ValueStore.cs" />
+     <Compile Include="Assets\Skydome\Sun.cs" />
+     <Compile Include="Assets\Skydome\skydomeScript2.cs" />
+     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\FX-SimpleWater4.shader" />
+     <None Include="Assets\Skydome\aScattering2.0.shader" />
+     <None Include="Assets\Standard Assets\Water (Pro Only)\Sources\Shaders\FX-Water.shader" />
+     <None Include="Assets\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\WaterInclude.cginc" />
+     <None Include="Assets\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\FX-Water4.shader" />
+ <Reference Include="Library\ScriptAssemblies\Assembly-UnityScript-firstpass">
+ <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{B4908E76-BC0A-8392-B170-6AEC2798AD69}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: e2e8fbc41d61547388dc3eb973ccfaba
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - click: {fileID: 8300000, guid: 1bf16fb853d9da94ca31f29139357d6b, type: 1}
+  - theMenu: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
