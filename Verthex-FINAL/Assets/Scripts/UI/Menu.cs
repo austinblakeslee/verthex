@@ -10,6 +10,19 @@ public class Menu : MonoBehaviour {
 	public int yOffset, xOffset = 0;
 	public GUISkin guiSkin = null;
 	
+	private bool hotKey = false;
+	private MenuItem hotMenuItem;
+	
+	
+	void Update() {
+		//Checks if any MenuItem's hotKey has been pressed
+		foreach (MenuItem m in menuItems) {
+			if (Input.GetKeyDown(m.hotKey)){
+				hotKey = true;
+				hotMenuItem = m;
+			}
+		}
+	}
 	// draw menu components
 	void OnGUI() {
 		foreach (MenuItem m in menuItems) {
@@ -65,10 +78,17 @@ public class Menu : MonoBehaviour {
 	}
 	
 	protected void DrawButton(MenuItem m) {
-		if (GUI.Button(new Rect(m.getLeftI()+xOffset, m.getTopI()+yOffset, m.getWidthI(), m.getHeightI()), m.text)){
+		//Set hotKey to true (equivalent to pressing MenuItems's hotKey
+		if(GUI.Button(new Rect(m.getLeftI()+xOffset, m.getTopI()+yOffset, m.getWidthI(), m.getHeightI()), m.text)){
+			hotKey = true;
+			hotMenuItem = m;
+		}
+		//If the hotKey or GUI Button was pressed....
+		if (hotKey){
+			hotKey = false;
 			ValueStore.buttonWasClicked = true;
-			if (m.action && !disabled){
-				m.action.Action();
+			if (hotMenuItem.action && !disabled){
+				hotMenuItem.action.Action();
 			} else if(disabled) {
 				ValueStore.helpMessage = "You must be viewing yourself\nto use the menu!";
 			}
