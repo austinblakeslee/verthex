@@ -35,10 +35,13 @@ public class MenuItem : MonoBehaviour {
 	private bool tooltipOn = false;
 	public enum TooltipType{
 		Box,
+		
 		Label
 	};
 	public TooltipType ttType = TooltipType.Label;
 	public bool visible = true;
+	public KeyCode hotKey;
+	
 	
 	/*public MenuItem() {
 		text = "";
