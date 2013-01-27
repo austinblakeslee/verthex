@@ -13,7 +13,7 @@ public class PickMenu : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.P)) {
+		if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) {
 			if(pause == false) {
 				pause = true;
 				Time.timeScale = 0.0f;

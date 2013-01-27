@@ -29,8 +29,8 @@ public class TowerSelection : MonoBehaviour {
 	public MenuItem aoeButton;
 	
 	void Start() {
-		materialBoxRect = new Rect(Screen.width - materialBox.x - padding, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
-		weaponBoxRect = new Rect(Screen.width - weaponBox.x - padding, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
+		materialBoxRect = new Rect(Screen.width - (Screen.width*(materialBox.x/960)) - padding, Screen.height - Screen.height*(materialBox.y/600) - padding, (Screen.width*(materialBox.x/960)), Screen.height*(materialBox.y/600));
+		weaponBoxRect = new Rect(Screen.width - (Screen.width*(weaponBox.x/960)) - padding, Screen.height - (Screen.height*(materialBox.y/600)) - (Screen.height*(weaponBox.y/600)) - padding*2, (Screen.width*(weaponBox.x/960)), (Screen.height*(weaponBox.y/600)));
 	}
 
 	void Update () {
@@ -134,8 +134,8 @@ public class TowerSelection : MonoBehaviour {
 		/* weapon name and effect */
 		int left = 15;
 		int top = 15;
-		int width = 210;
 		int height = 70;
+		int width = 210;
 		GUI.Label(new Rect(left, top, width, height), selectedSection.GetWeaponInfo());
 		
 		/* Damage Upgrade level */
@@ -158,10 +158,10 @@ public class TowerSelection : MonoBehaviour {
 		
 		/* Effect Upgrade level */
 		if(selectedSection.GetSection().GetWeapon().GetEffect().GetEffectType() != "none") {
-			left = 15;
-			top = 110;
-			width = 200;
-			height = 60;
+			left = Screen.width*(15/960);
+			top = Screen.height*(110/600);
+			width = Screen.width*(200/960);
+			height = Screen.height*(60/600);
 			GUI.BeginGroup(new Rect(left, top, width, height));
 			GUI.Label(new Rect(0, 0, 60, 30), selectedSection.GetSection().GetWeapon().GetEffect().GetEffectType() + ": ");
 			r = new Rect(70, 4, 16, 16);
