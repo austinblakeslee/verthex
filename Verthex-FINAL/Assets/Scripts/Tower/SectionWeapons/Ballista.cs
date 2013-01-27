@@ -7,7 +7,8 @@ public class Ballista : SectionWeapon {
         this.spcost = 50;
         this.cost = 100;
         this.weight = 50;
-        this.range = 1;
+        this.range = 1; //what exactly is range?
         this.wtype = "Ballista";
-    }
+    	this.attackRange = 3;
+	}
 }

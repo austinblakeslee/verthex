@@ -8,6 +8,7 @@ public class Catapult : SectionWeapon {
         this.cost = 250;
         this.weight = 30;
         this.range = 2;
+		this.attackRange = 2;
         this.wtype = "Catapult";
     }
 }

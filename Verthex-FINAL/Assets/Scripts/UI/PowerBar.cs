@@ -4,25 +4,43 @@ using System.Collections;
 public class PowerBar : MonoBehaviour {
 
 	private bool isDisplayed = false;
-	private float fill = 0.0f;
+	private float fill = 0.5f;
 	private bool hasStartedCharge = false;
 	private bool hasFinishedCharge  = false;
+	private float range = 1;
+	private float fillRate;
+	private int targetSectionNumber; //0 is straight across, -1 is 1 down, 2 is 2 above.
 	public Texture2D emptyTexture;
 	public Texture2D fillTexture;
 	
 	void Update () {
-		if(Input.GetKey(KeyCode.Space) && isDisplayed && !hasFinishedCharge)  {
+		fillRate = .5f/range;
+		if (!hasStartedCharge && isDisplayed)
+		{
+			targetSectionNumber = 0;
 			hasStartedCharge = true;
-			fill += GameValues.floatValues["powerBarSpeed"];
-			if(fill > 1.0f) {
-				fill = 0.0f;
+		}
+		else if(Input.GetKeyDown(KeyCode.UpArrow) && isDisplayed && !hasFinishedCharge)  {
+			//fill += GameValues.floatValues["powerBarSpeed"];
+			if(Mathf.Abs(targetSectionNumber + 1) <= range){
+				fill += fillRate;
+				targetSectionNumber ++;
 			}
+
 		} 
-		else if(Input.GetKeyUp(KeyCode.Space) && hasStartedCharge) {
+		else if(Input.GetKeyDown(KeyCode.DownArrow) && isDisplayed && !hasFinishedCharge)  {
+			if(Mathf.Abs(targetSectionNumber - 1) <= range)
+			{
+				fill -= fillRate;
+				targetSectionNumber --;
+			}
+		}
+		else if(Input.GetKeyDown(KeyCode.Space) && hasStartedCharge) {
 			hasFinishedCharge = true;
 			isDisplayed = false;
 		}
 	}
+
 	
 	void OnGUI() {
 	    if(isDisplayed) {
@@ -40,19 +58,26 @@ public class PowerBar : MonoBehaviour {
 	    }
 	}
 	
+	public void setRange(int weaponRange)
+	{
+		range = (float) 1.0 * weaponRange;
+	}
+	
 	public void Hide() {
 		this.isDisplayed = false;
 		this.fill = 0.0f;
 	}
 	
 	public void Reset() {
-		this.fill = 0.0f;
+		this.fill = 0.5f;
 		this.isDisplayed = false;
 		this.hasFinishedCharge = false;
 		this.hasStartedCharge = false;
 	}
 	
 	public void Show() {
+		this.fill = 0.5f;
+		targetSectionNumber = 0;
 		this.isDisplayed = true;
 	}
 	
@@ -62,5 +87,9 @@ public class PowerBar : MonoBehaviour {
 	
 	public bool Complete() {
 		return this.hasFinishedCharge;
+	}
+	public int GetTargetSectionNumber()
+	{
+		return targetSectionNumber;
 	}
 }

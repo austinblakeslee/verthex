@@ -8,6 +8,7 @@ public class SectionWeapon {
 	public int cost;
 	protected int weight;
 	protected int range;
+	protected int attackRange;
 	public string wtype;
 	protected int damageUpgradeLevel = 0;
 	protected List<float> damageUpgrades = new List<float> {1.0f, 1.2f, 1.3f, 1.4f, 1.5f};
@@ -51,5 +52,9 @@ public class SectionWeapon {
 	
 	public void SetEffect(Effect e) {
 		this.weaponEffect = e;
+	}
+	public int GetAttackRange()
+	{
+		return attackRange;
 	}
 }

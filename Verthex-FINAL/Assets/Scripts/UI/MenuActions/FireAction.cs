@@ -33,7 +33,10 @@ public class FireAction : DefaultMenuAction,MenuAction {
 				ValueStore.helpMessage = "You must select a tower section equipped with a weapon before firing!";
 			}
 			else {
+				//need to change it from showing PowerBar to showing arrows (or something equivalent) for who you want to attack
 				audio.Play();
+			
+				GetComponent<PowerBar>().setRange(selectedSection.GetComponent<SectionController>().GetSection().GetWeapon().GetAttackRange());
 				GetComponent<PowerBar>().Show();
 				player = TurnOrder.currentPlayer;
 				target = TurnOrder.otherPlayer;
@@ -42,7 +45,8 @@ public class FireAction : DefaultMenuAction,MenuAction {
 				foreach(Menu m in toHide) {
 					m.on = false;
 				}
-				ValueStore.helpMessage = "Hold and release space to fire (fuller bar = higher shot).";
+				//ValueStore.helpMessage = "Hold and release space to fire (fuller bar = higher shot).";
+				ValueStore.helpMessage = "Use Up/Down arrows to select targets above and below your level. Press Space to fire. ";
 			}
 		}
 		else {
@@ -50,15 +54,12 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		}
 	}
 	
-	void Fire(float power) {
-		firingSection = selectedSection;
+	void Fire(int attackSection) {
+		firingSection = selectedSection; //What's the reason for this assignment?
 		SectionController sc = firingSection.GetComponent<SectionController>();
-		int index = sc.GetHeight()-1;
-		int range = player.GetTower().GetSection(index).GetWeapon().GetRange();
-		int hit = (int)((2*range + 1) * power);
-		int bottom = index - range;
-		hitIndex = bottom + hit;
-		List<GameObject> hitSections = sc.GetSection().GetWeapon().GetEffect().GetDamagedSections(target.GetTower(), hitIndex);
+		int index = sc.GetHeight() - 1;
+		int hitCenter = index + attackSection;
+		List<GameObject> hitSections = sc.GetSection().GetWeapon().GetEffect().GetDamagedSections(target.GetTower(), hitCenter);//hitIndex 
 		GetComponent<WeaponAnimator>().BeginAnimation(firingSection.gameObject, hitSections, hitParticle);
 	}
 	
@@ -74,7 +75,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		}
 		if(isActive && GetComponent<PowerBar>().Complete()) {
 			isActive = false;
-			Fire(GetComponent<PowerBar>().GetFillAmount());
+			Fire(GetComponent<PowerBar>().GetTargetSectionNumber());
 			waitingForAnimation = true;
 		} else if(isActive && fightMenu.on == false) {
 			isActive = false;
