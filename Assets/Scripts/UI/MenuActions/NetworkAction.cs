@@ -11,7 +11,7 @@ string gameName = "VertHex_Network_Test";
 GameObject playerPrefab;
 Transform spawnObject;
 
-private bool  refreshing;
+private bool refreshing;
 private HostData[] hostData;
 public bool visible;
 
@@ -48,20 +48,15 @@ void  Update (){
 	}
 }
 
-void  spawnPlayer (){
-	Network.Instantiate(playerPrefab, spawnObject.position, Quaternion.identity, 0);
-}
-
 //Messages
 void  OnServerInitialized (){
 	Debug.Log("Server initialized!");
 	//spawnPlayer();
 }
 
-void  OnConnectedtoServer (){
-	//spawnPlayer();
+void OnPlayerConnected() {
+	Application.LoadLevel("Test");
 }
-
 
 void  OnMasterServerEvent ( MasterServerEvent mse  ){
 	if(mse == MasterServerEvent.RegistrationSucceeded){
@@ -82,10 +77,11 @@ void  OnGUI (){
 			Debug.Log("Refreshing");
 			refreshHostList();
 		}
-		if(hostData.Length > 0){
+		if(hostData != null && hostData.Length > 0){
 			for(int i = 0; i<hostData.Length; i++){
 				if(GUI.Button( new Rect(buttonX * 1.5f + buttonW, buttonY*1.2f + (buttonH * i), buttonW*3, buttonH*0.5f), hostData[i].gameName)){
 					Network.Connect(hostData[i]);
+					Application.LoadLevel("Test");
 				}
 			}
 		}

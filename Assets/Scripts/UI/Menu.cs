@@ -11,16 +11,18 @@ public class Menu : MonoBehaviour {
 	public GUISkin guiSkin = null;
 	
 	private bool hotKey = false;
-	private MenuItem hotMenuItem;
+	private int hotMenuItem;
 	
 	
 	void Update() {
 		//Checks if any MenuItem's hotKey has been pressed
+		int i=0;
 		foreach (MenuItem m in menuItems) {
 			if (Input.GetKeyDown(m.hotKey)){
 				hotKey = true;
-				hotMenuItem = m;
+				hotMenuItem = i;
 			}
+			i++;
 		}
 	}
 	// draw menu components
@@ -77,18 +79,28 @@ public class Menu : MonoBehaviour {
 		}
 	}
 	
+	[RPC]
+	protected void PerformAction(int index) {
+		Debug.Log("XYZZZZ");
+		menuItems[index].action.Action();
+	}
+	
 	protected void DrawButton(MenuItem m) {
 		//Set hotKey to true (equivalent to pressing MenuItems's hotKey
 		if(GUI.Button(new Rect(m.getLeftI()+xOffset, m.getTopI()+yOffset, m.getWidthI(), m.getHeightI()), m.text)){
 			hotKey = true;
-			hotMenuItem = m;
+			hotMenuItem = menuItems.IndexOf(m);
 		}
 		//If the hotKey or GUI Button was pressed....
 		if (hotKey){
 			hotKey = false;
 			ValueStore.buttonWasClicked = true;
-			if (hotMenuItem.action && !disabled){
-				hotMenuItem.action.Action();
+			if (menuItems[hotMenuItem].action && !disabled){
+				if(Network.isServer || Network.isClient) {
+					networkView.RPC("PerformAction", RPCMode.All, hotMenuItem);
+				} else {
+					PerformAction(hotMenuItem);
+				}
 			} else if(disabled) {
 				ValueStore.helpMessage = "You must be viewing yourself\nto use the menu!";
 			}

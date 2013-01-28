@@ -20,10 +20,16 @@ public class TurnOrder : MonoBehaviour {
 	public MenuItem ceasefireIcon;
 	public GUISkin player1Box;
 	public GUISkin player2Box;
+	public Player myPlayer;
 	
 	public void Start () {
 		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"]);
 		player2 = new Player(2, player2Color, new Tower(), GameValues.intValues["baseResources"]);
+		if(Network.isServer) {
+			myPlayer = player1;
+		} else {
+			myPlayer = player2;
+		}
 		currentPlayer = player1;
 		otherPlayer = player2;
 		//turnNum is incremented everytime control switches.

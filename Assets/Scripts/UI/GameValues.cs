@@ -17,17 +17,21 @@ public class GameValues : MonoBehaviour {
 	// dictionaries of editable values for menu inspector integration
 	public static Dictionary<string, int> intValues = new Dictionary<string, int>();
 	public static Dictionary<string, float> floatValues = new Dictionary<string, float>();
+	public static bool loaded = false;
 
 	void Awake () {
-		intValues.Add("baseResources", baseResources);
-		intValues.Add("retrofitCost", retrofitCost);
-        intValues.Add("actionsPerTurn", actionsPerTurn);
-        intValues.Add("resourcesPerTurn", resourcesPerTurn);
-        intValues.Add("resourcesPerSection", resourcesPerSection);
+		if(!loaded) {
+			intValues.Add("baseResources", baseResources);
+			intValues.Add("retrofitCost", retrofitCost);
+			intValues.Add("actionsPerTurn", actionsPerTurn);
+			intValues.Add("resourcesPerTurn", resourcesPerTurn);
+			intValues.Add("resourcesPerSection", resourcesPerSection);
+			
+			floatValues.Add("gravity", gravity);
+			floatValues.Add("powerBarSpeed", powerBarSpeed);
+			loaded = true;
 		
-		floatValues.Add("gravity", gravity);
-		floatValues.Add("powerBarSpeed", powerBarSpeed);
-	
-		DontDestroyOnLoad(gameObject);
+			DontDestroyOnLoad(gameObject);
+		}
 	}
 }
