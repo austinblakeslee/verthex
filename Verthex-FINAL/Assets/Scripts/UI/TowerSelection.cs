@@ -29,8 +29,8 @@ public class TowerSelection : MonoBehaviour {
 	public MenuItem aoeButton;
 	
 	void Start() {
-		materialBoxRect = new Rect(Screen.width - (Screen.width*(materialBox.x/960)) - padding, Screen.height - Screen.height*(materialBox.y/600) - padding, (Screen.width*(materialBox.x/960)), Screen.height*(materialBox.y/600));
-		weaponBoxRect = new Rect(Screen.width - (Screen.width*(weaponBox.x/960)) - padding, Screen.height - (Screen.height*(materialBox.y/600)) - (Screen.height*(weaponBox.y/600)) - padding*2, (Screen.width*(weaponBox.x/960)), (Screen.height*(weaponBox.y/600)));
+		materialBoxRect = new Rect(Screen.width - materialBox.x - padding, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
+		weaponBoxRect = new Rect(Screen.width - weaponBox.x - padding, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
 	}
 
 	void Update () {
@@ -134,34 +134,56 @@ public class TowerSelection : MonoBehaviour {
 		/* weapon name and effect */
 		int left = 15;
 		int top = 15;
-		int height = 70;
 		int width = 210;
-		GUI.Label(new Rect(left, top, width, height), selectedSection.GetWeaponInfo());
-		
+		int height = 70;
+		GUI.Label(new Rect(left, top, width, height), selectedSection.GetWeaponInfo() + " - Level " + (selectedSection.GetSection().GetWeapon().GetDamageUpgradeLevel() + 1).ToString());
+		//GUI.Label(new Rect(left, top, width, height), "Level " + selectedSection.GetSection().GetWeapon().GetDamageUpgradeLevel().ToString());
+
 		/* Damage Upgrade level */
 		left = 15;
-		top = 85;
+		top = 75;
 		width = 200;
 		height = 60;
 		GUI.BeginGroup(new Rect(left, top, width, height));
 		GUI.Label(new Rect(0, 0, 60, 30), "Damage: ");
 		Rect r = new Rect(70, 4, 16, 16);
 		Texture2D toDraw = upgrade;
-		for(int i=0; i < 5; i++) {
-			if(i > selectedSection.GetSection().GetWeapon().GetDamageUpgradeLevel()) {
+		for(int i=0; i <= 7; i++) {
+			//if(i > selectedSection.GetSection().GetWeapon().GetDamageUpgradeLevel()) {
+			if((i+1)/8f > selectedSection.GetSection().GetWeapon().GetDamage()/120f){
+
 				toDraw = noUpgrade;
 			}
 			GUI.DrawTexture(r, toDraw);
 			r = new Rect(r.left + 16, r.top, r.width, r.height);
 		}
+		
 		GUI.EndGroup();
 		
+		/* Weapon Range */
+		left = 15;
+		top = 95;
+		width = 200;
+		height = 60;
+		GUI.BeginGroup(new Rect(left, top, width, height));
+		GUI.Label (new Rect(0, 0, 60, 30), "Range: ");
+		r = new Rect(70, 4, 16, 16);
+		toDraw = upgrade;
+		for(int i = 0; i < 5; i++){
+			if(i > selectedSection.GetSection().GetWeapon().GetAttackRange()  - 1){
+				toDraw = noUpgrade;
+			}
+			GUI.DrawTexture (r, toDraw);
+			r = new Rect(r.left + 16, r.top, r.width, r.height);
+		}
+		
+		GUI.EndGroup ();
 		/* Effect Upgrade level */
 		if(selectedSection.GetSection().GetWeapon().GetEffect().GetEffectType() != "none") {
-			left = Screen.width*(15/960);
-			top = Screen.height*(110/600);
-			width = Screen.width*(200/960);
-			height = Screen.height*(60/600);
+			left = 15;
+			top = 115;
+			width = 200;
+			height = 60;
 			GUI.BeginGroup(new Rect(left, top, width, height));
 			GUI.Label(new Rect(0, 0, 60, 30), selectedSection.GetSection().GetWeapon().GetEffect().GetEffectType() + ": ");
 			r = new Rect(70, 4, 16, 16);

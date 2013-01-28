@@ -11,7 +11,9 @@ public class SectionWeapon {
 	protected int attackRange;
 	public string wtype;
 	protected int damageUpgradeLevel = 0;
+	protected int rangeUpgradeLevel = 0;
 	protected List<float> damageUpgrades = new List<float> {1.0f, 1.2f, 1.3f, 1.4f, 1.5f};
+	protected List<int> rangeUpgrades = new List<int>{0,0,1,1,2};
 	protected Effect weaponEffect = new DefaultEffect();
 
 	public string GetWeaponType() {
@@ -22,8 +24,9 @@ public class SectionWeapon {
 		return damageUpgradeLevel;
 	}
 	
-	public void UpgradeDamage() {
+	public void UpgradeDamage() {//UpgradeLevel()
 		damageUpgradeLevel++;
+		//rangeUpgradeLevel++;
 	}
 
 	public int GetDamage() {
@@ -43,7 +46,7 @@ public class SectionWeapon {
 	}
 
 	public int GetRange() {
-	    return range;
+	    return range + rangeUpgrades[rangeUpgradeLevel];
 	}
 	
 	public Effect GetEffect() {
