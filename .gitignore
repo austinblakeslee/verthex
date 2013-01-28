@@ -1,0 +1,8 @@
+Library
+Temp
+
+#auto-generated monodevelop files
+*.csproj
+*.unityproj
+*.pidb
+*.userprefs
