@@ -136,7 +136,7 @@ public class TowerSelection : MonoBehaviour {
 		int top = 15;
 		int width = 210;
 		int height = 70;
-		GUI.Label(new Rect(left, top, width, height), selectedSection.GetWeaponInfo() + " - Level " + (selectedSection.GetSection().GetWeapon().GetDamageUpgradeLevel() + 1).ToString());
+		GUI.Label(new Rect(left, top, width, height), selectedSection.GetWeaponInfo());
 		//GUI.Label(new Rect(left, top, width, height), "Level " + selectedSection.GetSection().GetWeapon().GetDamageUpgradeLevel().ToString());
 
 		/* Damage Upgrade level */
@@ -150,7 +150,8 @@ public class TowerSelection : MonoBehaviour {
 		Texture2D toDraw = upgrade;
 		for(int i=0; i <= 7; i++) {
 			//if(i > selectedSection.GetSection().GetWeapon().GetDamageUpgradeLevel()) {
-			if((i+1)/8f > selectedSection.GetSection().GetWeapon().GetDamage()/120f){
+			//120 is about the maximum number of health a weapon can have in this game right now. This should give a better visual indication of a weapons power.
+			if((i+1)/8f > selectedSection.GetSection().GetWeapon().GetDamage()/120f){ 
 
 				toDraw = noUpgrade;
 			}
@@ -169,8 +170,9 @@ public class TowerSelection : MonoBehaviour {
 		GUI.Label (new Rect(0, 0, 60, 30), "Range: ");
 		r = new Rect(70, 4, 16, 16);
 		toDraw = upgrade;
+		//max range is 5 right now
 		for(int i = 0; i < 5; i++){
-			if(i > selectedSection.GetSection().GetWeapon().GetAttackRange()  - 1){
+			if(i > selectedSection.GetSection().GetWeapon().GetRange()  - 1){
 				toDraw = noUpgrade;
 			}
 			GUI.DrawTexture (r, toDraw);

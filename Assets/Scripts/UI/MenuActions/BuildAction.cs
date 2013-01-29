@@ -110,7 +110,6 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 	
 	void Update() {
 		if(myMenu.on) {
-			Debug.Log("xyz");
 			SectionMaterial m = ValueStore.selectedMaterial;
 			SectionWeapon w = ValueStore.selectedWeapon;
 			if(m == null || w == null) {

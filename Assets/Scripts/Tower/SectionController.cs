@@ -64,7 +64,7 @@ public class SectionController : MonoBehaviour {
 	public string GetWeaponInfo() {
 		SectionWeapon weapon = sec.GetWeapon();
 		string effectType = weapon.GetEffect().GetEffectType();
-		return weapon.GetWeaponType() + (effectType == "none" ? "" : (" - " + effectType)) + "\n" + weapon.GetEffect().GetInfo(weapon.GetDamage());
+		return weapon.GetWeaponType() + "\nLevel " + (weapon.GetUpgradeLevel() + 1) + (effectType == "none" ? "" : (" - " + effectType)) + "\n" + weapon.GetEffect().GetInfo(weapon.GetDamage());
 	}
 	
 	public string GetDotInfo() {

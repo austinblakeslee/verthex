@@ -9,6 +9,6 @@ public class Ballista : SectionWeapon {
         this.weight = 50;
         this.range = 1; //what exactly is range?
         this.wtype = "Ballista";
-    	this.attackRange = 3;
+    	this.range = 3;
 	}
 }

@@ -8,7 +8,7 @@ public class Nothing : SectionWeapon {
         this.cost = 0;
         this.weight = 0;
         this.range = 0;
-		this.attackRange = 0;
+		this.range = 0;
         this.wtype = "Nothing";
     }
 }

@@ -9,6 +9,6 @@ public class Cannon : SectionWeapon {
         this.weight = 80;
         this.range = 3;
         this.wtype = "Cannon";
-		this.attackRange = 1;
+		this.range = 1;
     }
 }

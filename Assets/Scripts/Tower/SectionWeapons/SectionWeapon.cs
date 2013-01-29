@@ -8,10 +8,8 @@ public class SectionWeapon {
 	public int cost;
 	protected int weight;
 	protected int range;
-	protected int attackRange;
 	public string wtype;
-	protected int damageUpgradeLevel = 0;
-	protected int rangeUpgradeLevel = 0;
+	protected int upgradeLevel = 0;
 	protected List<float> damageUpgrades = new List<float> {1.0f, 1.2f, 1.3f, 1.4f, 1.5f};
 	protected List<int> rangeUpgrades = new List<int>{0,0,1,1,2};
 	protected Effect weaponEffect = new DefaultEffect();
@@ -20,17 +18,16 @@ public class SectionWeapon {
 	    return wtype;
 	}
 	
-	public int GetDamageUpgradeLevel() {
-		return damageUpgradeLevel;
+	public int GetUpgradeLevel() {
+		return upgradeLevel;
 	}
 	
-	public void UpgradeDamage() {//UpgradeLevel()
-		damageUpgradeLevel++;
-		//rangeUpgradeLevel++;
+	public void Upgrade() {//UpgradeLevel()
+		upgradeLevel++;
 	}
 
 	public int GetDamage() {
-	    return (int)(damage * damageUpgrades[damageUpgradeLevel]);
+	    return (int)(damage * damageUpgrades[upgradeLevel]);
 	}
 
 	public int GetSPCost() {
@@ -44,10 +41,6 @@ public class SectionWeapon {
 	public int GetWeight() {
 	    return weight;
 	}
-
-	public int GetRange() {
-	    return range + rangeUpgrades[rangeUpgradeLevel];
-	}
 	
 	public Effect GetEffect() {
 		return weaponEffect;
@@ -56,8 +49,8 @@ public class SectionWeapon {
 	public void SetEffect(Effect e) {
 		this.weaponEffect = e;
 	}
-	public int GetAttackRange()
+	public int GetRange()
 	{
-		return attackRange;
+		return range + rangeUpgrades[upgradeLevel];
 	}
 }

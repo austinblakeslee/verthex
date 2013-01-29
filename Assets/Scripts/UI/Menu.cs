@@ -81,7 +81,6 @@ public class Menu : MonoBehaviour {
 	
 	[RPC]
 	protected void PerformAction(int index) {
-		Debug.Log("XYZZZZ");
 		menuItems[index].action.Action();
 	}
 	

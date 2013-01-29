@@ -9,12 +9,12 @@ public class DamageAction : DefaultMenuAction,MenuAction {
 			Section s = selectedSection.GetSection();
 			int cost = 200;
 			Player p = TurnOrder.currentPlayer;
-			if(s.GetWeapon().GetDamageUpgradeLevel() >= 3) {
+			if(s.GetWeapon().GetUpgradeLevel() >= 4) {
 				ValueStore.helpMessage = "Damage cannot be upgraded further.";
 			} else if(cost > p.GetResources()) {
 				ValueStore.helpMessage = "You don't have enough RP to do that!";
 			} else {
-				s.GetWeapon().UpgradeDamage();
+				s.GetWeapon().Upgrade();
 				p.RemoveResources(cost);
 				TurnOrder.ActionTaken();
 			}
