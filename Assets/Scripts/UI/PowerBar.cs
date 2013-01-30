@@ -9,12 +9,17 @@ public class PowerBar : MonoBehaviour {
 	private bool hasFinishedCharge  = false;
 	private float range = 1;
 	private float fillRate;
+	private SectionController selectedSection;
 	private int targetSectionNumber; //0 is straight across, -1 is 1 down, 2 is 2 above.
 	public Texture2D emptyTexture;
 	public Texture2D fillTexture;
 	
 	void Update () {
-		fillRate = .5f/range;
+		if(selectedSection != TowerSelection.GetSelectedSection())
+		{
+			selectedSection = TowerSelection.GetSelectedSection();
+			Reset();
+		}
 		if (!hasStartedCharge && isDisplayed)
 		{
 			targetSectionNumber = 0;
@@ -58,18 +63,19 @@ public class PowerBar : MonoBehaviour {
 	    }
 	}
 	
-	public void setRange(int weaponRange)
+	public void updateRange()
 	{
-		range = (float) 1.0 * weaponRange;
+		range = (float) 1.0 * selectedSection.GetSection().GetWeapon().GetRange();
 	}
 	
 	public void Hide() {
 		this.isDisplayed = false;
-		this.fill = 0.0f;
 	}
 	
 	public void Reset() {
 		this.fill = 0.5f;
+		updateRange();
+		fillRate = .5f/range;
 		this.isDisplayed = false;
 		this.hasFinishedCharge = false;
 		this.hasStartedCharge = false;
@@ -77,6 +83,8 @@ public class PowerBar : MonoBehaviour {
 	
 	public void Show() {
 		this.fill = 0.5f;
+		updateRange();
+		fillRate = .5f/range;
 		targetSectionNumber = 0;
 		this.isDisplayed = true;
 	}

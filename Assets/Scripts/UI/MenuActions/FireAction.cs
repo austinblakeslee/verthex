@@ -35,8 +35,6 @@ public class FireAction : DefaultMenuAction,MenuAction {
 			else {
 				//need to change it from showing PowerBar to showing arrows (or something equivalent) for who you want to attack
 				audio.Play();
-			
-				GetComponent<PowerBar>().setRange(selectedSection.GetComponent<SectionController>().GetSection().GetWeapon().GetRange());
 				GetComponent<PowerBar>().Show();
 				player = TurnOrder.currentPlayer;
 				target = TurnOrder.otherPlayer;
