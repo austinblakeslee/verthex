@@ -119,7 +119,7 @@ public class TowerInspector : MonoBehaviour {
     }
 	
 	private void RenderButton(Rect r, string text, GUIStyle style, Tower t, int i) {
-		if(GUI.Button (r, text, style)) {
+		if(GUI.Button (r, text, style) && TurnOrder.MyTurn()) {
 			SectionController sc = t.GetSections()[i].GetComponent<SectionController>();
 			TowerSelection.NetworkedSelectSection(sc.GetPlayer().playerNumber, i);
 		}
