@@ -25,7 +25,7 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 				c.SetSection(s);
 				c.SetPlayer(currentPlayer);
 				currentPlayer.Build(section);
-				TowerSelection.SelectSection(c);
+				TowerSelection.LocalSelectSection(currentPlayer.playerNumber, c.GetHeight()-1);
 				GetComponent<CollapseAnimator>().BeginAnimation(currentPlayer.GetTower());
 				TurnOrder.ActionTaken();
 			} else {

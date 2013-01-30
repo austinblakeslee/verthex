@@ -13,6 +13,29 @@ public class PowerBar : MonoBehaviour {
 	public Texture2D emptyTexture;
 	public Texture2D fillTexture;
 	
+	[RPC]
+	private void DecreaseFill() {
+		if(Mathf.Abs(targetSectionNumber - 1) <= range)
+		{
+			fill -= fillRate;
+			targetSectionNumber --;
+		}
+	}
+	
+	[RPC]
+	private void IncreaseFill() {
+		if(Mathf.Abs(targetSectionNumber + 1) <= range){
+			fill += fillRate;
+			targetSectionNumber ++;
+		}
+	}
+	
+	[RPC]
+	private void SpaceBarPressed() {
+		hasFinishedCharge = true;
+		isDisplayed = false;
+	}
+	
 	void Update () {
 		fillRate = .5f/range;
 		if (!hasStartedCharge && isDisplayed)
@@ -22,22 +45,25 @@ public class PowerBar : MonoBehaviour {
 		}
 		else if(Input.GetKeyDown(KeyCode.UpArrow) && isDisplayed && !hasFinishedCharge)  {
 			//fill += GameValues.floatValues["powerBarSpeed"];
-			if(Mathf.Abs(targetSectionNumber + 1) <= range){
-				fill += fillRate;
-				targetSectionNumber ++;
+			if(Network.isServer || Network.isClient) {
+				networkView.RPC("IncreaseFill", RPCMode.All);
+			} else {
+				IncreaseFill();
 			}
-
 		} 
 		else if(Input.GetKeyDown(KeyCode.DownArrow) && isDisplayed && !hasFinishedCharge)  {
-			if(Mathf.Abs(targetSectionNumber - 1) <= range)
-			{
-				fill -= fillRate;
-				targetSectionNumber --;
+			if(Network.isServer || Network.isClient) {
+				networkView.RPC("DecreaseFill", RPCMode.All);
+			} else {
+				DecreaseFill();
 			}
 		}
 		else if(Input.GetKeyDown(KeyCode.Space) && hasStartedCharge) {
-			hasFinishedCharge = true;
-			isDisplayed = false;
+			if(Network.isServer || Network.isClient) {
+				networkView.RPC("SpaceBarPressed", RPCMode.All);
+			} else {
+				SpaceBarPressed();
+			}
 		}
 	}
 
