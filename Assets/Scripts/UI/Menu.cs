@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour {
 		//Checks if any MenuItem's hotKey has been pressed
 		int i=0;
 		foreach (MenuItem m in menuItems) {
-			if (Input.GetKeyDown(m.hotKey)){
+			if (TurnOrder.MyTurn() && Input.GetKeyDown(m.hotKey)){
 				hotKey = true;
 				hotMenuItem = i;
 			}
@@ -86,7 +86,7 @@ public class Menu : MonoBehaviour {
 	
 	protected void DrawButton(MenuItem m) {
 		//Set hotKey to true (equivalent to pressing MenuItems's hotKey
-		if(GUI.Button(new Rect(m.getLeftI()+xOffset, m.getTopI()+yOffset, m.getWidthI(), m.getHeightI()), m.text)){
+		if(GUI.Button(new Rect(m.getLeftI()+xOffset, m.getTopI()+yOffset, m.getWidthI(), m.getHeightI()), m.text) && TurnOrder.MyTurn()){
 			hotKey = true;
 			hotMenuItem = menuItems.IndexOf(m);
 		}

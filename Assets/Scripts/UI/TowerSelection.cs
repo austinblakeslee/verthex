@@ -5,6 +5,7 @@ public class TowerSelection : MonoBehaviour {
 
 	private static SectionController selectedSection;
 	private static SectionController oldSelect;
+	private static TowerSelection instance;
 	public Vector2 materialBox;
 	public Vector2 weaponBox;
 	public int padding;
@@ -31,22 +32,37 @@ public class TowerSelection : MonoBehaviour {
 	void Start() {
 		materialBoxRect = new Rect(Screen.width - materialBox.x - padding, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
 		weaponBoxRect = new Rect(Screen.width - weaponBox.x - padding, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
+		instance = this;
+	}
+	
+	public static void NetworkedSelectSection(int playerNum, int sectionNum) {
+		if(Network.isClient || Network.isServer) {
+			instance.networkView.RPC("SelectSection", RPCMode.All, playerNum, sectionNum);
+		} else {
+			instance.SelectSection(playerNum, sectionNum);
+		}
+	}
+	
+	public static void LocalSelectSection(int playerNum, int sectionNum) {
+		instance.SelectSection(playerNum, sectionNum);
 	}
 
 	void Update () {
-		if(Input.GetMouseButtonDown(0) && !MenuItemManager.MouseIsInGUI()) {
+		if(Input.GetMouseButtonDown(0) && !MenuItemManager.MouseIsInGUI() && TurnOrder.MyTurn()) {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(ray, out hit, 10000.0f)) {
-				if(hit.collider == null) {
-					SelectSection(null);
+				if(hit.collider == null || hit.collider.tag != "Section") {
+					NetworkedSelectSection(-1, -1);
 					return;
 				}
 				SectionController s = hit.collider.GetComponent<SectionController>();
-				SelectSection(s);
+				int playerNum = s.GetPlayer().playerNumber;
+				int sectionNum = s.GetHeight()-1;
+				NetworkedSelectSection(playerNum, sectionNum);
 				audio.Play();
 			} else {
-				SelectSection(null);
+				NetworkedSelectSection(-1, -1);
 			}
 		}
 		if(selectedSection != null) {
@@ -208,17 +224,26 @@ public class TowerSelection : MonoBehaviour {
 		return selectedSection;
 	}
 	
-	public static void SelectSection(SectionController s) {
+	[RPC]
+	private void SelectSection(int playerNumber, int sectionNumber) {
+		Player p = null;
+		if(playerNumber == 1) {
+			p = TurnOrder.player1;
+		} else if(playerNumber == 2) {
+			p = TurnOrder.player2;
+		}
+		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
 		if(selectedSection != null) {
 			selectedSection.SetColor(Color.white);
 		}
-		selectedSection = s;
-		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
-		if(s == null) {
+		if(sectionNumber < 0) {
+			selectedSection = null;
 			mc.ChangeTarget(TurnOrder.currentPlayer.towerBase.transform);
 		} else {
+			SectionController s = p.GetTower().GetSections()[sectionNumber].GetComponent<SectionController>();
+			selectedSection = s;
 			mc.ChangeTarget(s.transform);
-			selectedSection.SetColor(TurnOrder.currentPlayer.color);
+			s.SetColor(TurnOrder.currentPlayer.color);
 		}
 	}
 	

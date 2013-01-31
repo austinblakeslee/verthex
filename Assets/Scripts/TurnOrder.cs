@@ -20,7 +20,7 @@ public class TurnOrder : MonoBehaviour {
 	public MenuItem ceasefireIcon;
 	public GUISkin player1Box;
 	public GUISkin player2Box;
-	public Player myPlayer;
+	public static Player myPlayer;
 	
 	public void Start () {
 		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"]);
@@ -40,6 +40,10 @@ public class TurnOrder : MonoBehaviour {
 		player2.SetTowerLocation(player2Base, player1Base);
 		ValueStore.helpMessage = "Click a section to select it.";
 		CombatLog.addLineNoPlayer("Ceasefire ends in " + (ceasefire - turnNum) + " turns.");
+	}
+	
+	public static bool MyTurn() {
+		return myPlayer == currentPlayer;
 	}
 
 	public void Update () {
@@ -84,7 +88,7 @@ public class TurnOrder : MonoBehaviour {
 			CombatLog.addLineNoPlayer("!!! CEASEFIRE HAS ENDED !!!");
 		}
 		numActionsTaken = 0;
-		TowerSelection.SelectSection(null);
+		TowerSelection.LocalSelectSection(-1, -1);
 		SwapPlayers(); //currentPlayer is now otherPlayer
 		if(turnNum > 1) {
 			currentPlayer.AccrueResources();
