@@ -25,7 +25,7 @@ public class TurnOrder : MonoBehaviour {
 	public void Start () {
 		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"]);
 		player2 = new Player(2, player2Color, new Tower(), GameValues.intValues["baseResources"]);
-		if(Network.isServer) {
+		if(Network.isServer || GameType.getGameType() == "Local") {
 			myPlayer = player1;
 		} else {
 			myPlayer = player2;
@@ -99,6 +99,12 @@ public class TurnOrder : MonoBehaviour {
 		Player temp = currentPlayer;
 		currentPlayer = otherPlayer;
 		otherPlayer = temp;
+		
+		//If it's a Local game, allow control of both turns
+		if (GameType.getGameType() == "Local"){
+			myPlayer = currentPlayer;
+		}
+		
 		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
 		mc.ChangeTarget(currentPlayer.towerBase.transform);
 		currentPlayer.NextTurn();

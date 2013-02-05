@@ -19,6 +19,8 @@ private float buttonX;
 private float buttonY;
 private float buttonW;
 private float buttonH;
+	
+private string gameType = "Online";
 
 
 void  Start (){
@@ -81,6 +83,8 @@ void  OnGUI (){
 			for(int i = 0; i<hostData.Length; i++){
 				if(GUI.Button( new Rect(buttonX * 1.5f + buttonW, buttonY*1.2f + (buttonH * i), buttonW*3, buttonH*0.5f), hostData[i].gameName)){
 					Network.Connect(hostData[i]);
+					//Set gameType to Online to determine player turns/control
+					GameType.setGameType(gameType);
 					Application.LoadLevel("Test");
 				}
 			}
