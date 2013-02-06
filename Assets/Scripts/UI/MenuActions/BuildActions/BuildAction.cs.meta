@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 255b52a0f0f7d438095b63413ac339b1
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - steelBlock: {fileID: 100000, guid: e13c3d83a5ba2fa4dbda208e8b790ff7, type: 2}
+  - woodBlock: {fileID: 100000, guid: a0bc773fc7ac5f1448b3422dc815f78b, type: 2}
+  - brickBlock: {fileID: 100000, guid: a5ac2f2f412a66e4c8a57371ab518034, type: 2}
+  - spawnPoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}

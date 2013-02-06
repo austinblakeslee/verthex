@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class CollapseAnimator : MonoBehaviour {
 
+	private static CollapseAnimator instance;
 	private SectionController collapsingSection;
-	private bool animate = false;
+	public static bool animate = false;
 	private string animationStage;
 	private Tower t;
 	
@@ -21,10 +22,18 @@ public class CollapseAnimator : MonoBehaviour {
 		collapsingSection = t.StressCheck();
 		if(collapsingSection != null) {
 			this.t = t;
-			this.animate = true;
+			animate = true;
 			this.animationStage = "pre";
 			this.timer = 0.0f;
 		}
+	}
+	
+	public static void Animate(Tower t) {
+		instance.BeginAnimation(t);
+	}
+	
+	void Start() {
+		instance = this;
 	}
 	
 	// Update is called once per frame
@@ -74,7 +83,6 @@ public class CollapseAnimator : MonoBehaviour {
 				t = null;
 				collapsingSection = null;
 				animate = false;
-				TurnOrder.CheckVictory();
 			}
 		}
 	}

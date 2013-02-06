@@ -26,7 +26,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 			PlayClickSound();
 		}
 		else if(TurnOrder.IsBattlePhase()) {
-			if(selectedSection == null || !TurnOrder.currentPlayer.GetTower().GetSections().Contains(selectedSection.gameObject)) {
+			if(selectedSection == null || !TurnOrder.myPlayer.GetTower().GetSections().Contains(selectedSection.gameObject)) {
 				ValueStore.helpMessage = "You must select your own tower section to fire!";
 			}
 			else if (selectedSection.GetSection().GetWeapon().GetWeaponType() == "Nothing") {
@@ -38,14 +38,11 @@ public class FireAction : DefaultMenuAction,MenuAction {
 			
 				GetComponent<PowerBar>().setRange(selectedSection.GetComponent<SectionController>().GetSection().GetWeapon().GetRange());
 				GetComponent<PowerBar>().Show();
-				player = TurnOrder.currentPlayer;
-				target = TurnOrder.otherPlayer;
 				isActive = true;
 				fightMenu.on = true;
 				foreach(Menu m in toHide) {
 					m.on = false;
 				}
-				//ValueStore.helpMessage = "Hold and release space to fire (fuller bar = higher shot).";
 				ValueStore.helpMessage = "Use Up/Down arrows to select targets above and below your level. Press Space to fire. ";
 			}
 		}
@@ -54,6 +51,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		}
 	}
 	
+	/*
 	void Fire(int attackSection) {
 		firingSection = selectedSection; //What's the reason for this assignment?
 		SectionController sc = firingSection.GetComponent<SectionController>();
@@ -62,21 +60,13 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		List<GameObject> hitSections = sc.GetSection().GetWeapon().GetEffect().GetDamagedSections(target.GetTower(), hitCenter);//hitIndex 
 		GetComponent<WeaponAnimator>().BeginAnimation(firingSection.gameObject, hitSections, hitParticle);
 	}
+	*/
 	
 	void Update() {
-		if(waitingForAnimation && GetComponent<WeaponAnimator>().AnimationComplete()) {
-			Section s = firingSection.GetComponent<SectionController>().GetSection();
-			int damage = s.GetWeapon().GetDamage();
-			s.GetWeapon().GetEffect().DoDamage(target.GetTower(), hitIndex, damage);
-			waitingForAnimation = false;
-			GetComponent<PowerBar>().Reset();
-			GetComponent<CollapseAnimator>().BeginAnimation(target.GetTower());
-			TurnOrder.ActionTaken();
-		}
 		if(isActive && GetComponent<PowerBar>().Complete()) {
 			isActive = false;
-			Fire(GetComponent<PowerBar>().GetTargetSectionNumber());
-			waitingForAnimation = true;
+			GetComponent<PowerBar>().Reset();
+			TurnOrder.SendAction(new Fight(selectedSection.GetHeight()-1, GetComponent<PowerBar>().GetTargetSectionNumber()));
 		} else if(isActive && fightMenu.on == false) {
 			isActive = false;
 			GetComponent<PowerBar>().Hide();

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 591c34775b0697e4a975815c0eb50a4f
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - woodBlock: {fileID: 100000, guid: a0bc773fc7ac5f1448b3422dc815f78b, type: 2}
+  - steelBlock: {fileID: 100124, guid: e13c3d83a5ba2fa4dbda208e8b790ff7, type: 2}
+  - stoneBlock: {fileID: 100038, guid: 622aa6843e2d7244fbce568c90c48008, type: 2}
+  - ballista: {fileID: 100054, guid: 926b9bc9ffaec4380b968f46cea5a46a, type: 2}
+  - catapult: {fileID: 100018, guid: 485725746f226474685e530a810a5583, type: 2}
+  - cannon: {fileID: 100024, guid: 56b075ee810084b268676df23ed5e3b1, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
