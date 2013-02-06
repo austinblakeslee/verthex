@@ -9,16 +9,20 @@ public class Menu : MonoBehaviour {
 	public bool disabled;
 	public int yOffset, xOffset = 0;
 	public GUISkin guiSkin = null;
+	public MenuItem currentBuildMenu;
+	public MenuItem otherBuildMenu;
 	
 	private bool hotKey = false;
 	private int hotMenuItem;
 	
+
 	
 	void Update() {
 		//Checks if any MenuItem's hotKey has been pressed
+
 		int i=0;
 		foreach (MenuItem m in menuItems) {
-			if (TurnOrder.MyTurn() && Input.GetKeyDown(m.hotKey)){
+			if (Input.GetKeyDown(m.hotKey)){
 				hotKey = true;
 				hotMenuItem = i;
 			}
@@ -46,6 +50,14 @@ public class Menu : MonoBehaviour {
 				m.setTooltipOn(false);
 			}
 		}
+	}
+	
+	public void swapBuildMenus()
+	{
+		MenuItem temp = currentBuildMenu;
+		currentBuildMenu = otherBuildMenu;
+		otherBuildMenu = currentBuildMenu;
+		menuItems[0] = currentBuildMenu;
 	}
 	
 	protected void DrawBackground() {
@@ -86,7 +98,7 @@ public class Menu : MonoBehaviour {
 	
 	protected void DrawButton(MenuItem m) {
 		//Set hotKey to true (equivalent to pressing MenuItems's hotKey
-		if(GUI.Button(new Rect(m.getLeftI()+xOffset, m.getTopI()+yOffset, m.getWidthI(), m.getHeightI()), m.text) && TurnOrder.MyTurn()){
+		if(GUI.Button(new Rect(m.getLeftI()+xOffset, m.getTopI()+yOffset, m.getWidthI(), m.getHeightI()), m.text)){
 			hotKey = true;
 			hotMenuItem = menuItems.IndexOf(m);
 		}

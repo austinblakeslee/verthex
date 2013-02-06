@@ -60,7 +60,8 @@ public class WeaponAnimator : MonoBehaviour {
 		} else if(weaponType == "Cannon") {
 			c = cannonFire;
 		}
-		AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
+		if (c != null) //Temp until weapon sounds are in
+			AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
 	}
 	
 	public void PlayWeaponHitSound() {
@@ -73,7 +74,8 @@ public class WeaponAnimator : MonoBehaviour {
 		} else if(weaponType == "Cannon") {
 			c = cannonHit;
 		}
-		AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
+		if (c != null) //Temp until weapon Sounds are in
+			AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
 	}
 	
 	void Update () {
