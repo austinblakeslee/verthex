@@ -56,9 +56,10 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		firingSection = selectedSection; //What's the reason for this assignment?
 		SectionController sc = firingSection.GetComponent<SectionController>();
 		int index = sc.GetHeight() - 1;
-		int hitCenter = index + attackSection;
-		List<GameObject> hitSections = sc.GetSection().GetWeapon().GetEffect().GetDamagedSections(target.GetTower(), hitCenter);//hitIndex 
+		hitIndex = index + attackSection;
+		List<GameObject> hitSections = sc.GetSection().GetWeapon().GetEffect().GetDamagedSections(target.GetTower(), hitIndex);//hitIndex 
 		GetComponent<WeaponAnimator>().BeginAnimation(firingSection.gameObject, hitSections, hitParticle);
+		TurnOrder.ActionTaken();
 	}
 	
 	void Update() {

@@ -54,10 +54,12 @@ public class Menu : MonoBehaviour {
 	
 	public void swapBuildMenus()
 	{
+		currentBuildMenu.SetVisible(false);
 		MenuItem temp = currentBuildMenu;
 		currentBuildMenu = otherBuildMenu;
-		otherBuildMenu = currentBuildMenu;
+		otherBuildMenu = temp;
 		menuItems[0] = currentBuildMenu;
+		menuItems[0].SetVisible(true);
 	}
 	
 	protected void DrawBackground() {

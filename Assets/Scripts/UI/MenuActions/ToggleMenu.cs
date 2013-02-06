@@ -10,7 +10,8 @@ public class ToggleMenu : DefaultMenuAction,MenuAction {
 	public override void Action() {
 		theMenu.on = !theMenu.on;
 		foreach (Menu m in offMenus){
-			m.on = false;
+			if (m != null)
+				m.on = false;
 		}
 		if(theMenu && theMenu.on && GetComponent<AudioSource>()) {
 			audio.Play();
