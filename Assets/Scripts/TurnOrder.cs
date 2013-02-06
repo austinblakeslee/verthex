@@ -107,7 +107,7 @@ public class TurnOrder : MonoBehaviour {
 		
 		MenuItem temp2 = currentBuildMenu;
 		currentBuildMenu = otherBuildMenu;
-		otherBuildMenu = temp;
+		otherBuildMenu = temp2;
 		Menu menu = GameObject.Find("Main").GetComponent("Menu") as Menu; 
 		menu.menuItems[0]= currentBuildMenu;
 	}
