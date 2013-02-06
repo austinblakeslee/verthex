@@ -11,4 +11,7 @@ public class Catapult : SectionWeapon {
 		this.range = 2;
         this.wtype = "Catapult";
     }
+	public Catapult(GameObject _model):this(){
+		model = _model;
+	}
 }

@@ -8,6 +8,7 @@ public class SectionMaterial {
 	protected double weightPerSP;
 	protected int SPPerRepair;
 	protected int costPerRepair;
+	protected GameObject model;
 	public string mtype = "abstract";
 
 	public int GetInitialSP() {
@@ -36,5 +37,13 @@ public class SectionMaterial {
 
 	public string GetMaterialType() {
 	    return mtype;
+	}
+	public GameObject GetModel()
+	{
+		return model;
+	}
+	public void setMOdel(GameObject _model)
+	{
+		model = _model;
 	}
 }

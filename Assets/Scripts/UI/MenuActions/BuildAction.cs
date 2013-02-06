@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BuildAction : DefaultMenuAction,MenuAction {
 	public GameObject steelBlock;
@@ -9,8 +10,37 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 	public GameObject ballista;
 	public GameObject catapult;
 	public GameObject cannon;
+	public GameObject sniper;
+	public GameObject gattlingGun;
+	public GameObject pistols;
+	public GameObject blaster;
+	public GameObject disintegrationBeam;
+	public GameObject eyeBlaster;
+	public GameObject drainBeam;
+	public Dictionary<string, object> sectionObjects = new Dictionary<string, object>();
+
 	public Menu myMenu;
 	
+	public void Start()
+	{
+		sectionObjects.Add("Wood", new Wood(woodBlock));
+		sectionObjects.Add("Stone", new Stone(brickBlock));
+		sectionObjects.Add ("Steel", new Steel(steelBlock));
+		sectionObjects.Add ("Nothing", new Nothing());
+		//if (Player.theme = "Cowboy"){
+		sectionObjects.Add ("Ballista", new Ballista(ballista));
+		sectionObjects.Add ("Catapult", new Catapult(catapult));
+		sectionObjects.Add ("Cannon", new Cannon(cannon));
+		sectionObjects.Add ("Pistols", new Pistols(pistols));
+		sectionObjects.Add ("Gattling Gun", new GattlingGun(gattlingGun));
+		sectionObjects.Add ("Sniper", new Sniper(sniper));
+		//if (Player.theme == "Area 51"){
+		sectionObjects.Add("Blaster", new Blaster(blaster));
+		sectionObjects.Add("Disintegration Beam", new DisintegrationBeam(disintegrationBeam));
+		sectionObjects.Add ("Eye Blaster", new EyeBlaster(eyeBlaster));
+		sectionObjects.Add ("Drain Beam", new DrainBeam(drainBeam));
+			
+	}
 	public override void Action() {
 		SectionMaterial m = ValueStore.selectedMaterial;
 		SectionWeapon w = ValueStore.selectedWeapon;
@@ -37,27 +67,19 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 	}
 	
 	private SectionMaterial makeMaterial(string m) {
-		if(m == "Wood") {
-			return new Wood();
-		} else if(m == "Stone") {
-			return new Stone();
-		} else if(m == "Steel") {
-			return new Steel();
+		if(sectionObjects.ContainsKey (m)) {
+			return sectionObjects[m] as SectionMaterial;
 		} else {
+			Debug.Log (m + ". Returning Null.");
 			return null;
 		}
 	}
 	
 	private SectionWeapon makeWeapon(string w) {
-		if(w == "Nothing") {
-			return new Nothing();
-		} else if(w == "Ballista") {
-			return new Ballista();
-		} else if(w == "Catapult") {
-			return new Catapult();
-		} else if(w == "Cannon") {
-			return new Cannon();
-		} else {
+		if(sectionObjects.ContainsKey(w)) {
+			return sectionObjects[w] as SectionWeapon;
+		}  else {
+			Debug.Log(w + ". Returning null.");
 			return null;
 		}
 	}
@@ -76,7 +98,9 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 			spawnPoint.transform.position = new Vector3(old.x, topOfTower.collider.bounds.max.y, old.z);
 			spawnPoint.transform.Translate(0,25,0);
 		}
-		if(m.mtype == "Wood") {
+		
+	/*	
+	 * if(m.mtype == "Wood") {
 			block = Instantiate(woodBlock,spawnPoint.transform.position,Quaternion.identity) as GameObject;
 		}
 		else if(m.mtype == "Steel") {
@@ -85,15 +109,28 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 		else if(m.mtype == "Stone") {
 			block = Instantiate(brickBlock,spawnPoint.transform.position,Quaternion.identity) as GameObject;
 		}
+		*/
+		if(sectionObjects.ContainsKey(m.mtype))
+		{
+			SectionMaterial mat = sectionObjects[m.mtype] as SectionMaterial;
+			block = Instantiate(mat.GetModel(), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+		}
+		
 		block.transform.Find("FireCam").camera.enabled = false;
 		block.transform.Find("HitCam").camera.enabled = false;
 		block.transform.Find("CollapseCam").camera.enabled = false;
-		if(w.wtype == "Ballista") {
+		/*if(w.wtype == "Ballista") {
 			weapon = Instantiate(ballista) as GameObject;
 		} else if(w.wtype == "Catapult") {
 			weapon = Instantiate(catapult) as GameObject;
 		} else if(w.wtype == "Cannon") {
 			weapon = Instantiate(cannon) as GameObject;
+		}*/
+		
+		if (sectionObjects.ContainsKey (w.wtype) && w.wtype != "Nothing")
+		{
+			SectionWeapon wep = sectionObjects[w.wtype] as SectionWeapon;
+			weapon = Instantiate(wep.GetModel()) as GameObject;
 		}
 		if(weapon != null) {
 			Vector3 localPos = weapon.transform.localPosition;

@@ -11,4 +11,7 @@ public class Wood : SectionMaterial {
         this.costPerRepair = 50;
         this.mtype = "Wood";
     }
+	public Wood(GameObject _model):this(){
+		model = _model;
+	}
 }

@@ -11,5 +11,8 @@ public class Nothing : SectionWeapon {
 		this.range = 0;
         this.wtype = "Nothing";
     }
+	public Nothing(GameObject _model):this(){
+		model = _model;
+	}
 }
 

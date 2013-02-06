@@ -8,6 +8,8 @@ public class TurnOrder : MonoBehaviour {
 	public static Player player2;
 	public static Player currentPlayer;
 	public static Player otherPlayer;
+	public static MenuItem currentBuildMenu;
+	public static MenuItem otherBuildMenu;
 	private static int numActionsTaken;
 	private static int turnNum;
 	public static int ceasefire;
@@ -102,6 +104,12 @@ public class TurnOrder : MonoBehaviour {
 		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
 		mc.ChangeTarget(currentPlayer.towerBase.transform);
 		currentPlayer.NextTurn();
+		
+		MenuItem temp2 = currentBuildMenu;
+		currentBuildMenu = otherBuildMenu;
+		otherBuildMenu = temp;
+		Menu menu = GameObject.Find("Main").GetComponent("Menu") as Menu; 
+		menu.menuItems[0]= currentBuildMenu;
 	}
 	
 	public static void CheckVictory() {

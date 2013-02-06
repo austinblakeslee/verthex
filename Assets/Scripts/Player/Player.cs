@@ -8,6 +8,7 @@ public class Player {
 	public int number;
 	public TowerBase towerBase;
 	public Color color;
+	public string theme;
 
 	public Player(int number, Color c, Tower newTower, int r) {
 		this.color = c;

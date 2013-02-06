@@ -180,7 +180,8 @@ public class WeaponAnimator : MonoBehaviour {
 				GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = true;
 				GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;	
 				if(hitSections.Count > 0) {	
-					List<GameObject> hitTowerSects = hitSections[0].GetComponent<SectionController>().GetPlayer().GetTower().GetSections();					for(int i = 0; i < hitTowerSects.Count; i++) {
+					List<GameObject> hitTowerSects = hitSections[0].GetComponent<SectionController>().GetPlayer().GetTower().GetSections();					
+					for(int i = 0; i < hitTowerSects.Count; i++) {
 						hitTowerSects[i].rigidbody.constraints = defaultConstraints;
 					}
 					for(int i = 0; i < hitSections.Count; i++) {

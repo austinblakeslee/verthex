@@ -7,8 +7,11 @@ public class Ballista : SectionWeapon {
         this.spcost = 50;
         this.cost = 100;
         this.weight = 50;
-        this.range = 1; //what exactly is range?
+        this.range = 1; 
         this.wtype = "Ballista";
     	this.range = 3;
+	}
+	public Ballista(GameObject _model):this(){
+		model = _model;
 	}
 }

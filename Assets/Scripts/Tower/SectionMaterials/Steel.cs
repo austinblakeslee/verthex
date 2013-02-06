@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using System.Collections;
 
@@ -11,4 +12,7 @@ public class Steel : SectionMaterial {
         this.costPerRepair = 75;
         this.mtype = "Steel";
     }
+	public Steel(GameObject _model):this(){
+		model = _model;
+	}	
 }

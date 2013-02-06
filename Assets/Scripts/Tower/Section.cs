@@ -11,6 +11,7 @@ public class Section {
     public Section(SectionMaterial newMat, SectionWeapon newWeapon){
         this.material = newMat;
         this.weapon = newWeapon;
+		Debug.Log(this.material.ToString());
         this.sp = this.material.GetInitialSP();
         this.maxSP = this.material.GetMaxSP() - this.weapon.GetSPCost();
         this.height = 0;
