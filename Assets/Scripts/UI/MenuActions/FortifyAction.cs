@@ -7,7 +7,7 @@ public class FortifyAction : DefaultMenuAction,MenuAction {
 		SectionController selectedSection = TowerSelection.GetSelectedSection();
 		if(selectedSection != null) {
 			Section s = selectedSection.GetSection();
-			Player p = TurnOrder.currentPlayer;
+			Player p = TurnOrder.myPlayer;
 			int cost = s.GetMaterial().GetCostPerRepair();
 			if(selectedSection.GetPlayer() != p) {
 				ValueStore.helpMessage = "You must select your own tower section to do that!";
@@ -16,8 +16,7 @@ public class FortifyAction : DefaultMenuAction,MenuAction {
 			} else if(s.GetMaterial().GetMaxSP() == s.GetSP()) {
 				ValueStore.helpMessage = "This section's SP has reached the maximum available to this material!";
 			} else {
-				p.RepairSection(selectedSection.GetHeight()-1);
-				TurnOrder.ActionTaken();
+				TurnOrder.SendAction(new Fortify(selectedSection.GetHeight()-1));
 			}
 		} else {
 			ValueStore.helpMessage = "You must select a section to fortify!";

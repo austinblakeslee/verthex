@@ -14,6 +14,8 @@ public class SectionWeapon {
 	protected List<int> rangeUpgrades = new List<int>{0,0,1,1,2};
 	protected Effect maxUpgradeEffect = new DefaultEffect();
 	protected Effect weaponEffect = new DefaultEffect();
+	
+	public static string[] weapons = new string[4] {"Nothing", "Ballista", "Catapult", "Cannon"};
 
 	public string GetWeaponType() {
 	    return wtype;

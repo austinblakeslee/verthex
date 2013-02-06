@@ -33,6 +33,11 @@ public class TowerSelection : MonoBehaviour {
 		materialBoxRect = new Rect(Screen.width - materialBox.x - padding, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
 		weaponBoxRect = new Rect(Screen.width - weaponBox.x - padding, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
 		instance = this;
+		if(Network.isServer) {
+			LocalSelectSection(1, -1);
+		} else {
+			LocalSelectSection(2, -1);
+		}
 	}
 	
 	public static void NetworkedSelectSection(int playerNum, int sectionNum) {
@@ -48,21 +53,21 @@ public class TowerSelection : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Input.GetMouseButtonDown(0) && !MenuItemManager.MouseIsInGUI() && TurnOrder.MyTurn()) {
+		if(Input.GetMouseButtonDown(0) && !MenuItemManager.MouseIsInGUI()) {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(ray, out hit, 10000.0f)) {
 				if(hit.collider == null || hit.collider.tag != "Section") {
-					NetworkedSelectSection(-1, -1);
+					LocalSelectSection(-1, -1);
 					return;
 				}
 				SectionController s = hit.collider.GetComponent<SectionController>();
 				int playerNum = s.GetPlayer().playerNumber;
 				int sectionNum = s.GetHeight()-1;
-				NetworkedSelectSection(playerNum, sectionNum);
+				LocalSelectSection(playerNum, sectionNum);
 				audio.Play();
 			} else {
-				NetworkedSelectSection(-1, -1);
+				LocalSelectSection(-1, -1);
 			}
 		}
 		if(selectedSection != null) {
@@ -231,6 +236,8 @@ public class TowerSelection : MonoBehaviour {
 			p = TurnOrder.player1;
 		} else if(playerNumber == 2) {
 			p = TurnOrder.player2;
+		} else {
+			p = TurnOrder.myPlayer;
 		}
 		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
 		if(selectedSection != null) {
@@ -238,12 +245,12 @@ public class TowerSelection : MonoBehaviour {
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
-			mc.ChangeTarget(TurnOrder.currentPlayer.towerBase.transform);
+			mc.ChangeTarget(p.towerBase.transform);
 		} else {
 			SectionController s = p.GetTower().GetSections()[sectionNumber].GetComponent<SectionController>();
 			selectedSection = s;
 			mc.ChangeTarget(s.transform);
-			s.SetColor(TurnOrder.currentPlayer.color);
+			s.SetColor(TurnOrder.myPlayer.color);
 		}
 	}
 	

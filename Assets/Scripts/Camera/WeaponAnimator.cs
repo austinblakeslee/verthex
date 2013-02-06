@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class WeaponAnimator : MonoBehaviour {
 
-	private bool animate;
+	private static WeaponAnimator instance;
+	public static bool animate;
 	private string animationStage;
 	private bool animationComplete;
 	private bool splitScreen;
@@ -13,7 +14,7 @@ public class WeaponAnimator : MonoBehaviour {
 	private List<GameObject> hitSections;
 	private List<Camera> sectionCams;
 	private List<Vector3> sectionPos;
-	private GameObject hitParticle;
+	public GameObject hitParticle;
 	private int sectionCounter = 0;
 	private float fireTime;
 	private float pausePeriod = 1.5f;
@@ -40,6 +41,9 @@ public class WeaponAnimator : MonoBehaviour {
 	private Object cloneDamageText;
 	private Vector3 damageLocale = new Vector3(0.5f, 0.5f, 0.0f);
 	
+	void Start() {
+		instance = this;
+	}
 	
 	public void AnimateWeapon() {
 		foreach(Transform child in firingSection.transform) {
@@ -203,15 +207,18 @@ public class WeaponAnimator : MonoBehaviour {
 		}
 	}
 	
-	public void BeginAnimation(GameObject firingSection, List<GameObject> hitSections, GameObject hitParticle) {
+	public void BeginAnimation(GameObject firingSection, List<GameObject> hitSections) {
 		this.firingSection = firingSection;
 		this.hitSections = hitSections;
-		this.hitParticle = hitParticle;
 		sectionCounter = 0;
-		this.animate = true;
+		animate = true;
 		this.animationStage = "fire";
 		this.sectionCams = new List<Camera>();
 		this.sectionPos = new List<Vector3>();
+	}
+	
+	public static void Animate(GameObject firingSection, List<GameObject> hitSections) {
+		instance.BeginAnimation(firingSection, hitSections);
 	}
 	
 	public bool AnimationComplete() {

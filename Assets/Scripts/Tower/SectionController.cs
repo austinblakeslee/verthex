@@ -12,6 +12,7 @@ public class SectionController : MonoBehaviour {
 	public List<GameObject> colorables;
 	public Texture damageTexture;
 	public bool damaged = false;
+	public AudioClip repairSound;
 	
 		
 	public void Start () {
@@ -26,6 +27,10 @@ public class SectionController : MonoBehaviour {
 			damaged = false;
 			RemoveDamage();
 		}
+	}
+	
+	public void PlayRepairSound() {
+		AudioSource.PlayClipAtPoint(repairSound, Vector3.zero);
 	}
 	
 	public void ShowDamage() {

@@ -9,6 +9,8 @@ public class SectionMaterial {
 	protected int SPPerRepair;
 	protected int costPerRepair;
 	public string mtype = "abstract";
+	
+	public static string[] materials = new string[3] {"Wood", "Stone", "Steel"};
 
 	public int GetInitialSP() {
 	    return initialSP;

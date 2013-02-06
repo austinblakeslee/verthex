@@ -11,7 +11,7 @@ public class CombatLog : MonoBehaviour {
 	
 	public static void addLine(string m) {
 		messages.RemoveAt(0);
-		string message = "[P" + TurnOrder.currentPlayer.playerNumber + "]: " + m;
+		string message = m;
 		messages.Add(message);
 		MenuItem combatLogMenu = GameObject.FindWithTag("CombatLog").GetComponent<MenuItem>();
 		combatLogMenu.text = GetString();

@@ -45,25 +45,13 @@ public class PowerBar : MonoBehaviour {
 		}
 		else if(Input.GetKeyDown(KeyCode.UpArrow) && isDisplayed && !hasFinishedCharge)  {
 			//fill += GameValues.floatValues["powerBarSpeed"];
-			if(Network.isServer || Network.isClient) {
-				networkView.RPC("IncreaseFill", RPCMode.All);
-			} else {
-				IncreaseFill();
-			}
+			IncreaseFill();
 		} 
 		else if(Input.GetKeyDown(KeyCode.DownArrow) && isDisplayed && !hasFinishedCharge)  {
-			if(Network.isServer || Network.isClient) {
-				networkView.RPC("DecreaseFill", RPCMode.All);
-			} else {
-				DecreaseFill();
-			}
+			DecreaseFill();
 		}
 		else if(Input.GetKeyDown(KeyCode.Space) && hasStartedCharge) {
-			if(Network.isServer || Network.isClient) {
-				networkView.RPC("SpaceBarPressed", RPCMode.All);
-			} else {
-				SpaceBarPressed();
-			}
+			SpaceBarPressed();
 		}
 	}
 
