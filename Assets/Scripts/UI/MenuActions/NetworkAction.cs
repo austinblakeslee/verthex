@@ -32,7 +32,7 @@ void  Start (){
 
 void  startServer (){
 	Network.InitializeServer(8, 25000, !Network.HavePublicAddress());
-	MasterServer.RegisterHost(gameName, "VertHex Multiplayer Test", "This is a multiplayer test");
+	MasterServer.RegisterHost(gameName, "VertHex Multiplayer Test","This is a multiplayer test");
 }
 
 void  refreshHostList (){
@@ -81,7 +81,7 @@ void  OnGUI (){
 		}
 		if(hostData != null && hostData.Length > 0){
 			for(int i = 0; i<hostData.Length; i++){
-				if(GUI.Button( new Rect(buttonX * 1.5f + buttonW, buttonY*1.2f + (buttonH * i), buttonW*3, buttonH*0.5f), hostData[i].gameName)){
+				if(GUI.Button( new Rect(buttonX * 1.5f + buttonW, buttonY*1.2f + (buttonH * i), buttonW*3, buttonH*0.5f), hostData[i].gameName + " - " + "Players: " + hostData[i].connectedPlayers)){
 					Network.Connect(hostData[i]);
 					//Set gameType to Online to determine player turns/control
 					GameType.setGameType(gameType);
