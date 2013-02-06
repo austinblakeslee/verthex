@@ -36,6 +36,10 @@ public class WeaponAnimator : MonoBehaviour {
 	
 	public Texture2D splitScreenTexture;
 	
+	public GUIText damageText;
+	private Object cloneDamageText;
+	private Vector3 damageLocale = new Vector3(0.5f, 0.5f, 0.0f);
+	
 	
 	public void AnimateWeapon() {
 		foreach(Transform child in firingSection.transform) {
@@ -90,6 +94,8 @@ public class WeaponAnimator : MonoBehaviour {
 				GameObject.FindWithTag("Help").GetComponent<Menu>().on = false;
 				GameObject.FindWithTag("MainCamera").GetComponent<TowerSelection>().deselectSection();
 				splitScreen = true;
+				//Set the FireCam so it will not display the DamageText
+				firingSection.transform.Find("FireCam").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
 				firingSection.transform.Find("FireCam").camera.enabled = true;
 				if(hitSections.Count > 0) {
 					defaultConstraints = hitSections[0].rigidbody.constraints;
@@ -133,6 +139,9 @@ public class WeaponAnimator : MonoBehaviour {
 					}
 					hitSectionOriginalPosition = hitSections[sectionCounter].transform.position;
 					GameObject.Instantiate(hitParticle, hitSection.transform.position, hitSection.transform.rotation);
+					//Create Damage Text to display on screen
+					damageText.text = firingSection.GetComponent<SectionController>().GetSection().GetWeapon().GetDamage().ToString();
+					cloneDamageText = Instantiate(damageText, damageLocale, Quaternion.identity);
 					PlayWeaponHitSound();
 					animationStage = "hitPause";
 				} else {
@@ -145,6 +154,7 @@ public class WeaponAnimator : MonoBehaviour {
 					sectionCounter++;
 					animationStage = "hit";
 					fireTime = 0;
+					Destroy(cloneDamageText);
 				} else {
 					fireTime += Time.deltaTime;
 					projectile.Translate(new Vector3(0, 0, projectileSpeed));
