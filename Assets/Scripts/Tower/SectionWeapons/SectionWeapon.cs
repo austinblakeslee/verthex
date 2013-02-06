@@ -12,6 +12,7 @@ public class SectionWeapon {
 	protected int upgradeLevel = 0;
 	protected List<float> damageUpgrades = new List<float> {1.0f, 1.2f, 1.3f, 1.4f, 1.5f};
 	protected List<int> rangeUpgrades = new List<int>{0,0,1,1,2};
+	protected Effect maxUpgradeEffect = new DefaultEffect();
 	protected Effect weaponEffect = new DefaultEffect();
 
 	public string GetWeaponType() {
@@ -23,7 +24,12 @@ public class SectionWeapon {
 	}
 	
 	public void Upgrade() {//UpgradeLevel()
-		upgradeLevel++;
+		if (upgradeLevel < 5){
+		 	upgradeLevel++;
+		}
+		else{
+			SetEffect(maxUpgradeEffect);
+		}
 	}
 
 	public int GetDamage() {
