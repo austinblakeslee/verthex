@@ -4,12 +4,6 @@ using System.Collections;
 public class Builder : MonoBehaviour {
 
 	private static Builder instance;
-	public GameObject woodBlock;
-	public GameObject steelBlock;
-	public GameObject stoneBlock;
-	public GameObject ballista;
-	public GameObject catapult;
-	public GameObject cannon;
 	private GameObject spawnPoint;
 	
 	void Start() {
@@ -30,25 +24,11 @@ public class Builder : MonoBehaviour {
 			spawnPoint.transform.position = new Vector3(old.x, topOfTower.collider.bounds.max.y, old.z);
 			spawnPoint.transform.Translate(0,25,0);
 		}
-		if(m.mtype == "Wood") {
-			block = Instantiate(woodBlock,spawnPoint.transform.position,Quaternion.identity) as GameObject;
-		}
-		else if(m.mtype == "Steel") {
-			block = Instantiate(steelBlock,spawnPoint.transform.position,Quaternion.identity) as GameObject;
-		}
-		else if(m.mtype == "Stone") {
-			block = Instantiate(stoneBlock,spawnPoint.transform.position,Quaternion.identity) as GameObject;
-		}
+		block = Instantiate(m.GetPrefab(),spawnPoint.transform.position,Quaternion.identity) as GameObject;
 		block.transform.Find("FireCam").camera.enabled = false;
 		block.transform.Find("HitCam").camera.enabled = false;
 		block.transform.Find("CollapseCam").camera.enabled = false;
-		if(w.wtype == "Ballista") {
-			weapon = Instantiate(ballista) as GameObject;
-		} else if(w.wtype == "Catapult") {
-			weapon = Instantiate(catapult) as GameObject;
-		} else if(w.wtype == "Cannon") {
-			weapon = Instantiate(cannon) as GameObject;
-		}
+		weapon = Instantiate(w.GetPrefab()) as GameObject;
 		if(weapon != null) {
 			Vector3 localPos = weapon.transform.localPosition;
 			Vector3 localScale = weapon.transform.localScale;
