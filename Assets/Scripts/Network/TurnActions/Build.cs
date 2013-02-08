@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 using System.Collections;
 
 public class Build : TurnAction {
@@ -37,18 +36,18 @@ public class Build : TurnAction {
 	}
 	
 	private int EncodeMaterial(SectionMaterial m) {
-		return Array.IndexOf(SectionMaterial.materials, m.GetMaterialType());
+		return TurnOrder.GetPlayerByNumber(playerNumber).faction.EncodeSectionMaterial(m.mtype);
 	}
 	
 	private int EncodeWeapon(SectionWeapon w) {
-		return Array.IndexOf(SectionWeapon.weapons, w.GetWeaponType());
+		return TurnOrder.GetPlayerByNumber(playerNumber).faction.EncodeSectionWeapon(w.wtype);
 	}
 	
 	private SectionMaterial DecodeMaterial() {
-		return SectionComponentFactory.GetMaterial(SectionMaterial.materials[material]);
+		return TurnOrder.GetPlayerByNumber(playerNumber).faction.GetSectionMaterial(material);
 	}
 	
 	private SectionWeapon DecodeWeapon() {
-		return SectionComponentFactory.GetWeapon(SectionWeapon.weapons[weapon]);
+		return TurnOrder.GetPlayerByNumber(playerNumber).faction.GetSectionWeapon(weapon);
 	}
 }
