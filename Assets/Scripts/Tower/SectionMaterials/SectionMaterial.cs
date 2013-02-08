@@ -11,6 +11,10 @@ public class SectionMaterial {
 	public string mtype = "abstract";
 	
 	public static string[] materials = new string[3] {"Wood", "Stone", "Steel"};
+	
+	public GameObject GetPrefab() {
+		return Resources.Load(mtype) as GameObject;
+	}
 
 	public int GetInitialSP() {
 	    return initialSP;
