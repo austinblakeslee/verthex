@@ -11,5 +11,9 @@ public class Nothing : SectionWeapon {
 		this.range = 0;
         this.wtype = "Nothing";
     }
+	
+	public override GameObject GetPrefab() {
+		return null;
+	}
 }
 

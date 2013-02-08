@@ -8,12 +8,14 @@ public class Player {
 	public int number;
 	public TowerBase towerBase;
 	public Color color;
+	public Faction faction;
 
-	public Player(int number, Color c, Tower newTower, int r) {
+	public Player(int number, Color c, Tower newTower, int r, Faction f) {
 		this.color = c;
 		this.playerNumber = number;
 	    this.tower = newTower;
 	    this.resources = r;
+		this.faction = f;
 	}
 
 	public Tower GetTower() {

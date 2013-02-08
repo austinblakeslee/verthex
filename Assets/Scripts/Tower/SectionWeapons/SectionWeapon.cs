@@ -18,6 +18,10 @@ public class SectionWeapon {
 	protected Effect weaponEffect = new DefaultEffect();
 	
 	public static string[] weapons = new string[4] {"Nothing", "Ballista", "Catapult", "Cannon"};
+	
+	public virtual GameObject GetPrefab() {
+		return Resources.Load(wtype) as GameObject;
+	}
 
 	public string GetWeaponType() {
 	    return wtype;
