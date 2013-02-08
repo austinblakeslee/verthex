@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour {
 	private int hotMenuItem;
 	
 	
-	void Update() {
+	public virtual void Update() {
 		//Checks if any MenuItem's hotKey has been pressed
 		int i=0;
 		foreach (MenuItem m in menuItems) {

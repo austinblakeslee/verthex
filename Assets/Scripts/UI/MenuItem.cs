@@ -9,7 +9,7 @@ public class MenuItem : MonoBehaviour {
 	public string width = "0";
 	public string height = "0";
 	public DefaultMenuAction action;
-	private int leftI, topI, widthI, heightI;
+	public int leftI, topI, widthI, heightI;
 	public enum MenuItemType{
 		Button,
 		Box,
