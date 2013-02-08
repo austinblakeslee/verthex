@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class SectionWeapon {
+	public bool fire = true;
+	
 	protected int damage;
 	protected int spcost;
 	public int cost;
@@ -35,7 +37,10 @@ public class SectionWeapon {
 	}
 
 	public int GetDamage() {
-	    return (int)(damage * damageUpgrades[upgradeLevel]);
+		if (fire)
+	    	return (int)(damage * damageUpgrades[upgradeLevel]);
+		else
+			return 0;
 	}
 
 	public int GetSPCost() {
