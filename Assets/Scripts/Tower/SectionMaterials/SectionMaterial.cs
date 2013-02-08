@@ -12,7 +12,7 @@ public class SectionMaterial {
 	
 	public static string[] materials = new string[3] {"Wood", "Stone", "Steel"};
 	
-	public GameObject GetPrefab() {
+	public virtual GameObject GetPrefab() {
 		return Resources.Load(mtype) as GameObject;
 	}
 

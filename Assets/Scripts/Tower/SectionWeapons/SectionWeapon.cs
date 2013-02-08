@@ -19,7 +19,7 @@ public class SectionWeapon {
 	
 	public static string[] weapons = new string[4] {"Nothing", "Ballista", "Catapult", "Cannon"};
 	
-	public GameObject GetPrefab() {
+	public virtual GameObject GetPrefab() {
 		return Resources.Load(wtype) as GameObject;
 	}
 
