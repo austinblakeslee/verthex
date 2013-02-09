@@ -154,7 +154,6 @@ public class WeaponAnimator : MonoBehaviour {
 			} else if(animationStage == "hitPause") {
 				if(fireTime >= pausePeriod) {
 					numShakes = 0;
-					GameObject hitSection = hitSections[sectionCounter];
 					sectionCounter++;
 					animationStage = "hit";
 					fireTime = 0;

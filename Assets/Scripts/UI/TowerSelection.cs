@@ -177,7 +177,7 @@ public class TowerSelection : MonoBehaviour {
 				toDraw = noUpgrade;
 			}
 			GUI.DrawTexture(r, toDraw);
-			r = new Rect(r.left + 16, r.top, r.width, r.height);
+			r = new Rect(r.xMin + 16, r.yMin, r.width, r.height);
 		}
 		
 		GUI.EndGroup();
@@ -197,7 +197,7 @@ public class TowerSelection : MonoBehaviour {
 				toDraw = noUpgrade;
 			}
 			GUI.DrawTexture (r, toDraw);
-			r = new Rect(r.left + 16, r.top, r.width, r.height);
+			r = new Rect(r.xMin + 16, r.yMin, r.width, r.height);
 		}
 		
 		GUI.EndGroup ();
@@ -216,7 +216,7 @@ public class TowerSelection : MonoBehaviour {
 					toDraw = noUpgrade;
 				}
 				GUI.DrawTexture(r, toDraw);
-				r = new Rect(r.left + 16, r.top, r.width, r.height);
+				r = new Rect(r.xMin + 16, r.yMin, r.width, r.height);
 			}
 			GUI.EndGroup();
 		}
