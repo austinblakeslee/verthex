@@ -51,7 +51,6 @@ public class SectionComponentFactory : MonoBehaviour {
 	}
 	
 	public static SectionWeapon GetWeapon(string weaponName) {
-		Debug.Log(weaponName);
 		if(weaponName == "Ballista") {
 			return new Ballista();
 		} else if(weaponName == "Catapult") {
@@ -71,9 +70,6 @@ public class SectionComponentFactory : MonoBehaviour {
 		} else {
 			return new Nothing();
 		}
-		
-		
-
 
 		/*switch(weaponName){
 		case "Ballista":
