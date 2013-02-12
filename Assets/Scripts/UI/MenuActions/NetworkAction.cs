@@ -6,8 +6,6 @@ using System.Collections;
 
 public class NetworkAction : MonoBehaviour {
 
-
-string gameName = "VertHex_Network_Test";
 GameObject playerPrefab;
 Transform spawnObject;
 
@@ -21,6 +19,8 @@ private float buttonW;
 private float buttonH;
 	
 private string gameType = "Online";
+public string serverName = "Enter Server Name Here!";
+string gameName = "VertHex_Network_Test";
 
 
 void  Start (){
@@ -30,9 +30,9 @@ void  Start (){
 	buttonH = Screen.width * 0.1f;
 }
 
-void  startServer (){
+void  startServer (string serverName){
 	Network.InitializeServer(8, 25000, !Network.HavePublicAddress());
-	MasterServer.RegisterHost(gameName, "VertHex Multiplayer Test","This is a multiplayer test");
+	MasterServer.RegisterHost(gameName, serverName, "This is a VertHex multiplayer test");
 }
 
 void  refreshHostList (){
@@ -69,13 +69,15 @@ void  OnMasterServerEvent ( MasterServerEvent mse  ){
 //GUI
 void  OnGUI (){
 	if(visible) {
-	//if(Network.isClient && !Network.isServer){
-		if(GUI.Button( new Rect(buttonX, buttonY, buttonW, buttonH ), "Start Server")){
+	
+		serverName = GUI.TextField(new Rect(buttonX, buttonY - 10, 200, 20), serverName, 25);
+		
+		if(GUI.Button( new Rect(buttonX, buttonY + 30, buttonW, 40 ), "Start Server")){
 			Debug.Log("Starting Server");
-			startServer();
+			startServer(serverName);
 		}
 	
-		if(GUI.Button( new Rect(buttonX, buttonY * 1.2f + buttonH, buttonW, buttonH ), "Refresh Hosts")){
+		if(GUI.Button( new Rect(buttonX, buttonY * 1.2f + 60, buttonW, 40 ), "Refresh Hosts")){
 			Debug.Log("Refreshing");
 			refreshHostList();
 		}
@@ -90,6 +92,5 @@ void  OnGUI (){
 			}
 		}
 	}
-		//}
 }
 }
