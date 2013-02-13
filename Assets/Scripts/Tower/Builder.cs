@@ -28,8 +28,10 @@ public class Builder : MonoBehaviour {
 		block.transform.Find("FireCam").camera.enabled = false;
 		block.transform.Find("HitCam").camera.enabled = false;
 		block.transform.Find("CollapseCam").camera.enabled = false;
-		weapon = Instantiate(w.GetPrefab()) as GameObject;
-		if(weapon != null) {
+		Debug.Log(w.wtype);
+		if (w.wtype != "Nothing"){
+			weapon = Instantiate(w.GetPrefab()) as GameObject; //I believe the here lies the issue for why building Nothing doesn't work? maybe.
+		//if(weapon != null) {
 			Vector3 localPos = weapon.transform.localPosition;
 			Vector3 localScale = weapon.transform.localScale;
 			weapon.transform.parent = block.transform;
@@ -42,6 +44,7 @@ public class Builder : MonoBehaviour {
 		
 		SectionController sc = block.GetComponent<SectionController>();
 		Section s = new Section(m, w);
+		Debug.Log (s);
 		sc.SetSection(s);
 		sc.SetPlayer(player);
 		player.Build(block);

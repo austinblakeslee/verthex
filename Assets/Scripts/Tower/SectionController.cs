@@ -81,14 +81,17 @@ public class SectionController : MonoBehaviour {
 		}
 	}
 	
-	public void SetColor(Color c) {
-		foreach(GameObject module in modules) {
-			foreach(Transform t in module.transform) {
-				t.renderer.material.color = c;
+	public void SetColor(Color c) { 
+		Debug.Log (modules.Count);
+		if (modules.Count > 0){//hopefully fixes a bug where an error is raised if nothing is assigned in modules
+			foreach(GameObject module in modules) {
+				foreach(Transform t in module.transform) {
+					t.renderer.material.color = c;
+				}
 			}
-		}
-		foreach(GameObject thing in colorables) {
-			thing.renderer.material.color = c;
+			foreach(GameObject thing in colorables) {
+				thing.renderer.material.color = c;
+			}
 		}
 	}
 

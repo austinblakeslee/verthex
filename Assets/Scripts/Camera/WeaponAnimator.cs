@@ -11,6 +11,7 @@ public class WeaponAnimator : MonoBehaviour {
 	private bool splitScreen;
 	private GameObject firingSection;
 	private Vector3 originalProjectilePosition;
+	private Quaternion originalProjectileRotation;
 	private List<GameObject> hitSections;
 	private List<Camera> sectionCams;
 	private List<Vector3> sectionPos;
@@ -68,7 +69,9 @@ public class WeaponAnimator : MonoBehaviour {
 		} else if(weaponType == "Cannon") {
 			c = cannonFire;
 		}
-		AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
+		if (GetComponent("Audio Source") != null){
+			AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
+		}
 	}
 	
 	public void PlayWeaponHitSound() {
@@ -81,7 +84,10 @@ public class WeaponAnimator : MonoBehaviour {
 		} else if(weaponType == "Cannon") {
 			c = cannonHit;
 		}
-		AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
+		if (GetComponent("Audio Source") != null)
+		{
+			AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
+		}
 	}
 	
 	void Update () {
@@ -118,6 +124,7 @@ public class WeaponAnimator : MonoBehaviour {
 				}
 				animationStage = "firePause";
 				originalProjectilePosition = projectile.position;
+				originalProjectileRotation = projectile.rotation;
 				PlayFiringWeaponSound();
 				AnimateWeapon();
 				fireTime = 0;
@@ -138,6 +145,7 @@ public class WeaponAnimator : MonoBehaviour {
 					GameObject hitSection = hitSections[sectionCounter];
 					hitSection.transform.Find("HitCam").camera.enabled = true;
 					projectile.position = hitSection.transform.Find("ProjectileLocation").position;
+					projectile.LookAt(hitSection.transform);
 					if(sectionCounter != 0) {
 						sectionCams[sectionCounter-1].enabled = false;
 					}
@@ -182,6 +190,7 @@ public class WeaponAnimator : MonoBehaviour {
 			} else if(animationStage == "end") {
 				fireTime = 0;
 				projectile.position = originalProjectilePosition;
+				projectile.rotation = originalProjectileRotation;
 				animationStage = "";
 				animate = false;
 				GameObject.FindWithTag("MainMenu").GetComponent<Menu>().disabled = false;

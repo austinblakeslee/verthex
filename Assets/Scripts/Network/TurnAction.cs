@@ -4,7 +4,7 @@ using System.Collections;
 //represents an action taken by a player
 public abstract class TurnAction {
 
-	protected const char TOKEN_SEPARATOR = '-';
+	protected const char TOKEN_SEPARATOR = '~';
 	public int playerNumber;
 	public string actionName;
 	
