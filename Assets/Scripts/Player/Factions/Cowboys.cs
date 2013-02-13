@@ -7,6 +7,6 @@ public class Cowboys : Faction {
 	public Cowboys() {
 		this.factionName = "Cowboys";
 		this.materials = new string[3] {"Water Tower", "Saloon", "Jail Cell"};
-		this.weapons = new string[5] {"Nothing", "Pistols", "Gattling Gun", "Cannon", "Sniper"};
+		this.weapons = new string[4] {"Nothing", "Pistols", "Gattling Gun", "Cannon"};
 	}
 }

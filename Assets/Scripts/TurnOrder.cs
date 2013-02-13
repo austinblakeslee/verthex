@@ -28,7 +28,7 @@ public class TurnOrder : MonoBehaviour {
 	
 	void Start () {
 		instance = this;
-		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"], new Area51());
+		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"], new Totem());
 		player2 = new Player(2, player2Color, new Tower(), GameValues.intValues["baseResources"], new Cowboys());
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			myPlayer = player1;
