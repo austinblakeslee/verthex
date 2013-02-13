@@ -18,7 +18,7 @@ public class FortifyMenu : Menu {
 	
 	public override void Update() {
 		if(!hasLoaded) {
-			//Faction f = TurnOrder.myPlayer.faction;
+			Faction f = TurnOrder.myPlayer.faction;
 			Rect rpLabelRect = new Rect(Screen.width - 380,Screen.height - 165,boxSize.x,boxSize.y);
 			GameObject rlabel = MakeBox ("RP",rpLabelRect);
 			rlabel.AddComponent("FortifyCostLabel");
@@ -104,7 +104,7 @@ public class FortifyMenu : Menu {
 		item.transform.parent = transform;
 		MenuItem m = item.GetComponent<MenuItem>();
 		m.action = item.GetComponent(scriptName) as DefaultMenuAction;
-		item.GetComponent<DefaultMenuAction>().click = click;
+		m.action.click = click;
 		menuItems.Add(m);
 		return item;
 	}

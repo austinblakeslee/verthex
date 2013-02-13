@@ -64,7 +64,7 @@ public class BuildMenu : Menu {
 			confirm.transform.parent = transform;
 			MenuItem m0 = confirm.GetComponent<MenuItem>();
 			m0.action = confirm.GetComponent<BuildAction>();
-			confirm.GetComponent<DefaultMenuAction>().click = click;
+			m0.action.click = click;
 			confirm.GetComponent<BuildAction>().myMenu = this;
 			menuItems.Add(m0);
 			numButtons++;
@@ -77,7 +77,7 @@ public class BuildMenu : Menu {
 			m1.action = back.GetComponent<SwitchMenu>();
 			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;
-			back.GetComponent<DefaultMenuAction>().click = click;
+			m1.action.click = click;
 			menuItems.Add(m1);
 			numButtons++;
 			Rect materialLabelRect = new Rect(Screen.width - 380,Screen.height - 165,boxSize.x,boxSize.y);
