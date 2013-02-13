@@ -40,9 +40,9 @@ public class FireAction : DefaultMenuAction,MenuAction {
 				GetComponent<PowerBar>().Show();
 				isActive = true;
 				fightMenu.on = true;
-				foreach(Menu m in toHide) {
-					m.on = false;
-				}
+				//foreach(Menu m in toHide) {
+				//	m.on = false;
+				//}
 				ValueStore.helpMessage = "Use Up/Down arrows to select targets above and below your level. Press Space to fire. ";
 			}
 		}

@@ -139,6 +139,7 @@ public class TurnOrder : MonoBehaviour {
 	[RPC]
 	private void Resume() {
 		this.inputReady = true;
+		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 		EndTurn();
 	}
 	
@@ -157,6 +158,9 @@ public class TurnOrder : MonoBehaviour {
 	private void RegisterAction(TurnAction action) {
 		ResetMenus();
 		this.inputReady = false;
+		foreach (Menu c in GameObject.Find("MainMenu").GetComponentsInChildren<Menu>()) {
+			c.on = false;
+		}
 		if(Network.isClient) {
 			networkView.RPC("RegisterAction", RPCMode.Server, action.GetActionMessage());
 		} else if(Network.isServer) {
