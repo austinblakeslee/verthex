@@ -10,5 +10,6 @@ public class EyeBlaster : SectionWeapon {
         this.range = 3;
         this.wtype = "Eye Blaster";
 		this.range = 1;
-    }
+    	this.maxUpgradeEffect = new AreaOfEffect();
+	}
 }
