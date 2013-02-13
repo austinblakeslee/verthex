@@ -3,6 +3,8 @@ guid: 131a997721726fc499d8c6367130eeba
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - soundEffect: {fileID: 8300000, guid: 85415db31ba5f2b49a97a1ebb551147a, type: 1}
+  - collapseParticle: {fileID: 100002, guid: 2335946a918492845b297fc42f03746d, type: 2}
+  - soundEffect: {fileID: 8300000, guid: 85415db31ba5f2b49a97a1ebb551147a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
+  userData: 

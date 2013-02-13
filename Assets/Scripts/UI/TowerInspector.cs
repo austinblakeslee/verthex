@@ -43,7 +43,7 @@ public class TowerInspector : MonoBehaviour {
 	}
 	
     void OnGUI() {
-    	if(GameObject.Find("Main/Fight").GetComponent<WeaponAnimator>().getSplitScreen() == false) {
+    	if(GameObject.Find("MainMenu/Fight").GetComponent<WeaponAnimator>().getSplitScreen() == false) {
         Player player1 = TurnOrder.GetPlayerByNumber(1);
         Player player2 = TurnOrder.GetPlayerByNumber(2);
         Tower p1Tower = player1.GetTower();
