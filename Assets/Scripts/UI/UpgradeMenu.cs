@@ -18,7 +18,7 @@ public class UpgradeMenu : Menu {
 	
 	public override void Update() {
 		if(!hasLoaded) {
-			//Faction f = TurnOrder.myPlayer.faction;
+			Faction f = TurnOrder.myPlayer.faction;
 			GameObject aoe = createGUIButton("AoEAction","AoE");
 			numButtons++;
 			GameObject damage = createGUIButton("DamageAction","Damage");
@@ -94,7 +94,7 @@ public class UpgradeMenu : Menu {
 		item.transform.parent = transform;
 		MenuItem m = item.GetComponent<MenuItem>();
 		m.action = item.GetComponent(scriptName) as DefaultMenuAction;
-		item.GetComponent<DefaultMenuAction>().click = click;
+		m.action.click = click;
 		menuItems.Add(m);
 		return item;
 	}

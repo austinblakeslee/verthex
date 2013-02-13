@@ -31,7 +31,7 @@ public class MainMenu : Menu {
 
 	public override void Update() {
 		if(!hasLoaded) {
-			//Faction f = TurnOrder.myPlayer.faction;
+			Faction f = TurnOrder.myPlayer.faction;
 			Rect buildButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
 			buildButtonRect = FindPos(numButtons, buildButtonRect);
 			GameObject build = MakeButton("Build",buildButtonRect);
@@ -42,7 +42,8 @@ public class MainMenu : Menu {
 			m1.action = build.GetComponent<SwitchMenu>();
 			build.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			build.GetComponent<SwitchMenu>().toMenu = build;
-			build.GetComponent<DefaultMenuAction>().click = click;
+			build.GetComponent<BuildMenu>().click = click;
+			m1.action.click = click;
 			menuItems.Add(m1);
 			numButtons++;
 			GameObject fight = makeFireButton(numButtons);
@@ -57,7 +58,8 @@ public class MainMenu : Menu {
 			m3.action = fortify.GetComponent<SwitchMenu>();
 			fortify.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			fortify.GetComponent<SwitchMenu>().toMenu = fortify;
-			fortify.GetComponent<DefaultMenuAction>().click = click;
+			fortify.GetComponent<FortifyMenu>().click = click;
+			m3.action.click = click;
 			menuItems.Add(m3);
 			numButtons++;
 			Rect upgradeButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
@@ -70,7 +72,8 @@ public class MainMenu : Menu {
 			m4.action = upgrade.GetComponent<SwitchMenu>();
 			upgrade.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			upgrade.GetComponent<SwitchMenu>().toMenu = upgrade;
-			upgrade.GetComponent<DefaultMenuAction>().click = click;
+			upgrade.GetComponent<UpgradeMenu>().click = click;
+			m4.action.click = click;
 			menuItems.Add(m4);
 			numButtons++;
 			Rect passButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
@@ -80,7 +83,7 @@ public class MainMenu : Menu {
 			pass.transform.parent = transform;
 			MenuItem m5 = pass.GetComponent<MenuItem>();
 			m5.action = pass.GetComponent<PassAction>();
-			pass.GetComponent<DefaultMenuAction>().click = click;
+			m5.action.click = click;
 			menuItems.Add(m5);
 			numButtons++;
 			hasLoaded = true;
@@ -184,7 +187,7 @@ public class MainMenu : Menu {
 		fight.transform.parent = transform;
 		MenuItem m2 = fight.GetComponent<MenuItem>();
 		m2.action = fight.GetComponent<FireAction>();
-		fight.GetComponent<DefaultMenuAction>().click = click;
+		m2.action.click = click;
 		menuItems.Add(m2);
 		return fight;
 	}

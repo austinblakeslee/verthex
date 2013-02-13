@@ -58,25 +58,21 @@ public class TurnOrder : MonoBehaviour {
 					Debug.Log("Actions received, let's get going!!!");
 					networkState = "waitingForReady";
 					networkView.RPC("CheckReady", RPCMode.All);
-					Debug.Log(networkState + " " + player1Confirm + " " + player2Confirm);
 				} else if(networkState == "waitingForReady" && player1Confirm && player2Confirm) {
 					player1Confirm = false;
 					player2Confirm = false;
 					networkState = "performingPlayer1Action";
 					networkView.RPC("PerformAction", RPCMode.All, player1Action.GetActionMessage());
-					Debug.Log(networkState + " " + player1Confirm + " " + player2Confirm);
 				} else if(networkState == "performingPlayer1Action" && player1Confirm && player2Confirm) {
 					player1Confirm = false;
 					player2Confirm = false;
 					networkState = "performingPlayer2Action";
 					networkView.RPC("PerformAction", RPCMode.All, player2Action.GetActionMessage());
-					Debug.Log(networkState + " " + player1Confirm + " " + player2Confirm);
 				} else if(networkState == "performingPlayer2Action" && player1Confirm && player2Confirm) {
 					player1Confirm = false;
 					player2Confirm = false;
 					networkState = "resolveCollapse";
 					networkView.RPC("CollapseIfNeeded", RPCMode.All);
-					Debug.Log(networkState + " " + player1Confirm + " " + player2Confirm);
 				} else if(networkState == "resolveCollapse" && player1Confirm && player2Confirm) {
 					player1Confirm = false;
 					player2Confirm = false;
@@ -84,7 +80,6 @@ public class TurnOrder : MonoBehaviour {
 					player2Action = null;
 					networkState = "waitingForActions";
 					networkView.RPC("Resume", RPCMode.All);
-					Debug.Log(networkState + " " + player1Confirm + " " + player2Confirm);
 				}
 			}
 		}
@@ -107,7 +102,6 @@ public class TurnOrder : MonoBehaviour {
 		} else {
 			player2Confirm = true;
 		}
-		Debug.Log("Player Ready: " + networkState);
 	}
 	
 	[RPC]
@@ -118,7 +112,6 @@ public class TurnOrder : MonoBehaviour {
 			yield return new WaitForSeconds(0.5f);
 		} while(CollapseAnimator.animate || WeaponAnimator.animate);
 		yield return new WaitForSeconds(2.0f);
-		Debug.Log("Sending player ready RPC");
 		if(Network.isClient) {
 			networkView.RPC("PlayerReady", RPCMode.Server, myPlayer.playerNumber);
 		} else {
