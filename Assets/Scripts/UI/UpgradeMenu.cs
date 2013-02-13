@@ -94,6 +94,7 @@ public class UpgradeMenu : Menu {
 		item.transform.parent = transform;
 		MenuItem m = item.GetComponent<MenuItem>();
 		m.action = item.GetComponent(scriptName) as DefaultMenuAction;
+		item.GetComponent<DefaultMenuAction>().click = click;
 		menuItems.Add(m);
 		return item;
 	}
