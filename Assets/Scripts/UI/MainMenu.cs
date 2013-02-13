@@ -8,6 +8,20 @@ public class MainMenu : Menu {
 	public Vector2 boxSize;
 	public AudioClip click;
 	private int numButtons;
+	public AudioClip balfire;
+	public AudioClip balhit;
+	public AudioClip trefire;
+	public AudioClip trehit;
+	public AudioClip canfire;
+	public AudioClip canhit;
+	public AudioClip miss;
+	public Texture2D splitscreen;
+	public Font missfont;
+	public GameObject hitp;
+	public GameObject collp;
+	public AudioClip sound;
+	public Texture2D empty;
+	public Texture2D full;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -28,9 +42,10 @@ public class MainMenu : Menu {
 			m1.action = build.GetComponent<SwitchMenu>();
 			build.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			build.GetComponent<SwitchMenu>().toMenu = build;
+			build.GetComponent<DefaultMenuAction>().click = click;
 			menuItems.Add(m1);
 			numButtons++;
-			makeFireButton(numButtons);
+			GameObject fight = makeFireButton(numButtons);
 			numButtons++;
 			Rect fortifyButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
 			fortifyButtonRect = FindPos(numButtons, fortifyButtonRect);
@@ -42,7 +57,7 @@ public class MainMenu : Menu {
 			m3.action = fortify.GetComponent<SwitchMenu>();
 			fortify.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			fortify.GetComponent<SwitchMenu>().toMenu = fortify;
-			//m3.action.click = click;
+			fortify.GetComponent<DefaultMenuAction>().click = click;
 			menuItems.Add(m3);
 			numButtons++;
 			Rect upgradeButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
@@ -55,7 +70,7 @@ public class MainMenu : Menu {
 			m4.action = upgrade.GetComponent<SwitchMenu>();
 			upgrade.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			upgrade.GetComponent<SwitchMenu>().toMenu = upgrade;
-			//m4.action.click = click;
+			upgrade.GetComponent<DefaultMenuAction>().click = click;
 			menuItems.Add(m4);
 			numButtons++;
 			Rect passButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
@@ -65,7 +80,7 @@ public class MainMenu : Menu {
 			pass.transform.parent = transform;
 			MenuItem m5 = pass.GetComponent<MenuItem>();
 			m5.action = pass.GetComponent<PassAction>();
-			//m5.action.Click = click;
+			pass.GetComponent<DefaultMenuAction>().click = click;
 			menuItems.Add(m5);
 			numButtons++;
 			hasLoaded = true;
@@ -140,18 +155,37 @@ public class MainMenu : Menu {
 		return item;
 	}
 	
-	private void makeFireButton(int i) {
+	private GameObject makeFireButton(int i) {
 		Rect fightButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
 		fightButtonRect = FindPos(numButtons, fightButtonRect);
 		GameObject fight = MakeButton("Fight",fightButtonRect);
+		fight.AddComponent("Menu");
 		fight.AddComponent ("FireAction");
+		fight.GetComponent<FireAction>().hitParticle = hitp;
+		fight.GetComponent<FireAction>().fightMenu = fight.GetComponent<Menu>();
 		fight.AddComponent ("PowerBar");
+		fight.GetComponent<PowerBar>().emptyTexture = empty;
+		fight.GetComponent<PowerBar>().fillTexture = full;
 		fight.AddComponent ("WeaponAnimator");
+		fight.GetComponent<WeaponAnimator>().hitParticle = hitp;
+		fight.GetComponent<WeaponAnimator>().ballistaFire = balfire;
+		fight.GetComponent<WeaponAnimator>().ballistaHit = balhit;
+		fight.GetComponent<WeaponAnimator>().catapultFire = trefire;
+		fight.GetComponent<WeaponAnimator>().catapultHit = trehit;
+		fight.GetComponent<WeaponAnimator>().cannonFire = canfire;
+		fight.GetComponent<WeaponAnimator>().cannonHit = canhit;
+		fight.GetComponent<WeaponAnimator>().missSound = miss;
+		fight.GetComponent<WeaponAnimator>().missFont = missfont;
+		fight.GetComponent<WeaponAnimator>().splitScreenTexture = splitscreen;
 		fight.AddComponent ("CollapseAnimator");
+		fight.GetComponent<CollapseAnimator>().collapseParticle = collp;
+		fight.GetComponent<CollapseAnimator>().soundEffect = sound;
+		AudioSource audio = fight.AddComponent<AudioSource>();
 		fight.transform.parent = transform;
 		MenuItem m2 = fight.GetComponent<MenuItem>();
 		m2.action = fight.GetComponent<FireAction>();
-		//m2.action.Click = click;
+		fight.GetComponent<DefaultMenuAction>().click = click;
 		menuItems.Add(m2);
+		return fight;
 	}
 }

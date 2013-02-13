@@ -21,12 +21,14 @@ public class FortifyMenu : Menu {
 			//Faction f = TurnOrder.myPlayer.faction;
 			Rect rpLabelRect = new Rect(Screen.width - 380,Screen.height - 165,boxSize.x,boxSize.y);
 			GameObject rlabel = MakeBox ("RP",rpLabelRect);
+			rlabel.AddComponent("FortifyCostLabel");
 			rlabel.transform.parent = transform;
 			MenuItem m1 = rlabel.GetComponent<MenuItem>();
 			m1.action = rlabel.GetComponent<DefaultMenuAction>();
 			menuItems.Add(m1);
 			Rect weaponsLabelRect = new Rect(Screen.width - 380,Screen.height - 110,boxSize.x,boxSize.y);
 			GameObject slabel = MakeBox ("SP",weaponsLabelRect);
+			slabel.AddComponent("FortifyHealthLabel");
 			slabel.transform.parent = transform;
 			MenuItem m3 = slabel.GetComponent<MenuItem>();
 			m3.action = slabel.GetComponent<DefaultMenuAction>();
@@ -102,6 +104,7 @@ public class FortifyMenu : Menu {
 		item.transform.parent = transform;
 		MenuItem m = item.GetComponent<MenuItem>();
 		m.action = item.GetComponent(scriptName) as DefaultMenuAction;
+		item.GetComponent<DefaultMenuAction>().click = click;
 		menuItems.Add(m);
 		return item;
 	}

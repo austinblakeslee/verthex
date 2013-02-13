@@ -144,8 +144,8 @@ public class WeaponAnimator : MonoBehaviour {
 					hitSectionOriginalPosition = hitSections[sectionCounter].transform.position;
 					GameObject.Instantiate(hitParticle, hitSection.transform.position, hitSection.transform.rotation);
 					//Create Damage Text to display on screen
-					damageText.text = firingSection.GetComponent<SectionController>().GetSection().GetWeapon().GetDamage().ToString();
-					cloneDamageText = Instantiate(damageText, damageLocale, Quaternion.identity);
+					//damageText.text = firingSection.GetComponent<SectionController>().GetSection().GetWeapon().GetDamage().ToString();
+					//cloneDamageText = Instantiate(damageText, damageLocale, Quaternion.identity);
 					PlayWeaponHitSound();
 					animationStage = "hitPause";
 				} else {

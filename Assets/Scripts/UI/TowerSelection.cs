@@ -30,8 +30,8 @@ public class TowerSelection : MonoBehaviour {
 	public MenuItem aoeButton;
 	
 	void Start() {
-		materialBoxRect = new Rect(Screen.width - materialBox.x - padding, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
-		weaponBoxRect = new Rect(Screen.width - weaponBox.x - padding, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
+		materialBoxRect = new Rect(230, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
+		weaponBoxRect = new Rect(230, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
 		instance = this;
 		if(Network.isServer) {
 			LocalSelectSection(1, -1);
