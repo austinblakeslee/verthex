@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class UpgradeMenu : Menu {
+public class FortifyMenu : Menu {
 	private bool hasLoaded = false;
 	public Vector2 buttonSize;
 	public Vector2 boxSize;
@@ -12,18 +12,26 @@ public class UpgradeMenu : Menu {
 		on = false;
 		buttonSize.x = 60;
 		buttonSize.y = 50;
-		boxSize.x = 200;
-		boxSize.y = 150;
+		boxSize.x = 150;
+		boxSize.y = 50;
 	}
 	
 	public override void Update() {
 		if(!hasLoaded) {
 			//Faction f = TurnOrder.myPlayer.faction;
-			GameObject aoe = createGUIButton("AoEAction","AoE");
-			numButtons++;
-			GameObject damage = createGUIButton("DamageAction","Damage");
-			numButtons++;
-			GameObject dot = createGUIButton("DoTAction","DoT");
+			Rect rpLabelRect = new Rect(Screen.width - 380,Screen.height - 165,boxSize.x,boxSize.y);
+			GameObject rlabel = MakeBox ("RP",rpLabelRect);
+			rlabel.transform.parent = transform;
+			MenuItem m1 = rlabel.GetComponent<MenuItem>();
+			m1.action = rlabel.GetComponent<DefaultMenuAction>();
+			menuItems.Add(m1);
+			Rect weaponsLabelRect = new Rect(Screen.width - 380,Screen.height - 110,boxSize.x,boxSize.y);
+			GameObject slabel = MakeBox ("SP",weaponsLabelRect);
+			slabel.transform.parent = transform;
+			MenuItem m3 = slabel.GetComponent<MenuItem>();
+			m3.action = slabel.GetComponent<DefaultMenuAction>();
+			menuItems.Add(m3);
+			GameObject confirm = createGUIButton("FortifyAction","Confirm");
 			numButtons++;
 			GameObject back = createGUIButton("SwitchMenu","Back");
 			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;

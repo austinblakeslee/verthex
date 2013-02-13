@@ -139,6 +139,7 @@ public class TurnOrder : MonoBehaviour {
 	[RPC]
 	private void Resume() {
 		this.inputReady = true;
+		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 		EndTurn();
 	}
 	
