@@ -18,6 +18,9 @@ public class GameValues : MonoBehaviour {
 	public static Dictionary<string, int> intValues = new Dictionary<string, int>();
 	public static Dictionary<string, float> floatValues = new Dictionary<string, float>();
 	public static bool loaded = false;
+	public static string myFaction = "Cowboys";
+	public static string player1Faction = "EMPTY";
+	public static string player2Faction = "EMPTY";
 
 	void Awake () {
 		if(!loaded) {

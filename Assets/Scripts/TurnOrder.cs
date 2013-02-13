@@ -28,8 +28,10 @@ public class TurnOrder : MonoBehaviour {
 	
 	void Start () {
 		instance = this;
-		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"], new Totem());
-		player2 = new Player(2, player2Color, new Tower(), GameValues.intValues["baseResources"], new Cowboys());
+		Faction player1Faction = MakeFactionForString(GameValues.player1Faction);
+		Faction player2Faction = MakeFactionForString(GameValues.player2Faction);
+		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"], player1Faction);
+		player2 = new Player(2, player2Color, new Tower(), GameValues.intValues["baseResources"], player2Faction);
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			myPlayer = player1;
 			otherPlayer = player2;
@@ -47,6 +49,18 @@ public class TurnOrder : MonoBehaviour {
 		player2.SetTowerLocation(player2Base, player1Base);
 		ValueStore.helpMessage = "Click a section to select it.";
 		CombatLog.addLineNoPlayer("Ceasefire ends in " + (ceasefire - turnNum) + " turns.");
+	}
+	
+	private Faction MakeFactionForString(string f) {
+		if(f == "Area51") {
+			return new Area51();
+		} else if(f == "Cowboys") {
+			return new Cowboys();
+		} else if(f == "Totem") {
+			return new Totem();
+		} else {
+			return new Generic();
+		}
 	}
 
 	void Update () {
