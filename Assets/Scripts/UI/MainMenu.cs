@@ -22,6 +22,7 @@ public class MainMenu : Menu {
 	public AudioClip sound;
 	public Texture2D empty;
 	public Texture2D full;
+	public GUIText damagetext;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -180,6 +181,7 @@ public class MainMenu : Menu {
 		fight.GetComponent<WeaponAnimator>().missSound = miss;
 		fight.GetComponent<WeaponAnimator>().missFont = missfont;
 		fight.GetComponent<WeaponAnimator>().splitScreenTexture = splitscreen;
+		fight.GetComponent<WeaponAnimator>().damageText = damagetext;
 		fight.AddComponent ("CollapseAnimator");
 		fight.GetComponent<CollapseAnimator>().collapseParticle = collp;
 		fight.GetComponent<CollapseAnimator>().soundEffect = sound;
