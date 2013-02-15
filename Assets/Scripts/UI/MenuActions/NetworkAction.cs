@@ -12,7 +12,7 @@ public class NetworkAction : MonoBehaviour {
 	private bool refreshing;
 	private HostData[] hostData;
 	public bool visible;
-
+	public bool waiting;
 	private float buttonX;
 	private float buttonY;
 	private float buttonW;
@@ -76,13 +76,14 @@ public class NetworkAction : MonoBehaviour {
 
 	//GUI
 	void  OnGUI (){
-		if(visible) {
+		if(visible && waiting == false) {
 		
 			serverName = GUI.TextField(new Rect(buttonX, buttonY - 10, 200, 20), serverName, 25);
 			
 			if(GUI.Button( new Rect(buttonX, buttonY + 30, buttonW, 40 ), "Start Server")){
 				Debug.Log("Starting Server");
 				startServer(serverName);
+				waiting = true;
 			}
 		
 			if(GUI.Button( new Rect(buttonX, buttonY * 1.2f + 60, buttonW, 40 ), "Refresh Hosts")){
@@ -97,6 +98,14 @@ public class NetworkAction : MonoBehaviour {
 						GameType.setGameType(gameType);
 					}
 				}
+			}
+		}
+		else if(waiting && visible == true) {
+			GUI.Box(new Rect(Screen.width/2-150, Screen.height/2-75,300,50),"Waiting for Player to Join Server:\n" + serverName + "...");
+			if(GUI.Button(new Rect(Screen.width/2-75, Screen.height/2+75,150,50),"Disconnect Server")) {
+				Network.Disconnect();
+				MasterServer.UnregisterHost();
+				waiting = false;
 			}
 		}
 	}
