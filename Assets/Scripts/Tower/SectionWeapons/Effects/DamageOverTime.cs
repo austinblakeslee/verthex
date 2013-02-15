@@ -11,10 +11,10 @@ public class DamageOverTime : Effect {
 		this.effectType = "Burn";
 	}
 	
-	public override List<GameObject> GetDamagedSections(Tower t, int center) {
-		List<GameObject> list = new List<GameObject>();
+	public override List<Section> GetDamagedSections(Tower t, int center) {
+		List<Section> list = new List<Section>();
 		if(center >= 0 && center < t.GetSections().Count) {
-			list.Add(t.GetSections()[center]);
+			list.Add(t.GetSection(center));
 		}
 		return list;
 	}

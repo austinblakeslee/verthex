@@ -3,8 +3,8 @@ using System.Collections;
 
 public class TowerSelection : MonoBehaviour {
 
-	private static SectionController selectedSection;
-	private static SectionController oldSelect;
+	private static Section selectedSection;
+	private static Section oldSelect;
 	private static TowerSelection instance;
 	public Vector2 materialBox;
 	public Vector2 weaponBox;
@@ -33,23 +33,14 @@ public class TowerSelection : MonoBehaviour {
 		materialBoxRect = new Rect(230, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
 		weaponBoxRect = new Rect(230, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
 		instance = this;
-		if(Network.isServer) {
-			LocalSelectSection(1, -1);
-		} else {
-			LocalSelectSection(2, -1);
-		}
 	}
 	
-	public static void NetworkedSelectSection(int playerNum, int sectionNum) {
-		if(Network.isClient || Network.isServer) {
-			instance.networkView.RPC("SelectSection", RPCMode.All, playerNum, sectionNum);
-		} else {
-			instance.SelectSection(playerNum, sectionNum);
-		}
+	public static void LocalSelectSection(Tower t, int sectionNum) {
+		instance.SelectSection(t, sectionNum);
 	}
 	
-	public static void LocalSelectSection(int playerNum, int sectionNum) {
-		instance.SelectSection(playerNum, sectionNum);
+	public static void Deselect() {
+		LocalSelectSection(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum), -1);
 	}
 
 	void Update () {
@@ -58,23 +49,23 @@ public class TowerSelection : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(ray, out hit, 10000.0f)) {
 				if(hit.collider == null || hit.collider.tag != "Section") {
-					LocalSelectSection(-1, -1);
+					Deselect();
 					return;
 				}
-				SectionController s = hit.collider.GetComponent<SectionController>();
-				int playerNum = s.GetPlayer().playerNumber;
-				int sectionNum = s.GetHeight()-1;
-				LocalSelectSection(playerNum, sectionNum);
+				Section s = hit.collider.GetComponent<Section>();
+				Tower t = s.attributes.myTower;
+				int sectionNum = s.attributes.height;
+				LocalSelectSection(t, sectionNum);
 				audio.Play();
 			} else {
-				LocalSelectSection(-1, -1);
+				Deselect();
 			}
 		}
 		if(selectedSection != null) {
-			SectionMaterial m = selectedSection.GetSection().GetMaterial();
-			fortifyRP.text = ""+m.GetCostPerRepair();
-			fortifySP.text = ""+m.GetSPPerRepair();
-			SectionWeapon w = selectedSection.GetSection().GetWeapon();
+			SectionMaterial m = selectedSection.attributes.material;
+			fortifyRP.text = ""+m.costPerRepair;
+			fortifySP.text = ""+m.SPPerRepair;
+			SectionWeapon w = selectedSection.attributes.weapon;
 			if(w.GetEffect().GetEffectType() == "Multi") {
 				dotButton.visible = false;
 				aoeButton.visible = true;
@@ -95,7 +86,7 @@ public class TowerSelection : MonoBehaviour {
 		GUI.skin = skin;
 		if(selectedSection != null) {
 			DrawMaterialBox();
-			if(selectedSection.GetSection().GetWeapon().GetWeaponType() != "Nothing") {
+			if(selectedSection.attributes.weapon.GetWeaponType() != "Nothing") {
 				DrawWeaponBox();
 			}
 		}
@@ -107,8 +98,8 @@ public class TowerSelection : MonoBehaviour {
 		GUI.BeginGroup(materialBoxRect);
 		
 		/* health bar */
-		float maxSPRatio = selectedSection.GetSection().GetSP() / (float)selectedSection.GetSection().GetMaxSP();
-		float stressRatio = selectedSection.GetStress() / (float)selectedSection.GetSection().GetMaxSP();
+		float maxSPRatio = selectedSection.attributes.sp / (float)selectedSection.attributes.material.GetMaxSP();
+		float stressRatio = selectedSection.GetStress() / (float)selectedSection.attributes.material.GetMaxSP();
 		int width = 125;
 		int height = 30;
 		int left = (int)materialBoxRect.width - 15 - width;
@@ -131,7 +122,7 @@ public class TowerSelection : MonoBehaviour {
 		top = 15;
 		height = 30;
 		width = 50;
-		GUI.Label(new Rect(left, top, width, height), selectedSection.GetSection().GetMaterial().GetMaterialType());
+		GUI.Label(new Rect(left, top, width, height), selectedSection.attributes.material.mtype);
 		
 		/* dot effect */
 		if(selectedSection.HasDot()) {
@@ -172,7 +163,7 @@ public class TowerSelection : MonoBehaviour {
 		for(int i=0; i <= 7; i++) {
 			//if(i > selectedSection.GetSection().GetWeapon().GetDamageUpgradeLevel()) {
 			//120 is about the maximum number of health a weapon can have in this game right now. This should give a better visual indication of a weapons power.
-			if((i+1)/8f > selectedSection.GetSection().GetWeapon().GetDamage()/120f){ 
+			if((i+1)/8f > selectedSection.attributes.weapon.GetDamage()/120f){ 
 
 				toDraw = noUpgrade;
 			}
@@ -193,7 +184,7 @@ public class TowerSelection : MonoBehaviour {
 		toDraw = upgrade;
 		//max range is 5 right now
 		for(int i = 0; i < 5; i++){
-			if(i > selectedSection.GetSection().GetWeapon().GetRange()  - 1){
+			if(i > selectedSection.attributes.weapon.GetRange()  - 1){
 				toDraw = noUpgrade;
 			}
 			GUI.DrawTexture (r, toDraw);
@@ -202,17 +193,17 @@ public class TowerSelection : MonoBehaviour {
 		
 		GUI.EndGroup ();
 		/* Effect Upgrade level */
-		if(selectedSection.GetSection().GetWeapon().GetEffect().GetEffectType() != "none") {
+		if(selectedSection.attributes.weapon.GetEffect().GetEffectType() != "none") {
 			left = 15;
 			top = 115;
 			width = 200;
 			height = 60;
 			GUI.BeginGroup(new Rect(left, top, width, height));
-			GUI.Label(new Rect(0, 0, 60, 30), selectedSection.GetSection().GetWeapon().GetEffect().GetEffectType() + ": ");
+			GUI.Label(new Rect(0, 0, 60, 30), selectedSection.attributes.weapon.GetEffect().GetEffectType() + ": ");
 			r = new Rect(70, 4, 16, 16);
 			toDraw = upgrade;
 			for(int i=0; i < 4; i++) {
-				if(i > selectedSection.GetSection().GetWeapon().GetEffect().GetUpgradeLevel()) {
+				if(i > selectedSection.attributes.weapon.GetEffect().GetUpgradeLevel()) {
 					toDraw = noUpgrade;
 				}
 				GUI.DrawTexture(r, toDraw);
@@ -225,31 +216,23 @@ public class TowerSelection : MonoBehaviour {
 		GUI.EndGroup();
 	}
 	
-	public static SectionController GetSelectedSection() {
+	public static Section GetSelectedSection() {
 		return selectedSection;
 	}
 	
 	[RPC]
-	private void SelectSection(int playerNumber, int sectionNumber) {
-		Player p = null;
-		if(playerNumber == 1) {
-			p = TurnOrder.player1;
-		} else if(playerNumber == 2) {
-			p = TurnOrder.player2;
-		} else {
-			p = TurnOrder.myPlayer;
-		}
+	private void SelectSection(Tower t, int sectionNumber) {
 		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
 		if(selectedSection != null) {
 			selectedSection.SetColor(Color.white);
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
-			mc.ChangeTarget(p.towerBase.transform);
+			mc.ChangeTarget(t.towerBase.transform);
 		} else {
-			SectionController s = p.GetTower().GetSections()[sectionNumber].GetComponent<SectionController>();
+			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
-			mc.ChangeTarget(s.transform);
+			mc.ChangeTarget(t.towerBase.transform);
 			s.SetColor(TurnOrder.myPlayer.color);
 		}
 	}

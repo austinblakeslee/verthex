@@ -9,8 +9,8 @@ public class TurnOrder : MonoBehaviour {
 	private static int turnNum;
 	public static int ceasefire;
 	private static TurnOrder instance;
-	public GameObject player1Base;
-	public GameObject player2Base;
+	public TowerBase[] player1Bases;
+	public TowerBase[] player2Bases;
 	public MenuItem helpText;
 	public Color player1Color;
 	public Color player2Color;
@@ -25,13 +25,12 @@ public class TurnOrder : MonoBehaviour {
 	private bool player2Confirm = false;
 	private string networkState = "waitingForActions";
 	private bool inputReady = true;
+	public static int actionNum = 0;
 	
 	void Start () {
 		instance = this;
-		Faction player1Faction = MakeFactionForString(GameValues.player1Faction);
-		Faction player2Faction = MakeFactionForString(GameValues.player2Faction);
-		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"], player1Faction);
-		player2 = new Player(2, player2Color, new Tower(), GameValues.intValues["baseResources"], player2Faction);
+		player1 = new Player(1, player1Color, GameValues.intValues["baseResources"]);
+		player2 = new Player(2, player2Color, GameValues.intValues["baseResources"]);
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			myPlayer = player1;
 			otherPlayer = player2;
@@ -45,9 +44,13 @@ public class TurnOrder : MonoBehaviour {
 		}
 		turnNum = 0;
 		ceasefire = 3;
-		player1.SetTowerLocation(player1Base, player2Base);
-		player2.SetTowerLocation(player2Base, player1Base);
-		ValueStore.helpMessage = "Click a section to select it.";
+		Faction[] factions = new Faction[3] { new Totem(), new Cowboys(), new Area51() };
+		for(int i=0; i<player1Bases.Length; i++) {
+			player1.AddTower(player1Bases[i], factions[i], i);
+		}
+		for(int i=0; i<player2Bases.Length; i++) {
+			player2.AddTower(player2Bases[i], factions[i], i);
+		}
 		CombatLog.addLineNoPlayer("Ceasefire ends in " + (ceasefire - turnNum) + " turns.");
 	}
 	
@@ -135,14 +138,18 @@ public class TurnOrder : MonoBehaviour {
 	
 	[RPC]
 	private IEnumerator CollapseIfNeeded() {
-		CollapseAnimator.Animate(player1.GetTower());
-		do {
-			yield return new WaitForSeconds(0.5f);
-		} while(CollapseAnimator.animate);
-		CollapseAnimator.Animate(player2.GetTower());
-		do {
-			yield return new WaitForSeconds(0.5f);
-		} while(CollapseAnimator.animate);
+		for(int i=0; i<3; i++) {
+			CollapseAnimator.Animate(player1.GetTower(i));
+			do {
+				yield return new WaitForSeconds(0.1f);
+			} while(CollapseAnimator.animate);
+		}
+		for(int i=0; i<3; i++) {
+			CollapseAnimator.Animate(player2.GetTower(i));
+			do {
+				yield return new WaitForSeconds(0.1f);
+			} while(CollapseAnimator.animate);
+		}
 		if(Network.isClient) {
 			networkView.RPC("PlayerReady", RPCMode.Server, myPlayer.playerNumber);
 		} else {
@@ -199,7 +206,6 @@ public class TurnOrder : MonoBehaviour {
 			ceasefireIcon.visible = false;
 			CombatLog.addLineNoPlayer("!!! CEASEFIRE HAS ENDED !!!");
 		}
-		TowerSelection.LocalSelectSection(-1, -1);
 		player1.AccrueResources();
 		player2.AccrueResources();
 		
@@ -209,12 +215,12 @@ public class TurnOrder : MonoBehaviour {
 		return turnNum >= ceasefire;
 	}
 	
-	public static void CheckVictory() {
+	public static void CheckVictory() { //FIX ME
 		if(IsBattlePhase()) {
-			if(player1.GetTower().GetHeight() == 0) {
-				Application.LoadLevel("Player2Wins");
-			} else if(player2.GetTower().GetHeight() == 0) {
-				Application.LoadLevel("Player1Wins");
+			if(player1.Loses()) {
+				Debug.Log("--------------PLAYER2 WINS----------------");
+			} else if(player2.Loses()) {
+				Debug.Log("--------------PLAYER1 WINS----------------");
 			}
 		}
 	}

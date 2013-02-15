@@ -1,85 +1,114 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Section {
-    private SectionMaterial material;
-    private SectionWeapon weapon;
-    private int sp;
-    private int maxSP;
-    private int height;
+public class Section : MonoBehaviour {
 
-    public Section(SectionMaterial newMat, SectionWeapon newWeapon){
-        this.material = newMat;
-        this.weapon = newWeapon;
-        this.sp = this.material.GetInitialSP();
-        this.maxSP = this.material.GetMaxSP() - this.weapon.GetSPCost();
-        this.height = 0;
-    }
-    
-    public int GetSP() {
-    	return this.sp;
-    }
-	
-	public int GetInitialSP() {
-		return this.material.GetInitialSP();
+	public SectionAttributes attributes;
+	public GameObject dotEffect;
+	private GameObject dotEffectInstance;
+	public Texture damageTexture;
+	public bool damaged = false;
+	public AudioClip repairSound;
+		
+	public void Start () {
+		dotEffectInstance = null;
+	}
+
+	public void Update () {
+		if(!damaged && attributes.sp / (float)attributes.material.initialSP <= 0.5) {
+			damaged = true;
+			ShowDamage();
+		} else if(damaged && attributes.sp / (float)attributes.material.initialSP > 0.5) {
+			damaged = false;
+			RemoveDamage();
+		}
 	}
 	
-	public int GetMaxSP() {
-    	return this.maxSP;
-    }
-
-    public SectionMaterial GetMaterial() {
-        return this.material;
-    }
-
-    public SectionWeapon GetWeapon() {
-        return this.weapon;
-    }
-
-    public void ChangeMaterial(SectionMaterial newMat) {
-        material = newMat;
-    }
-
-    public void ChangeWeapon(SectionWeapon newWeapon) {
-        weapon = newWeapon;
-    }
-
-    public int GetWeight() {
-        return (int)(this.material.GetWeightPerSP() * this.sp) + this.weapon.GetWeight();
-    }
-
-    public int GetCost() {
-        return this.material.GetCost() + this.weapon.GetCost();
-    }
-
-    public int GetCostPerRepair() {
-        return this.material.GetCostPerRepair();
-    }
-
-    public void Repair() {
-        this.sp += this.material.GetSPPerRepair();
-        if(this.sp > this.maxSP) {
-            this.sp = this.maxSP;
-        }
-    }
-
-    public void SubtractSP(int i) {
-        this.sp -= i;
-    }
-
-    public void AddSP(int i) {
-        this.sp += i;
-    }
-    
-    public void SetHeight(int newHeight) {
-    	this.height = newHeight;
-    }
-    
-    public int GetHeight() {
-    	return this.height;
-    }
-    
-    public bool IsOverloaded(int stress) {
-    	return stress > sp;
-    }
+	public void PlayRepairSound() {
+		AudioSource.PlayClipAtPoint(repairSound, Vector3.zero);
+	}
+	
+	public void ShowDamage() {
+		/* laziness is a virtue
+		foreach(GameObject module in modules) {
+			foreach(Transform t in module.transform) {
+				t.renderer.material.shader = Shader.Find("Decal");
+				t.renderer.material.SetTexture("_DecalTex", damageTexture);
+			}
+		}
+		foreach(GameObject thing in colorables) {
+			thing.renderer.material.shader = Shader.Find("Decal");
+			thing.renderer.material.SetTexture("_DecalTex", damageTexture);
+		}
+		*/
+	}
+	
+	public void RemoveDamage() {
+		/* according to me anyway
+		foreach(GameObject module in modules) {
+			foreach(Transform t in module.transform) {
+				t.renderer.material.shader = Shader.Find("Diffuse");
+			}
+		}
+		foreach(GameObject thing in colorables) {
+			thing.renderer.material.shader = Shader.Find("Diffuse");
+		}
+		*/
+	}
+	
+	public int GetStress() {
+		return attributes.myTower.GetWeightAboveSection(attributes.height);
+	}
+	
+	public string GetMaterialInfo() {
+		int stress = attributes.myTower.GetWeightAboveSection(attributes.height);
+		return stress + "/" + attributes.sp + "/" + attributes.material.maxSP;
+	}
+	
+	public string GetWeaponInfo() {
+		SectionWeapon weapon = attributes.weapon;
+		string effectType = weapon.GetEffect().GetEffectType();
+		return weapon.GetWeaponType() + "\nLevel " + (weapon.GetUpgradeLevel() + 1) + (effectType == "none" ? "" : (" - " + effectType)) + "\n" + weapon.GetEffect().GetInfo(weapon.GetDamage());
+	}
+	
+	public string GetDotInfo() {
+		Dot d = attributes.myTower.GetDot(this);
+		if(d != null) {
+			return "BURN! " + d.damagePerTurn + " SP per turn for " + d.turnsRemaining + " turns.";
+		} else {
+			return "";
+		}
+	}
+	
+	public void SetColor(Color c) {
+		/* my laziness knows no bounds
+		if (modules.Count > 0){
+			foreach(GameObject module in modules) {
+				foreach(Transform t in module.transform) {
+					t.renderer.material.color = c;
+				}
+			}
+			foreach(GameObject thing in colorables) {
+				thing.renderer.material.color = c;
+			}
+		}
+		*/
+	}
+	
+	public void DotApplied() {
+		if(dotEffectInstance == null) {
+			dotEffectInstance = (GameObject)GameObject.Instantiate(dotEffect, transform.position, transform.rotation);
+		}
+	}
+	
+	public bool HasDot() {
+		return dotEffectInstance != null;
+	}
+	
+	public void DotFinished() {
+		if(dotEffectInstance != null) {
+			Object.Destroy((Object)dotEffectInstance);
+		}
+	}
 }

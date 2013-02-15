@@ -5,7 +5,10 @@ using System.Collections;
 public abstract class TurnAction {
 
 	protected const char TOKEN_SEPARATOR = '~';
+	protected const int FIRST_AVAILABLE_INDEX = 3;
+	
 	public int playerNumber;
+	public int towerNumber;
 	public string actionName;
 	
 	public TurnAction(string actionName) {
@@ -21,7 +24,8 @@ public abstract class TurnAction {
 	protected string FormatActionMessage(params string[] args) {
 		string[] messageParams = new string[2 + args.Length];
 		messageParams[0] = playerNumber + "";
-		messageParams[1] = this.actionName;
+		messageParams[1] = towerNumber + "";
+		messageParams[2] = this.actionName;
 		args.CopyTo(messageParams, 2);
 		return string.Join(TOKEN_SEPARATOR+"", messageParams);
 	}

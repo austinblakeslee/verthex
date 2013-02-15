@@ -7,8 +7,8 @@ public class FireAction : DefaultMenuAction,MenuAction {
 	public bool isActive = false;
 	public bool waitingForAnimation = false;
 	public float power = 0.0f;
-	private SectionController firingSection;
-	private List<GameObject> hitSections;
+	private Section firingSection;
+	private List<Section> hitSections;
 	public GameObject hitParticle;
 	private int hitIndex;
 	public Menu fightMenu;
@@ -16,7 +16,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 	
 	public Player player;
 	public Player target;
-	public SectionController selectedSection;
+	public Section selectedSection;
 	
 	public override void Action() {
 		selectedSection = TowerSelection.GetSelectedSection();
@@ -26,17 +26,17 @@ public class FireAction : DefaultMenuAction,MenuAction {
 			PlayClickSound();
 		}
 		else if(TurnOrder.IsBattlePhase()) {
-			if(selectedSection == null || !TurnOrder.myPlayer.GetTower().GetSections().Contains(selectedSection.gameObject)) {
+			if(selectedSection == null || !TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).GetSections().Contains(selectedSection)) {
 				ValueStore.helpMessage = "You must select your own tower section to fire!";
 			}
-			else if (selectedSection.GetSection().GetWeapon().GetWeaponType() == "Nothing") {
+			else if (selectedSection.attributes.weapon.GetWeaponType() == "Nothing") {
 				ValueStore.helpMessage = "You must select a tower section equipped with a weapon before firing!";
 			}
 			else {
 				//need to change it from showing PowerBar to showing arrows (or something equivalent) for who you want to attack
 				audio.Play();
 			
-				GetComponent<PowerBar>().setRange(selectedSection.GetComponent<SectionController>().GetSection().GetWeapon().GetRange());
+				GetComponent<PowerBar>().setRange(selectedSection.GetComponent<Section>().attributes.weapon.GetRange());
 				GetComponent<PowerBar>().Show();
 				isActive = true;
 				fightMenu.on = true;
@@ -62,11 +62,12 @@ public class FireAction : DefaultMenuAction,MenuAction {
 	}
 	*/
 	
+	//FIX ME!!!
 	void Update() {
 		if(isActive && GetComponent<PowerBar>().Complete()) {
 			isActive = false;
 			GetComponent<PowerBar>().Reset();
-			TurnOrder.SendAction(new Fight(selectedSection.GetHeight()-1, GetComponent<PowerBar>().GetTargetSectionNumber()));
+			TurnOrder.SendAction(new Fight(TurnOrder.actionNum, selectedSection.attributes.height, 0, GetComponent<PowerBar>().GetTargetSectionNumber()));
 		} else if(isActive && fightMenu.on == false) {
 			isActive = false;
 			GetComponent<PowerBar>().Hide();

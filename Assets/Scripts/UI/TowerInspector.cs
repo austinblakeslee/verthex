@@ -24,7 +24,7 @@ public class TowerInspector : MonoBehaviour {
 	private Rect p1OpenRect;
 	private Rect p1ClosedRect;
 	private Rect p2OpenRect;
-	private Rect p2ClosedRect;
+	private Rect p2ClosedRect ;
 	
 	void Start() {
 		UpdateRects();
@@ -46,8 +46,8 @@ public class TowerInspector : MonoBehaviour {
     	if(GameObject.Find("MainMenu/Fight").GetComponent<WeaponAnimator>().getSplitScreen() == false) {
         Player player1 = TurnOrder.GetPlayerByNumber(1);
         Player player2 = TurnOrder.GetPlayerByNumber(2);
-        Tower p1Tower = player1.GetTower();
-        Tower p2Tower = player2.GetTower();
+        Tower p1Tower = player1.GetTower(0);
+        Tower p2Tower = player2.GetTower(0);
 		int p1Height = p1Tower.GetSections().Count;
 		int p2Height = p2Tower.GetSections().Count;
 		/* inspector collapse button */
@@ -86,7 +86,7 @@ public class TowerInspector : MonoBehaviour {
 			for(int i = 0; i < p1Height; i++) {
 				GUIStyle style = GetInspectorStyle(p1Tower, i, false);
 				Section s = p1Tower.GetSection(i);
-				string towerStat = " " + p1Tower.GetWeightAboveSection(i) + "/" + s.GetSP();
+				string towerStat = " " + p1Tower.GetWeightAboveSection(i) + "/" + s.attributes.sp;
 				Rect r;
 				if(p1Height > 6) {
 					r = new Rect(5,(top+(Screen.height/3))-((Screen.height/3)/(p1Height)*(i)),120,(Screen.height/3)/(p1Height));
@@ -101,7 +101,7 @@ public class TowerInspector : MonoBehaviour {
 				GUIStyle style = GetInspectorStyle(p2Tower, i, false);
 				GUIStyle nadaStyle = GetInspectorStyle(p2Tower, i, true);
 				Section s = p2Tower.GetSection(i);
-				string towerStat = p2Tower.GetWeightAboveSection(i) + "/" + s.GetSP();
+				string towerStat = p2Tower.GetWeightAboveSection(i) + "/" + s.attributes.sp;
 				Rect buttonRect;
 				Rect boxRect;
 				if(p2Height > 6) {
@@ -120,8 +120,8 @@ public class TowerInspector : MonoBehaviour {
 	
 	private void RenderButton(Rect r, string text, GUIStyle style, Tower t, int i) {
 		if(GUI.Button (r, text, style)) {
-			SectionController sc = t.GetSections()[i].GetComponent<SectionController>();
-			TowerSelection.LocalSelectSection(sc.GetPlayer().playerNumber, i);
+			Section sc = t.GetSection(i);
+			TowerSelection.LocalSelectSection(t, i); //FIX ME!!!!
 		}
 	}
 	
@@ -135,13 +135,13 @@ public class TowerInspector : MonoBehaviour {
 		    yStyle = nadayStyle;
 		    rStyle = nadarStyle;
 		} else {
-			bool hasWeapon = s.GetWeapon().GetWeaponType() != "Nothing";
+			bool hasWeapon = s.attributes.weapon.GetWeaponType() != "Nothing";
 			gStyle = hasWeapon ? wgStyle : ngStyle;
 		    yStyle = hasWeapon ? wyStyle : nyStyle;
 		    rStyle = hasWeapon ? wrStyle : nrStyle;
 		}
-		int stress = t.GetWeightAboveSection(i); //WHY DO I HAVE TO DO THIS
-		int maxSP = s.GetSP();
+		int stress = t.GetWeightAboveSection(i);
+		int maxSP = s.attributes.sp;
 		double ratio = (double)stress / (double)maxSP;
 		if(ratio < 0.33) {
 			return gStyle;

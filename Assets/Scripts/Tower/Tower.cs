@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Tower {
-    private List<GameObject> sections;
+    private List<Section> sections;
+	public TowerBase towerBase;
+	public Faction faction;
+	public bool alive = true;
 	private DotManager dotManager;
 
-    public Tower() {
-        sections = new List<GameObject>();
+    public Tower(TowerBase towerBase, Faction faction) {
+        sections = new List<Section>();
 		dotManager = new DotManager();
+		this.towerBase = towerBase;
+		this.faction = faction;
     }
 	
 	public int GetHeight() {
@@ -19,20 +24,19 @@ public class Tower {
 		this.dotManager.NextTurn();
 	}
 	
-	public Dot GetDot(SectionController sc) {
+	public Dot GetDot(Section sc) {
 		return dotManager.GetDot(sc);
 	}
 
-    public List<GameObject> GetSections() {
+    public List<Section> GetSections() {
         return this.sections;
     }
 
     public Section GetSection(int index) {
-    	SectionController c = (SectionController)this.sections[index].GetComponent("SectionController");
-        return c.GetSection();
+        return sections[index];
     }
     
-    public GameObject GetTopSection() {
+    public Section GetTopSection() {
     	if(sections.Count == 0) {
     		return null;
     	} else {
@@ -41,41 +45,34 @@ public class Tower {
     }
 
 //returns the cost of the newly added section
-    public void AddSection(GameObject s) {
+    public void AddSection(Section s) {
         this.sections.Add(s);
-        this.sections[this.sections.Count-1].GetComponent<SectionController>().SetHeight(this.sections.Count);
+        this.sections[this.sections.Count-1].attributes.height = this.sections.Count;
         StressCheck();
     }
 
     public int RepairSection(int i) {
-		SectionController sc = sections[i].GetComponent<SectionController>();
-		Section s = sc.GetSection();
-		if(sc.HasDot()) {
-			dotManager.RemoveDot(sc);
+		Section s = sections[i];
+		if(s.HasDot()) {
+			dotManager.RemoveDot(s);
 		} else {
-			s.Repair();
+			s.attributes.Repair();
 		}
-        return s.GetCostPerRepair();
-    }
-
-    public void RetrofitSection(int i, GameObject section) {
-    	SectionController c = section.GetComponent<SectionController>();
-    	c.SetHeight(i+1);
-    	this.sections[i] = section;
+        return s.attributes.material.costPerRepair;
     }
 
     public void DamageSection(int i, int damage) {
 		if (i < sections.Count)	{
-	        GetSection(i).SubtractSP(damage);
+	        GetSection(i).attributes.sp -= damage;
 	        StressCheck();
 		}
     }
 	
 	public void ApplyDot(int i, int dotDamage) {
 		if(i < sections.Count) {
-			SectionController sc = sections[i].GetComponent<SectionController>();
-			sc.DotApplied();
-			dotManager.RegisterDot(sc, dotDamage);
+			Section s = sections[i];;
+			s.DotApplied();
+			dotManager.RegisterDot(s, dotDamage);
 		}
 	}
 
@@ -90,28 +87,31 @@ public class Tower {
     public int SumWeight(int index) {
     	int weight = 0;
     	for(int i=index; i < sections.Count; i++) {
-    		weight += GetSection(i).GetWeight();
+    		weight += GetSection(i).attributes.GetWeight();
     	}
     	return weight;
     }
     
-    public SectionController StressCheck() {
+    public Section StressCheck() {
     	for(int i=0; i < sections.Count; i++) {
     		int stress = GetWeightAboveSection(i);
-    		if(GetSection(i).IsOverloaded(stress)) {
-    			return sections[i].GetComponent<SectionController>();
+    		if(GetSection(i).attributes.IsOverloaded(stress)) {
+    			return sections[i];;
     		}
     	}
 		return null;
     }
     
     public void Collapse(int index) {
-    	GameObject o = sections[index];
+    	Section o = sections[index];
     	sections.RemoveAt(index);
-    	GameObject.Destroy(o);
+    	GameObject.Destroy(o.gameObject);
 		CombatLog.addLine("Section " + (index+1) + " destroyed!!!");
     	for(int i=index; i < sections.Count; i++) {
-    		sections[i].GetComponent<SectionController>().SetHeight(i+1);
+    		sections[i].attributes.height = i+1;
     	}
+		if(sections.Count <= 0) {
+			alive = false;
+		}
     }
 }

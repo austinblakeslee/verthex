@@ -8,16 +8,16 @@ public class Drain : Effect {
 		this.effectType = "Drain";
 	}
 	
-	public override List<GameObject> GetDamagedSections(Tower t, int center) {
-		List<GameObject> list = new List<GameObject>();
+	public override List<Section> GetDamagedSections(Tower t, int center) {
+		List<Section> list = new List<Section>();
 		if(center >= 0 && center < t.GetSections().Count) {
-			list.Add(t.GetSections()[center]);
+			list.Add(t.GetSection(center));
 		}
 		return list;
 	}
 	
 	public override void DoDamage(Tower t, int center, int damage) {
-		List<GameObject> sections = GetDamagedSections(t, center);
+		List<Section> sections = GetDamagedSections(t, center);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
 			t.DamageSection(center, damage);
@@ -39,6 +39,6 @@ public class Drain : Effect {
 	public void Heal(int damage, int center, Tower t){
 		int heal = (damage*4)/10;
 		Section s = t.GetSection(center);
-		s.AddSP(heal);
+		s.attributes.sp += heal;
 	}
 }
