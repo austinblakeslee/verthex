@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AimCritStrike : Effect
+public class AimCritStrike : WeaponEffect
 {
 	protected List<Section> taggedSections = new List<Section>();
 	protected int maxTaggedSections = 2;

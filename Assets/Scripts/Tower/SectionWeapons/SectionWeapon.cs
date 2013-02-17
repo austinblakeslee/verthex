@@ -15,10 +15,10 @@ public class SectionWeapon {
 	protected int upgradeLevel = 0;
 	protected List<float> damageUpgrades = new List<float> {1.0f, 1.2f, 1.3f, 1.4f, 1.5f};
 	protected List<int> rangeUpgrades = new List<int>{0,0,1,1,2};
-	protected Effect maxUpgradeEffect = new DefaultEffect();
-	protected Effect weaponEffect = new DefaultEffect();
+	protected WeaponEffect maxUpgradeEffect = new DefaultWeaponEffect();
+	protected WeaponEffect weaponEffect = new DefaultWeaponEffect();
 	
-	public static string[] weapons = new string[4] {"Nothing", "Ballista", "Catapult", "Cannon"};
+	public static string[] weapons = new string[4] {"Nothing", "Ballista", "Catapult", "Cannon"}; //?
 	
 	public virtual GameObject GetPrefab() {
 		return Resources.Load(wtype) as GameObject;
@@ -60,11 +60,11 @@ public class SectionWeapon {
 	    return weight;
 	}
 	
-	public Effect GetEffect() {
+	public WeaponEffect GetEffect() {
 		return weaponEffect;
 	}
 	
-	public void SetEffect(Effect e) {
+	public void SetEffect(WeaponEffect e) {
 		this.weaponEffect = e;
 	}
 	public int GetRange()

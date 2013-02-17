@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class DamageOverTime : Effect {
+public class DamageOverTime : WeaponEffect {
 
 	private List<float> initialDamage = new List<float> {0.5f, 0.5f, 0.6f, 0.8f};
 	private List<float> dotDamage = new List<float> {0.6f, 0.7f, 0.8f, 0.8f};
@@ -19,7 +19,7 @@ public class DamageOverTime : Effect {
 		return list;
 	}
 	
-	public override void DoDamage(Tower t, int center, int damage) {
+	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
 		if(center >= 0 && center < t.GetSections().Count) {
 			int impact = (int)(damage * initialDamage[upgradeLevel]);
 			int dot = (int)(damage * dotDamage[upgradeLevel]);

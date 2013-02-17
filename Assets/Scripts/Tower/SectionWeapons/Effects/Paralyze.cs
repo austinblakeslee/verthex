@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Paralyze : Effect {
+public class Paralyze : WeaponEffect {
 
 	public Paralyze() : base() {
 		this.effectType = "Paralyze";
@@ -16,7 +16,7 @@ public class Paralyze : Effect {
 		return list;
 	}
 	
-	public override void DoDamage(Tower t, int center, int damage) {
+	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
 		List<GameObject> sections = GetDamagedSections(t, center);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");

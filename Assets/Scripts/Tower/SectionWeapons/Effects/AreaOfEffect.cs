@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AreaOfEffect : Effect {
+public class AreaOfEffect : WeaponEffect {
 
 	private List<int> numTargets = new List<int> {2, 3, 4, 5};
 	private List<float> percentDamage = new List<float> {0.5f, 0.4f, 0.35f, 0.32f};
@@ -33,7 +33,7 @@ public class AreaOfEffect : Effect {
 		return list;
 	}
 	
-	public override void DoDamage(Tower t, int center, int damage) {
+	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
 		List<GameObject> damagedSections = GetDamagedSections(t, center);
 		foreach(GameObject g in damagedSections) {
 			int height = g.GetComponent<SectionController>().GetHeight();

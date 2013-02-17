@@ -8,6 +8,7 @@ public class SectionMaterial {
 	protected double weightPerSP;
 	protected int SPPerRepair;
 	protected int costPerRepair;
+	protected SectionEffect sectionEffect = new DefaultSectionEffect();//will this give the sub-material as the param?
 	public string mtype = "abstract";
 	
 	public static string[] materials = new string[3] {"Wood", "Stone", "Steel"};
@@ -42,5 +43,13 @@ public class SectionMaterial {
 
 	public string GetMaterialType() {
 	    return mtype;
+	}
+	public void SetSectionEffect(SectionEffect secEffect)
+	{
+		sectionEffect = secEffect;
+	}
+	public SectionEffect GetSectionEffect()
+	{
+		return sectionEffect;
 	}
 }

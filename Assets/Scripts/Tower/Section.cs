@@ -35,6 +35,11 @@ public class Section {
     public SectionWeapon GetWeapon() {
         return this.weapon;
     }
+	
+	public bool HasWeapon()
+	{
+		return weapon == null ? false : true;
+	}
 
     public void ChangeMaterial(SectionMaterial newMat) {
         material = newMat;

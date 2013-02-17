@@ -2,10 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PoisonSplash : WeaponEffect {
+public class DefaultWeaponEffect : WeaponEffect {
 
-	public PoisonSplash() : base() {
-		this.effectType = "Posion Splash";
+	public DefaultWeaponEffect() : base() {
+		this.effectType = "none";
 	}
 	
 	public override List<GameObject> GetDamagedSections(Tower t, int center) {
@@ -15,18 +15,12 @@ public class PoisonSplash : WeaponEffect {
 		}
 		return list;
 	}
-	
-	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
-		List<GameObject> sections = GetDamagedSections(self, firingSec);
+	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSection) {
+		List<GameObject> sections = GetDamagedSections(t, center);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
 			t.DamageSection(center, damage);
-			if (t.GetSection(center).HasWeapon()){
-				CombatLog.addLine("Section is confused");
-				t.GetSection(center).GetWeapon().SetEffect(new PoisonedSplash());
-			}
-		}
-		else if(center < 0) {
+		} else if(center < 0) {
 			CombatLog.addLine("Attack was too low");
 			CombatLog.addLine("Fill the aim bar more.");
 		} else if(center >= t.GetSections().Count) {
@@ -36,6 +30,7 @@ public class PoisonSplash : WeaponEffect {
 	}
 	
 	public override string GetInfo(int damage) {
-		return "Deals " + damage + " damage to sections above and below the firing section.";
+		return "Deals " + damage + " single-target damage.";
 	}
+	
 }

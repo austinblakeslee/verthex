@@ -39,6 +39,6 @@ public class Fight : TurnAction {
 		List<GameObject> hitSections = sc.GetSection().GetWeapon().GetEffect().GetDamagedSections(target.GetTower(), hitCenter);//hitIndex 
 		WeaponAnimator.Animate(sc.gameObject, hitSections);
 		int damage = sc.GetSection().GetWeapon().GetDamage();
-		sc.GetSection().GetWeapon().GetEffect().DoDamage(target.GetTower(), hitCenter, damage);
+		sc.GetSection().GetWeapon().GetEffect().DoDamage(target.GetTower(), hitCenter, damage, firingPlayer.GetTower(), firingSection);
 	}
 }
