@@ -30,10 +30,12 @@ public class CollapseAnimator : MonoBehaviour {
 	private IEnumerator CollapseAnimation() {
 		while(collapsingSection != null) {
 			Pre();
-			yield return new WaitForSeconds(0.01f); //I hate coroutines.
-			Pause();
+			yield return new WaitForSeconds(pauseTime);
 			Collapse();
-			Pause();
+			do {
+				yield return new WaitForSeconds(0.3f);
+			} while(collapseSection);
+			yield return new WaitForSeconds(pauseTime);
 			t.Collapse(collapsingSection.attributes.height);
 			collapsingSection = t.StressCheck();
 		}
@@ -55,13 +57,10 @@ public class CollapseAnimator : MonoBehaviour {
 		yield return new WaitForSeconds(pauseTime);
 	}
 	
-	private IEnumerator Collapse() {
+	private void Collapse() {
 		AudioSource.PlayClipAtPoint(soundEffect, new Vector3(0,0,0));
 		GameObject.Instantiate(collapseParticle, collapsingSection.transform.position, collapsingSection.transform.rotation);
 		collapseSection = true;
-		do {
-			yield return new WaitForSeconds(0.3f);
-		} while(collapseSection);
 	}
 	
 	public static void Animate(Tower t) {

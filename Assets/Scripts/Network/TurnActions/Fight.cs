@@ -21,7 +21,7 @@ public class Fight : TurnAction {
 	}
 	
 	public override string GetActionMessage() {
-		return FormatActionMessage(this.firingSection+"", this.targetSection+"");
+		return FormatActionMessage(this.firingSection+"", this.targetTower+"", this.targetSection+"");
 	}
 	
 	protected override void ParseActionMessage(string actionMessage) {

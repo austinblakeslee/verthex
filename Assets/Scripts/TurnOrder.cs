@@ -235,7 +235,8 @@ public class TurnOrder : MonoBehaviour {
 		}
 		player1.AccrueResources();
 		player2.AccrueResources();
-		
+		actionNum = 0;
+		TowerSelection.Deselect();
 	}
 	
 	public static bool IsBattlePhase() {

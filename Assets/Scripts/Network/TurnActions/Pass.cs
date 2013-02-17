@@ -7,8 +7,9 @@ public class Pass : TurnAction {
 		ParseActionMessage(actionMessage);
 	}
 
-	public Pass() : base("Pass") {
+	public Pass(int t) : base("Pass") {
 		this.playerNumber = TurnOrder.myPlayer.playerNumber;
+		this.towerNumber = t;
 	}
 	
 	public override string GetActionMessage() {
@@ -18,6 +19,7 @@ public class Pass : TurnAction {
 	protected override void ParseActionMessage(string actionMessage) {
 		string[] tokens = actionMessage.Split(TOKEN_SEPARATOR);
 		this.playerNumber = int.Parse(tokens[0]);
+		this.towerNumber = int.Parse(tokens[1]);
 	}
 	
 	public override void Perform() {
