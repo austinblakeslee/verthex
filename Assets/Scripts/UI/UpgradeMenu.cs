@@ -18,7 +18,6 @@ public class UpgradeMenu : Menu {
 	
 	public override void Update() {
 		if(!hasLoaded) {
-			Faction f = TurnOrder.myPlayer.faction;
 			GameObject aoe = createGUIButton("AoEAction","AoE");
 			numButtons++;
 			GameObject damage = createGUIButton("DamageAction","Damage");

@@ -30,6 +30,7 @@ public class CollapseAnimator : MonoBehaviour {
 	private IEnumerator CollapseAnimation() {
 		while(collapsingSection != null) {
 			Pre();
+			yield return new WaitForSeconds(0.01f); //I hate coroutines.
 			Pause();
 			Collapse();
 			Pause();
@@ -40,7 +41,6 @@ public class CollapseAnimator : MonoBehaviour {
 		GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;
 		GameObject.FindWithTag("MainCamera").camera.enabled = true;
 		animate = false;
-		return null;
 	}
 	
 	private void Pre() {

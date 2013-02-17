@@ -28,7 +28,6 @@ public class Builder : MonoBehaviour {
 		block.transform.Find("FireCam").camera.enabled = false;
 		block.transform.Find("HitCam").camera.enabled = false;
 		block.transform.Find("CollapseCam").camera.enabled = false;
-		Debug.Log(w.wtype);
 		if (w.wtype != "Nothing"){
 			weapon = Instantiate(w.GetPrefab()) as GameObject; //I believe the here lies the issue for why building Nothing doesn't work? maybe.
 		//if(weapon != null) {

@@ -32,7 +32,6 @@ public class MainMenu : Menu {
 
 	public override void Update() {
 		if(!hasLoaded) {
-			Faction f = TurnOrder.myPlayer.faction;
 			Rect buildButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
 			buildButtonRect = FindPos(numButtons, buildButtonRect);
 			GameObject build = MakeButton("Build",buildButtonRect);

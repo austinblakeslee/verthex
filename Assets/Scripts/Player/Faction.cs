@@ -8,8 +8,8 @@ public abstract class Faction {
 	public static int NUM_WEAPONS = 4;
 	
 	public string factionName;
-	protected string[] materials;
-	protected string[] weapons;
+	public string[] materials;
+	public string[] weapons;
 
 	public SectionMaterial GetSectionMaterial(int strength) {
 		return SectionComponentFactory.GetMaterial(materials[strength]);

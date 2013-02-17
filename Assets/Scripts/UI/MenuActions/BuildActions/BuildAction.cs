@@ -10,7 +10,7 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 		if(m != null && w != null) {
 			SectionAttributes s = new SectionAttributes(m, w);
 			if(TurnOrder.myPlayer.GetResources() >= s.GetCost()) {
-				myMenu.on = false;
+				//myMenu.on = false;
 				ValueStore.helpMessage = "";
 				TurnOrder.SendAction(new Build(TurnOrder.actionNum, m, w));
 			} else {

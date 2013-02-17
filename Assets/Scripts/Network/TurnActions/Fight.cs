@@ -25,7 +25,6 @@ public class Fight : TurnAction {
 	}
 	
 	protected override void ParseActionMessage(string actionMessage) {
-		Debug.Log(actionMessage);
 		string[] tokens = actionMessage.Split(TOKEN_SEPARATOR);
 		this.playerNumber = int.Parse(tokens[0]);
 		this.towerNumber = int.Parse(tokens[1]);

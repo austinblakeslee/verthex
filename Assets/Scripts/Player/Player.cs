@@ -7,7 +7,6 @@ public class Player {
 	private int resources;
 	public int number;
 	public Color color;
-	public Faction faction;
 
 	public Player(int number, Color c, int r) {
 		this.color = c;

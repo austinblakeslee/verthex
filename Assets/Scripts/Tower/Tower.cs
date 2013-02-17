@@ -47,7 +47,9 @@ public class Tower {
 //returns the cost of the newly added section
     public void AddSection(Section s) {
         this.sections.Add(s);
-        this.sections[this.sections.Count-1].attributes.height = this.sections.Count;
+        s.attributes.height = this.sections.Count-1;
+		Debug.Log(s.attributes.height);
+		s.attributes.myTower = this;
         StressCheck();
     }
 

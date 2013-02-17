@@ -29,7 +29,7 @@ public class TowerSelection : MonoBehaviour {
 	public MenuItem dotButton;
 	public MenuItem aoeButton;
 	
-	void Start() {
+	void Awake() {
 		materialBoxRect = new Rect(230, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
 		weaponBoxRect = new Rect(230, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
 		instance = this;
@@ -232,7 +232,7 @@ public class TowerSelection : MonoBehaviour {
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
-			mc.ChangeTarget(t.towerBase.transform);
+			mc.ChangeTarget(s.transform);
 			s.SetColor(TurnOrder.myPlayer.color);
 		}
 	}
