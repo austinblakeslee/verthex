@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Drain : WeaponEffect {
-
+	private int drainPercentage = 40;
 	public Drain() : base() {
 		this.effectType = "Drain";
 	}
@@ -21,7 +21,7 @@ public class Drain : WeaponEffect {
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
 			t.DamageSection(center, damage);
-			CombatLog.addLine("Section healed for " + (damage*4)/10 + " points.");
+			CombatLog.addLine("Section healed for " + (damage*drainPercentage)/100 + " points.");
 			Heal(damage, firingSec, self);
 		} else if(center < 0) {
 			CombatLog.addLine("Attack was too low");
@@ -36,8 +36,12 @@ public class Drain : WeaponEffect {
 		return "Deals " + damage + " single-target damage.";
 	}
 	public void Heal(int damage, int center, Tower t){
-		int heal = (damage*4)/10; //40 percent
+		int heal = (damage*drainPercentage)/100; //40 percent
 		Section s = t.GetSection(center);
-		s.AddSP(heal);
+		//if (s.GetInitialSP() < s.GetSP() + heal){
+			s.AddSP(heal);
+		//}
+		//else 
+		//	s.AddSP(s.GetInitialSP() - s.GetSP());
 	}
 }

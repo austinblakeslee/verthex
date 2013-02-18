@@ -66,7 +66,8 @@ public class Tower {
 
     public void DamageSection(int i, int damage) {
 		if (i < sections.Count)	{
-	        GetSection(i).SubtractSP(damage);
+	        GetSection (i).GetMaterial().GetSectionEffect().ApplyDamage(GetSection(i), damage);//poor workflow... fix later...
+			//GetSection(i).SubtractSP(damage);
 	        StressCheck();
 		}
     }

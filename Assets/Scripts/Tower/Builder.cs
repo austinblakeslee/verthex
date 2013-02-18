@@ -43,7 +43,7 @@ public class Builder : MonoBehaviour {
 		block.transform.LookAt(positionToLookAt);
 		
 		SectionController sc = block.GetComponent<SectionController>();
-		Section s = new Section(m, w);
+		Section s = new Section(m, w, player.GetTower());
 		Debug.Log (s);
 		sc.SetSection(s);
 		sc.SetPlayer(player);

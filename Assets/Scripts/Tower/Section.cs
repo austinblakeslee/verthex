@@ -7,14 +7,20 @@ public class Section {
     private int sp;
     private int maxSP;
     private int height;
-
-    public Section(SectionMaterial newMat, SectionWeapon newWeapon){
-        this.material = newMat;
+	private Tower tower;
+	
+    public Section(SectionMaterial newMat, SectionWeapon newWeapon, Tower t) : this(newMat, newWeapon){
+		this.tower = t;
+    }
+	
+	public Section(SectionMaterial newMat, SectionWeapon newWeapon)
+	{
+		this.material = newMat;
         this.weapon = newWeapon;
         this.sp = this.material.GetInitialSP();
         this.maxSP = this.material.GetMaxSP() - this.weapon.GetSPCost();
         this.height = 0;
-    }
+	}
     
     public int GetSP() {
     	return this.sp;
@@ -67,7 +73,11 @@ public class Section {
             this.sp = this.maxSP;
         }
     }
-
+	
+	public void Damage(int i)
+	{
+		material.GetSectionEffect().ApplyDamage(this, i);
+	}
     public void SubtractSP(int i) {
         this.sp -= i;
     }
@@ -87,4 +97,8 @@ public class Section {
     public bool IsOverloaded(int stress) {
     	return stress > sp;
     }
+	public Tower GetTower()
+	{
+		return tower;
+	}
 }

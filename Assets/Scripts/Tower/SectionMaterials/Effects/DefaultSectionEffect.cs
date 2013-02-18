@@ -7,23 +7,19 @@ public class DefaultSectionEffect : SectionEffect
 	public DefaultSectionEffect() : base() {
 		this.effectType = "Default";
 	}
-		
-	public void Damage(int power)
-	{
-		section.SubtractSP(power);
-	}
-	
-	public override void PreAttack ()
-	{
-		throw new System.NotImplementedException ();
-	}
 	public override string GetInfo (int damage)
 	{
 		throw new System.NotImplementedException ();
 	}
-	public override void PreDefend ()
+	public override void PreAttack(Section s)
 	{
-		throw new System.NotImplementedException ();
+		Debug.Log (s.ToString() + " Pre-attack ");
 	}
+	
+	public override void EndTurnEffect()
+	{
+		Debug.Log("Default End Turn effect");
+	}
+	
 }
 

@@ -39,6 +39,8 @@ public class Fight : TurnAction {
 		List<GameObject> hitSections = sc.GetSection().GetWeapon().GetEffect().GetDamagedSections(target.GetTower(), hitCenter);//hitIndex 
 		WeaponAnimator.Animate(sc.gameObject, hitSections);
 		int damage = sc.GetSection().GetWeapon().GetDamage();
-		sc.GetSection().GetWeapon().GetEffect().DoDamage(target.GetTower(), hitCenter, damage, firingPlayer.GetTower(), firingSection);
+		//check firing sections pre-attack
+		firingPlayer.GetTower ().GetSection(firingSection).GetMaterial().GetSectionEffect().PreAttack(firingPlayer.GetTower().GetSection(firingSection));
+		sc.GetSection().GetWeapon().GetEffect().DoDamage(target.GetTower(), hitCenter, damage, firingPlayer.GetTower(), firingSection); //rework so that it only knows about opponent's section
 	}
 }

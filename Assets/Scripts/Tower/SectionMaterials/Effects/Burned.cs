@@ -6,18 +6,28 @@ public class Burned : SectionEffect
 {
 	public int damagePerTurn = 40;
 	public int numTurns = 3;
+	public Section burnedSection;
 	public Burned() : base() {
-		this.effectType = "Force Field";
-		//visually show force field
+		this.effectType = "Burned";
+		//visually show Initial Burn
+	}
+	public Burned(int _damagePerTurn, Section _burnedSection) : this()
+	{
+		burnedSection = _burnedSection;
+		damagePerTurn = _damagePerTurn;
 	}
 	
-	public void EndTurnEffect(){
-		Damage (damagePerTurn);
+	
+	public override void EndTurnEffect(){
+		//Damage (damagePerTurn);
 		if (numTurns <= 0)
 		{
-			//destroy this script
+			burnedSection.GetMaterial().SetSectionEffect(new DefaultSectionEffect());	//destroy this script/apply DefaultEffect to the section 
 		}
 		numTurns --;
+		Debug.Log ("Burn Damage per turn: " + damagePerTurn);
+		Debug.Log("Num turns left: " + numTurns);
+		ApplyDamage(burnedSection, damagePerTurn);
 
 	}
 	public override string GetInfo (int damage)

@@ -6,18 +6,23 @@ public abstract class SectionEffect {
 
 	protected string effectType;
 	protected int upgradeLevel;
-	protected Section section;
+	protected Section appliedSection;
 	
 	public SectionEffect() {
 		upgradeLevel = 0;
 	}
-	
-	public void PreAttack();
-	public void Damage(int power)
+	public SectionEffect(Section effectedSection) : this()
 	{
-		section.SubtractSP(power);
+		appliedSection = effectedSection;
 	}
-	public void EndTurnEffect(){}
+	
+	public virtual void PreAttack(Section S){}
+	public virtual void ApplyDamage(Section target, int power)
+	{
+		target.SubtractSP(power);
+	}
+
+	public virtual void EndTurnEffect(){}
 	public abstract string GetInfo(int damage);
 	
 	public void Upgrade() {

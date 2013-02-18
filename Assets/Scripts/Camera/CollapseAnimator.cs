@@ -77,9 +77,13 @@ public class CollapseAnimator : MonoBehaviour {
 					timer += Time.deltaTime;
 				}
 			} else if(animationStage == "end") {
+				//try{
 				GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = true;
 				GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;
 				GameObject.FindWithTag("MainCamera").camera.enabled = true;
+			//	}
+			//	catch(Exception e)
+		//		{}
 				t = null;
 				collapsingSection = null;
 				animate = false;

@@ -11,6 +11,5 @@ public class Pistols : SectionWeapon {
         this.wtype = "Pistols";
     	this.range = 3;
 		this.maxUpgradeEffect = new DamageOverTime();   
-		this.weaponEffect = new Drain(); //temp
 	}
 }

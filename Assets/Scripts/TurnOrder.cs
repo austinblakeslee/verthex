@@ -203,6 +203,20 @@ public class TurnOrder : MonoBehaviour {
 		player1.AccrueResources();
 		player2.AccrueResources();
 		
+		//Activate each sections end turn effect
+		foreach(GameObject s in player1.GetTower().GetSections())
+		{
+			SectionController sec = (SectionController)s.GetComponent("SectionController");
+			sec.GetSection().GetMaterial().GetSectionEffect().EndTurnEffect();
+		}
+		foreach(GameObject s in player2.GetTower().GetSections())
+		{
+			SectionController sec = (SectionController)s.GetComponent("SectionController");
+			sec.GetSection().GetMaterial().GetSectionEffect().EndTurnEffect();
+		}
+
+		
+		
 	}
 	
 	public static bool IsBattlePhase() {

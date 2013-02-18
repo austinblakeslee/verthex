@@ -10,5 +10,6 @@ public class Bison : SectionMaterial {
         this.SPPerRepair = 50;
         this.costPerRepair = 75;
         this.mtype = "Bison";
+		//this.sectionEffect = new Burned(20);
     }
 }

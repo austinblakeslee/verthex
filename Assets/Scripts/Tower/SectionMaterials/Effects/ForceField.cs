@@ -5,18 +5,21 @@ using System.Collections.Generic;
 public class ForceFieldEffect : SectionEffect
 {
 	public int forceFieldStrength = 40;
-	public int forceFieldTurnLength = 3;
-	public ForceFieldEffect() : base() {
+	public int numTurns = 3;
+	public ForceFieldEffect(Section effectedSection, int fieldStrength) : base(effectedSection)
+	{
 		this.effectType = "Force Field";
+		forceFieldStrength = fieldStrength;
 		//visually show force field
+
 	}
 		
-	public void Damage(int power)
+	public override void ApplyDamage(Section s, int power)
 	{
 		if (power > forceFieldStrength)
 		{
 			//destroy force field visually
-			section.SubtractSP(power - forceFieldStrength);
+			s.SubtractSP(power - forceFieldStrength);
 		}
 		else{
 			//display forceField being attacked
@@ -24,12 +27,14 @@ public class ForceFieldEffect : SectionEffect
 		}
 	}
 	
-	public void EndTurnEffect(){
-		if (forceFieldTurnLength <= 0)
+	public override void EndTurnEffect(){
+		if (numTurns <= 0)
 		{
-			//Destroy(this); - Destroy this Effect at the end of it's last turn
+			appliedSection.GetMaterial().SetSectionEffect(new DefaultSectionEffect());
 		}
-		forceFieldTurnLength --;
+		numTurns --;
+		Debug.Log ("Force Field Strength: " + forceFieldStrength);
+		Debug.Log("Num turns left: " + numTurns);
 
 	}
 	public override string GetInfo (int damage)
