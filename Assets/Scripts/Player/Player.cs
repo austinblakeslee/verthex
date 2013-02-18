@@ -30,9 +30,11 @@ public class Player {
 	}
 	
 	public void AccrueResources() {
-		Debug.LogWarning("ACCRUE RESOURCES NEEDS TO BE FIXED");
-		int towerEarnings = GameValues.intValues["resourcesPerSection"];;
-		AddResources(GameValues.intValues["resourcesPerTurn"] + towerEarnings);
+		int towerEarnings = GameValues.intValues["resourcesPerTurn"];
+		foreach(Tower t in towers) {
+			towerEarnings += t.GetHeight() * GameValues.intValues["resourcesPerSection"];
+		}
+		AddResources(towerEarnings);
 	}
 	
 	public void AddResources(int add) {
