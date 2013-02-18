@@ -260,6 +260,7 @@ public class TurnOrder : MonoBehaviour {
 	public static void ResetMenus() {
 		ValueStore.selectedWeapon = null;
 		ValueStore.selectedMaterial = null;
+		ValueStore.helpMessage = "";
 		
 		SetTextForMenuItemWithTag("BuildWeaponCost", "0");
 		SetTextForMenuItemWithTag("BuildMaterialCost", "0");

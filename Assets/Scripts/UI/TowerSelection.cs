@@ -4,6 +4,7 @@ using System.Collections;
 public class TowerSelection : MonoBehaviour {
 
 	private static Section selectedSection;
+	private static Tower selectedTower;
 	private static Section oldSelect;
 	private static TowerSelection instance;
 	public Vector2 materialBox;
@@ -231,6 +232,10 @@ public class TowerSelection : MonoBehaviour {
 		return selectedSection;
 	}
 	
+	public static Tower GetSelectedTower() {
+		return selectedTower;
+	}
+	
 	[RPC]
 	private void SelectSection(Tower t, int sectionNumber) {
 		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
@@ -246,6 +251,7 @@ public class TowerSelection : MonoBehaviour {
 			mc.ChangeTarget(s.transform);
 			s.SetColor(TurnOrder.myPlayer.color);
 		}
+		selectedTower = t;
 	}
 	
 	public void deselectSection() {

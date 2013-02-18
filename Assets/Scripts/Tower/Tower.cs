@@ -48,7 +48,6 @@ public class Tower {
     public void AddSection(Section s) {
         this.sections.Add(s);
         s.attributes.height = this.sections.Count-1;
-		Debug.Log(s.attributes.height);
 		s.attributes.myTower = this;
         StressCheck();
     }

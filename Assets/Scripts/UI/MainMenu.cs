@@ -164,11 +164,7 @@ public class MainMenu : Menu {
 		GameObject fight = MakeButton("Fight",fightButtonRect);
 		fight.AddComponent("Menu");
 		fight.AddComponent ("FireAction");
-		fight.GetComponent<FireAction>().hitParticle = hitp;
 		fight.GetComponent<FireAction>().fightMenu = fight.GetComponent<Menu>();
-		fight.AddComponent ("PowerBar");
-		fight.GetComponent<PowerBar>().emptyTexture = empty;
-		fight.GetComponent<PowerBar>().fillTexture = full;
 		fight.AddComponent ("WeaponAnimator");
 		fight.GetComponent<WeaponAnimator>().hitParticle = hitp;
 		fight.GetComponent<WeaponAnimator>().ballistaFire = balfire;
