@@ -48,8 +48,17 @@ public class TowerSelection : MonoBehaviour {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(ray, out hit, 10000.0f)) {
-				if(hit.collider == null || hit.collider.tag != "Section") {
-					Deselect();
+				if(hit.collider.tag == "Base")
+				{
+					TowerBase b = hit.collider.GetComponent<TowerBase>();
+					Tower baseTow = TurnOrder.GetPlayerByNumber(b.playerNumber).GetTower(b.towerNumber);
+					LocalSelectSection(baseTow, -1);
+					audio.Play ();
+					return;
+				}				
+				else if(hit.collider == null || hit.collider.tag != "Section")
+				{
+					Deselect ();
 					return;
 				}
 				Section s = hit.collider.GetComponent<Section>();
@@ -57,7 +66,9 @@ public class TowerSelection : MonoBehaviour {
 				int sectionNum = s.attributes.height;
 				LocalSelectSection(t, sectionNum);
 				audio.Play();
-			} else {
+			}
+			else
+			{
 				Deselect();
 			}
 		}

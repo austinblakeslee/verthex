@@ -51,9 +51,13 @@ public class TurnOrder : MonoBehaviour {
 		ceasefire = 3;
 		Faction[] factions = new Faction[3] { new Totem(), new Cowboys(), new Area51() };
 		for(int i=0; i<player1Bases.Length; i++) {
+			player1Bases[i].SetTowerNumber(i);
+			player1Bases[i].SetPlayerNumber(1);
 			player1.AddTower(player1Bases[i], factions[i], i);
 		}
 		for(int i=0; i<player2Bases.Length; i++) {
+			player2Bases[i].SetTowerNumber(i);
+			player2Bases[i].SetPlayerNumber(2);
 			player2.AddTower(player2Bases[i], factions[i], i);
 		}
 		CombatLog.addLineNoPlayer("Ceasefire ends in " + (ceasefire - turnNum) + " turns.");
