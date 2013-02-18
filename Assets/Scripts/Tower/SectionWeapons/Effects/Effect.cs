@@ -11,7 +11,7 @@ public abstract class Effect {
 		upgradeLevel = 0;
 	}
 	
-	public abstract List<GameObject> GetDamagedSections(Tower t, int center);
+	public abstract List<Section> GetDamagedSections(Tower t, int center);
 	public abstract void DoDamage(Tower t, int center, int damage);
 	public abstract string GetInfo(int damage);
 	

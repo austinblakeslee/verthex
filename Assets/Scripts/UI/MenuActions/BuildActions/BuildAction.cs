@@ -8,11 +8,11 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 		SectionMaterial m = ValueStore.selectedMaterial;
 		SectionWeapon w = ValueStore.selectedWeapon;
 		if(m != null && w != null) {
-			Section s = new Section(m, w);
+			SectionAttributes s = new SectionAttributes(m, w);
 			if(TurnOrder.myPlayer.GetResources() >= s.GetCost()) {
-				myMenu.on = false;
+				//myMenu.on = false;
 				ValueStore.helpMessage = "";
-				TurnOrder.SendAction(new Build(m, w));
+				TurnOrder.SendAction(new Build(TurnOrder.actionNum, m, w));
 			} else {
 				ValueStore.helpMessage = "You don't have enough RP to do that!";
 			}

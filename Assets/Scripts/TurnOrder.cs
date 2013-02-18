@@ -9,8 +9,8 @@ public class TurnOrder : MonoBehaviour {
 	private static int turnNum;
 	public static int ceasefire;
 	private static TurnOrder instance;
-	public GameObject player1Base;
-	public GameObject player2Base;
+	public TowerBase[] player1Bases;
+	public TowerBase[] player2Bases;
 	public MenuItem helpText;
 	public Color player1Color;
 	public Color player2Color;
@@ -19,19 +19,22 @@ public class TurnOrder : MonoBehaviour {
 	public GUISkin player1Box;
 	public GUISkin player2Box;
 	public MenuItem ceasefireIcon;
-	private TurnAction player1Action = null;
-	private TurnAction player2Action = null;
+	private TurnAction[] myActions = new TurnAction[3];
+	private TurnAction[] player1Actions = new TurnAction[3];
+	private TurnAction[] player2Actions = new TurnAction[3];
+	private int player1ActionsReceived = 0;
+	private int player2ActionsReceived = 0;	
 	private bool player1Confirm = false;
 	private bool player2Confirm = false;
 	private string networkState = "waitingForActions";
 	private bool inputReady = true;
+	public static int actionNum = 0;
+	private int displayActionNum = 0;
 	
 	void Start () {
 		instance = this;
-		Faction player1Faction = MakeFactionForString(GameValues.player1Faction);
-		Faction player2Faction = MakeFactionForString(GameValues.player2Faction);
-		player1 = new Player(1, player1Color, new Tower(), GameValues.intValues["baseResources"], player1Faction);
-		player2 = new Player(2, player2Color, new Tower(), GameValues.intValues["baseResources"], player2Faction);
+		player1 = new Player(1, player1Color, GameValues.intValues["baseResources"]);
+		player2 = new Player(2, player2Color, GameValues.intValues["baseResources"]);
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			myPlayer = player1;
 			otherPlayer = player2;
@@ -44,11 +47,21 @@ public class TurnOrder : MonoBehaviour {
 			playerText.text = "Player 2";
 		}
 		turnNum = 0;
+		actionNum = 0;
 		ceasefire = 3;
-		player1.SetTowerLocation(player1Base, player2Base);
-		player2.SetTowerLocation(player2Base, player1Base);
-		ValueStore.helpMessage = "Click a section to select it.";
+		Faction[] factions = new Faction[3] { new Totem(), new Cowboys(), new Area51() };
+		for(int i=0; i<player1Bases.Length; i++) {
+			player1Bases[i].SetTowerNumber(i);
+			player1Bases[i].SetPlayerNumber(1);
+			player1.AddTower(player1Bases[i], factions[i], i);
+		}
+		for(int i=0; i<player2Bases.Length; i++) {
+			player2Bases[i].SetTowerNumber(i);
+			player2Bases[i].SetPlayerNumber(2);
+			player2.AddTower(player2Bases[i], factions[i], i);
+		}
 		CombatLog.addLineNoPlayer("Ceasefire ends in " + (ceasefire - turnNum) + " turns.");
+		TowerSelection.Deselect();
 	}
 	
 	private Faction MakeFactionForString(string f) {
@@ -67,7 +80,7 @@ public class TurnOrder : MonoBehaviour {
 		resources.text = ""+myPlayer.GetResources();
 		helpText.text = ValueStore.helpMessage;
 		if(Network.isServer) {
-			if(player1Action != null && player2Action != null) {
+			if(player1ActionsReceived == 3 && player2ActionsReceived == 3) {
 				if(networkState == "waitingForActions") {
 					Debug.Log("Actions received, let's get going!!!");
 					networkState = "waitingForReady";
@@ -76,28 +89,40 @@ public class TurnOrder : MonoBehaviour {
 					player1Confirm = false;
 					player2Confirm = false;
 					networkState = "performingPlayer1Action";
-					networkView.RPC("PerformAction", RPCMode.All, player1Action.GetActionMessage());
+					networkView.RPC("PerformAction", RPCMode.All, player1Actions[displayActionNum].GetActionMessage());
 				} else if(networkState == "performingPlayer1Action" && player1Confirm && player2Confirm) {
 					player1Confirm = false;
 					player2Confirm = false;
-					networkState = "performingPlayer2Action";
-					networkView.RPC("PerformAction", RPCMode.All, player2Action.GetActionMessage());
+					displayActionNum++;
+					if(displayActionNum >= 3) {
+						displayActionNum = 0;
+						networkState = "performingPlayer2Action";
+						networkView.RPC("PerformAction", RPCMode.All, player2Actions[displayActionNum].GetActionMessage());
+					} else {
+						networkView.RPC("PerformAction", RPCMode.All, player1Actions[displayActionNum].GetActionMessage());
+					}
 				} else if(networkState == "performingPlayer2Action" && player1Confirm && player2Confirm) {
 					player1Confirm = false;
 					player2Confirm = false;
-					networkState = "resolveCollapse";
-					networkView.RPC("CollapseIfNeeded", RPCMode.All);
+					displayActionNum++;
+					if(displayActionNum >= 3) {
+						displayActionNum = 0;
+						networkState = "resolveCollapse";
+						networkView.RPC("CollapseIfNeeded", RPCMode.All);
+					} else {
+						networkView.RPC("PerformAction", RPCMode.All, player2Actions[displayActionNum].GetActionMessage());
+					}
 				} else if(networkState == "resolveCollapse" && player1Confirm && player2Confirm) {
 					player1Confirm = false;
 					player2Confirm = false;
-					player1Action = null;
-					player2Action = null;
+					player1ActionsReceived = 0;
+					player2ActionsReceived = 0;
 					networkState = "waitingForActions";
 					networkView.RPC("Resume", RPCMode.All);
 				}
 			}
 		}
-		GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = inputReady;
+		//GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = inputReady;
 	}
 	
 	[RPC]
@@ -135,14 +160,18 @@ public class TurnOrder : MonoBehaviour {
 	
 	[RPC]
 	private IEnumerator CollapseIfNeeded() {
-		CollapseAnimator.Animate(player1.GetTower());
-		do {
-			yield return new WaitForSeconds(0.5f);
-		} while(CollapseAnimator.animate);
-		CollapseAnimator.Animate(player2.GetTower());
-		do {
-			yield return new WaitForSeconds(0.5f);
-		} while(CollapseAnimator.animate);
+		for(int i=0; i<3; i++) {
+			CollapseAnimator.Animate(player1.GetTower(i));
+			do {
+				yield return new WaitForSeconds(0.1f);
+			} while(CollapseAnimator.animate);
+		}
+		for(int i=0; i<3; i++) {
+			CollapseAnimator.Animate(player2.GetTower(i));
+			do {
+				yield return new WaitForSeconds(0.1f);
+			} while(CollapseAnimator.animate);
+		}
 		if(Network.isClient) {
 			networkView.RPC("PlayerReady", RPCMode.Server, myPlayer.playerNumber);
 		} else {
@@ -158,28 +187,37 @@ public class TurnOrder : MonoBehaviour {
 	}
 	
 	[RPC]
-	private void RegisterAction(string actionMessage) {
+	private void RegisterAction(int actionNum, string actionMessage) {
 		TurnAction a = TurnAction.GetActionForMessage(actionMessage);
 		if(actionMessage[0] == '1') {
 			Debug.Log("Server action received");
-			player1Action = a;
+			player1Actions[actionNum] = a;
+			player1ActionsReceived++;
 		} else {
 			Debug.Log("Client action received");
-			player2Action = a;
+			player2Actions[actionNum] = a;
+			player2ActionsReceived++;
 		}
 	}
 	
 	private void RegisterAction(TurnAction action) {
 		ResetMenus();
-		this.inputReady = false;
-		foreach (Menu c in GameObject.Find("MainMenu").GetComponentsInChildren<Menu>()) {
-			c.on = false;
+		myActions[actionNum] = action;
+		if(actionNum >= 2) {
+			for(int i=0; i<3; i++) {
+				if(Network.isClient) {
+					networkView.RPC("RegisterAction", RPCMode.Server, i, myActions[i].GetActionMessage());
+				} else if(Network.isServer) {
+					RegisterAction(i, myActions[i].GetActionMessage());
+				}
+			}
+			foreach (Menu c in GameObject.Find("MainMenu").GetComponentsInChildren<Menu>()) {
+				c.on = false;
+			}
+		} else {
+			actionNum++;
 		}
-		if(Network.isClient) {
-			networkView.RPC("RegisterAction", RPCMode.Server, action.GetActionMessage());
-		} else if(Network.isServer) {
-			RegisterAction(action.GetActionMessage());
-		}
+		TowerSelection.LocalSelectSection(myPlayer.GetTower(actionNum), -1);
 	}
 	
 	public static void SendAction(TurnAction action) {
@@ -199,32 +237,30 @@ public class TurnOrder : MonoBehaviour {
 			ceasefireIcon.visible = false;
 			CombatLog.addLineNoPlayer("!!! CEASEFIRE HAS ENDED !!!");
 		}
-		TowerSelection.LocalSelectSection(-1, -1);
 		player1.AccrueResources();
 		player2.AccrueResources();
-		
+		actionNum = 0;
+		TowerSelection.Deselect();
 	}
 	
 	public static bool IsBattlePhase() {
 		return turnNum >= ceasefire;
 	}
 	
-	public static void CheckVictory() {
+	public static void CheckVictory() { //FIX ME
 		if(IsBattlePhase()) {
-			if(player1.GetTower().GetHeight() == 0) {
-				Application.LoadLevel("Player2Wins");
-			} else if(player2.GetTower().GetHeight() == 0) {
-				Application.LoadLevel("Player1Wins");
+			if(player1.Loses()) {
+				Debug.Log("--------------PLAYER2 WINS----------------");
+			} else if(player2.Loses()) {
+				Debug.Log("--------------PLAYER1 WINS----------------");
 			}
 		}
 	}
 	
 	public static void ResetMenus() {
-		ToggleMenuForTag("BuildMenu");
-		ToggleMenuForTag("FortifyMenu");
-		ToggleMenuForTag("UpgradeMenu");
 		ValueStore.selectedWeapon = null;
 		ValueStore.selectedMaterial = null;
+		ValueStore.helpMessage = "";
 		
 		SetTextForMenuItemWithTag("BuildWeaponCost", "0");
 		SetTextForMenuItemWithTag("BuildMaterialCost", "0");

@@ -2,12 +2,12 @@ using UnityEngine;
 using System.Collections;
 
 public class SectionMaterial {
-	protected int initialSP;
-	protected int maxSP;
+	public int initialSP;
+	public int maxSP;
 	public int cost;
-	protected double weightPerSP;
-	protected int SPPerRepair;
-	protected int costPerRepair;
+	public double weightPerSP;
+	public int SPPerRepair;
+	public int costPerRepair;
 	public string mtype = "abstract";
 	
 	public static string[] materials = new string[3] {"Wood", "Stone", "Steel"};

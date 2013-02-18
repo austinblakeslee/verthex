@@ -9,8 +9,9 @@ public class Fortify : TurnAction {
 		ParseActionMessage(actionMessage);
 	}
 
-	public Fortify(int n) : base("Fortify") {
+	public Fortify(int t, int n) : base("Fortify") {
 		this.playerNumber = TurnOrder.myPlayer.playerNumber;
+		this.towerNumber = t;
 		this.sectionNum = n;
 	}
 	
@@ -21,14 +22,15 @@ public class Fortify : TurnAction {
 	protected override void ParseActionMessage(string actionMessage) {
 		string[] tokens = actionMessage.Split(TOKEN_SEPARATOR);
 		this.playerNumber = int.Parse(tokens[0]);
-		this.sectionNum = int.Parse(tokens[2]);
+		this.sectionNum = int.Parse(tokens[FIRST_AVAILABLE_INDEX]);
 	}
 	
 	public override void Perform() {
 		ValueStore.helpMessage = "Fortifying";
-		TowerSelection.LocalSelectSection(playerNumber, sectionNum);
+		Player p = TurnOrder.GetPlayerByNumber(playerNumber);
+		TowerSelection.LocalSelectSection(p.GetTower(towerNumber), sectionNum);
 		TowerSelection.GetSelectedSection().PlayRepairSound();
 		CombatLog.addLine("Fortified section");
-		TurnOrder.GetPlayerByNumber(playerNumber).RepairSection(sectionNum);
+		p.RepairSection(sectionNum, towerNumber);
 	}
 }

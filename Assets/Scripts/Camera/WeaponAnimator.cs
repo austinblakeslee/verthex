@@ -9,10 +9,10 @@ public class WeaponAnimator : MonoBehaviour {
 	private string animationStage;
 	private bool animationComplete;
 	private bool splitScreen;
-	private GameObject firingSection;
+	private Section firingSection;
 	private Vector3 originalProjectilePosition;
 	private Quaternion originalProjectileRotation;
-	private List<GameObject> hitSections;
+	private List<Section> hitSections;
 	private List<Camera> sectionCams;
 	private List<Vector3> sectionPos;
 	public GameObject hitParticle;
@@ -61,7 +61,7 @@ public class WeaponAnimator : MonoBehaviour {
 	
 	public void PlayFiringWeaponSound() {
 		AudioClip c = null;
-		string weaponType = firingSection.GetComponent<SectionController>().GetSection().GetWeapon().GetWeaponType();
+		string weaponType = firingSection.GetComponent<Section>().attributes.weapon.GetWeaponType();
 		if(weaponType == "Ballista") {
 			c = ballistaFire;
 		} else if(weaponType == "Catapult") {
@@ -76,7 +76,7 @@ public class WeaponAnimator : MonoBehaviour {
 	
 	public void PlayWeaponHitSound() {
 		AudioClip c = null;
-		string weaponType = firingSection.GetComponent<SectionController>().GetSection().GetWeapon().GetWeaponType();
+		string weaponType = firingSection.GetComponent<Section>().attributes.weapon.GetWeaponType();
 		if(weaponType == "Ballista") {
 			c = ballistaHit;
 		} else if(weaponType == "Catapult") {
@@ -109,7 +109,7 @@ public class WeaponAnimator : MonoBehaviour {
 				firingSection.transform.Find("FireCam").camera.enabled = true;
 				if(hitSections.Count > 0) {
 					defaultConstraints = hitSections[0].rigidbody.constraints;
-					List<GameObject> hitTowerSects = hitSections[0].GetComponent<SectionController>().GetPlayer().GetTower().GetSections();
+					List<Section> hitTowerSects = hitSections[0].GetComponent<Section>().attributes.myTower.GetSections();
 					for(int i = 0; i < hitTowerSects.Count; i++) {
 						hitTowerSects[i].rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 					}
@@ -142,7 +142,7 @@ public class WeaponAnimator : MonoBehaviour {
 				}
 			} else if(animationStage == "hit") {
 				if(sectionCounter < hitSections.Count) {
-					GameObject hitSection = hitSections[sectionCounter];
+					Section hitSection = hitSections[sectionCounter];
 					hitSection.transform.Find("HitCam").camera.enabled = true;
 					projectile.position = hitSection.transform.Find("ProjectileLocation").position;
 					projectile.LookAt(hitSection.transform);
@@ -152,7 +152,7 @@ public class WeaponAnimator : MonoBehaviour {
 					hitSectionOriginalPosition = hitSections[sectionCounter].transform.position;
 					GameObject.Instantiate(hitParticle, hitSection.transform.position, hitSection.transform.rotation);
 					//Create Damage Text to display on screen
-					damageText.text = firingSection.GetComponent<SectionController>().GetSection().GetWeapon().GetDamage().ToString();
+					damageText.text = firingSection.GetComponent<Section>().attributes.weapon.GetDamage().ToString();
 					cloneDamageText = Instantiate(damageText, damageLocale, Quaternion.identity);
 					PlayWeaponHitSound();
 					animationStage = "hitPause";
@@ -169,7 +169,7 @@ public class WeaponAnimator : MonoBehaviour {
 				} else {
 					fireTime += Time.deltaTime;
 					projectile.Translate(new Vector3(0, 0, projectileSpeed));
-					GameObject hitSection = hitSections[sectionCounter];
+					Section hitSection = hitSections[sectionCounter];
 					sectionCams[sectionCounter].transform.parent = null;
 					if(numShakes <= 10) {
 						hitSection.transform.Translate(new Vector3(shakeSpeed,0,shakeSpeed));
@@ -202,7 +202,8 @@ public class WeaponAnimator : MonoBehaviour {
 				GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = true;
 				GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;	
 				if(hitSections.Count > 0) {	
-					List<GameObject> hitTowerSects = hitSections[0].GetComponent<SectionController>().GetPlayer().GetTower().GetSections();					for(int i = 0; i < hitTowerSects.Count; i++) {
+					List<Section> hitTowerSects = hitSections[0].GetComponent<Section>().attributes.myTower.GetSections();
+					for(int i = 0; i < hitTowerSects.Count; i++) {
 						hitTowerSects[i].rigidbody.constraints = defaultConstraints;
 					}
 					for(int i = 0; i < hitSections.Count; i++) {
@@ -215,7 +216,7 @@ public class WeaponAnimator : MonoBehaviour {
 		}
 	}
 	
-	public void BeginAnimation(GameObject firingSection, List<GameObject> hitSections) {
+	public void BeginAnimation(Section firingSection, List<Section> hitSections) {
 		this.firingSection = firingSection;
 		this.hitSections = hitSections;
 		sectionCounter = 0;
@@ -225,7 +226,7 @@ public class WeaponAnimator : MonoBehaviour {
 		this.sectionPos = new List<Vector3>();
 	}
 	
-	public static void Animate(GameObject firingSection, List<GameObject> hitSections) {
+	public static void Animate(Section firingSection, List<Section> hitSections) {
 		instance.BeginAnimation(firingSection, hitSections);
 	}
 	

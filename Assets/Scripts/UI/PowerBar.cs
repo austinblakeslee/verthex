@@ -32,8 +32,12 @@ public class PowerBar : MonoBehaviour {
 	
 	[RPC]
 	private void SpaceBarPressed() {
-		hasFinishedCharge = true;
-		isDisplayed = false;
+		if(TowerSelection.GetSelectedTower().towerBase.playerNumber != TurnOrder.myPlayer.playerNumber) {
+			hasFinishedCharge = true;
+			isDisplayed = false;
+		} else {
+			ValueStore.helpMessage = "You must select an opponent's tower to fire at.";
+		}
 	}
 	
 	void Update () {

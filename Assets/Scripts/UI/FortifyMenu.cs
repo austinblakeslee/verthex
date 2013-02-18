@@ -18,7 +18,6 @@ public class FortifyMenu : Menu {
 	
 	public override void Update() {
 		if(!hasLoaded) {
-			Faction f = TurnOrder.myPlayer.faction;
 			Rect rpLabelRect = new Rect(Screen.width - 380,Screen.height - 165,boxSize.x,boxSize.y);
 			GameObject rlabel = MakeBox ("RP",rpLabelRect);
 			rlabel.AddComponent("FortifyCostLabel");

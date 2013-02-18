@@ -7,6 +7,8 @@ public class BuildMenu : Menu {
 	public Vector2 buttonSize;
 	public Vector2 boxSize;
 	public AudioClip click;
+	private MenuItem[] materialButtons;
+	public MenuItem[] weaponButtons;
 	private int numButtons;
 	
 	void Start() {
@@ -14,42 +16,56 @@ public class BuildMenu : Menu {
 		buttonSize.y = 50;
 		boxSize.x = 150;
 		boxSize.y = 50;
+		materialButtons = new MenuItem[Faction.NUM_MATERIALS];
+		weaponButtons = new MenuItem[Faction.NUM_WEAPONS];
 	}
 	
 	public override void Update() {
+		if(hasLoaded) {
+			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
+			for(int i=0; i<Faction.NUM_MATERIALS; i++) {
+				string text = t.faction.materials[i];
+				materialButtons[i].text = text;
+				materialButtons[i].GetComponent<MaterialCostLabelUpdate>().materialName = text;
+			}
+			for(int i=0; i<Faction.NUM_WEAPONS; i++) {
+				string text = t.faction.weapons[i];
+				weaponButtons[i].text = text;
+				weaponButtons[i].GetComponent<WeaponCostLabelUpdate>().weaponName = text;
+			}
+		}
 		if(!hasLoaded) {
 			GameObject values = new GameObject("BuildValues");
 			values.AddComponent("GameValues");
 			values.transform.parent = transform;
 			numButtons=0;
-			Faction f = TurnOrder.myPlayer.faction;
 			Rect materialButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_MATERIALS; i++) {
-				SectionMaterial material = f.GetSectionMaterial(i);
 				materialButtonRect = FindPos (numButtons, materialButtonRect);
-				GameObject item = MakeButton(material.mtype, materialButtonRect);
+				GameObject item = MakeButton("", materialButtonRect);
 				item.AddComponent("MaterialCostLabelUpdate");
-				item.GetComponent<MaterialCostLabelUpdate>().materialName = material.mtype;
+				item.GetComponent<MaterialCostLabelUpdate>().materialName = "";
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
 				m.action = item.GetComponent<DefaultMenuAction>();
 				m.action.click = click;
 				menuItems.Add(m);
+				materialButtons[i] = m;
 				//materialButtonRect.xMin += buttonSize.x + 15;
 				numButtons++;
 			}
 			Rect weaponButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_WEAPONS; i++) {
-				SectionWeapon weapon = f.GetSectionWeapon(i);
 				weaponButtonRect = FindPos(numButtons, weaponButtonRect);
-				GameObject item = MakeButton(weapon.wtype, weaponButtonRect);
+				GameObject item = MakeButton("", weaponButtonRect);
 				item.AddComponent("WeaponCostLabelUpdate");
-				item.GetComponent<WeaponCostLabelUpdate>().weaponName = weapon.wtype;
+				item.GetComponent<WeaponCostLabelUpdate>().weaponName = "";
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
 				m.action = item.GetComponent<DefaultMenuAction>();
 				m.action.click = click;
 				menuItems.Add(m);
+				weaponButtons[i] = m;
 				//weaponButtonRect.xMin += buttonSize.x + 15;
 				//if(i%2 == 0 && i > 0) {
 					//weaponButtonRect.yMin += buttonSize.y + 5;

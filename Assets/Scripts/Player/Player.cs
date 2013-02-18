@@ -3,40 +3,38 @@ using System.Collections;
 
 public class Player {
 	public int playerNumber;
-	private Tower tower;
+	private Tower[] towers;
 	private int resources;
 	public int number;
-	public TowerBase towerBase;
 	public Color color;
-	public Faction faction;
 
-	public Player(int number, Color c, Tower newTower, int r, Faction f) {
+	public Player(int number, Color c, int r) {
 		this.color = c;
 		this.playerNumber = number;
-	    this.tower = newTower;
 	    this.resources = r;
-		this.faction = f;
-	}
-
-	public Tower GetTower() {
-	    return this.tower;
+		this.towers = new Tower[3];
 	}
 	
-	public void SetTowerLocation(GameObject towerBase, GameObject other) {
-		this.towerBase = towerBase.GetComponent<TowerBase>();
-		this.towerBase.SetColor(color);
-		Vector3 positionToLookAt = other.transform.position;
-		positionToLookAt.y = towerBase.transform.position.y;
-		towerBase.transform.LookAt(positionToLookAt);
+	public void AddTower(TowerBase b, Faction f, int i) {
+		this.towers[i] = new Tower(b, f);
+	}
+
+	public Tower GetTower(int i) {
+	    return this.towers[i];
 	}
 	
 	public void NextTurn() {
-		this.tower.AdvanceDots();
+		foreach(Tower t in towers) {
+			t.AdvanceDots();
+		}
 	}
 	
 	public void AccrueResources() {
-		int towerEarnings = GameValues.intValues["resourcesPerSection"] * tower.GetHeight();
-		AddResources(GameValues.intValues["resourcesPerTurn"] + towerEarnings);
+		int towerEarnings = GameValues.intValues["resourcesPerTurn"];
+		foreach(Tower t in towers) {
+			towerEarnings += t.GetHeight() * GameValues.intValues["resourcesPerSection"];
+		}
+		AddResources(towerEarnings);
 	}
 	
 	public void AddResources(int add) {
@@ -51,23 +49,26 @@ public class Player {
 	    return this.resources;
 	}
 
-	public void Build(GameObject section) {
-		SectionController c = section.GetComponent<SectionController>();
-		Section s = c.GetSection();
-		this.tower.AddSection(section);
-		this.resources -= s.GetCost();
+	public void Build(Section section, Tower t) {
+		t.AddSection(section);
+		this.resources -= section.attributes.GetCost();
 	}        
 
-	public void RepairSection(int sectionIndex) {
-	    int cost = this.tower.RepairSection(sectionIndex);
+	public void RepairSection(int sectionIndex, int i) {
+	    int cost = this.towers[i].RepairSection(sectionIndex);
 	    this.resources -= cost;
 	}
 
-	public void Retrofit(int index, GameObject section) {
-		this.tower.RetrofitSection(index, section);
+	public void TakeDamage(int sectionIndex, int damage, int i) {
+	    this.towers[i].DamageSection(sectionIndex, damage);
 	}
-
-	public void TakeDamage(int sectionIndex, int damage) {
-	    this.tower.DamageSection(sectionIndex, damage);
+	
+	public bool Loses() {
+		foreach(Tower t in towers) {
+			if(t.alive) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
