@@ -23,7 +23,6 @@ public class BuildWeaponMenu : Menu {
 	
 	public override void Update() {
 		ValueStore.selectedMaterial = sm;
-		Debug.Log (ValueStore.selectedMaterial);
 		foreach(BuildConfirmMenu b in this.gameObject.GetComponentsInChildren<BuildConfirmMenu>()) {
 			b.sm = ValueStore.selectedMaterial;
 			b.sw = ValueStore.selectedWeapon;
