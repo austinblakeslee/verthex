@@ -23,18 +23,22 @@ public class MainMenu : Menu {
 	public Texture2D empty;
 	public Texture2D full;
 	public GUIText damagetext;
+	public GameObject build;
+	public GameObject fight;
+	public GameObject fortify;
+	public GameObject upgrade;
 	
 	void Start() {
 		buttonSize.x = 60;
 		buttonSize.y = 50;
 		this.on = true;
+		numButtons = 1;
 	}
 
 	public override void Update() {
 		if(!hasLoaded) {
-			Rect buildButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
-			buildButtonRect = FindPos(numButtons, buildButtonRect);
-			GameObject build = MakeButton("Build",buildButtonRect);
+			Rect buildButtonRect = new Rect(Screen.width - 200,(Screen.height - 165) + ((numButtons-1) *(150/(numButtons))) ,190, (150/(2)));
+			build = MakeButton("Build",buildButtonRect);
 			build.AddComponent("SwitchMenu");
 			build.AddComponent ("BuildMenu");
 			build.transform.parent = transform;
@@ -46,11 +50,10 @@ public class MainMenu : Menu {
 			m1.action.click = click;
 			menuItems.Add(m1);
 			numButtons++;
-			GameObject fight = makeFireButton(numButtons);
-			numButtons++;
-			Rect fortifyButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
-			fortifyButtonRect = FindPos(numButtons, fortifyButtonRect);
-			GameObject fortify = MakeButton("Fortify",fortifyButtonRect);
+			fight = makeFireButton(numButtons);
+			Rect fortifyButtonRect = new Rect(Screen.width/2 + 130,Screen.height/2 - 120,buttonSize.x, buttonSize.y);
+			//fortifyButtonRect = FindPos(numButtons, fortifyButtonRect);
+			fortify = MakeButton("Fortify",fortifyButtonRect);
 			fortify.AddComponent("SwitchMenu");
 			fortify.AddComponent ("FortifyMenu");
 			fortify.transform.parent = transform;
@@ -61,10 +64,9 @@ public class MainMenu : Menu {
 			fortify.GetComponent<FortifyMenu>().click = click;
 			m3.action.click = click;
 			menuItems.Add(m3);
-			numButtons++;
-			Rect upgradeButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
-			upgradeButtonRect = FindPos(numButtons, upgradeButtonRect);
-			GameObject upgrade = MakeButton("Upgrade",upgradeButtonRect);
+			Rect upgradeButtonRect = new Rect(Screen.width/2 + 130,Screen.height/2 - 60 ,buttonSize.x, buttonSize.y);
+			//upgradeButtonRect = FindPos(numButtons, upgradeButtonRect);
+			upgrade = MakeButton("Upgrade",upgradeButtonRect);
 			upgrade.AddComponent("SwitchMenu");
 			upgrade.AddComponent ("UpgradeMenu");
 			upgrade.transform.parent = transform;
@@ -75,9 +77,7 @@ public class MainMenu : Menu {
 			upgrade.GetComponent<UpgradeMenu>().click = click;
 			m4.action.click = click;
 			menuItems.Add(m4);
-			numButtons++;
-			Rect passButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
-			passButtonRect = FindPos(numButtons, passButtonRect);
+			Rect passButtonRect = new Rect(Screen.width - 200,(Screen.height - 165) + ((numButtons-1) *(150/(numButtons)))+10,190,150/(2));
 			GameObject pass = MakeButton("Pass",passButtonRect);
 			pass.AddComponent("PassAction");
 			pass.transform.parent = transform;
@@ -89,6 +89,33 @@ public class MainMenu : Menu {
 			hasLoaded = true;
 		}
 		base.Update();
+		/*if(TowerSelection.GetSelectedSection() == null) {
+			fight.GetComponent<MenuItem>().visible = false;
+		}
+		else if (TowerSelection.GetSelectedSection() != null && (TowerSelection.GetSelectedSection().GetWeaponInfo() == "Nothing" || TurnOrder.ceasefire > 0)) {
+			fight.GetComponent<MenuItem>().visible = false;
+		}
+		else {
+			fight.GetComponent<MenuItem>().visible = true;
+		}
+		if(TowerSelection.GetSelectedSection() == null) {
+			upgrade.GetComponent<MenuItem>().visible = false;
+		}
+		else if(TowerSelection.GetSelectedSection() != null && TowerSelection.GetSelectedSection().attributes.weapon.GetUpgradeLevel() >= TowerSelection.GetSelectedSection().attributes.weapon.maxUpgradeLevel) {
+			upgrade.GetComponent<MenuItem>().visible = false;
+		}
+		else {
+			upgrade.GetComponent<MenuItem>().visible = true;
+		}
+		if(TowerSelection.GetSelectedSection() == null) {
+			fortify.GetComponent<MenuItem>().visible = false;
+		}
+		else if(TowerSelection.GetSelectedSection() != null && TowerSelection.GetSelectedSection().attributes.sp >= TowerSelection.GetSelectedSection().attributes.maxSP) {
+			fortify.GetComponent<MenuItem>().visible = false;
+		}
+		else {
+			fortify.GetComponent<MenuItem>().visible = true;
+		}*/
 	}
 	
 	private GameObject MakeButton(string text, Rect rect) {
@@ -97,8 +124,8 @@ public class MainMenu : Menu {
 		MenuItem m = item.GetComponent<MenuItem>();
 		m.left = ""+rect.xMin;
 		m.top = ""+rect.yMin;
-		m.width = ""+buttonSize.x;
-		m.height = ""+buttonSize.y;
+		m.width = ""+rect.width;
+		m.height = ""+rect.height;
 		m.type = MenuItem.MenuItemType.Button;
 		m.visible = true;
 		m.text = text;
@@ -119,36 +146,8 @@ public class MainMenu : Menu {
 		return item;
 	}
 	
-	private Rect FindPos(int i, Rect rect) {
-		if(i == 1 || i == 4 || i == 7) {
-			rect.x = Screen.width - 150;
-		}
-		else if(i == 0 || i == 3 || i == 6) {
-			rect.x = Screen.width - 225;
-		}
-		else if(i == 2 || i == 5 || i == 8) {
-			rect.x = Screen.width - 75;
-		}
-		else {
-			Debug.Log ("Too many buttons!");	
-		}
-		
-		if(i <= 2) {
-			rect.y = Screen.height - 165;
-		}
-		else if(i > 2 && i <= 5) {
-			rect.y = Screen.height - 110;
-		}
-		else if(i > 5 && i <= 8) {
-			rect.y = Screen.height - 55;
-		}
-		
-		return rect;
-	}
-	
 	private GameObject createGUIButton(string scriptName, string goName) {
 		Rect itemButtonRect = new Rect(0,0,buttonSize.x,buttonSize.y); 
-		itemButtonRect = FindPos(numButtons, itemButtonRect);
 		GameObject item = MakeButton(goName,itemButtonRect);
 		item.AddComponent(scriptName);
 		item.transform.parent = transform;
@@ -159,8 +158,8 @@ public class MainMenu : Menu {
 	}
 	
 	private GameObject makeFireButton(int i) {
-		Rect fightButtonRect = new Rect(200,200,buttonSize.x, buttonSize.y);
-		fightButtonRect = FindPos(numButtons, fightButtonRect);
+		Rect fightButtonRect = new Rect(Screen.width/2 + 130,Screen.height/2,buttonSize.x, buttonSize.y);
+		//fightButtonRect = FindPos(numButtons, fightButtonRect);
 		GameObject fight = MakeButton("Fight",fightButtonRect);
 		fight.AddComponent("Menu");
 		fight.AddComponent ("FireAction");
