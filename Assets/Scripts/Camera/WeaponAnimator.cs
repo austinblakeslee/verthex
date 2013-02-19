@@ -108,6 +108,8 @@ public class WeaponAnimator : MonoBehaviour {
 				firingSection.transform.Find("FireCam").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
 				firingSection.transform.Find("FireCam").camera.enabled = true;
 				if(hitSections.Count > 0) {
+					firingSection.transform.LookAt(hitSections[0].transform);
+					firingSection.transform.eulerAngles = new Vector3(0, firingSection.transform.eulerAngles.y, 0);
 					defaultConstraints = hitSections[0].rigidbody.constraints;
 					List<Section> hitTowerSects = hitSections[0].GetComponent<Section>().attributes.myTower.GetSections();
 					for(int i = 0; i < hitTowerSects.Count; i++) {
