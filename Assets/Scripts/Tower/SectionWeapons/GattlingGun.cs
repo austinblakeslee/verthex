@@ -11,6 +11,5 @@ public class GattlingGun : SectionWeapon {
 		this.range = 2;
         this.wtype = "Gattling Gun";
     	this.maxUpgradeEffect = new DamageOverTime();
-		this.weaponEffect = new AimCritStrike();
 	}
 }

@@ -38,10 +38,10 @@ public class Drain : WeaponEffect {
 	public void Heal(int damage, int center, Tower t){
 		int heal = (damage*drainPercentage)/100; //40 percent
 		Section s = t.GetSection(center);
-		//if (s.GetInitialSP() < s.GetSP() + heal){
+		if (s.GetMaxSP() >= s.GetSP() + heal){
 			s.AddSP(heal);
-		//}
-		//else 
-		//	s.AddSP(s.GetInitialSP() - s.GetSP());
+		}
+		else 
+			s.AddSP(s.GetInitialSP() - s.GetSP());
 	}
 }

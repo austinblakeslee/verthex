@@ -24,7 +24,7 @@ public class PoisonSplash : WeaponEffect {
 			if (t.GetSection(center).HasWeapon()){
 				CombatLog.addLine("Section is confused");
 				//t.GetSection(center).GetWeapon().SetEffect(new PoisonedSplash());
-				t.GetSection(center).GetMaterial().SetSectionEffect(new Poisoned());
+				t.GetSection(center).GetMaterial().SetSectionEffect(new Poisoned(t.GetSection(center)));
 			}
 		}
 		else if(center < 0) {

@@ -1,0 +1,38 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class Burn : WeaponEffect {
+	public int burnPercentage = 40;
+	public Burn() : base() {
+		this.effectType = "Burn";
+	}
+	
+	public override List<GameObject> GetDamagedSections(Tower t, int center) {
+		List<GameObject> list = new List<GameObject>();
+		if(center >= 0 && center < t.GetSections().Count) {
+			list.Add(t.GetSections()[center]);
+		}
+		return list;
+	}
+	
+	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
+		List<GameObject> sections = GetDamagedSections(t, center);
+		if(sections.Count >= 1) {
+			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
+			t.DamageSection(center, damage);
+			t.GetSection(center).GetMaterial().SetSectionEffect(new Burned((damage * burnPercentage / 100), t.GetSection(center)));
+			CombatLog.addLine("Section is burned");
+		} else if(center < 0) {
+			CombatLog.addLine("Attack was too low");
+			CombatLog.addLine("Fill the aim bar more.");
+		} else if(center >= t.GetSections().Count) {
+			CombatLog.addLine("Attack was too high");
+			CombatLog.addLine("Lower the aim bar.");
+		}
+	}
+	
+	public override string GetInfo(int damage) {
+		return "Deals " + damage + " single-target damage and burns the enemy.";
+	}
+}

@@ -10,6 +10,6 @@ public class Coyote : SectionMaterial {
         this.SPPerRepair = 75;
         this.costPerRepair = 75;
         this.mtype = "Coyote";
-		this.sectionEffect = new ForceFieldEffect(80);
+		//this.sectionEffect = new ForceFieldEffect(80);
     }
 }

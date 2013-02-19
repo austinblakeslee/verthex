@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class AimCritStrike : WeaponEffect
 {
 	protected List<Section> taggedSections = new List<Section>();
-	protected int maxTaggedSections = 2;
 	protected int critStrikeDamageModifier = 50;//Percentage of bonus damage a crit strike will do.
 			
 	public override List<GameObject> GetDamagedSections(Tower t, int center) {
@@ -13,20 +12,19 @@ public class AimCritStrike : WeaponEffect
 	}
 		
 	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSection) {
-		if (center >= 0 && center < t.GetSections().Count){
-			if (taggedSections.Contains(t.GetSection(center)))
-			{
-				
-				taggedSections.Remove(t.GetSection(center));
-				CombatLog.addLine("Crit Strike! Hit section " + (center + 1) + " for " + damage + "(+" + (damage * critStrikeDamageModifier/100) + ") damage." );
-				t.DamageSection(center, damage + damage * critStrikeDamageModifier / 100);
-			}
-			else
-			{
-				taggedSections.Add(t.GetSection(center));
+		if(t.GetSections().Count >= 1) {			
+			t.DamageSection(center, damage);
+
+			if (t.GetSection(center).GetMaterial().GetSectionEffect().GetEffectType() != "Tagged")
+			{	
+				t.GetSection(center).GetMaterial().SetSectionEffect(new Tagged(critStrikeDamageModifier));
 				CombatLog.addLine("Hit section " + (center + 1) + " for " + damage + " damage. Section is tagged for a crit strike" );
 
-				t.DamageSection(center, damage);
+			}
+			else{
+				CombatLog.addLine("CRIT STRIKE!");
+				CombatLog.addLine("Hit section " + (center + 1) + " for " + damage + "(+" + (damage * critStrikeDamageModifier / 100) +  ") damage." );
+
 			}
 		}
 		else if(center < 0) {

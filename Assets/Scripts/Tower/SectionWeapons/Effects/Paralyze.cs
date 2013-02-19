@@ -21,7 +21,7 @@ public class Paralyze : WeaponEffect {
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
 			t.DamageSection(center, damage);
-			t.GetSection().GetMaterial().SetSectionEffect(new Paralyzed());
+			t.GetSection(center).GetMaterial().SetSectionEffect(new Paralyzed(t.GetSection(center)));
 			CombatLog.addLine("Section is paralyzed");
 		} else if(center < 0) {
 			CombatLog.addLine("Attack was too low");

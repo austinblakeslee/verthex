@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Burned : SectionEffect
 {
-	public int damagePerTurn = 40;
+	public int damagePerTurn;
 	public int numTurns = 3;
 	public Section burnedSection;
 	public Burned() : base() {
@@ -28,6 +28,7 @@ public class Burned : SectionEffect
 		Debug.Log ("Burn Damage per turn: " + damagePerTurn);
 		Debug.Log("Num turns left: " + numTurns);
 		ApplyDamage(burnedSection, damagePerTurn);
+		//Display burn stuff
 
 	}
 	public override string GetInfo (int damage)

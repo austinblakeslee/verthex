@@ -6,9 +6,7 @@ public class Poisoned : SectionEffect
 {
 	public int numTurns = 3;
 	public int poisonDamagePercentage = 35;
-	public Poisoned() : base() {
 
-	}
 	public Poisoned(Section effectedSection) : base(effectedSection)
 	{
 		this.effectType = "Poisoned";
@@ -17,21 +15,22 @@ public class Poisoned : SectionEffect
 	
 	public override void PreAttack(Section s)
 	{
-		int damageToDo = s.GetWeapon().GetDamage() * poisonDamagePercentage / 100;	
-		Tower t = s.GetTower ();
-		if (s.GetHeight() >= 1)
+		int damageToDo = appliedSection.GetWeapon().GetDamage() * poisonDamagePercentage / 100;	
+		Tower t = appliedSection.GetTower ();
+		if (appliedSection.GetHeight() >= 1)
 		{
-			s.GetWeapon().GetEffect().DoDamage(t, s.GetHeight() - 1, damageToDo, t, s.GetHeight());
+			appliedSection.GetWeapon().GetEffect().DoDamage(t, appliedSection.GetHeight() - 2, damageToDo, t, appliedSection.GetHeight());
 		}
-		if(s.GetHeight() >= 0 && s.GetHeight() < t.GetSections().Count) {
-			s.GetWeapon().GetEffect().DoDamage(t, s.GetHeight() + 1, damageToDo, t, s.GetHeight());
+		if(appliedSection.GetHeight() >= 0 && appliedSection.GetHeight() <= t.GetHeight()) {
+			Debug.Log ("HERRREEEEEEEEEEEEEEEEEEEEE");
+			t.GetSection(appliedSection.GetHeight() - 1);
 		}
 	}
 	
 	public override void EndTurnEffect(){
 		if (numTurns <= 0)
 		{
-			//destroy this script
+			appliedSection.GetMaterial().SetSectionEffect(new DefaultSectionEffect());
 		}
 		numTurns --;
 
