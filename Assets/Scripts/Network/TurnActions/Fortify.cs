@@ -13,6 +13,7 @@ public class Fortify : TurnAction {
 		this.playerNumber = TurnOrder.myPlayer.playerNumber;
 		this.towerNumber = t;
 		this.sectionNum = n;
+		this.cost = TurnOrder.GetPlayerByNumber(playerNumber).GetTower(t).GetSection(n).attributes.material.costPerRepair;
 	}
 	
 	public override string GetActionMessage() {

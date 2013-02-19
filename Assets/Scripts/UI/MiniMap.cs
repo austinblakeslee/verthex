@@ -67,7 +67,7 @@ public class MiniMap : MonoBehaviour {
 			TowerSelection.LocalSelectSection(baseTow, -1);
 		}
 		
-		if(GUI.Button(p2T3Rect, "P3:T3"))
+		if(GUI.Button(p2T3Rect, "P2:T3"))
 		{
 			Tower baseTow = TurnOrder.GetPlayerByNumber(2).GetTower(2);
 			TowerSelection.LocalSelectSection(baseTow, -1);

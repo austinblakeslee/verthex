@@ -18,6 +18,7 @@ public class Upgrade : TurnAction {
 		this.playerNumber = TurnOrder.myPlayer.playerNumber;
 		this.sectionNum = n;
 		this.upgradeChoice = EncodeUpgrade(u);
+		this.cost = 200;
 	}
 	
 	public override string GetActionMessage() {
@@ -47,26 +48,20 @@ public class Upgrade : TurnAction {
 		CombatLog.addLine("Upgraded section");
 		Section s = p.GetTower(towerNumber).GetSection(sectionNum);
 		string upgrade = DecodeUpgrade();
-		int cost = 200;
 		SectionWeapon weapon = s.attributes.weapon;
 		if(upgrade == "Damage") {
 			weapon.Upgrade();
-			p.RemoveResources(cost);
 		} else if(upgrade == "AoE") {
 			if(weapon.GetEffect().GetEffectType() == "Multi") {
 				weapon.GetEffect().Upgrade();
-				p.RemoveResources(cost);
 			} else {
 				weapon.SetEffect(new AreaOfEffect());
-				p.RemoveResources(cost);
 			}
 		} else if(upgrade == "DoT") {
 			if(weapon.GetEffect().GetEffectType() == "Burn") {
 				weapon.GetEffect().Upgrade();
-				p.RemoveResources(cost);
 			} else if(weapon.GetEffect().GetEffectType() == "none") {
 				weapon.SetEffect(new DamageOverTime());
-				p.RemoveResources(cost);
 			}
 		}
 	}

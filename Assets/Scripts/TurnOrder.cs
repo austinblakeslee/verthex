@@ -207,6 +207,7 @@ public class TurnOrder : MonoBehaviour {
 	private void RegisterAction(TurnAction action) {
 		ResetMenus();
 		myActions[actionNum] = action;
+		myPlayer.RemoveResources(action.cost);
 		if(actionNum >= 2) {
 			for(int i=0; i<3; i++) {
 				if(Network.isClient) {

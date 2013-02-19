@@ -15,6 +15,7 @@ public class Build : TurnAction {
 		this.towerNumber = t;
 		this.material = EncodeMaterial(m);
 		this.weapon = EncodeWeapon(w);
+		this.cost = m.GetCost() + w.GetCost();
 	}
 	
 	public override void Perform() {

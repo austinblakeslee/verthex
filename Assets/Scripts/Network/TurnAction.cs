@@ -10,6 +10,7 @@ public abstract class TurnAction {
 	public int playerNumber;
 	public int towerNumber;
 	public string actionName;
+	public int cost = 0;
 	
 	public TurnAction(string actionName) {
 		this.actionName = actionName;

@@ -51,12 +51,10 @@ public class Player {
 
 	public void Build(Section section, Tower t) {
 		t.AddSection(section);
-		this.resources -= section.attributes.GetCost();
 	}        
 
 	public void RepairSection(int sectionIndex, int i) {
-	    int cost = this.towers[i].RepairSection(sectionIndex);
-	    this.resources -= cost;
+	    this.towers[i].RepairSection(sectionIndex);
 	}
 
 	public void TakeDamage(int sectionIndex, int damage, int i) {
