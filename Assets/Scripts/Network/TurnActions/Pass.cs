@@ -23,6 +23,7 @@ public class Pass : TurnAction {
 	}
 	
 	public override void Perform() {
+		ValueStore.helpMessage = "Passing";
 		Player p = TurnOrder.GetPlayerByNumber(playerNumber);
 		TowerSelection.LocalSelectSection(p.GetTower(towerNumber), -1);
 		CombatLog.addLine("Pass!");

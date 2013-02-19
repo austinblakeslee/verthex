@@ -40,6 +40,7 @@ public class Upgrade : TurnAction {
 	}
 	
 	public override void Perform() {
+		ValueStore.helpMessage = "Upgrading";
 		Player p = TurnOrder.GetPlayerByNumber(playerNumber);
 		TowerSelection.LocalSelectSection(p.GetTower(towerNumber), sectionNum);
 		TowerSelection.GetSelectedSection().PlayRepairSound();
