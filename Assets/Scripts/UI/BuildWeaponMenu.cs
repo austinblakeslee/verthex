@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BuildMenu : Menu {
+public class BuildWeaponMenu : Menu {
 
 	private bool hasLoaded = false;
 	public Vector2 buttonSize;
@@ -10,6 +10,7 @@ public class BuildMenu : Menu {
 	private MenuItem[] materialButtons;
 	public MenuItem[] weaponButtons;
 	private int numButtons;
+	public SectionMaterial sm;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -21,47 +22,54 @@ public class BuildMenu : Menu {
 	}
 	
 	public override void Update() {
-		foreach(BuildWeaponMenu b in this.gameObject.GetComponentsInChildren<BuildWeaponMenu>()) {
+		ValueStore.selectedMaterial = sm;
+		Debug.Log (ValueStore.selectedMaterial);
+		foreach(BuildConfirmMenu b in this.gameObject.GetComponentsInChildren<BuildConfirmMenu>()) {
 			b.sm = ValueStore.selectedMaterial;
+			b.sw = ValueStore.selectedWeapon;
 		}
 		if(hasLoaded) {
 			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
-			for(int i=0; i<Faction.NUM_MATERIALS; i++) {
+			/*for(int i=0; i<Faction.NUM_MATERIALS; i++) {
 				string text = t.faction.materials[i];
 				materialButtons[i].text = text;
 				materialButtons[i].GetComponent<MaterialCostLabelUpdate>().materialName = text;
-			}
-			/*for(int i=0; i<Faction.NUM_WEAPONS; i++) {
+			}*/
+			for(int i=0; i<Faction.NUM_WEAPONS; i++) {
 				string text = t.faction.weapons[i];
 				weaponButtons[i].text = text;
 				weaponButtons[i].GetComponent<WeaponCostLabelUpdate>().weaponName = text;
-			}*/
+			}
 		}
 		if(!hasLoaded) {
 			GameObject values = new GameObject("BuildValues");
 			values.AddComponent("GameValues");
 			values.transform.parent = transform;
 			numButtons=0;
-			
-			Rect materialButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
+			/*Rect materialButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_MATERIALS; i++) {
-				materialButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_MATERIALS+1))+5))  ), 160, 150/(Faction.NUM_MATERIALS+1));
+				materialButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_MATERIALS))+5))  ), 160, 150/(Faction.NUM_MATERIALS));
 				//materialButtonRect = FindPos (numButtons, materialButtonRect);
 				GameObject item = MakeButton("", materialButtonRect);
 				item.AddComponent("MaterialCostLabelUpdate");
 				item.GetComponent<MaterialCostLabelUpdate>().materialName = "";
+				item.AddComponent("SwitchMenu");
+				item.GetComponent("BuildWeaponMenu");
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
-				m.action = item.GetComponent<DefaultMenuAction>();
+				m.action = item.GetComponent<SwitchMenu>();//item.GetComponent<DefaultMenuAction>();
+				build.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
+				build.GetComponent<SwitchMenu>().toMenu = item;
 				m.action.click = click;
 				menuItems.Add(m);
 				materialButtons[i] = m;
 				//materialButtonRect.xMin += buttonSize.x + 15;
 				numButtons++;
-			}
-			/*Rect weaponButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
+			}*/
+			Rect weaponButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_WEAPONS; i++) {
-				weaponButtonRect = FindPos(numButtons, weaponButtonRect);
+				weaponButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_WEAPONS+1))+5))  ), 160, 150/(Faction.NUM_WEAPONS+1));
+				//weaponButtonRect = FindPos(numButtons, weaponButtonRect);
 				GameObject item = MakeButton("", weaponButtonRect);
 				item.AddComponent("WeaponCostLabelUpdate");
 				item.GetComponent<WeaponCostLabelUpdate>().weaponName = "";
@@ -77,18 +85,18 @@ public class BuildMenu : Menu {
 					//weaponButtonRect.xMin -= 3*(buttonSize.x + 15);
 				//}
 				numButtons++;
-			}*/
-			Rect confirmButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( Faction.NUM_MATERIALS * ((150/(Faction.NUM_MATERIALS+1))+5))  ), 160, 150/(Faction.NUM_MATERIALS+1));
+			}
+			Rect confirmButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( Faction.NUM_WEAPONS * ((150/(Faction.NUM_WEAPONS+1))+5))  ), 160, 150/(Faction.NUM_WEAPONS+1));
 			//confirmButtonRect = FindPos(numButtons, confirmButtonRect);
 			GameObject confirm = MakeButton("Confirm",confirmButtonRect);
 			confirm.AddComponent("SwitchMenu");
-			confirm.AddComponent("BuildWeaponMenu");
+			confirm.AddComponent("BuildConfirmMenu");
 			confirm.transform.parent = transform;
 			MenuItem m0 = confirm.GetComponent<MenuItem>();
 			m0.action = confirm.GetComponent<SwitchMenu>();//item.GetComponent<DefaultMenuAction>();
 			confirm.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			confirm.GetComponent<SwitchMenu>().toMenu = confirm;
-			confirm.GetComponent<BuildWeaponMenu>().click = click;
+			confirm.GetComponent<BuildConfirmMenu>().click = click;
 			m0.action.click = click;
 			menuItems.Add(m0);
 			numButtons++;

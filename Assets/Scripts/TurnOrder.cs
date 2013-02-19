@@ -219,6 +219,10 @@ public class TurnOrder : MonoBehaviour {
 				c.on = false;
 			}
 		} else {
+			foreach (Menu c in GameObject.Find("MainMenu").GetComponentsInChildren<Menu>()) {
+				c.on = false;
+			}
+			GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 			actionNum++;
 		}
 		TowerSelection.LocalSelectSection(myPlayer.GetTower(actionNum), -1);
