@@ -30,6 +30,7 @@ public class TurnOrder : MonoBehaviour {
 	private bool inputReady = true;
 	public static int actionNum = 0;
 	private int displayActionNum = 0;
+	private bool showDebug = false;
 	
 	void Start () {
 		instance = this;
@@ -121,6 +122,9 @@ public class TurnOrder : MonoBehaviour {
 					networkView.RPC("Resume", RPCMode.All);
 				}
 			}
+		}
+		if(Input.GetKeyDown(KeyCode.D)) {
+			showDebug = !showDebug;
 		}
 		//GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = inputReady;
 	}
@@ -289,6 +293,22 @@ public class TurnOrder : MonoBehaviour {
 			return player2;
 		} else {
 			return null;
+		}
+	}
+	
+	void OnGUI() {
+		if(showDebug) {
+			Rect r = new Rect(Screen.width/2 - 150, Screen.height/2 - 150, 250, 150);
+			string debugText = "";
+			debugText += "Turn number: " + turnNum + "\n";
+			debugText += "---Server text below---\n";
+			debugText += "Player 1 actions receied" + player1ActionsReceived + "\n";
+			debugText += "Player 2 actions receied" + player2ActionsReceived + "\n";
+			debugText += "Network State: " + networkState + "\n";
+			debugText += "Displaying action: " + displayActionNum + "\n";
+			debugText += "Player 1 confirmed: " + player1Confirm + "\n";
+			debugText += "Player 2 confirmed: " + player2Confirm + "\n";
+			GUI.Box(r, debugText);
 		}
 	}
 }
