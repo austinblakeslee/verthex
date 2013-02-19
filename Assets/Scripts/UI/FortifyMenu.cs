@@ -13,28 +13,30 @@ public class FortifyMenu : Menu {
 		buttonSize.x = 60;
 		buttonSize.y = 50;
 		boxSize.x = 150;
-		boxSize.y = 50;
+		boxSize.y = 30;
 	}
 	
 	public override void Update() {
 		if(!hasLoaded) {
-			Rect rpLabelRect = new Rect(Screen.width - 380,Screen.height - 165,boxSize.x,boxSize.y);
+			Rect rpLabelRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 120,boxSize.x,boxSize.y);
 			GameObject rlabel = MakeBox ("RP",rpLabelRect);
 			rlabel.AddComponent("FortifyCostLabel");
 			rlabel.transform.parent = transform;
 			MenuItem m1 = rlabel.GetComponent<MenuItem>();
 			m1.action = rlabel.GetComponent<DefaultMenuAction>();
 			menuItems.Add(m1);
-			Rect weaponsLabelRect = new Rect(Screen.width - 380,Screen.height - 110,boxSize.x,boxSize.y);
+			Rect weaponsLabelRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 85,boxSize.x,boxSize.y);
 			GameObject slabel = MakeBox ("SP",weaponsLabelRect);
 			slabel.AddComponent("FortifyHealthLabel");
 			slabel.transform.parent = transform;
 			MenuItem m3 = slabel.GetComponent<MenuItem>();
 			m3.action = slabel.GetComponent<DefaultMenuAction>();
 			menuItems.Add(m3);
-			GameObject confirm = createGUIButton("FortifyAction","Confirm");
+			Rect confRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 50,boxSize.x,boxSize.y);
+			GameObject confirm = createGUIButton("FortifyAction","Confirm",confRect);
 			numButtons++;
-			GameObject back = createGUIButton("SwitchMenu","Back");
+			Rect backRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 5,boxSize.x,boxSize.y);
+			GameObject back = createGUIButton("SwitchMenu","Back",backRect);
 			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;
 			numButtons++;
@@ -49,8 +51,8 @@ public class FortifyMenu : Menu {
 		MenuItem m = item.GetComponent<MenuItem>();
 		m.left = ""+rect.xMin;
 		m.top = ""+rect.yMin;
-		m.width = ""+buttonSize.x;
-		m.height = ""+buttonSize.y;
+		m.width = ""+rect.width;
+		m.height = ""+rect.height;
 		m.type = MenuItem.MenuItemType.Button;
 		m.visible = true;
 		m.text = text;
@@ -63,8 +65,8 @@ public class FortifyMenu : Menu {
 		MenuItem m = item.GetComponent<MenuItem>();
 		m.left = ""+rect.xMin;
 		m.top = ""+rect.yMin;
-		m.width = ""+boxSize.x;
-		m.height = ""+boxSize.y;
+		m.width = ""+rect.width;
+		m.height = ""+rect.height;
 		m.type = MenuItem.MenuItemType.Box;
 		m.visible = true;
 		m.text = "";
@@ -95,9 +97,9 @@ public class FortifyMenu : Menu {
 		return rect;
 	}
 	
-	private GameObject createGUIButton(string scriptName, string goName) {
-		Rect itemButtonRect = new Rect(0,0,buttonSize.x,buttonSize.y); 
-		itemButtonRect = FindPos(numButtons, itemButtonRect);
+	private GameObject createGUIButton(string scriptName, string goName, Rect itemButtonRect) {
+		//Rect itemButtonRect = new Rect(0,0,buttonSize.x,buttonSize.y); 
+		//itemButtonRect = FindPos(numButtons, itemButtonRect);
 		GameObject item = MakeButton(goName,itemButtonRect);
 		item.AddComponent(scriptName);
 		item.transform.parent = transform;

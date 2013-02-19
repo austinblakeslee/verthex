@@ -12,8 +12,7 @@ public class Menu : MonoBehaviour {
 	
 	private bool hotKey = false;
 	private int hotMenuItem;
-	
-	
+
 	public virtual void Update() {
 		//Checks if any MenuItem's hotKey has been pressed
 		int i=0;
