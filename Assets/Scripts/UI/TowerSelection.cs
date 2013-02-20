@@ -244,10 +244,12 @@ public class TowerSelection : MonoBehaviour {
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
+			ValueStore.selectedMaterial = null; //For Fortify Menu Update
 			mc.ChangeTarget(t.towerBase.transform);
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
+			ValueStore.selectedMaterial = s.attributes.material; //For Fortify Menu Update
 			mc.ChangeTarget(s.transform);
 			s.SetColor(TurnOrder.myPlayer.color);
 		}
