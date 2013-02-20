@@ -9,7 +9,7 @@ public class WeaponCostLabelUpdate : DefaultMenuAction,MenuAction {
 	public override void Action() {
 		ValueStore.selectedWeapon = SectionComponentFactory.GetWeapon(weaponName);
 		fromMenu.GetComponent<Menu>().on = false;
-		this.GetComponent<BuildConfirmMenu>().on = true;
-		PlayClickSound();
+		this.gameObject.GetComponent<BuildConfirmMenu>().on = true;
+
 	}
 }

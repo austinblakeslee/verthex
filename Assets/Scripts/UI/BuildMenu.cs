@@ -50,10 +50,9 @@ public class BuildMenu : Menu {
 				MenuItem m = item.GetComponent<MenuItem>();
 				m.action = item.GetComponent<MaterialCostLabelUpdate>();
 				item.GetComponent<MaterialCostLabelUpdate>().fromMenu = this.gameObject;
-				m.action.click = click;
+				item.GetComponent<BuildWeaponMenu>().click = click;
 				menuItems.Add(m);
 				materialButtons[i] = m;
-				//materialButtonRect.xMin += buttonSize.x + 15;
 				numButtons++;
 			}
 			Rect backButtonRect = new Rect(Screen.width - 230,Screen.height - 165,60,160);

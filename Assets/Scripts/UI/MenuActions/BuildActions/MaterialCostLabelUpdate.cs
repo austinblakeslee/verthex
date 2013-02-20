@@ -9,7 +9,7 @@ public class MaterialCostLabelUpdate : DefaultMenuAction,MenuAction {
 	public override void Action() {
 		ValueStore.selectedMaterial = SectionComponentFactory.GetMaterial(materialName);
 		fromMenu.GetComponent<Menu>().on = false;
-		this.GetComponent<BuildWeaponMenu>().on = true;
+		this.gameObject.GetComponent<BuildWeaponMenu>().on = true;
 		PlayClickSound();
 	}
 }
