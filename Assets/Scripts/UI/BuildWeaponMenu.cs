@@ -29,10 +29,6 @@ public class BuildWeaponMenu : Menu {
 		}
 		if(hasLoaded) {
 			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
-<<<<<<< HEAD
-
-=======
->>>>>>> 1c1dab308da93d138b39b87d5948924071c7e004
 			for(int i=0; i<Faction.NUM_WEAPONS; i++) {
 				string text = t.faction.weapons[i];
 				weaponButtons[i].text = text;
@@ -44,10 +40,6 @@ public class BuildWeaponMenu : Menu {
 			values.AddComponent("GameValues");
 			values.transform.parent = transform;
 			numButtons=0;
-<<<<<<< HEAD
-
-=======
->>>>>>> 1c1dab308da93d138b39b87d5948924071c7e004
 			Rect weaponButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_WEAPONS; i++) {
 				weaponButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_WEAPONS))+5))  ), 160, 150/(Faction.NUM_WEAPONS));
@@ -60,11 +52,7 @@ public class BuildWeaponMenu : Menu {
 				MenuItem m = item.GetComponent<MenuItem>();
 				m.action = item.GetComponent<WeaponCostLabelUpdate>();
 				item.GetComponent<WeaponCostLabelUpdate>().fromMenu = this.gameObject;
-<<<<<<< HEAD
-				m.action.click = click;
-=======
 				item.GetComponent<BuildConfirmMenu>().click = click;
->>>>>>> 1c1dab308da93d138b39b87d5948924071c7e004
 				menuItems.Add(m);
 				weaponButtons[i] = m;
 				//weaponButtonRect.xMin += buttonSize.x + 15;
