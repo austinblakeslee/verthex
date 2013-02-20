@@ -89,7 +89,7 @@ public class MainMenu : Menu {
 			hasLoaded = true;
 		}
 		base.Update();
-		/*if(TowerSelection.GetSelectedSection() == null) {
+		if(TowerSelection.GetSelectedSection() == null) {
 			fight.GetComponent<MenuItem>().visible = false;
 		}
 		else if (TowerSelection.GetSelectedSection() != null && (TowerSelection.GetSelectedSection().GetWeaponInfo() == "Nothing" || TurnOrder.ceasefire > 0)) {
@@ -115,7 +115,7 @@ public class MainMenu : Menu {
 		}
 		else {
 			fortify.GetComponent<MenuItem>().visible = true;
-		}*/
+		}
 	}
 	
 	private GameObject MakeButton(string text, Rect rect) {
