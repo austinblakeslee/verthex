@@ -28,7 +28,7 @@ public class BuildMenu : Menu {
 			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
 			for(int i=0; i<Faction.NUM_MATERIALS; i++) {
 				string text = t.faction.materials[i];
-				materialButtons[i].text = text;
+				materialButtons[i].text = text + ": $" + SectionComponentFactory.GetMaterial(text).cost;
 				materialButtons[i].GetComponent<MaterialCostLabelUpdate>().materialName = text;
 			}
 		}

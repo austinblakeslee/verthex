@@ -31,7 +31,7 @@ public class BuildWeaponMenu : Menu {
 			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
 			for(int i=0; i<Faction.NUM_WEAPONS; i++) {
 				string text = t.faction.weapons[i];
-				weaponButtons[i].text = text;
+				weaponButtons[i].text = text + ": $" + SectionComponentFactory.GetWeapon(text).cost;
 				weaponButtons[i].GetComponent<WeaponCostLabelUpdate>().weaponName = text;
 			}
 		}
