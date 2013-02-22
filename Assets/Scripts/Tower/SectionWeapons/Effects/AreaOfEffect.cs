@@ -1,4 +1,4 @@
-using UnityEngine;
+eusing UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,7 +11,7 @@ public class AreaOfEffect : WeaponEffect {
 		this.effectType = "Multi";
 	}
 	
-	public override List<GameObject> GetDamagedSections(Tower t, int center) {
+	public override List<Section> GetDamagedSections(Tower t, int center) {
 		int down = numTargets[upgradeLevel]/2;
 		int up = down;
 		down = numTargets[upgradeLevel]%2 == 0 ? down-1 : down;
@@ -24,19 +24,19 @@ public class AreaOfEffect : WeaponEffect {
 			end = t.GetSections().Count - 1;
 		}
 		Debug.Log("Start: " + start + " End: " + end);
-		List<GameObject> list = new List<GameObject>();
+		List<Section> list = new List<Section>();
 		if(end >= 0) {
 			for(int i=start; i <= end; i++) {
-				list.Add(t.GetSections()[i]);
+				list.Add(t.GetSection(i));
 			}
 		}
 		return list;
 	}
 	
 	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
-		List<GameObject> damagedSections = GetDamagedSections(t, center);
-		foreach(GameObject g in damagedSections) {
-			int height = g.GetComponent<SectionController>().GetHeight();
+		List<Section> damagedSections = GetDamagedSections(t, center);
+		foreach(Section g in damagedSections) {
+			int height = g.attributes.height;
 			int d = (int)(percentDamage[upgradeLevel] * damage);
 			CombatLog.addLine("Hit section " + height + " for " + d + " damage.");
 			t.DamageSection(height-1, (int)(percentDamage[upgradeLevel] * damage));

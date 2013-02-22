@@ -6,10 +6,12 @@ public class PauseMenu : MonoBehaviour {
 	public static bool showMenu;
 	public bool pause;
 	public GUIStyle pm;
+	public string stringCL;
 	
 	void Start () {
 		showMenu = false;
 		pause = false;
+		stringCL = "Show Combat Log";
 	}
 	
 	void Update () {
@@ -30,6 +32,15 @@ public class PauseMenu : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width/2-Screen.width/10,Screen.height/2 - Screen.height/8,Screen.width/5,Screen.height/10),"Resume",pm)) {
 				pause = false;
 				Time.timeScale = 1.0f;
+			}
+			else if (GUI.Button(new Rect(Screen.width/2-Screen.width/10,Screen.height/2,Screen.width/5,Screen.height/10),stringCL,pm)) {
+				HideCL.setCombatLog();
+				if(stringCL == "Hide Combat Log") {
+					stringCL = "Show Combat Log";
+				}
+				else if (stringCL == "Show Combat Log") {
+					stringCL = "Hide Combat Log";
+				}
 			}
 			//else if (GUI.Button(new Rect(Screen.width/2-Screen.width/10,Screen.height/2,Screen.width/5,Screen.height/10),"Restart",pm)) {
 			//	pause = false;

@@ -115,6 +115,10 @@ public class MenuItem : MonoBehaviour {
 		return heightI;
 	}
 	
+	public bool GetVisible() {
+		return visible;	
+	}
+	
 	public void setTooltipOn(bool on){
 		tooltipOn = on;
 	}

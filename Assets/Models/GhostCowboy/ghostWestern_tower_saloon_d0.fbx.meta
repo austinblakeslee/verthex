@@ -4,10 +4,56 @@ ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Saloon
+    100004: saloon_door_left
+    100006: saloon_door_right
+    100008: saloon_shutter_botleft_left
+    100010: saloon_shutter_botright_left
+    100012: saloon_shutter_botright_right
+    100014: saloon_shutter_topleft_left
+    100016: saloon_shutter_topright_left
+    100018: saloon_shutter_topright_right
     400000: //RootNode
+    400002: Saloon
+    400004: saloon_door_left
+    400006: saloon_door_right
+    400008: saloon_shutter_botleft_left
+    400010: saloon_shutter_botright_left
+    400012: saloon_shutter_botright_right
+    400014: saloon_shutter_topleft_left
+    400016: saloon_shutter_topright_left
+    400018: saloon_shutter_topright_right
     2300000: //RootNode
+    2300002: Saloon
+    2300004: saloon_door_left
+    2300006: saloon_door_right
+    2300008: saloon_shutter_botleft_left
+    2300010: saloon_shutter_botright_left
+    2300012: saloon_shutter_botright_right
+    2300014: saloon_shutter_topleft_left
+    2300016: saloon_shutter_topright_left
+    2300018: saloon_shutter_topright_right
     3300000: //RootNode
+    3300002: Saloon
+    3300004: saloon_door_left
+    3300006: saloon_door_right
+    3300008: saloon_shutter_botleft_left
+    3300010: saloon_shutter_botright_left
+    3300012: saloon_shutter_botright_right
+    3300014: saloon_shutter_topleft_left
+    3300016: saloon_shutter_topright_left
+    3300018: saloon_shutter_topright_right
     4300000: GhostWestern_tower_saloon_d0
+    4300002: saloon_door_left
+    4300004: saloon_door_right
+    4300006: saloon_shutter_botleft_left
+    4300008: saloon_shutter_botright_left
+    4300010: saloon_shutter_botright_right
+    4300012: saloon_shutter_topright_right
+    4300014: saloon_shutter_topright_left
+    4300016: saloon_shutter_topleft_left
+    4300018: Saloon
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1

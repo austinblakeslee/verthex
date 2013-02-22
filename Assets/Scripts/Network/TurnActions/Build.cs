@@ -10,18 +10,19 @@ public class Build : TurnAction {
 		ParseActionMessage(actionMessage);
 	}
 
-	public Build(SectionMaterial m, SectionWeapon w) : base("Build") {
+	public Build(int t, SectionMaterial m, SectionWeapon w) : base("Build") {
 		this.playerNumber = TurnOrder.myPlayer.playerNumber;
+		this.towerNumber = t;
 		this.material = EncodeMaterial(m);
 		this.weapon = EncodeWeapon(w);
+		this.cost = m.GetCost() + w.GetCost();
 	}
 	
 	public override void Perform() {
-		Player p = TurnOrder.GetPlayerByNumber(playerNumber);
 		SectionMaterial m = DecodeMaterial();
 		SectionWeapon w = DecodeWeapon();
 		ValueStore.helpMessage = "Building section";
-		Builder.BuildSection(p, m, w);
+		Builder.BuildSection(TurnOrder.GetPlayerByNumber(playerNumber), GetTower(), m, w);
 	}
 	
 	public override string GetActionMessage() {
@@ -31,23 +32,28 @@ public class Build : TurnAction {
 	protected override void ParseActionMessage(string actionMessage) {
 		string[] tokens = actionMessage.Split(TOKEN_SEPARATOR);
 		this.playerNumber = int.Parse(tokens[0]);
-		this.material = int.Parse(tokens[2]);
-		this.weapon = int.Parse(tokens[3]);
+		this.towerNumber = int.Parse(tokens[1]);
+		this.material = int.Parse(tokens[FIRST_AVAILABLE_INDEX]);
+		this.weapon = int.Parse(tokens[FIRST_AVAILABLE_INDEX+1]);
 	}
 	
 	private int EncodeMaterial(SectionMaterial m) {
-		return TurnOrder.GetPlayerByNumber(playerNumber).faction.EncodeSectionMaterial(m.mtype);
+		return GetTower().faction.EncodeSectionMaterial(m.mtype);
 	}
 	
 	private int EncodeWeapon(SectionWeapon w) {
-		return TurnOrder.GetPlayerByNumber(playerNumber).faction.EncodeSectionWeapon(w.wtype);
+		return GetTower().faction.EncodeSectionWeapon(w.wtype);
 	}
 	
 	private SectionMaterial DecodeMaterial() {
-		return TurnOrder.GetPlayerByNumber(playerNumber).faction.GetSectionMaterial(material);
+		return GetTower().faction.GetSectionMaterial(material);
 	}
 	
 	private SectionWeapon DecodeWeapon() {
-		return TurnOrder.GetPlayerByNumber(playerNumber).faction.GetSectionWeapon(weapon);
+		return GetTower().faction.GetSectionWeapon(weapon);
+	}
+	
+	private Tower GetTower() {
+		return TurnOrder.GetPlayerByNumber(playerNumber).GetTower(towerNumber);
 	}
 }

@@ -8,16 +8,17 @@ public class Paralyze : WeaponEffect {
 		this.effectType = "Paralyze";
 	}
 	
-	public override List<GameObject> GetDamagedSections(Tower t, int center) {
-		List<GameObject> list = new List<GameObject>();
+	public override List<Section> GetDamagedSections(Tower t, int center) {
+		List<Section> list = new List<Section>();
 		if(center >= 0 && center < t.GetSections().Count) {
-			list.Add(t.GetSections()[center]);
+			list.Add(t.GetSection(center));
 		}
 		return list;
 	}
 	
+
 	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
-		List<GameObject> sections = GetDamagedSections(t, center);
+		List<Section> sections = GetDamagedSections(t, center);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
 			t.DamageSection(center, damage);
@@ -38,7 +39,7 @@ public class Paralyze : WeaponEffect {
 	
 	public void Stun(Tower t, int center){
 		Section s = t.GetSection(center);
-		s.GetWeapon().fire = false;
+		s.attributes.weapon.fire = false;
 		CombatLog.addLine("Weapon is stunned.  It won't deal damage until it is repaired.");
 	}
 }

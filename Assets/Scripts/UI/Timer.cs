@@ -18,7 +18,7 @@ public class TurnTimer : MonoBehaviour {
 		if(elapsedTime <= 0)
 		{
 			CombatLog.addLineNoPlayer("Time End");
-			TurnOrder.SendAction(new Pass()); 
+			TurnOrder.SendAction(new Pass(TurnOrder.actionNum)); 
 			currentTime = maxTime + Time.time; 
 		}
 		//Debug.Log("Time: " + ((int)elapsedTime).ToString());

@@ -6,15 +6,85 @@ ModelImporter:
     100000: //RootNode
     100002: polySurface108
     100004: polySurface109
+    100006: Area51_tower_gootank_d0a
+    100008: Area51_tower_gootank_d0a 1
+    100010: Area51_tower_gootank_d0b
+    100012: Area51_tower_gootank_d0b 1
+    100014: Area51_tower_gootank_d0c
+    100016: Area51_tower_gootank_d0c 1
+    100018: Area51_tower_gootank_d0d
+    100020: Area51_tower_gootank_d0d 1
+    100022: Area51_tower_gootank_d0e
+    100024: Area51_tower_gootank_d0e 1
+    100026: Area51_tower_gootankpanel_d0
+    100028: Area51_tower_gootankpanel_d0a
+    100030: Area51_tower_gootankpanel_d0b
+    100032: Area51_tower_gootankpanel_d0c
+    100034: Area51_tower_gootankpanel_d0d
+    100036: Area51_tower_gootankpanel_d0e
+    100038: forcefield
+    100040: group
     400000: //RootNode
     400002: polySurface108
     400004: polySurface109
+    400006: Area51_tower_gootank_d0a
+    400008: Area51_tower_gootank_d0a 1
+    400010: Area51_tower_gootank_d0b
+    400012: Area51_tower_gootank_d0b 1
+    400014: Area51_tower_gootank_d0c
+    400016: Area51_tower_gootank_d0c 1
+    400018: Area51_tower_gootank_d0d
+    400020: Area51_tower_gootank_d0d 1
+    400022: Area51_tower_gootank_d0e
+    400024: Area51_tower_gootank_d0e 1
+    400026: Area51_tower_gootankpanel_d0
+    400028: Area51_tower_gootankpanel_d0a
+    400030: Area51_tower_gootankpanel_d0b
+    400032: Area51_tower_gootankpanel_d0c
+    400034: Area51_tower_gootankpanel_d0d
+    400036: Area51_tower_gootankpanel_d0e
+    400038: forcefield
+    400040: group
     2300000: polySurface108
     2300002: polySurface109
+    2300004: Area51_tower_gootank_d0a 1
+    2300006: Area51_tower_gootank_d0b 1
+    2300008: Area51_tower_gootank_d0c 1
+    2300010: Area51_tower_gootank_d0d 1
+    2300012: Area51_tower_gootank_d0e 1
+    2300014: Area51_tower_gootankpanel_d0a
+    2300016: Area51_tower_gootankpanel_d0b
+    2300018: Area51_tower_gootankpanel_d0c
+    2300020: Area51_tower_gootankpanel_d0d
+    2300022: Area51_tower_gootankpanel_d0e
+    2300024: forcefield
     3300000: polySurface108
     3300002: polySurface109
+    3300004: Area51_tower_gootank_d0a 1
+    3300006: Area51_tower_gootank_d0b 1
+    3300008: Area51_tower_gootank_d0c 1
+    3300010: Area51_tower_gootank_d0d 1
+    3300012: Area51_tower_gootank_d0e 1
+    3300014: Area51_tower_gootankpanel_d0a
+    3300016: Area51_tower_gootankpanel_d0b
+    3300018: Area51_tower_gootankpanel_d0c
+    3300020: Area51_tower_gootankpanel_d0d
+    3300022: Area51_tower_gootankpanel_d0e
+    3300024: forcefield
     4300000: polySurface108
     4300002: polySurface109
+    4300004: Area51_tower_gootank_d0a
+    4300006: Area51_tower_gootankpanel_d0a
+    4300008: Area51_tower_gootank_d0b
+    4300010: Area51_tower_gootankpanel_d0b
+    4300012: Area51_tower_gootank_d0c
+    4300014: Area51_tower_gootankpanel_d0c
+    4300016: Area51_tower_gootank_d0d
+    4300018: Area51_tower_gootankpanel_d0d
+    4300020: Area51_tower_gootank_d0e
+    4300022: Area51_tower_gootankpanel_d0e
+    4300024: forcefield
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1

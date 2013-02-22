@@ -13,10 +13,12 @@ public class Upgrade : TurnAction {
 		ParseActionMessage(actionMessage);
 	}
 
-	public Upgrade(int n, string u) : base("Upgrade") {
+	public Upgrade(int t, int n, string u) : base("Upgrade") {
+		this.towerNumber = t;
 		this.playerNumber = TurnOrder.myPlayer.playerNumber;
 		this.sectionNum = n;
 		this.upgradeChoice = EncodeUpgrade(u);
+		this.cost = 200;
 	}
 	
 	public override string GetActionMessage() {
@@ -26,8 +28,8 @@ public class Upgrade : TurnAction {
 	protected override void ParseActionMessage(string actionMessage) {
 		string[] tokens = actionMessage.Split(TOKEN_SEPARATOR);
 		this.playerNumber = int.Parse(tokens[0]);
-		this.sectionNum = int.Parse(tokens[2]);
-		this.upgradeChoice = int.Parse(tokens[3]);
+		this.sectionNum = int.Parse(tokens[FIRST_AVAILABLE_INDEX]);
+		this.upgradeChoice = int.Parse(tokens[FIRST_AVAILABLE_INDEX+1]);
 	}
 	
 	private int EncodeUpgrade(string u) {
@@ -39,31 +41,27 @@ public class Upgrade : TurnAction {
 	}
 	
 	public override void Perform() {
-		TowerSelection.LocalSelectSection(playerNumber, sectionNum);
+		ValueStore.helpMessage = "Upgrading";
+		Player p = TurnOrder.GetPlayerByNumber(playerNumber);
+		TowerSelection.LocalSelectSection(p.GetTower(towerNumber), sectionNum);
 		TowerSelection.GetSelectedSection().PlayRepairSound();
 		CombatLog.addLine("Upgraded section");
-		Player p = TurnOrder.GetPlayerByNumber(playerNumber);
-		Section s = p.GetTower().GetSection(sectionNum);
+		Section s = p.GetTower(towerNumber).GetSection(sectionNum);
 		string upgrade = DecodeUpgrade();
-		int cost = 200;
+		SectionWeapon weapon = s.attributes.weapon;
 		if(upgrade == "Damage") {
-			s.GetWeapon().Upgrade();
-			p.RemoveResources(cost);
+			weapon.Upgrade();
 		} else if(upgrade == "AoE") {
-			if(s.GetWeapon().GetEffect().GetEffectType() == "Multi") {
-				s.GetWeapon().GetEffect().Upgrade();
-				p.RemoveResources(cost);
+			if(weapon.GetEffect().GetEffectType() == "Multi") {
+				weapon.GetEffect().Upgrade();
 			} else {
-				s.GetWeapon().SetEffect(new AreaOfEffect());
-				p.RemoveResources(cost);
+				weapon.SetEffect(new AreaOfEffect());
 			}
 		} else if(upgrade == "DoT") {
-			if(s.GetWeapon().GetEffect().GetEffectType() == "Burn") {
-				s.GetWeapon().GetEffect().Upgrade();
-				p.RemoveResources(cost);
-			} else if(s.GetWeapon().GetEffect().GetEffectType() == "none") {
-				s.GetWeapon().SetEffect(new DamageOverTime());
-				p.RemoveResources(cost);
+			if(weapon.GetEffect().GetEffectType() == "Burn") {
+				weapon.GetEffect().Upgrade();
+			} else if(weapon.GetEffect().GetEffectType() == "none") {
+				weapon.SetEffect(new DamageOverTime());
 			}
 		}
 	}
