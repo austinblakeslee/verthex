@@ -22,7 +22,7 @@ public class Burned : SectionEffect
 		//Damage (damagePerTurn);
 		if (numTurns <= 0)
 		{
-			burnedSection.GetMaterial().SetSectionEffect(new DefaultSectionEffect());	//destroy this script/apply DefaultEffect to the section 
+			burnedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());	//destroy this script/apply DefaultEffect to the section 
 		}
 		numTurns --;
 		Debug.Log ("Burn Damage per turn: " + damagePerTurn);

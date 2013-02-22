@@ -8,8 +8,8 @@ public class PoisonSplash : WeaponEffect {
 		this.effectType = "Posion Splash";
 	}
 	
-	public override List<GameObject> GetDamagedSections(Tower t, int center) {
-		List<GameObject> list = new List<GameObject>();
+	public override List<Section> GetDamagedSections(Tower t, int center) {
+		List<Section> list = new List<Section>();
 		if(center >= 0 && center < t.GetSections().Count) {
 			list.Add(t.GetSections()[center]);
 		}
@@ -17,14 +17,14 @@ public class PoisonSplash : WeaponEffect {
 	}
 	
 	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
-		List<GameObject> sections = GetDamagedSections(self, firingSec);
+		List<Section> sections = GetDamagedSections(self, firingSec);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
 			t.DamageSection(center, damage);
-			if (t.GetSection(center).HasWeapon()){
+			if (t.GetSection(center).attributes.HasWeapon()){
 				CombatLog.addLine("Section is confused");
 				//t.GetSection(center).GetWeapon().SetEffect(new PoisonedSplash());
-				t.GetSection(center).GetMaterial().SetSectionEffect(new Poisoned(t.GetSection(center)));
+				t.GetSection(center).attributes.material.SetSectionEffect(new Poisoned(t.GetSection(center)));
 			}
 		}
 		else if(center < 0) {

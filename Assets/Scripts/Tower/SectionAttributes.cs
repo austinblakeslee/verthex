@@ -20,6 +20,12 @@ public class SectionAttributes {
     public int GetWeight() {
         return (int)(this.material.GetWeightPerSP() * this.sp) + this.weapon.GetWeight();
     }
+	public bool HasWeapon()
+	{
+		if (weapon.wtype == "Nothing")
+			return false;
+		return true;
+	}
 
     public int GetCost() {
         return this.material.GetCost() + this.weapon.GetCost();

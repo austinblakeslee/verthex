@@ -8,7 +8,7 @@ public class DoTAction : DefaultMenuAction,MenuAction {
 		if(s != null) {
 			int cost = 200;
 			Player p = TurnOrder.myPlayer;
-			Effect effect = s.attributes.weapon.GetEffect();
+			WeaponEffect effect = s.attributes.weapon.GetEffect();
 			if(effect.GetEffectType() == "Multi") {
 				ValueStore.helpMessage = "Cannot add Burn effect. Multi effect already purchased!";
 			} else if(effect.GetUpgradeLevel() >= 3) {

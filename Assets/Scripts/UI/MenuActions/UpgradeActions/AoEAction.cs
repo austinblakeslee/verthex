@@ -8,7 +8,7 @@ public class AoEAction : DefaultMenuAction,MenuAction {
 		if(s != null) {
 			int cost = 200;
 			Player p = TurnOrder.myPlayer;
-			Effect effect = s.attributes.weapon.GetEffect();
+			WeaponEffect effect = s.attributes.weapon.GetEffect();
 			if(effect.GetEffectType() == "Burn") {
 				ValueStore.helpMessage = "Cannot add Multi effect. Burn effect already purchased!";
 			} else if(effect.GetUpgradeLevel() >= 3) {

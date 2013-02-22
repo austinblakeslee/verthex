@@ -8,8 +8,8 @@ public class Burn : WeaponEffect {
 		this.effectType = "Burn";
 	}
 	
-	public override List<GameObject> GetDamagedSections(Tower t, int center) {
-		List<GameObject> list = new List<GameObject>();
+	public override List<Section> GetDamagedSections(Tower t, int center) {
+		List<Section> list = new List<Section>();
 		if(center >= 0 && center < t.GetSections().Count) {
 			list.Add(t.GetSections()[center]);
 		}
@@ -17,11 +17,11 @@ public class Burn : WeaponEffect {
 	}
 	
 	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
-		List<GameObject> sections = GetDamagedSections(t, center);
+		List<Section> sections = GetDamagedSections(t, center);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
 			t.DamageSection(center, damage);
-			t.GetSection(center).GetMaterial().SetSectionEffect(new Burned((damage * burnPercentage / 100), t.GetSection(center)));
+			t.GetSection(center).attributes.material.SetSectionEffect(new Burned((damage * burnPercentage / 100), t.GetSection(center)));
 			CombatLog.addLine("Section is burned");
 		} else if(center < 0) {
 			CombatLog.addLine("Attack was too low");

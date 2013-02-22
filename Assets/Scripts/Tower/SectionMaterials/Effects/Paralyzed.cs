@@ -11,14 +11,14 @@ public class Paralyzed : SectionEffect
 		this.effectType = "Paralyzed";
 		CombatLog.addLine("Weapon is stunned.  It won't deal damage until it is repaired.");
 
-		section.GetWeapon().fire = false; //makes damage = 0... Will change to more permanent solution later
+		section.attributes.weapon.fire = false; //makes damage = 0... Will change to more permanent solution later
 	}
 		
 	public override void EndTurnEffect(){
 		if (numTurns <= 0)
 		{
-			appliedSection.GetWeapon().fire = true; 
-			appliedSection.GetMaterial().SetSectionEffect(new DefaultSectionEffect());
+			appliedSection.attributes.weapon.fire = true; 
+			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());
 		}
 		numTurns --;
 		Debug.Log ("Num turns of Paralysis left: " + numTurns);

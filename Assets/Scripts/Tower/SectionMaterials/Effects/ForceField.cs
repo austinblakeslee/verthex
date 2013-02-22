@@ -19,7 +19,7 @@ public class ForceFieldEffect : SectionEffect
 		if (power > forceFieldStrength)
 		{
 			//destroy force field visually
-			s.SubtractSP(power - forceFieldStrength);
+			s.attributes.sp -= (power - forceFieldStrength);
 		}
 		else{
 			//display forceField being attacked
@@ -30,7 +30,7 @@ public class ForceFieldEffect : SectionEffect
 	public override void EndTurnEffect(){
 		if (numTurns <= 0)
 		{
-			appliedSection.GetMaterial().SetSectionEffect(new DefaultSectionEffect());
+			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());
 		}
 		numTurns --;
 		Debug.Log ("Force Field Strength: " + forceFieldStrength);

@@ -19,7 +19,7 @@ public abstract class SectionEffect {
 	public virtual void PreAttack(Section S){}
 	public virtual void ApplyDamage(Section target, int power)
 	{
-		target.SubtractSP(power);
+		target.attributes.sp -= power;
 	}
 
 	public virtual void EndTurnEffect(){}

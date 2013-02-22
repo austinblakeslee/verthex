@@ -15,22 +15,22 @@ public class Poisoned : SectionEffect
 	
 	public override void PreAttack(Section s)
 	{
-		int damageToDo = appliedSection.GetWeapon().GetDamage() * poisonDamagePercentage / 100;	
-		Tower t = appliedSection.GetTower ();
-		if (appliedSection.GetHeight() >= 1)
+		int damageToDo = appliedSection.attributes.weapon.GetDamage() * poisonDamagePercentage / 100;	
+		Tower t = appliedSection.attributes.myTower;
+		if (appliedSection.attributes.height >= 1)
 		{
-			appliedSection.GetWeapon().GetEffect().DoDamage(t, appliedSection.GetHeight() - 2, damageToDo, t, appliedSection.GetHeight());
+			appliedSection.attributes.weapon.GetEffect().DoDamage(t, appliedSection.attributes.height - 2, damageToDo, t, appliedSection.attributes.height);
 		}
-		if(appliedSection.GetHeight() >= 0 && appliedSection.GetHeight() <= t.GetHeight()) {
+		if(appliedSection.attributes.height >= 0 && appliedSection.attributes.height <= t.GetHeight()) {
 			Debug.Log ("HERRREEEEEEEEEEEEEEEEEEEEE");
-			t.GetSection(appliedSection.GetHeight() - 1);
+			t.GetSection(appliedSection.attributes.height - 1);
 		}
 	}
 	
 	public override void EndTurnEffect(){
 		if (numTurns <= 0)
 		{
-			appliedSection.GetMaterial().SetSectionEffect(new DefaultSectionEffect());
+			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());
 		}
 		numTurns --;
 

@@ -45,7 +45,7 @@ public class Fight : TurnAction {
 		WeaponAnimator.Animate(sc, hitSections);
 		int damage = sc.attributes.weapon.GetDamage();
 		//check firing sections pre-attack
-		firingPlayer.GetTower().GetSection(firingSection).attributes.material.GetSectionEffect().PreAttack(firingPlayer.GetTower().GetSection(firingSection));
-		sc.attributes.weapon.GetEffect().DoDamage(target.GetTower(targetTower), hitCenter, damage);
+		firingPlayer.GetTower(towerNumber).GetSection(firingSection).attributes.material.GetSectionEffect().PreAttack(firingPlayer.GetTower(towerNumber).GetSection(firingSection));
+		sc.attributes.weapon.GetEffect().DoDamage(target.GetTower(targetTower), hitCenter, damage, firingPlayer.GetTower(towerNumber), firingSection);
 	}
 }

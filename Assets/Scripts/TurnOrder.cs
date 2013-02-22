@@ -252,15 +252,15 @@ public class TurnOrder : MonoBehaviour {
 		TowerSelection.Deselect();
 		
 		//Activate each sections end turn effect
-		foreach(GameObject s in player1.GetTower().GetSections())
-		{
-			SectionController sec = (SectionController)s.GetComponent("SectionController");
-			sec.GetSection().GetMaterial().GetSectionEffect().EndTurnEffect();
-		}
-		foreach(GameObject s in player2.GetTower().GetSections())
-		{
-			SectionController sec = (SectionController)s.GetComponent("SectionController");
-			sec.GetSection().GetMaterial().GetSectionEffect().EndTurnEffect();
+		for(int i = 0; i < 3; i++){
+			foreach(Section sec in player1.GetTower(i).GetSections())
+				{
+			sec.attributes.material.GetSectionEffect().EndTurnEffect();
+			}
+			foreach(Section sec in player2.GetTower(i).GetSections())
+			{
+				sec.attributes.material.GetSectionEffect().EndTurnEffect();
+			}
 		}
 	}
 	

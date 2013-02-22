@@ -19,7 +19,7 @@ public class Tagged : SectionEffect
 	public override void ApplyDamage (Section s, int power)
 	{
 		base.ApplyDamage (s, power + power * critStrikeBonusPercentage / 100);
-		s.GetMaterial().SetSectionEffect(new DefaultSectionEffect());
+		s.attributes.material.SetSectionEffect(new DefaultSectionEffect());
 		//Destroy this effect - One time use... unless we want it destroyed at the end of the turn...
 	}
 }

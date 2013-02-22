@@ -9,8 +9,8 @@ public class PoisonedSplash : WeaponEffect {
 		this.effectType = "Posioned";
 	}
 	
-	public override List<GameObject> GetDamagedSections(Tower t, int center) {
-		List<GameObject> list = new List<GameObject>();
+	public override List<Section> GetDamagedSections(Tower t, int center) {
+		List<Section> list = new List<Section>();
 		if(center >= 0 && center < t.GetSections().Count) {
 			list.Add(t.GetSections()[center + 1]);
 		}
@@ -22,9 +22,9 @@ public class PoisonedSplash : WeaponEffect {
 	}
 	
 	public override void DoDamage(Tower t, int center, int damage, Tower self, int firingSec) {
-		List<GameObject> selfSections = GetDamagedSections(self, firingSec);
-		foreach(GameObject g in selfSections) {
-			int height = g.GetComponent<SectionController>().GetHeight();
+		List<Section> selfSections = GetDamagedSections(self, firingSec);
+		foreach(Section sec in selfSections) {
+			int height = sec.attributes.height;
 			int d = (int)(damage*poisonedDamageModifier/100);
 			CombatLog.addLine("Hit own section " + height + " for " + d + " damage.");
 			self.DamageSection(height-1, d);
