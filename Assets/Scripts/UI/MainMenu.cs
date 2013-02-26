@@ -92,7 +92,6 @@ public class MainMenu : Menu {
 		
 		if(TowerSelection.GetSelectedSection() == null) {
 			fight.GetComponent<MenuItem>().visible = false;
-			upgrade.GetComponent<MenuItem>().visible = false;
 		}
 		else if (TowerSelection.GetSelectedSection() != null && (TowerSelection.GetSelectedSection().GetWeaponInfo() == "Nothing" || TurnOrder.ceasefire > TurnOrder.turnNum)) {
 			fight.GetComponent<MenuItem>().visible = false;
