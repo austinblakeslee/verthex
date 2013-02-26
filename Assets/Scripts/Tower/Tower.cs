@@ -16,6 +16,10 @@ public class Tower {
 		this.faction = faction;
     }
 	
+	public TowerBase GetTowerBase(){
+		return this.towerBase;
+	}
+	
 	public int GetHeight() {
 		return sections.Count;
 	}

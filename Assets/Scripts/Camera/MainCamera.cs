@@ -9,6 +9,7 @@ public class MainCamera : MonoBehaviour {
 	public int zoomLevel;
 	public int maxZoomLevel;
 	public MenuItem quit;
+	public Tower currentTower;
 	
 	// Use this for initialization
 	void Start () {
@@ -47,5 +48,13 @@ public class MainCamera : MonoBehaviour {
 		transform.localPosition = localPos;
 		transform.localScale = Vector3.one;
 		transform.rotation = rotation;
+	}
+	
+	public void SetCurrentTower(Tower t){
+		currentTower = t;
+	}
+	
+	public Tower GetCurrentTower(){
+		return currentTower;
 	}
 }

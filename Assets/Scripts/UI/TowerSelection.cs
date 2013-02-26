@@ -246,6 +246,7 @@ public class TowerSelection : MonoBehaviour {
 			selectedSection = null;
 			ValueStore.selectedMaterial = null; //For Fortify Menu Update
 			mc.ChangeTarget(t.towerBase.transform);
+			mc.SetCurrentTower(t);	//Allows camera to hold tower info
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
