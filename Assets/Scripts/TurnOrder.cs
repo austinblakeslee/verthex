@@ -6,7 +6,7 @@ public class TurnOrder : MonoBehaviour {
 	public static Player player2;
 	public static Player myPlayer;
 	public static Player otherPlayer;
-	private static int turnNum;
+	public static int turnNum;
 	public static int ceasefire;
 	private static TurnOrder instance;
 	public TowerBase[] player1Bases;
