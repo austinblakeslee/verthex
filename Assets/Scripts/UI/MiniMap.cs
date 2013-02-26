@@ -12,6 +12,7 @@ public class MiniMap : MonoBehaviour {
 	private Vector3 scale;
 	private float ow;
 	private float oh;
+	public bool hidden;
 	
 	void Start() {
 		ow = 960;
@@ -31,6 +32,7 @@ public class MiniMap : MonoBehaviour {
 	}
 	
 	void OnGUI () {
+		if(!hidden){
 		scale.y = Screen.height/oh;
 		scale.x = Screen.width/ow;
 		scale.z = 1;
@@ -71,6 +73,7 @@ public class MiniMap : MonoBehaviour {
 		{
 			Tower baseTow = TurnOrder.GetPlayerByNumber(2).GetTower(2);
 			TowerSelection.LocalSelectSection(baseTow, -1);
+		}
 		}
 	}
 }
