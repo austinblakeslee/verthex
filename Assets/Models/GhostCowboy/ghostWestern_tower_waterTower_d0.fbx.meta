@@ -24,6 +24,7 @@ ModelImporter:
     100036: waterTower_platform
     100038: weaponCamera
     100040: weaponLocation
+    100042: waterTower_base
     400000: //RootNode
     400002: pCube1
     400004: polySurface1
@@ -45,18 +46,22 @@ ModelImporter:
     400036: waterTower_platform
     400038: weaponCamera
     400040: weaponLocation
+    400042: waterTower_base
     2300000: polySurface7
     2300002: waterTower_body
     2300004: waterTower_legs
     2300006: waterTower_platform
+    2300008: waterTower_base
     3300000: polySurface7
     3300002: waterTower_body
     3300004: waterTower_legs
     3300006: waterTower_platform
+    3300008: waterTower_base
     4300000: polySurface7
     4300002: waterTower_body
     4300004: waterTower_legs
     4300006: waterTower_platform
+    4300008: waterTower_base
     9500000: //RootNode
   materials:
     importMaterials: 1

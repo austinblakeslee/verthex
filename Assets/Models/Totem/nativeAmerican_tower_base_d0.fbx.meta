@@ -11,6 +11,7 @@ ModelImporter:
     100010: Directional Light
     100012: //RootNode
     100014: Stripe
+    100016: Texture Group
     400000: Backdrop Item
     400002: Balls
     400004: Base
@@ -19,6 +20,7 @@ ModelImporter:
     400010: Directional Light
     400012: //RootNode
     400014: Stripe
+    400016: Texture Group
     2300000: Balls
     2300002: Base
     2300004: Diamonds

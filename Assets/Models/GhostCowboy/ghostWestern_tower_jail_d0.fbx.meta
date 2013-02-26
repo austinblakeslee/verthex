@@ -11,6 +11,8 @@ ModelImporter:
     100010: jail_door
     100012: weaponCamera
     100014: weaponLocation
+    100016: ghostWestern_tower_jail_d0
+    100018: jail_platform
     400000: //RootNode
     400002: pCube3
     400004: pCube4
@@ -19,21 +21,26 @@ ModelImporter:
     400010: jail_door
     400012: weaponCamera
     400014: weaponLocation
+    400016: ghostWestern_tower_jail_d0
+    400018: jail_platform
     2300000: pCube3
     2300002: pCube4
     2300004: jail_base
     2300006: Jail_building
     2300008: jail_door
+    2300010: jail_platform
     3300000: pCube3
     3300002: pCube4
     3300004: jail_base
     3300006: Jail_building
     3300008: jail_door
+    3300010: jail_platform
     4300000: pCube3
     4300002: pCube4
     4300004: jail_base
     4300006: jail_door
     4300008: Jail_building
+    4300010: jail_platform
     7400000: Take 001
     9500000: //RootNode
   materials:

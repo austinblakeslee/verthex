@@ -14,6 +14,7 @@ ModelImporter:
     100016: //RootNode
     100018: Top
     100020: Wings
+    100022: Texture Group
     400000: Backdrop Item
     400002: 'Backdrop Item '
     400004: BeakBottom
@@ -25,6 +26,7 @@ ModelImporter:
     400016: //RootNode
     400018: Top
     400020: Wings
+    400022: Texture Group
     2300000: BeakBottom
     2300002: BeakTop
     2300004: Bottom
