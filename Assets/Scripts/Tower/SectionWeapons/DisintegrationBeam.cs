@@ -11,6 +11,5 @@ public class DisintegrationBeam : SectionWeapon {
         this.range = 2;
 		this.range = 2;
         this.wtype = "Disintegration Beam";
-		this.weaponEffect = new PoisonSplash();
     }
 }

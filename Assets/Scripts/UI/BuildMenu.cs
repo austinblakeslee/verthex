@@ -28,14 +28,9 @@ public class BuildMenu : Menu {
 			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
 			for(int i=0; i<Faction.NUM_MATERIALS; i++) {
 				string text = t.faction.materials[i];
-				materialButtons[i].text = text;
+				materialButtons[i].text = text + ": $" + SectionComponentFactory.GetMaterial(text).cost;
 				materialButtons[i].GetComponent<MaterialCostLabelUpdate>().materialName = text;
 			}
-			/*for(int i=0; i<Faction.NUM_WEAPONS; i++) {
-				string text = t.faction.weapons[i];
-				weaponButtons[i].text = text;
-				weaponButtons[i].GetComponent<WeaponCostLabelUpdate>().weaponName = text;
-			}*/
 		}
 		if(!hasLoaded) {
 			GameObject values = new GameObject("BuildValues");
@@ -45,53 +40,21 @@ public class BuildMenu : Menu {
 			
 			Rect materialButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_MATERIALS; i++) {
-				materialButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_MATERIALS+1))+5))  ), 160, 150/(Faction.NUM_MATERIALS+1));
+				materialButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_MATERIALS))+5))  ), 160, 150/(Faction.NUM_MATERIALS));
 				//materialButtonRect = FindPos (numButtons, materialButtonRect);
 				GameObject item = MakeButton("", materialButtonRect);
 				item.AddComponent("MaterialCostLabelUpdate");
 				item.GetComponent<MaterialCostLabelUpdate>().materialName = "";
+				item.AddComponent("BuildWeaponMenu");
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
-				m.action = item.GetComponent<DefaultMenuAction>();
-				m.action.click = click;
+				m.action = item.GetComponent<MaterialCostLabelUpdate>();
+				item.GetComponent<MaterialCostLabelUpdate>().fromMenu = this.gameObject;
+				item.GetComponent<BuildWeaponMenu>().click = click;
 				menuItems.Add(m);
 				materialButtons[i] = m;
-				//materialButtonRect.xMin += buttonSize.x + 15;
 				numButtons++;
 			}
-			/*Rect weaponButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
-			for(int i=0; i< Faction.NUM_WEAPONS; i++) {
-				weaponButtonRect = FindPos(numButtons, weaponButtonRect);
-				GameObject item = MakeButton("", weaponButtonRect);
-				item.AddComponent("WeaponCostLabelUpdate");
-				item.GetComponent<WeaponCostLabelUpdate>().weaponName = "";
-				item.transform.parent = transform;
-				MenuItem m = item.GetComponent<MenuItem>();
-				m.action = item.GetComponent<DefaultMenuAction>();
-				m.action.click = click;
-				menuItems.Add(m);
-				weaponButtons[i] = m;
-				//weaponButtonRect.xMin += buttonSize.x + 15;
-				//if(i%2 == 0 && i > 0) {
-					//weaponButtonRect.yMin += buttonSize.y + 5;
-					//weaponButtonRect.xMin -= 3*(buttonSize.x + 15);
-				//}
-				numButtons++;
-			}*/
-			Rect confirmButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( Faction.NUM_MATERIALS * ((150/(Faction.NUM_MATERIALS+1))+5))  ), 160, 150/(Faction.NUM_MATERIALS+1));
-			//confirmButtonRect = FindPos(numButtons, confirmButtonRect);
-			GameObject confirm = MakeButton("Confirm",confirmButtonRect);
-			confirm.AddComponent("SwitchMenu");
-			confirm.AddComponent("BuildWeaponMenu");
-			confirm.transform.parent = transform;
-			MenuItem m0 = confirm.GetComponent<MenuItem>();
-			m0.action = confirm.GetComponent<SwitchMenu>();//item.GetComponent<DefaultMenuAction>();
-			confirm.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-			confirm.GetComponent<SwitchMenu>().toMenu = confirm;
-			confirm.GetComponent<BuildWeaponMenu>().click = click;
-			m0.action.click = click;
-			menuItems.Add(m0);
-			numButtons++;
 			Rect backButtonRect = new Rect(Screen.width - 230,Screen.height - 165,60,160);
 			//backButtonRect = FindPos(numButtons, backButtonRect);
 			GameObject back = MakeButton("Back",backButtonRect);
@@ -104,27 +67,6 @@ public class BuildMenu : Menu {
 			m1.action.click = click;
 			menuItems.Add(m1);
 			numButtons++;
-			
-			/*
-			Rect materialLabelRect = new Rect(Screen.width - 380,Screen.height - 165,boxSize.x,boxSize.y);
-			GameObject mlabel = MakeBox ("MaterialsCost",materialLabelRect);
-			mlabel.AddComponent("MaterialCostLabel");
-			mlabel.transform.parent = transform;
-			MenuItem m2 = mlabel.GetComponent<MenuItem>();
-			menuItems.Add(m2);
-			Rect weaponsLabelRect = new Rect(Screen.width - 380,Screen.height - 110,boxSize.x,boxSize.y);
-			GameObject wlabel = MakeBox ("WeaponsCost",weaponsLabelRect);
-			wlabel.AddComponent("WeaponCostLabel");
-			wlabel.transform.parent = transform;
-			MenuItem m3 = wlabel.GetComponent<MenuItem>();
-			menuItems.Add(m3);
-			Rect sumLabelRect = new Rect(Screen.width - 380,Screen.height - 55,boxSize.x,boxSize.y);
-			GameObject slabel = MakeBox ("SumCost",sumLabelRect);
-			slabel.AddComponent("SumCostLabel");
-			slabel.transform.parent = transform;
-			MenuItem m4 = slabel.GetComponent<MenuItem>();
-			menuItems.Add(m4);
-			*/
 			hasLoaded = true;
 		}
 		base.Update();

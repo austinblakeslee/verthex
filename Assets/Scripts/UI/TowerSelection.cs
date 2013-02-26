@@ -41,6 +41,7 @@ public class TowerSelection : MonoBehaviour {
 	}
 	
 	public static void Deselect() {
+		print("GetTower[0] in Deselect: " + TurnOrder.myPlayer.GetTower(0).ToString());
 		LocalSelectSection(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum), -1);
 	}
 
@@ -238,16 +239,19 @@ public class TowerSelection : MonoBehaviour {
 	
 	[RPC]
 	private void SelectSection(Tower t, int sectionNumber) {
+		print(t);
 		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
 		if(selectedSection != null) {
 			selectedSection.SetColor(Color.white);
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
+			ValueStore.selectedMaterial = null; //For Fortify Menu Update
 			mc.ChangeTarget(t.towerBase.transform);
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
+			ValueStore.selectedMaterial = s.attributes.material; //For Fortify Menu Update
 			mc.ChangeTarget(s.transform);
 			s.SetColor(TurnOrder.myPlayer.color);
 		}

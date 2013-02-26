@@ -51,6 +51,11 @@ public class TurnOrder : MonoBehaviour {
 		actionNum = 0;
 		ceasefire = 3;
 		Faction[] factions = new Faction[3] { new Totem(), new Cowboys(), new Area51() };
+		if (player1Bases.Length == 0)
+		{
+			Debug.Log ("Error! There are 0 Player Bases assigned.");
+		}
+		Debug.Log(player1Bases.Length);
 		for(int i=0; i<player1Bases.Length; i++) {
 			player1Bases[i].SetTowerNumber(i);
 			player1Bases[i].SetPlayerNumber(1);

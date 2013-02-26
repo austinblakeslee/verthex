@@ -32,50 +32,6 @@ public class BuildConfirmMenu : Menu {
 			values.AddComponent("GameValues");
 			values.transform.parent = transform;
 			numButtons=0;
-			/*Rect materialButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
-			for(int i=0; i< Faction.NUM_MATERIALS; i++) {
-				materialButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_MATERIALS))+5))  ), 160, 150/(Faction.NUM_MATERIALS));
-				//materialButtonRect = FindPos (numButtons, materialButtonRect);
-				GameObject item = MakeButton("", materialButtonRect);
-				item.AddComponent("MaterialCostLabelUpdate");
-				item.GetComponent<MaterialCostLabelUpdate>().materialName = "";
-				item.AddComponent("SwitchMenu");
-				item.GetComponent("BuildWeaponMenu");
-				item.transform.parent = transform;
-				MenuItem m = item.GetComponent<MenuItem>();
-				m.action = item.GetComponent<SwitchMenu>();//item.GetComponent<DefaultMenuAction>();
-				build.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-				build.GetComponent<SwitchMenu>().toMenu = item;
-				m.action.click = click;
-				menuItems.Add(m);
-				materialButtons[i] = m;
-				//materialButtonRect.xMin += buttonSize.x + 15;
-				numButtons++;
-			}*/
-			/*Rect weaponButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
-			for(int i=0; i< Faction.NUM_WEAPONS; i++) {
-				weaponButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_WEAPONS))+5))  ), 160, 150/(Faction.NUM_WEAPONS));
-				//weaponButtonRect = FindPos(numButtons, weaponButtonRect);
-				GameObject item = MakeButton("", weaponButtonRect);
-				item.AddComponent("WeaponCostLabelUpdate");
-				item.GetComponent<WeaponCostLabelUpdate>().weaponName = "";
-				item.AddComponent("SwitchMenu");
-				item.GetComponent("BuildConfirmMenu");
-				item.transform.parent = transform;
-				MenuItem m = item.GetComponent<MenuItem>();
-				m.action = item.GetComponent<SwitchMenu>();//item.GetComponent<DefaultMenuAction>();
-				item.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-				item.GetComponent<SwitchMenu>().toMenu = item;
-				m.action.click = click;
-				menuItems.Add(m);
-				weaponButtons[i] = m;
-				//weaponButtonRect.xMin += buttonSize.x + 15;
-				//if(i%2 == 0 && i > 0) {
-					//weaponButtonRect.yMin += buttonSize.y + 5;
-					//weaponButtonRect.xMin -= 3*(buttonSize.x + 15);
-				//}
-				numButtons++;
-			}*/
 			Rect confirmButtonRect = new Rect(Screen.width - 165, (Screen.height - 39), 160, 150/(4));
 			//confirmButtonRect = FindPos(numButtons, confirmButtonRect);
 			GameObject confirm = MakeButton("Confirm",confirmButtonRect);

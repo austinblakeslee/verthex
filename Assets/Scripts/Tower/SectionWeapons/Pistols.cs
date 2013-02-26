@@ -10,6 +10,7 @@ public class Pistols : SectionWeapon {
         this.range = 1;
         this.wtype = "Pistols";
     	this.range = 3;
-		this.maxUpgradeEffect = new DamageOverTime();   
+		this.maxUpgradeEffect = new DamageOverTime();  
+		this.weaponEffect = new Burn();
 	}
 }

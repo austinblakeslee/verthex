@@ -10,5 +10,6 @@ public class Arrows : SectionWeapon {
         this.range = 1; //what exactly is range?
         this.wtype = "Arrows";
     	this.range = 3;
+		this.weaponEffect = new AimCritStrike();
 	}
 }

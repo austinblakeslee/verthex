@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class GameValues : MonoBehaviour {
 
 	//player editable values
-	public int baseResources = 1000;
+	public int baseResources = 1200;
     public int resourcesPerTurn = 50;
     public int resourcesPerSection = 50;
 	public int retrofitCost = 300;
