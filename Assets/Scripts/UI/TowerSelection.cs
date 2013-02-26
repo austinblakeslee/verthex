@@ -45,7 +45,6 @@ public class TowerSelection : MonoBehaviour {
 	}
 
 	void Update () {
-		Debug.Log(this.gameObject.camera.name);
 		if(Input.GetMouseButtonDown(0) && !MenuItemManager.MouseIsInGUI()) {
 			RaycastHit hit;
 			//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
