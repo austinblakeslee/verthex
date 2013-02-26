@@ -113,7 +113,7 @@ public class Tower {
     	GameObject.Destroy(o.gameObject);
 		CombatLog.addLine("Section " + (index+1) + " destroyed!!!");
     	for(int i=index; i < sections.Count; i++) {
-    		sections[i].attributes.height = i+1;
+    		sections[i].attributes.height = i;
     	}
 		if(sections.Count <= 0) {
 			alive = false;
