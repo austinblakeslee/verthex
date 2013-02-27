@@ -19,6 +19,7 @@ public class TurnOrder : MonoBehaviour {
 	public GUISkin player1Box;
 	public GUISkin player2Box;
 	public MenuItem ceasefireIcon;
+	public bool showingActions = false;
 	private TurnAction[] myActions = new TurnAction[3];
 	private TurnAction[] player1Actions = new TurnAction[3];
 	private TurnAction[] player2Actions = new TurnAction[3];
@@ -49,7 +50,7 @@ public class TurnOrder : MonoBehaviour {
 		}
 		turnNum = 0;
 		actionNum = 0;
-		ceasefire = 3;
+		ceasefire = 2;
 		Faction[] factions = new Faction[3] { new Totem(), new Cowboys(), new Area51() };
 		for(int i=0; i<player1Bases.Length; i++) {
 			player1Bases[i].SetTowerNumber(i);
@@ -149,6 +150,7 @@ public class TurnOrder : MonoBehaviour {
 	
 	[RPC]
 	private IEnumerator PerformAction(string actionMessage) {
+		showingActions = true;
 		TurnAction action = TurnAction.GetActionForMessage(actionMessage);
 		action.Perform();
 		do {
@@ -185,6 +187,7 @@ public class TurnOrder : MonoBehaviour {
 	
 	[RPC]
 	private void Resume() {
+		showingActions = false;
 		this.inputReady = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 		EndTurn();
