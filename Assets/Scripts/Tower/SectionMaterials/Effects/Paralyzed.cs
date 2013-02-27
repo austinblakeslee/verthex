@@ -31,6 +31,6 @@ public class Paralyzed : SectionEffect
 	}
 	public override string GetInfo ()
 	{
-		return "Paralyzed for " + numTurns + " more turns.";
+		return "Paralyzed for " + (numTurns+1) + " more turns.";
 	}
 }

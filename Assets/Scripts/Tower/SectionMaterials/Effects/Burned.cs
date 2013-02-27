@@ -33,6 +33,6 @@ public class Burned : SectionEffect
 	}
 	public override string GetInfo ()
 	{
-		return "Burned for " + numTurns + " more turns.";
+		return "Burned for " + (numTurns+1) + " more turns.";
 	}
 }

@@ -19,10 +19,11 @@ public class Poisoned : SectionEffect
 		Tower t = appliedSection.attributes.myTower;
 		if (appliedSection.attributes.height >= 1)
 		{
-			appliedSection.attributes.weapon.GetEffect().DoDamage(t, appliedSection.attributes.height - 2, damageToDo, t, appliedSection.attributes.height);
+			ApplyDamage(t.GetSection((appliedSection.attributes.height - 1)), damageToDo);
 		}
-		if(appliedSection.attributes.height >= 0 && appliedSection.attributes.height <= t.GetHeight()) {
-			t.GetSection(appliedSection.attributes.height - 1);
+		if(appliedSection.attributes.height >= 0 && appliedSection.attributes.height < t.GetHeight()) {
+			Debug.Log ("Not on top");
+			ApplyDamage(t.GetSection((appliedSection.attributes.height + 1)), damageToDo);
 		}
 	}
 	
@@ -36,6 +37,6 @@ public class Poisoned : SectionEffect
 	}
 	public override string GetInfo ()
 	{
-		return "Poisoned for " + numTurns + " more turns.";
+		return "Poisoned for " + (numTurns+1) + " more turns.";
 	}
 }

@@ -39,7 +39,7 @@ public class ForceFieldEffect : SectionEffect
 	}
 	public override string GetInfo ()
 	{
-		return "Force Field (+" + forceFieldStrength + ") for " + numTurns + " more turns.";
+		return "Force Field (+" + forceFieldStrength + ") for " + (numTurns+1) + " more turns.";
 	}
 }
 
