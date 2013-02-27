@@ -9,15 +9,25 @@ ModelImporter:
     100006: Directional Light
     100008: Mesh
     100010: //RootNode
+    100012: Eyes
+    100014: 'Mesh '
     400000: Backdrop Item
     400002: 'Backdrop Item '
     400004: Camera
     400006: Directional Light
     400008: Mesh
     400010: //RootNode
+    400012: Eyes
+    400014: 'Mesh '
     2300000: Mesh
+    2300002: Eyes
+    2300004: 'Mesh '
     3300000: Mesh
+    3300002: Eyes
+    3300004: 'Mesh '
     4300000: Mesh
+    4300002: Eyes
+    4300004: 'Mesh '
     7400000: modo_Anim
     9500000: //RootNode
   materials:

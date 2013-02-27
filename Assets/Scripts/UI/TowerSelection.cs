@@ -32,7 +32,7 @@ public class TowerSelection : MonoBehaviour {
 	
 	void Awake() {
 		materialBoxRect = new Rect(230, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
-		weaponBoxRect = new Rect(230, Screen.height - materialBox.y - weaponBox.y - padding*2, weaponBox.x, weaponBox.y);
+		weaponBoxRect = new Rect(460, Screen.height - weaponBox.y - padding, weaponBox.x, weaponBox.y);
 		instance = this;
 	}
 	
@@ -48,7 +48,9 @@ public class TowerSelection : MonoBehaviour {
 	void Update () {
 		if(Input.GetMouseButtonDown(0) && !MenuItemManager.MouseIsInGUI()) {
 			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if(this.gameObject.camera.enabled == true) {
+			Ray ray = this.gameObject.camera.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(ray, out hit, 10000.0f)) {
 				if(hit.collider.tag == "Base")
 				{
@@ -72,6 +74,7 @@ public class TowerSelection : MonoBehaviour {
 			else
 			{
 				Deselect();
+			}
 			}
 		}
 		if(selectedSection != null) {
@@ -248,6 +251,7 @@ public class TowerSelection : MonoBehaviour {
 			selectedSection = null;
 			ValueStore.selectedMaterial = null; //For Fortify Menu Update
 			mc.ChangeTarget(t.towerBase.transform);
+			mc.SetCurrentTower(t);	//Allows camera to hold tower info
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;

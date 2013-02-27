@@ -29,4 +29,12 @@ public class TowerBase : MonoBehaviour {
 	{
 		towerNumber = n;
 	}
+	
+	public int GetPlayerNumber(){
+		return this.playerNumber;
+	}
+	
+	public int GetTowerNumber(){
+		return this.towerNumber;
+	}
 } 

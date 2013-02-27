@@ -16,7 +16,12 @@ public class Tower {
 		this.towerBase = towerBase;
 		this.faction = faction;
 		towerNum = _towerNum;
+
     }
+	
+	public TowerBase GetTowerBase(){
+		return this.towerBase;
+	}
 	
 	public int GetHeight() {
 		return sections.Count;
@@ -111,7 +116,7 @@ public class Tower {
     	GameObject.Destroy(o.gameObject);
 		CombatLog.addLine("Section " + (index+1) + " destroyed!!!");
     	for(int i=index; i < sections.Count; i++) {
-    		sections[i].attributes.height = i+1;
+    		sections[i].attributes.height = i;
     	}
 		if(sections.Count <= 0) {
 			alive = false;
