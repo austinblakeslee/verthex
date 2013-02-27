@@ -22,7 +22,6 @@ public class Poisoned : SectionEffect
 			appliedSection.attributes.weapon.GetEffect().DoDamage(t, appliedSection.attributes.height - 2, damageToDo, t, appliedSection.attributes.height);
 		}
 		if(appliedSection.attributes.height >= 0 && appliedSection.attributes.height <= t.GetHeight()) {
-			Debug.Log ("HERRREEEEEEEEEEEEEEEEEEEEE");
 			t.GetSection(appliedSection.attributes.height - 1);
 		}
 	}
@@ -35,8 +34,8 @@ public class Poisoned : SectionEffect
 		numTurns --;
 
 	}
-	public override string GetInfo (int damage)
+	public override string GetInfo ()
 	{
-		throw new System.NotImplementedException ();
+		return "Poisoned for " + numTurns + " more turns.";
 	}
 }

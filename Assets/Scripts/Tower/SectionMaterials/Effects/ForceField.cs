@@ -37,9 +37,9 @@ public class ForceFieldEffect : SectionEffect
 		Debug.Log("Num turns left: " + numTurns);
 
 	}
-	public override string GetInfo (int damage)
+	public override string GetInfo ()
 	{
-		throw new System.NotImplementedException ();
+		return "Force Field (+" + forceFieldStrength + ") for " + numTurns + " more turns.";
 	}
 }
 

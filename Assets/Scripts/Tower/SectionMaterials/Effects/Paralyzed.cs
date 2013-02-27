@@ -29,8 +29,8 @@ public class Paralyzed : SectionEffect
 
 
 	}
-	public override string GetInfo (int damage)
+	public override string GetInfo ()
 	{
-		throw new System.NotImplementedException ();
+		return "Paralyzed for " + numTurns + " more turns.";
 	}
 }

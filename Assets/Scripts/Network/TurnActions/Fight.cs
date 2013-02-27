@@ -39,7 +39,8 @@ public class Fight : TurnAction {
 		Player target = playerNumber == 1 ? TurnOrder.GetPlayerByNumber(2) : TurnOrder.GetPlayerByNumber(1);
 		Section sc = firingPlayer.GetTower(towerNumber).GetSection(firingSection);
 		int index = sc.attributes.height;
-		int hitCenter = index + targetSection;
+		//int hitCenter = index + targetSection;
+		int hitCenter = targetSection;
 		
 		List<Section> hitSections = sc.attributes.weapon.GetEffect().GetDamagedSections(target.GetTower(targetTower), hitCenter);
 		WeaponAnimator.Animate(sc, hitSections);

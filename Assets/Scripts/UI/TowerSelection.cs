@@ -138,16 +138,16 @@ public class TowerSelection : MonoBehaviour {
 		GUI.Label(new Rect(left, top, width, height), selectedSection.attributes.material.mtype);
 		
 		/* dot effect */
-		if(selectedSection.HasDot()) {
+		//if(selectedSection.attributes.material.GetSectionEffect().GetType() != "Default") {
 			left = 15;
 			top = 45;
 			height = 30;
 			width = 200;
 			
 			GUI.skin = skinSmall;
-			GUI.Label(new Rect(left, top, width, height), selectedSection.GetDotInfo());
+			GUI.Label(new Rect(left, top, width, height), selectedSection.attributes.material.GetSectionEffect().GetInfo());
 			GUI.skin = skin;
-		}
+		//}
 		GUI.EndGroup();
 	}
 	

@@ -14,10 +14,6 @@ public class Tagged : SectionEffect
 		critStrikeBonusPercentage = critBonusPercent;
 	}
 	
-	public override string GetInfo (int damage)
-	{
-		throw new System.NotImplementedException ();
-	}
 	public override void ApplyDamage (Section s, int power)
 	{
 		CombatLog.addLine("CRIT STRIKE!");

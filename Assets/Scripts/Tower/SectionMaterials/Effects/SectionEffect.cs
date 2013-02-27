@@ -24,14 +24,17 @@ public abstract class SectionEffect {
 	}
 
 	public virtual void EndTurnEffect(){}
-	public abstract string GetInfo(int damage);
+	public virtual string GetInfo()
+	{
+		return(effectType);
+	}
 	
 	public void Upgrade() {
 		upgradeLevel++;
 	}
 	
 	public string GetEffectType() {
-		return effectType;
+		return effectType + ".";
 	}
 	
 	public int GetUpgradeLevel() {

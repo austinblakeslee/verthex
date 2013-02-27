@@ -31,8 +31,8 @@ public class Burned : SectionEffect
 		//Display burn stuff
 
 	}
-	public override string GetInfo (int damage)
+	public override string GetInfo ()
 	{
-		throw new System.NotImplementedException ();
+		return "Burned for " + numTurns + " more turns.";
 	}
 }

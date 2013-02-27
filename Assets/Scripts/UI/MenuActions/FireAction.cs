@@ -53,6 +53,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 				int firingSectionNum = firingSection.attributes.height;
 				int targetTowerNum = TowerSelection.GetSelectedTower().towerBase.towerNumber;
 				int targetSectionNum = TowerSelection.GetSelectedSection().attributes.height;
+				Debug.Log ("Target tNum = " + targetTowerNum + ". targetSection = " + targetSectionNum);
 				TurnOrder.SendAction(new Fight(firingTowerNum, firingSectionNum, targetTowerNum, targetSectionNum));
 			} else {
 				ValueStore.helpMessage = "You cannot fire at that section.";

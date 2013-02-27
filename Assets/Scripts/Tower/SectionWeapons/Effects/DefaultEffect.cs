@@ -13,6 +13,7 @@ public class DefaultEffect : Effect {
 		if(center >= 0 && center < t.GetSections().Count) {
 			list.Add(t.GetSection(center));
 		}
+		Debug.Log ("Sections Count = " + t.GetSections().Count + ". Attacking count = " + list.Count);
 		return list;
 	}
 	
