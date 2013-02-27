@@ -24,6 +24,21 @@ ModelImporter:
     100036: group
     100038: pasted__Alien
     100040: pasted__Alien1
+    100042: Alien
+    100044: Alien1
+    100046: Alien2
+    100048: Alien3
+    100050: Alien4
+    100052: area51_tower_gooTank_d0_Area51_tower_gootankpanel_d0
+    100054: Area51_tower_gootank_d0e 2
+    100056: Area51_tower_gootank_d0e1
+    100058: Area51_tower_gootank_d0e2
+    100060: Area51_tower_gootank_d0e3
+    100062: Area51_tower_gootank_d0e4
+    100064: Area51_tower_gootankpanel_d0e1
+    100066: Area51_tower_gootankpanel_d0e2
+    100068: Area51_tower_gootankpanel_d0e3
+    100070: Area51_tower_gootankpanel_d0e4
     400000: Area51_tower_gootank_d0a
     400002: Area51_tower_gootank_d0a 1
     400004: Area51_tower_gootank_d0b
@@ -45,6 +60,21 @@ ModelImporter:
     400036: group
     400038: pasted__Alien
     400040: pasted__Alien1
+    400042: Alien
+    400044: Alien1
+    400046: Alien2
+    400048: Alien3
+    400050: Alien4
+    400052: area51_tower_gooTank_d0_Area51_tower_gootankpanel_d0
+    400054: Area51_tower_gootank_d0e 2
+    400056: Area51_tower_gootank_d0e1
+    400058: Area51_tower_gootank_d0e2
+    400060: Area51_tower_gootank_d0e3
+    400062: Area51_tower_gootank_d0e4
+    400064: Area51_tower_gootankpanel_d0e1
+    400066: Area51_tower_gootankpanel_d0e2
+    400068: Area51_tower_gootankpanel_d0e3
+    400070: Area51_tower_gootankpanel_d0e4
     2300000: Area51_tower_gootank_d0a 1
     2300002: Area51_tower_gootank_d0b 1
     2300004: Area51_tower_gootank_d0c 1
@@ -58,6 +88,20 @@ ModelImporter:
     2300020: forcefield
     2300022: pasted__Alien
     2300024: pasted__Alien1
+    2300026: Alien
+    2300028: Alien1
+    2300030: Alien2
+    2300032: Alien3
+    2300034: Alien4
+    2300036: Area51_tower_gootank_d0e 2
+    2300038: Area51_tower_gootank_d0e1
+    2300040: Area51_tower_gootank_d0e2
+    2300042: Area51_tower_gootank_d0e3
+    2300044: Area51_tower_gootank_d0e4
+    2300046: Area51_tower_gootankpanel_d0e1
+    2300048: Area51_tower_gootankpanel_d0e2
+    2300050: Area51_tower_gootankpanel_d0e3
+    2300052: Area51_tower_gootankpanel_d0e4
     3300000: Area51_tower_gootank_d0a 1
     3300002: Area51_tower_gootank_d0b 1
     3300004: Area51_tower_gootank_d0c 1
@@ -71,6 +115,20 @@ ModelImporter:
     3300020: forcefield
     3300022: pasted__Alien
     3300024: pasted__Alien1
+    3300026: Alien
+    3300028: Alien1
+    3300030: Alien2
+    3300032: Alien3
+    3300034: Alien4
+    3300036: Area51_tower_gootank_d0e 2
+    3300038: Area51_tower_gootank_d0e1
+    3300040: Area51_tower_gootank_d0e2
+    3300042: Area51_tower_gootank_d0e3
+    3300044: Area51_tower_gootank_d0e4
+    3300046: Area51_tower_gootankpanel_d0e1
+    3300048: Area51_tower_gootankpanel_d0e2
+    3300050: Area51_tower_gootankpanel_d0e3
+    3300052: Area51_tower_gootankpanel_d0e4
     4300000: Area51_tower_gootankpanel_d0a
     4300002: pasted__Alien
     4300004: Area51_tower_gootank_d0a
@@ -84,6 +142,19 @@ ModelImporter:
     4300020: Area51_tower_gootank_d0e
     4300022: Area51_tower_gootankpanel_d0e
     4300024: forcefield
+    4300026: Area51_tower_gootankpanel_d0e1
+    4300028: Area51_tower_gootankpanel_d0e2
+    4300030: Area51_tower_gootankpanel_d0e3
+    4300032: Area51_tower_gootankpanel_d0e4
+    4300034: Area51_tower_gootank_d0e1
+    4300036: Area51_tower_gootank_d0e2
+    4300038: Area51_tower_gootank_d0e3
+    4300040: Area51_tower_gootank_d0e4
+    4300042: Alien
+    4300044: Alien1
+    4300046: Alien2
+    4300048: Alien3
+    4300050: Alien4
     7400000: Take 001
     9500000: //RootNode
   materials:
@@ -102,7 +173,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     swapUVChannels: 0

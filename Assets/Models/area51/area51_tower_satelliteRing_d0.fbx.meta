@@ -23,6 +23,30 @@ ModelImporter:
     100034: SatelliteBase
     100036: weaponCamera
     100038: weaponLocation
+    100040: polySurface1
+    100042: polySurface10
+    100044: polySurface11
+    100046: polySurface12
+    100048: polySurface13
+    100050: polySurface14
+    100052: polySurface15
+    100054: polySurface16
+    100056: polySurface17
+    100058: polySurface2
+    100060: polySurface3
+    100062: polySurface4
+    100064: polySurface5
+    100066: polySurface6
+    100068: polySurface7
+    100070: polySurface8
+    100072: polySurface9
+    100074: transform1
+    100076: transform2
+    100078: transform3
+    100080: transform4
+    100082: transform5
+    100084: transform6
+    100086: transform7
     400000: //RootNode
     400002: forcefield
     400004: satellie1
@@ -43,6 +67,30 @@ ModelImporter:
     400034: SatelliteBase
     400036: weaponCamera
     400038: weaponLocation
+    400040: polySurface1
+    400042: polySurface10
+    400044: polySurface11
+    400046: polySurface12
+    400048: polySurface13
+    400050: polySurface14
+    400052: polySurface15
+    400054: polySurface16
+    400056: polySurface17
+    400058: polySurface2
+    400060: polySurface3
+    400062: polySurface4
+    400064: polySurface5
+    400066: polySurface6
+    400068: polySurface7
+    400070: polySurface8
+    400072: polySurface9
+    400074: transform1
+    400076: transform2
+    400078: transform3
+    400080: transform4
+    400082: transform5
+    400084: transform6
+    400086: transform7
     2300000: forcefield
     2300002: satellieDish1
     2300004: satellieDish2
@@ -55,6 +103,16 @@ ModelImporter:
     2300018: satellieDishBot4
     2300020: satellieDishBot5
     2300022: SatelliteBase
+    2300024: polySurface10
+    2300026: polySurface11
+    2300028: polySurface12
+    2300030: polySurface13
+    2300032: polySurface14
+    2300034: polySurface15
+    2300036: polySurface16
+    2300038: polySurface17
+    2300040: polySurface4
+    2300042: polySurface5
     3300000: forcefield
     3300002: satellieDish1
     3300004: satellieDish2
@@ -67,6 +125,16 @@ ModelImporter:
     3300018: satellieDishBot4
     3300020: satellieDishBot5
     3300022: SatelliteBase
+    3300024: polySurface10
+    3300026: polySurface11
+    3300028: polySurface12
+    3300030: polySurface13
+    3300032: polySurface14
+    3300034: polySurface15
+    3300036: polySurface16
+    3300038: polySurface17
+    3300040: polySurface4
+    3300042: polySurface5
     4300000: forcefield
     4300002: SatelliteBase
     4300004: satellieDishBot3
@@ -79,6 +147,16 @@ ModelImporter:
     4300018: satellieDish5
     4300020: satellieDishBot4
     4300022: satellieDish4
+    4300024: polySurface4
+    4300026: polySurface5
+    4300028: polySurface10
+    4300030: polySurface11
+    4300032: polySurface12
+    4300034: polySurface13
+    4300036: polySurface14
+    4300038: polySurface15
+    4300040: polySurface16
+    4300042: polySurface17
     7400000: Take 001
     9500000: //RootNode
   materials:
