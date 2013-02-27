@@ -7,13 +7,15 @@ public class Tower {
 	public TowerBase towerBase;
 	public Faction faction;
 	public bool alive = true;
+	public int towerNum;
 	private DotManager dotManager;
 
-    public Tower(TowerBase towerBase, Faction faction) {
+    public Tower(TowerBase towerBase, Faction faction, int _towerNum) {
         sections = new List<Section>();
 		dotManager = new DotManager();
 		this.towerBase = towerBase;
 		this.faction = faction;
+		towerNum = _towerNum;
     }
 	
 	public int GetHeight() {

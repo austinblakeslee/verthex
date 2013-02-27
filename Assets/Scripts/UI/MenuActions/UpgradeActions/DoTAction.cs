@@ -16,7 +16,7 @@ public class DoTAction : DefaultMenuAction,MenuAction {
 			} else if(cost > p.GetResources()) {
 				ValueStore.helpMessage = "You don't have enough RP to do that!";
 			} else {
-				TurnOrder.SendAction(new Upgrade(TurnOrder.actionNum, s.attributes.height, "DoT"));
+				TurnOrder.SendAction(new Upgrade(s.attributes.myTower.towerNum, s.attributes.height, "DoT"));
 			}
 		} else {
 			ValueStore.helpMessage = "You must select a section to upgrade!";

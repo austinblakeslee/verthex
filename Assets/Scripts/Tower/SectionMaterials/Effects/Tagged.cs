@@ -9,6 +9,8 @@ public class Tagged : SectionEffect
 	{
 		this.effectType = "Tagged";
 		//visually show the tag
+		CombatLog.addLine("Section is tagged for a crit strike" );
+
 		critStrikeBonusPercentage = critBonusPercent;
 	}
 	
@@ -18,6 +20,7 @@ public class Tagged : SectionEffect
 	}
 	public override void ApplyDamage (Section s, int power)
 	{
+		CombatLog.addLine("CRIT STRIKE!");
 		base.ApplyDamage (s, power + power * critStrikeBonusPercentage / 100);
 		s.attributes.material.SetSectionEffect(new DefaultSectionEffect());
 		//Destroy this effect - One time use... unless we want it destroyed at the end of the turn...

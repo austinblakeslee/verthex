@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Saloon : SectionMaterial {
     public Saloon () {
-        this.initialSP = 300;
+        this.initialSP = 275;
         this.maxSP = 550;
         this.cost = 150;
         this.weightPerSP = 0.05;

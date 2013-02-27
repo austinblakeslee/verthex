@@ -19,7 +19,8 @@ public abstract class SectionEffect {
 	public virtual void PreAttack(Section S){}
 	public virtual void ApplyDamage(Section target, int power)
 	{
-		target.attributes.sp -= power;
+		CombatLog.addLine("Hit section " + (target.attributes.height + 1) + " for " +power+  " damage.");
+		target.attributes.myTower.DamageSection(target.attributes.height, power);
 	}
 
 	public virtual void EndTurnEffect(){}

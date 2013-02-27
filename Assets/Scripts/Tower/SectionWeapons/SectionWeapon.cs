@@ -11,7 +11,7 @@ public class SectionWeapon {
 	protected int weight;
 	protected int range;
 	public string wtype;
-	public int maxUpgradeLevel = 5;
+	public int maxUpgradeLevel = 3;
 	protected int upgradeLevel = 0;
 	protected List<float> damageUpgrades = new List<float> {1.0f, 1.2f, 1.3f, 1.4f, 1.5f};
 	protected List<int> rangeUpgrades = new List<int>{0,0,1,1,2};
@@ -37,7 +37,7 @@ public class SectionWeapon {
 		 	upgradeLevel++;
 		}
 		if (upgradeLevel == maxUpgradeLevel){
-			SetEffect(maxUpgradeEffect);
+			SetWeaponEffect(maxUpgradeEffect);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class SectionWeapon {
 		return weaponEffect;
 	}
 	
-	public void SetEffect(WeaponEffect e) {
+	public void SetWeaponEffect(WeaponEffect e) {
 		this.weaponEffect = e;
 	}
 	public int GetRange()

@@ -21,7 +21,8 @@ public class Drain : WeaponEffect {
 		List<Section> sections = GetDamagedSections(t, center);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
-			t.DamageSection(center, damage);
+			t.GetSection (center).attributes.material.GetSectionEffect().ApplyDamage(t.GetSection(center), damage);
+			//t.DamageSection(center, damage);
 			CombatLog.addLine("Section healed for " + (damage*drainPercentage)/100 + " points.");
 			Heal(damage, firingSec, self);
 		} else if(center < 0) {

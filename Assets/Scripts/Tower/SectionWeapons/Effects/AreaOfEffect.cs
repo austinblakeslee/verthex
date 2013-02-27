@@ -39,7 +39,8 @@ public class AreaOfEffect : WeaponEffect {
 			int height = g.attributes.height;
 			int d = (int)(percentDamage[upgradeLevel] * damage);
 			CombatLog.addLine("Hit section " + height + " for " + d + " damage.");
-			t.DamageSection(height-1, (int)(percentDamage[upgradeLevel] * damage));
+			g.attributes.material.GetSectionEffect().ApplyDamage(g, d);
+			//t.DamageSection(height-1, (int)(percentDamage[upgradeLevel] * damage));
 		}
 		if(damagedSections.Count <= 0) {
 			if(center < 0) {

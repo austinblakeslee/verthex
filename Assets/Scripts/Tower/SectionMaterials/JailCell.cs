@@ -3,7 +3,7 @@ using System.Collections;
 
 public class JailCell : SectionMaterial {
     public JailCell () {
-        this.initialSP = 400;
+        this.initialSP = 300;
         this.maxSP = 700;
         this.cost = 200;
         this.weightPerSP = 0.1;

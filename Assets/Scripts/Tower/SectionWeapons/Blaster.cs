@@ -7,10 +7,8 @@ public class Blaster : SectionWeapon {
         this.spcost = 50;
         this.cost = 100;
         this.weight = 50;
-        this.range = 1; 
         this.wtype = "Blaster";
     	this.range = 3;
 		this.maxUpgradeEffect = new AreaOfEffect();
-		this.weaponEffect = new Paralyze(); //temp
 	}
 }

@@ -19,9 +19,14 @@ public class Paralyzed : SectionEffect
 		{
 			appliedSection.attributes.weapon.fire = true; 
 			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());
+			//TODO - Destroy this script so it's not just floating in memory forever			
+		}
+		else
+		{
+			Debug.Log ("Num turns of Paralysis left: " + numTurns);
 		}
 		numTurns --;
-		Debug.Log ("Num turns of Paralysis left: " + numTurns);
+
 
 	}
 	public override string GetInfo (int damage)

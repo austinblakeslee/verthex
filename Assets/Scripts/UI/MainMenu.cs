@@ -50,6 +50,7 @@ public class MainMenu : Menu {
 			m1.action.click = click;
 			menuItems.Add(m1);
 			numButtons++;
+			
 			fight = makeFireButton(numButtons);
 			Rect fortifyButtonRect = new Rect(Screen.width/2 + 130,Screen.height/2 - 120,buttonSize.x, buttonSize.y);
 			//fortifyButtonRect = FindPos(numButtons, fortifyButtonRect);
@@ -92,7 +93,7 @@ public class MainMenu : Menu {
 		if(TowerSelection.GetSelectedSection() == null) {
 			fight.GetComponent<MenuItem>().visible = false;
 		}
-		else if (TowerSelection.GetSelectedSection() != null && (TowerSelection.GetSelectedSection().GetWeaponInfo() == "Nothing" || TurnOrder.ceasefire > 0)) {
+		else if (TowerSelection.GetSelectedSection() != null && (TowerSelection.GetSelectedSection().GetWeaponInfo() == "Nothing" || TurnOrder.ceasefire > TurnOrder.turnNum)) {			
 			fight.GetComponent<MenuItem>().visible = false;
 		}
 		else {

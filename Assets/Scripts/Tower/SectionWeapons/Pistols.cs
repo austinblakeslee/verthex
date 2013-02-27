@@ -3,14 +3,12 @@ using System.Collections;
 
 public class Pistols : SectionWeapon {
     public Pistols() {
-        this.damage = 60;
+        this.damage = 50;
         this.spcost = 50;
-        this.cost = 100;
+        this.cost = 125;
         this.weight = 50;
-        this.range = 1;
         this.wtype = "Pistols";
     	this.range = 3;
-		this.maxUpgradeEffect = new DamageOverTime();  
-		this.weaponEffect = new Burn();
+		this.maxUpgradeEffect = new Burn();  
 	}
 }

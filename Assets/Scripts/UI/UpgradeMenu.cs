@@ -7,6 +7,10 @@ public class UpgradeMenu : Menu {
 	public Vector2 boxSize;
 	public AudioClip click;
 	private int numButtons;
+	private int lastFrameActionNum;
+	private bool firstUpdate = true;
+	private GameObject upgradeButton;
+	private string scriptName = "";
 	
 	void Start() {
 		on = false;
@@ -14,19 +18,51 @@ public class UpgradeMenu : Menu {
 		buttonSize.y = 50;
 		boxSize.x = 150;
 		boxSize.y = 30;
+		lastFrameActionNum = TurnOrder.actionNum;
 	}
 	
 	public override void Update() {
+		
+		if (firstUpdate)
+		{
+			scriptName = "PoisonAction";
+			Rect upgradeRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 120,boxSize.x,boxSize.y);
+
+			upgradeButton = createGUIButton(scriptName,"Poison",upgradeRect);
+			numButtons++;
+			firstUpdate = false;
+		}
+		if(lastFrameActionNum != TurnOrder.actionNum){	
+			Rect upgradeRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 120,boxSize.x,boxSize.y);
+			string oldScriptName = scriptName;
+			string goName = "";
+			if (TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Totem")
+			{
+				scriptName = "PoisonAction";
+				goName = "Poison";
+			}
+			else if(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Cowboys")
+			{
+				scriptName = "TagAction";
+				goName = "Tag Section";
+			}
+			else if (TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Area 51")
+			{
+				scriptName = "ParalyzeAction";
+				goName = "Paralyze";
+			}
+			else{
+				Debug.Log ("Error - Faction name not matched properly.");
+			}
+			editUpgradeButton(oldScriptName, scriptName, goName);
+			lastFrameActionNum = TurnOrder.actionNum;
+		}
 		if(!hasLoaded) {
-			Rect aoeRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 120,boxSize.x,boxSize.y);
-			GameObject aoe = createGUIButton("AoEAction","MultiShot",aoeRect);
-			numButtons++;
+
 			Rect damRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 85,boxSize.x,boxSize.y);
-			GameObject damage = createGUIButton("DamageAction","Damage",damRect);
+			GameObject damage = createGUIButton("DamageAction","Upgrade",damRect);
 			numButtons++;
-			Rect dotRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 50,boxSize.x,boxSize.y);
-			GameObject dot = createGUIButton("DoTAction","Burn",dotRect);
-			numButtons++;
+
 			Rect backRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 5,boxSize.x,boxSize.y);
 			GameObject back = createGUIButton("SwitchMenu","Back",backRect);
 			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
@@ -100,5 +136,14 @@ public class UpgradeMenu : Menu {
 		m.action.click = click;
 		menuItems.Add(m);
 		return item;
+	}
+	private void editUpgradeButton(string oldScriptName, string scriptName, string goName)
+	{
+		Destroy(upgradeButton.GetComponent(oldScriptName));
+		upgradeButton.AddComponent(scriptName);
+		MenuItem m = upgradeButton.GetComponent<MenuItem>();
+		m.action = upgradeButton.GetComponent(scriptName) as DefaultMenuAction;
+		m.action.click = click;		
+		m.text = goName;
 	}
 }

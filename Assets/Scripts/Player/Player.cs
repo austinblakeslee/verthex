@@ -17,7 +17,7 @@ public class Player {
 	}
 	
 	public void AddTower(TowerBase b, Faction f, int i) {
-		this.towers[i] = new Tower(b, f);
+		this.towers[i] = new Tower(b, f, i);
 	}
 
 	public Tower GetTower(int i) {

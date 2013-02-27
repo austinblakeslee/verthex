@@ -18,7 +18,6 @@ public class DefaultSectionEffect : SectionEffect
 	
 	public override void EndTurnEffect()
 	{
-		Debug.Log("Default End Turn effect");
 	}
 	
 }

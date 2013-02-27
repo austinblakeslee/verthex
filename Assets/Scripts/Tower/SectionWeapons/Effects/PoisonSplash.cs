@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PoisonSplash : WeaponEffect {
 
 	public PoisonSplash() : base() {
-		this.effectType = "Posion Splash";
+		this.effectType = "Poison Splash";
 	}
 	
 	public override List<Section> GetDamagedSections(Tower t, int center) {
@@ -20,7 +20,9 @@ public class PoisonSplash : WeaponEffect {
 		List<Section> sections = GetDamagedSections(self, firingSec);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
-			t.DamageSection(center, damage);
+			//t.DamageSection(center, damage);
+			t.GetSection (center).attributes.material.GetSectionEffect().ApplyDamage(t.GetSection(center), damage);
+
 			if (t.GetSection(center).attributes.HasWeapon()){
 				CombatLog.addLine("Section is confused");
 				//t.GetSection(center).GetWeapon().SetEffect(new PoisonedSplash());
