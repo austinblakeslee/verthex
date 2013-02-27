@@ -104,9 +104,12 @@ public class WeaponAnimator : MonoBehaviour {
 				GameObject.FindWithTag("Help").GetComponent<Menu>().on = false;
 				GameObject.FindWithTag("MainCamera").GetComponent<TowerSelection>().deselectSection();
 				splitScreen = true;
-				//Set the FireCam so it will not display the DamageText
+				
+				//Set Cameras so it will not display the DamageText
+				GameObject.FindWithTag("MiniMap").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
 				firingSection.transform.Find("FireCam").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
 				firingSection.transform.Find("FireCam").camera.enabled = true;
+				
 				if(hitSections.Count > 0) {
 					firingSection.transform.LookAt(hitSections[0].transform);
 					firingSection.transform.eulerAngles = new Vector3(0, firingSection.transform.eulerAngles.y, 0);
