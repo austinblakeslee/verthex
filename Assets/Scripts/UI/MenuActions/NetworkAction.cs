@@ -24,6 +24,8 @@ public class NetworkAction : MonoBehaviour {
 
 
 	void  Start (){
+		MasterServer.ipAddress = "144.118.204.16";
+		MasterServer.port = 8889;
 		buttonX = Screen.width * 0.05f;
 		buttonY = Screen.width * 0.05f;
 		buttonW = Screen.width * 0.1f;
