@@ -11,6 +11,7 @@ public class Arrows : SectionWeapon {
         this.wtype = "Arrows";
     	this.range = 3;
 		this.maxUpgradeEffect = new Drain();
+		this.weaponEffect = new ApplyForceField();
 
 	}
 }

@@ -10,5 +10,6 @@ public class Pistols : SectionWeapon {
         this.wtype = "Pistols";
     	this.range = 2;
 		this.maxUpgradeEffect = new Burn();  
+		this.weaponEffect = new AlterWeight();
 	}
 }
