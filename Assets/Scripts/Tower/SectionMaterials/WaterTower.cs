@@ -6,7 +6,7 @@ public class WaterTower : SectionMaterial {
         this.initialSP = 150;
         this.maxSP = 400;
         this.cost = 50;
-        this.weightPerSP = 0.03;
+        this.weight = 20;//0.03;
         this.SPPerRepair = 100;
         this.costPerRepair = 50;
         this.mtype = "Water Tower";

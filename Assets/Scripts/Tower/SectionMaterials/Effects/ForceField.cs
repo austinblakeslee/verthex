@@ -20,6 +20,7 @@ public class ForceFieldEffect : SectionEffect
 		{
 			//destroy force field visually
 			s.attributes.sp -= (power - forceFieldStrength);
+			s.attributes.material.SetSectionEffect(new DefaultSectionEffect());
 		}
 		else{
 			//display forceField being attacked

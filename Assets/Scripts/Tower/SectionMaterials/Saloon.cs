@@ -6,7 +6,7 @@ public class Saloon : SectionMaterial {
         this.initialSP = 275;
         this.maxSP = 550;
         this.cost = 150;
-        this.weightPerSP = 0.05;
+        this.weight = 30;//0.05;
         this.SPPerRepair = 75;
         this.costPerRepair = 75;
         this.mtype = "Saloon";

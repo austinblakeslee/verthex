@@ -26,13 +26,13 @@ public class AlterWeight : WeaponEffect
 			Section s = t.GetSection (center);
 			if (!modifiedSecs.ContainsKey(s)) //if not modified before...
 			{
-				ModifyWeight(s, t, damage);
+				ModifyWeight(s, t, damage, self);
 				modifiedSecs.Add(s, 1);
 
 			}
 			else if (modifiedSecs[s] >= numTimesModifiable)
 			{
-				ModifyWeight(s, t, damage);
+				ModifyWeight(s, t, damage, self);
 				modifiedSecs[s]++;
 			}
 			else
@@ -50,22 +50,22 @@ public class AlterWeight : WeaponEffect
 		}
 	}
 	
-	public void ModifyWeight(Section s, Tower t, int damage)
+	public void ModifyWeight(Section s, Tower t, int damage, Tower attackingTower)
 	{
-		double weightPerSP = s.attributes.material.GetWeightPerSP();
+		double weight = s.attributes.material.GetWeight();
 
-		if (TurnOrder.myPlayer.GetTower(t.towerNum) == t) //If you're attacking your own tower
+		if (attackingTower.GetPlayerNum() == t.GetPlayerNum()) //If you're attacking your own tower
 		{
-			s.attributes.material.weightPerSP -= weightPerSP*weightPercentageModifier/100;
-			CombatLog.addLine("own " + s.attributes.myTower.faction + " section from " + weightPerSP + " to " + s.attributes.material.weightPerSP);
+			s.attributes.material.weight -= weight*weightPercentageModifier/100;
+			CombatLog.addLine("own " + s.attributes.myTower.faction + " section from " + weight + " to " + s.attributes.material.weight);
 
 
 		}
 		else
 		{
-			s.attributes.material.weightPerSP += weightPerSP*weightPercentageModifier/100;
+			s.attributes.material.weight += weight*weightPercentageModifier/100;
 			s.attributes.material.GetSectionEffect().ApplyDamage(s, damage);
-			CombatLog.addLine("opponent's " + s.attributes.myTower.faction + " section from " + weightPerSP + " to " + s.attributes.material.weightPerSP);
+			CombatLog.addLine("opponent's " + s.attributes.myTower.faction + " section from " + weight + " to " + s.attributes.material.weight);
 		}	
 	}
 	

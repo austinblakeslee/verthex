@@ -6,7 +6,7 @@ public class GooTube : SectionMaterial {
         this.initialSP = 300;
         this.maxSP = 500;
         this.cost = 175;
-        this.weightPerSP = 0.05;
+        this.weight = 25;//0.05;
         this.SPPerRepair = 75;
         this.costPerRepair = 75;
         this.mtype = "Goo Tube";

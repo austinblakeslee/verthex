@@ -18,7 +18,7 @@ public class SectionAttributes {
     }
 
     public int GetWeight() {
-        return (int)(this.material.GetWeightPerSP() * this.sp) + this.weapon.GetWeight();
+        return (int)this.material.GetWeight() + this.weapon.GetWeight();
     }
 	public bool HasWeapon()
 	{

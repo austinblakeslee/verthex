@@ -27,13 +27,13 @@ public class ApplyForceField : WeaponEffect
 			//t.DamageSection(center, damage);
 			Section s = t.GetSection (center);
 			//if force field is not already applied and you're attacking your own tower, apply forceField
-			if (s.attributes.material.GetSectionEffect().GetEffectType() != "Force Field" && TurnOrder.myPlayer.GetTower(t.towerNum) == t)
+			if (s.attributes.material.GetSectionEffect().GetEffectType() != "Force Field" && t.GetPlayerNum() == self.GetPlayerNum())
 			{	
 				s.attributes.material.SetSectionEffect(new ForceFieldEffect(s, forceFieldStrength));
 				CombatLog.addLine("own " + s.attributes.myTower.faction + " section has FF.");
 			}
 			//if attacking opponents tower, Just do damage
-			else if (TurnOrder.myPlayer.GetTower(t.towerNum) != t)
+			else if (t.GetPlayerNum() != self.GetPlayerNum())
 			{
 				CombatLog.addLine("opponent's " + s.attributes.myTower.faction + " section - didn't FF.");
 				t.GetSection(center).attributes.material.GetSectionEffect().ApplyDamage(t.GetSection(center), damage);
