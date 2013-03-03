@@ -24,8 +24,6 @@ public class AlterWeight : WeaponEffect
 		if(t.GetSections().Count >= 1) {		
 			//t.DamageSection(center, damage);
 			Section s = t.GetSection (center);
-			SectionEffect eff = s.attributes.material.GetSectionEffect();
-			eff.ApplyDamage(s, damage);
 			if (!modifiedSecs.ContainsKey(s)) //if not modified before...
 			{
 				ModifyWeight(s, t, damage);

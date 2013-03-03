@@ -28,4 +28,13 @@ public abstract class WeaponEffect {
 	public int GetUpgradeLevel() {
 		return upgradeLevel;
 	}
+	
+	public bool CanAttackOpponent()
+	{
+		return canAttackOpponent;
+	}
+	public bool CanAttackSelf()
+	{
+		return canAttackSelf;
+	}
 }
