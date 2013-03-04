@@ -4,10 +4,34 @@ ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
     100000: //RootNode
+    100002: pPlane1
+    100004: pPlane2
+    100006: pPlane3
+    100008: pSphere1
+    100010: pSphere2
     400000: //RootNode
+    400002: pPlane1
+    400004: pPlane2
+    400006: pPlane3
+    400008: pSphere1
+    400010: pSphere2
     2300000: //RootNode
+    2300002: pPlane1
+    2300004: pPlane2
+    2300006: pPlane3
+    2300008: pSphere1
+    2300010: pSphere2
     3300000: //RootNode
+    3300002: pPlane1
+    3300004: pPlane2
+    3300006: pPlane3
+    3300008: pSphere1
+    3300010: pSphere2
     4300000: pSphere1
+    4300002: pSphere2
+    4300004: pPlane1
+    4300006: pPlane2
+    4300008: pPlane3
     9500000: //RootNode
   materials:
     importMaterials: 1
