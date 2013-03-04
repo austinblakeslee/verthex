@@ -24,6 +24,10 @@ public class Player {
 	    return this.towers[i];
 	}
 	
+	public Tower[] GetTowers() {
+		return towers;
+	}
+	
 	public void NextTurn() {
 		foreach(Tower t in towers) {
 			t.AdvanceDots();
