@@ -16,8 +16,8 @@ public class TurnOrder : MonoBehaviour {
 	public Color player2Color;
 	public MenuItem playerText;
 	public MenuItem resources;
-	//public MenuItem actionsLeft;
-	//public MenuItem actionQueue;
+	public MenuItem actionsLeft;
+	public MenuItem actionQueue;
 	public GUISkin player1Box;
 	public GUISkin player2Box;
 	public MenuItem ceasefireIcon;
@@ -88,7 +88,7 @@ public class TurnOrder : MonoBehaviour {
 
 	void Update () {
 		resources.text = ""+myPlayer.GetResources();
-		/*if(Network.isServer || GameType.getGameType() == "Local") {
+		if(Network.isServer || GameType.getGameType() == "Local") {
 			//playerText.guiSkin = player1Box;
 			playerText.text = "Player 1";
 			actionsLeft.text = ""+(3-player1ActionsReceived);
@@ -97,7 +97,7 @@ public class TurnOrder : MonoBehaviour {
 			playerText.text = "Player 2";
 			actionsLeft.text = ""+(3-player2ActionsReceived);
 		}
-		actionQueue.text = "Actions:\nAction 1: "+myActions[0]+"\nAction 2: "+myActions[1]+"\nAction 3: "+myActions[2];*/
+		actionQueue.text = "Actions:\nAction 1: "+myActions[0]+"\nAction 2: "+myActions[1]+"\nAction 3: "+myActions[2];
 		helpText.text = ValueStore.helpMessage;
 		if(Network.isServer) {
 			if(player1ActionsReceived == 3 && player2ActionsReceived == 3) {
