@@ -10,3 +10,9 @@ Temp
 *_Data
 *.pdb
 *.sln
+
+Assets/Textures/Towers/totem/.DS_Store
+
+.gitignore
+
+.gitignore

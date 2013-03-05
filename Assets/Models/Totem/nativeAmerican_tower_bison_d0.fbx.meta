@@ -12,6 +12,7 @@ ModelImporter:
     100012: Horns
     100014: //RootNode
     100016: Nose
+    100018: Texture Group
     400000: Backdrop Item
     400002: 'Backdrop Item '
     400004: Base
@@ -21,6 +22,7 @@ ModelImporter:
     400012: Horns
     400014: //RootNode
     400016: Nose
+    400018: Texture Group
     2300000: Base
     2300002: Eyes
     2300004: Horns
