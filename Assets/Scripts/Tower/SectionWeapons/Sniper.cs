@@ -10,6 +10,6 @@ public class Sniper : SectionWeapon {
 		this.range = 2;
         this.wtype = "Sniper";
 		this.range = 7;
-		this.maxUpgradeEffect = new DamageOverTime();
+		this.maxUpgradeEffect = new Burn();
     }
 }

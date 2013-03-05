@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ParalyzeAction : DefaultMenuAction,MenuAction {
+public class DrainAction : DefaultMenuAction,MenuAction {
 	
 	public override void Action() {
 		Section s = TowerSelection.GetSelectedSection();
@@ -17,7 +17,7 @@ public class ParalyzeAction : DefaultMenuAction,MenuAction {
 				ValueStore.helpMessage = "You don't have enough RP to do that!";
 			} else {				
 				Debug.Log (s.attributes.myTower.towerNum);
-				TurnOrder.SendAction(new Upgrade(s.attributes.myTower.towerNum, s.attributes.height, "Paralyze"));
+				TurnOrder.SendAction(new Upgrade(s.attributes.myTower.towerNum, s.attributes.height, "Drain"));
 			}
 		} else {
 			ValueStore.helpMessage = "You must select a section to upgrade!";
