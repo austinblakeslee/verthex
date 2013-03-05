@@ -6,6 +6,8 @@ public abstract class WeaponEffect {
 
 	protected string effectType;
 	protected int upgradeLevel;
+	protected bool canAttackSelf = false;
+	protected bool canAttackOpponent = true;
 	
 	public WeaponEffect() {
 		upgradeLevel = 0;
@@ -25,5 +27,14 @@ public abstract class WeaponEffect {
 	
 	public int GetUpgradeLevel() {
 		return upgradeLevel;
+	}
+	
+	public bool CanAttackOpponent()
+	{
+		return canAttackOpponent;
+	}
+	public bool CanAttackSelf()
+	{
+		return canAttackSelf;
 	}
 }

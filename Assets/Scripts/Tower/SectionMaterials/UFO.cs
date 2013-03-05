@@ -6,7 +6,7 @@ public class UFO : SectionMaterial {
         this.initialSP = 400;
         this.maxSP = 650;
         this.cost = 250;
-        this.weightPerSP = 0.1;
+        this.weight = 37;//.1
         this.SPPerRepair = 50;
         this.costPerRepair = 75;
         this.mtype = "UFO";

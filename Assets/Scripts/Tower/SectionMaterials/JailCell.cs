@@ -3,10 +3,10 @@ using System.Collections;
 
 public class JailCell : SectionMaterial {
     public JailCell () {
-        this.initialSP = 300;
+        this.initialSP = 350;
         this.maxSP = 700;
         this.cost = 200;
-        this.weightPerSP = 0.1;
+        this.weight = 38;//0.1;
         this.SPPerRepair = 50;
         this.costPerRepair = 75;
         this.mtype = "Jail Cell";

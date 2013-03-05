@@ -5,7 +5,7 @@ public class SectionMaterial {
 	public int initialSP;
 	public int maxSP;
 	public int cost;
-	public double weightPerSP;
+	public double weight;
 	public int SPPerRepair;
 	public int costPerRepair;
 	public string mtype = "abstract";
@@ -30,8 +30,8 @@ public class SectionMaterial {
 	    return cost;
 	}
 
-	public double GetWeightPerSP() {
-	    return weightPerSP;
+	public double GetWeight() {
+	    return weight;
 	}
 
 	public int GetSPPerRepair() {

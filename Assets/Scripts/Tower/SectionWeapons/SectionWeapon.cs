@@ -13,7 +13,7 @@ public class SectionWeapon {
 	public string wtype;
 	public int maxUpgradeLevel = 3;
 	protected int upgradeLevel = 0;
-	protected List<float> damageUpgrades = new List<float> {1.0f, 1.2f, 1.3f, 1.4f, 1.5f};
+	protected List<float> damageUpgrades = new List<float> {1.0f, 1.25f, 1.5f, 1.75f, 2.0f};
 	protected List<int> rangeUpgrades = new List<int>{0,0,1,1,2};
 	protected WeaponEffect maxUpgradeEffect = new DefaultWeaponEffect();
 	protected WeaponEffect weaponEffect = new DefaultWeaponEffect();

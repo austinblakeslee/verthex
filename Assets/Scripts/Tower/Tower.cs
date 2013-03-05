@@ -50,6 +50,10 @@ public class Tower {
 			return sections[sections.Count-1];
 		}
     }
+	public int GetPlayerNum()
+	{
+		return TurnOrder.myPlayer.GetTower(towerNum) == this ? TurnOrder.myPlayer.playerNumber : TurnOrder.otherPlayer.playerNumber;
+	}
 
 //returns the cost of the newly added section
     public void AddSection(Section s) {

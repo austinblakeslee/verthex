@@ -30,7 +30,7 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 			} else if(m.GetCost() + w.GetCost() > TurnOrder.myPlayer.GetResources()) {
 				ValueStore.helpMessage = "You do not have enough resources to build that. Choose different options.";
 			} else {
-				int weight = (int)(m.GetWeightPerSP() * m.GetInitialSP()) + w.GetWeight();
+				int weight = (int)(m.GetWeight() * m.GetInitialSP()) + w.GetWeight();
 				string help = "Weight: " + weight;
 				help += "\nDamage: " + w.GetDamage();
 				ValueStore.helpMessage = help;

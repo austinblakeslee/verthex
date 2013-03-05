@@ -6,7 +6,7 @@ public class Coyote : SectionMaterial {
         this.initialSP = 275;
         this.maxSP = 450;
         this.cost = 175;
-        this.weightPerSP = 0.05;
+        this.weight = 27; //.05
         this.SPPerRepair = 75;
         this.costPerRepair = 75;
         this.mtype = "Coyote";

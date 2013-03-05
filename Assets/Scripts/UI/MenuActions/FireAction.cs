@@ -54,10 +54,10 @@ public class FireAction : DefaultMenuAction,MenuAction {
 				unhide ();
 				int firingTowerNum = TurnOrder.actionNum;
 				int firingSectionNum = firingSection.attributes.height;
-				int targetTowerNum = TowerSelection.GetSelectedTower().towerBase.towerNumber;
+				Tower targetTower = TowerSelection.GetSelectedTower();
 				int targetSectionNum = TowerSelection.GetSelectedSection().attributes.height;
-				Debug.Log ("Target tNum = " + targetTowerNum + ". targetSection = " + targetSectionNum);
-				TurnOrder.SendAction(new Fight(firingTowerNum, firingSectionNum, targetTowerNum, targetSectionNum));
+				Debug.Log ("Target Player = " + targetTower.GetPlayerNum() + ". Target tNum = " + targetTower.towerNum + ". targetSection = " + targetSectionNum);
+				TurnOrder.SendAction(new Fight(firingTowerNum, firingSectionNum, targetTower, targetSectionNum));
 			} else {
 				ValueStore.helpMessage = "You cannot fire at that section.";
 			}
@@ -69,9 +69,12 @@ public class FireAction : DefaultMenuAction,MenuAction {
 	private bool CheckTarget() {
 		Tower selectedTower = TowerSelection.GetSelectedTower();
 		Section selectedSection = TowerSelection.GetSelectedSection();
-		return selectedTower.towerBase.playerNumber != TurnOrder.myPlayer.playerNumber &&
-			selectedSection != null && selectedSection.attributes.height >= lowRange &&
+		bool basicCheck = selectedSection != null && selectedSection.attributes.height >= lowRange &&
 			selectedSection.attributes.height <= highRange;
+		if (!firingSection.attributes.weapon.GetEffect().CanAttackSelf()){
+			return selectedTower.towerBase.playerNumber != TurnOrder.myPlayer.playerNumber && basicCheck;
+		}
+		return basicCheck;
 	}
 	
 	private void hide() {
@@ -79,21 +82,42 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		//GameObject.FindWithTag("MiniMap").camera.enabled = false;
 		//GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = false;
-		if(TurnOrder.myPlayer == TurnOrder.player1) {
-			GameObject.FindWithTag("p1FireCamera").camera.enabled = true;	
+		string firingCam = "";
+	//	if (firingSection.attributes.weapon.GetEffect().CanAttackOpponent() && firingSection.attributes.weapon.GetEffect().CanAttackSelf()) //if can attack either opp or self,
+	//	{
+			//TODO: Add option to choose who to attack / enabling a "Switch Camera" button from p1FireCamera to p2FireCamera would work
+			
+	//	}
+	//	else
+			if(firingSection.attributes.weapon.GetEffect().CanAttackSelf()) //if can only attack self
+		{
+			firingCam = TurnOrder.myPlayer == TurnOrder.player1 ? "p2FireCamera" : "p1FireCamera";
 		}
-		else if(TurnOrder.myPlayer == TurnOrder.player2) {
-			GameObject.FindWithTag("p2FireCamera").camera.enabled = true;
+		else if(firingSection.attributes.weapon.GetEffect().CanAttackOpponent()) //if can only attack opp
+		{
+			firingCam = TurnOrder.myPlayer == TurnOrder.player1 ? "p1FireCamera" : "p2FireCamera";
 		}
+		else
+		{
+			Debug.Log ("Error choosing which Firing Camera to use");
+		}
+		GameObject.FindWithTag(firingCam).camera.enabled = true;	
+
+		//if(TurnOrder.myPlayer == TurnOrder.player1) {
+		//	GameObject.FindWithTag("p1FireCamera").camera.enabled = true;	
+		//}
+		//else if(TurnOrder.myPlayer == TurnOrder.player2) {
+		//	GameObject.FindWithTag("p2FireCamera").camera.enabled = true;
+		//}
 	}
 	
 	private void unhide() {
-		if(TurnOrder.myPlayer == TurnOrder.player1) {
+		//if(TurnOrder.myPlayer == TurnOrder.player1) {
 			GameObject.FindWithTag("p1FireCamera").camera.enabled = false;
-		}
-		if(TurnOrder.myPlayer == TurnOrder.player2) {
+	//	}
+//		if(TurnOrder.myPlayer == TurnOrder.player2) {
 			GameObject.FindWithTag("p2FireCamera").camera.enabled = false;
-		}
+//		}
 		//GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = false;
 		GameObject.FindWithTag("MainCamera").camera.enabled = true;
 		//GameObject.FindWithTag("MiniMap").camera.enabled = true;
