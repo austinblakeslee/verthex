@@ -106,7 +106,7 @@ public class WeaponAnimator : MonoBehaviour {
 				splitScreen = true;
 				
 				//Set Cameras so it will not display the DamageText
-				GameObject.FindWithTag("MiniMap").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
+				//GameObject.FindWithTag("MiniMap").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
 				firingSection.transform.Find("FireCam").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
 				firingSection.transform.Find("FireCam").camera.enabled = true;
 				
