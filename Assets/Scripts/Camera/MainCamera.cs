@@ -15,6 +15,10 @@ public class MainCamera : MonoBehaviour {
 	void Start () {
 		transform.localPosition = relativePosition;
 		ChangeTarget(target);
+		if(Application.loadedLevelName == "Title") {
+			float factor = Random.value <= 0.5f ? 1.0f : -1.0f;
+			rotationSpeed *= factor;
+		}
 	}
 	
 	// Update is called once per frame
