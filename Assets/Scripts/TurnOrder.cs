@@ -218,6 +218,9 @@ public class TurnOrder : MonoBehaviour {
 		showingActions = false;
 		this.inputReady = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
+		for(int i = 0; i < myActions.Length; i++) {
+			myActions[i] = null;
+		}
 		EndTurn();
 	}
 	
