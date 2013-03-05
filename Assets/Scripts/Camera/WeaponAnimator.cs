@@ -101,7 +101,7 @@ public class WeaponAnimator : MonoBehaviour {
 			if(animationStage == "fire") {
 				GameObject.FindWithTag("MainCamera").camera.enabled = false;
 				GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = false;
-				GameObject.FindWithTag("Help").GetComponent<Menu>().on = false;
+				//GameObject.FindWithTag("Help").GetComponent<Menu>().on = false;
 				GameObject.FindWithTag("MainCamera").GetComponent<TowerSelection>().deselectSection();
 				splitScreen = true;
 				
@@ -205,7 +205,7 @@ public class WeaponAnimator : MonoBehaviour {
 				splitScreen = false;
 				miss = false;
 				GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = true;
-				GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;	
+				//GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;	
 				if(hitSections.Count > 0) {	
 					List<Section> hitTowerSects = hitSections[0].GetComponent<Section>().attributes.myTower.GetSections();
 					for(int i = 0; i < hitTowerSects.Count; i++) {
