@@ -91,11 +91,21 @@ public class TurnOrder : MonoBehaviour {
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			//playerText.guiSkin = player1Box;
 			playerText.text = "Player 1";
-			actionsLeft.text = ""+(3-player1ActionsReceived);
+			if(player1Confirm) {
+				actionsLeft.text = "0";
+			}
+			else {
+				actionsLeft.text = ""+(3-actionNum);
+			}
 		} else {
 			//playerText.guiSkin = player2Box;
 			playerText.text = "Player 2";
-			actionsLeft.text = ""+(3-player2ActionsReceived);
+			if(player2Confirm) {
+				actionsLeft.text = "0";
+			}
+			else {
+				actionsLeft.text = ""+(3-actionNum);
+			}
 		}
 		actionQueue.text = "Actions:\nAction 1: "+myActions[0]+"\nAction 2: "+myActions[1]+"\nAction 3: "+myActions[2];
 		helpText.text = ValueStore.helpMessage;
@@ -240,6 +250,7 @@ public class TurnOrder : MonoBehaviour {
 			foreach (Menu c in GameObject.Find("MainMenu").GetComponentsInChildren<Menu>()) {
 				c.on = false;
 			}
+			
 		} else {
 			foreach (Menu c in GameObject.Find("MainMenu").GetComponentsInChildren<Menu>()) {
 				c.on = false;

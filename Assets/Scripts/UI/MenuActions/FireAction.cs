@@ -79,8 +79,8 @@ public class FireAction : DefaultMenuAction,MenuAction {
 	
 	private void hide() {
 		GameObject.FindWithTag("MainCamera").camera.enabled = false;
-		GameObject.FindWithTag("MiniMap").camera.enabled = false;
-		GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = true;
+		//GameObject.FindWithTag("MiniMap").camera.enabled = false;
+		//GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = false;
 		string firingCam = "";
 	//	if (firingSection.attributes.weapon.GetEffect().CanAttackOpponent() && firingSection.attributes.weapon.GetEffect().CanAttackSelf()) //if can attack either opp or self,
@@ -112,12 +112,15 @@ public class FireAction : DefaultMenuAction,MenuAction {
 	}
 	
 	private void unhide() {
-		//TODO: Disable the "Switch Camera" button
-		GameObject.FindWithTag("p1FireCamera").camera.enabled = false;
-		GameObject.FindWithTag("p2FireCamera").camera.enabled = false;
-		GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = false;
+		//if(TurnOrder.myPlayer == TurnOrder.player1) {
+			GameObject.FindWithTag("p1FireCamera").camera.enabled = false;
+	//	}
+//		if(TurnOrder.myPlayer == TurnOrder.player2) {
+			GameObject.FindWithTag("p2FireCamera").camera.enabled = false;
+//		}
+		//GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = false;
 		GameObject.FindWithTag("MainCamera").camera.enabled = true;
-		GameObject.FindWithTag("MiniMap").camera.enabled = true;
+		//GameObject.FindWithTag("MiniMap").camera.enabled = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 	}
 	

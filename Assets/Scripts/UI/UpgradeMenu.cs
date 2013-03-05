@@ -76,18 +76,13 @@ public class UpgradeMenu : Menu {
 			upgradeButton1 = editUpgradeButton(upgradeButton1, oldScriptName1, scriptName1, goName1);
 			if (goName2 != "")
 			{	
-				upgradeButton2.SetActive(true);
-				upgradeButton2.renderer.enabled = true;
 
-				upgradeButton2.GetComponent<MenuItem>().SetVisible(true);
 				upgradeButton2 = editUpgradeButton(upgradeButton2, oldScriptName2, scriptName2, goName2);
 
 			}
 			else{
 				CombatLog.addLine("Here");
-				upgradeButton2.SetActive(false);
-				upgradeButton2.renderer.enabled = false;
-				upgradeButton2.GetComponent<MenuItem>().SetVisible(false);
+		
 			}
 		}
 		if(!hasLoaded) {
@@ -173,10 +168,8 @@ public class UpgradeMenu : Menu {
 	private GameObject editUpgradeButton(GameObject upgradeButton, string oldScriptName, string scriptName, string goName)
 	{
 		Destroy(upgradeButton.GetComponent(oldScriptName));
-
 		upgradeButton.AddComponent(scriptName);
 		MenuItem m = upgradeButton.GetComponent<MenuItem>();
-
 		m.action = upgradeButton.GetComponent(scriptName) as DefaultMenuAction;
 		m.action.click = click;		
 		m.text = goName;

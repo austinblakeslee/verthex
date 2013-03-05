@@ -101,12 +101,12 @@ public class WeaponAnimator : MonoBehaviour {
 			if(animationStage == "fire") {
 				GameObject.FindWithTag("MainCamera").camera.enabled = false;
 				GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = false;
-				GameObject.FindWithTag("Help").GetComponent<Menu>().on = false;
+				//GameObject.FindWithTag("Help").GetComponent<Menu>().on = false;
 				GameObject.FindWithTag("MainCamera").GetComponent<TowerSelection>().deselectSection();
 				splitScreen = true;
 				
 				//Set Cameras so it will not display the DamageText
-				GameObject.FindWithTag("MiniMap").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
+				//GameObject.FindWithTag("MiniMap").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
 				firingSection.transform.Find("FireCam").camera.cullingMask &=  ~(1 << LayerMask.NameToLayer("DamageText"));
 				firingSection.transform.Find("FireCam").camera.enabled = true;
 				
@@ -205,7 +205,7 @@ public class WeaponAnimator : MonoBehaviour {
 				splitScreen = false;
 				miss = false;
 				GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = true;
-				GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;	
+				//GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;	
 				if(hitSections.Count > 0) {	
 					List<Section> hitTowerSects = hitSections[0].GetComponent<Section>().attributes.myTower.GetSections();
 					for(int i = 0; i < hitTowerSects.Count; i++) {

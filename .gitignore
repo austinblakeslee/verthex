@@ -13,6 +13,4 @@ Temp
 
 Assets/Textures/Towers/totem/.DS_Store
 
-.gitignore
-
-.gitignore
+*.app
