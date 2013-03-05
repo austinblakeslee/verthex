@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: 41bb57c2f81e3944288c3c3a0eda3f7f
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Area51_tower_gootank_d0a
+    100002: Area51_tower_gootank_d0a 1
+    100004: Area51_tower_gootank_d0b
+    100006: Area51_tower_gootank_d0b 1
+    100008: Area51_tower_gootank_d0c
+    100010: Area51_tower_gootank_d0c 1
+    100012: Area51_tower_gootank_d0d
+    100014: Area51_tower_gootank_d0d 1
+    100016: Area51_tower_gootank_d0e
+    100018: Area51_tower_gootank_d0e 1
+    100020: //RootNode
+    100022: Area51_tower_gootankpanel_d0
+    100024: Area51_tower_gootankpanel_d0a
+    100026: Area51_tower_gootankpanel_d0b
+    100028: Area51_tower_gootankpanel_d0c
+    100030: Area51_tower_gootankpanel_d0d
+    100032: Area51_tower_gootankpanel_d0e
+    100034: forcefield
+    100036: group
+    100038: pasted__Alien
+    100040: pasted__Alien1
+    400000: Area51_tower_gootank_d0a
+    400002: Area51_tower_gootank_d0a 1
+    400004: Area51_tower_gootank_d0b
+    400006: Area51_tower_gootank_d0b 1
+    400008: Area51_tower_gootank_d0c
+    400010: Area51_tower_gootank_d0c 1
+    400012: Area51_tower_gootank_d0d
+    400014: Area51_tower_gootank_d0d 1
+    400016: Area51_tower_gootank_d0e
+    400018: Area51_tower_gootank_d0e 1
+    400020: //RootNode
+    400022: Area51_tower_gootankpanel_d0
+    400024: Area51_tower_gootankpanel_d0a
+    400026: Area51_tower_gootankpanel_d0b
+    400028: Area51_tower_gootankpanel_d0c
+    400030: Area51_tower_gootankpanel_d0d
+    400032: Area51_tower_gootankpanel_d0e
+    400034: forcefield
+    400036: group
+    400038: pasted__Alien
+    400040: pasted__Alien1
+    2300000: Area51_tower_gootank_d0a 1
+    2300002: Area51_tower_gootank_d0b 1
+    2300004: Area51_tower_gootank_d0c 1
+    2300006: Area51_tower_gootank_d0d 1
+    2300008: Area51_tower_gootank_d0e 1
+    2300010: Area51_tower_gootankpanel_d0a
+    2300012: Area51_tower_gootankpanel_d0b
+    2300014: Area51_tower_gootankpanel_d0c
+    2300016: Area51_tower_gootankpanel_d0d
+    2300018: Area51_tower_gootankpanel_d0e
+    2300020: forcefield
+    2300022: pasted__Alien
+    2300024: pasted__Alien1
+    3300000: Area51_tower_gootank_d0a 1
+    3300002: Area51_tower_gootank_d0b 1
+    3300004: Area51_tower_gootank_d0c 1
+    3300006: Area51_tower_gootank_d0d 1
+    3300008: Area51_tower_gootank_d0e 1
+    3300010: Area51_tower_gootankpanel_d0a
+    3300012: Area51_tower_gootankpanel_d0b
+    3300014: Area51_tower_gootankpanel_d0c
+    3300016: Area51_tower_gootankpanel_d0d
+    3300018: Area51_tower_gootankpanel_d0e
+    3300020: forcefield
+    3300022: pasted__Alien
+    3300024: pasted__Alien1
+    4300000: Area51_tower_gootankpanel_d0a
+    4300002: pasted__Alien
+    4300004: Area51_tower_gootank_d0a
+    4300006: Area51_tower_gootank_d0b
+    4300008: Area51_tower_gootankpanel_d0b
+    4300010: Area51_tower_gootank_d0c
+    4300012: Area51_tower_gootankpanel_d0c
+    4300014: pasted__Alien1
+    4300016: Area51_tower_gootank_d0d
+    4300018: Area51_tower_gootankpanel_d0d
+    4300020: Area51_tower_gootank_d0e
+    4300022: Area51_tower_gootankpanel_d0e
+    4300024: forcefield
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

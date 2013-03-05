@@ -1,37 +1,34 @@
 fileFormatVersion: 2
-guid: 5faa145fae6bb4f84b32777bbcd391d5
+guid: d33f6f584d02fd440b180cb99835239c
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: Base
-    100002: Camera
-    100004: Directional Light
-    100006: Eyes
-    100008: Horns
-    100010: //RootNode
-    100012: Nose
-    100014: Texture Group
-    400000: Base
-    400002: Camera
-    400004: Directional Light
-    400006: Eyes
-    400008: Horns
-    400010: //RootNode
-    400012: Nose
-    400014: Texture Group
-    2300000: Base
-    2300002: Eyes
-    2300004: Horns
-    2300006: Nose
-    3300000: Base
-    3300002: Eyes
-    3300004: Horns
-    3300006: Nose
-    4300000: Base
-    4300002: Nose
-    4300004: Eyes
-    4300006: Horns
-    7400000: modo_Anim
+    100000: //RootNode
+    100002: body
+    100004: forcefield
+    100006: glass_dome
+    100008: group
+    100010: ufo_body
+    100012: weaponCamera
+    100014: weaponLocation
+    400000: //RootNode
+    400002: body
+    400004: forcefield
+    400006: glass_dome
+    400008: group
+    400010: ufo_body
+    400012: weaponCamera
+    400014: weaponLocation
+    2300000: body
+    2300002: forcefield
+    2300004: glass_dome
+    3300000: body
+    3300002: forcefield
+    3300004: glass_dome
+    4300000: body
+    4300002: glass_dome
+    4300004: forcefield
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1

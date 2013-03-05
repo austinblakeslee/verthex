@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: e10c8bc1088eca34d9fc41e50633a741
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: group1
+    100004: group2
+    100006: pasted__forcefield
+    100008: pasted__SatelliteBase
+    100010: satellie1
+    100012: satellie2
+    100014: satellie3
+    100016: satellie4
+    100018: satellie5
+    100020: satellieDish1
+    100022: satellieDish2
+    100024: satellieDish3
+    100026: satellieDish4
+    100028: satellieDish5
+    100030: satellieDishBot1
+    100032: satellieDishBot2
+    100034: satellieDishBot3
+    100036: satellieDishBot4
+    100038: satellieDishBot5
+    100040: weaponCamera
+    100042: weaponLocation
+    400000: //RootNode
+    400002: group1
+    400004: group2
+    400006: pasted__forcefield
+    400008: pasted__SatelliteBase
+    400010: satellie1
+    400012: satellie2
+    400014: satellie3
+    400016: satellie4
+    400018: satellie5
+    400020: satellieDish1
+    400022: satellieDish2
+    400024: satellieDish3
+    400026: satellieDish4
+    400028: satellieDish5
+    400030: satellieDishBot1
+    400032: satellieDishBot2
+    400034: satellieDishBot3
+    400036: satellieDishBot4
+    400038: satellieDishBot5
+    400040: weaponCamera
+    400042: weaponLocation
+    2300000: pasted__forcefield
+    2300002: pasted__SatelliteBase
+    2300004: satellieDish1
+    2300006: satellieDish2
+    2300008: satellieDish3
+    2300010: satellieDish4
+    2300012: satellieDish5
+    2300014: satellieDishBot1
+    2300016: satellieDishBot2
+    2300018: satellieDishBot3
+    2300020: satellieDishBot4
+    2300022: satellieDishBot5
+    3300000: pasted__forcefield
+    3300002: pasted__SatelliteBase
+    3300004: satellieDish1
+    3300006: satellieDish2
+    3300008: satellieDish3
+    3300010: satellieDish4
+    3300012: satellieDish5
+    3300014: satellieDishBot1
+    3300016: satellieDishBot2
+    3300018: satellieDishBot3
+    3300020: satellieDishBot4
+    3300022: satellieDishBot5
+    4300000: satellieDishBot3
+    4300002: satellieDish3
+    4300004: satellieDishBot2
+    4300006: satellieDish2
+    4300008: satellieDishBot1
+    4300010: satellieDish1
+    4300012: satellieDishBot5
+    4300014: satellieDish5
+    4300016: satellieDishBot4
+    4300018: satellieDish4
+    4300020: pasted__forcefield
+    4300022: pasted__SatelliteBase
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

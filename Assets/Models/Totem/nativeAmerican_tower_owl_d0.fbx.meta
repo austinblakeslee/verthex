@@ -3,30 +3,24 @@ guid: 5089bbf4352bf42d9bc1039327fe8c9f
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: Backdrop Item
-    100002: 'Backdrop Item '
-    100004: BeakBottom
-    100006: BeakTop
-    100008: Bottom
-    100010: Camera
-    100012: Directional Light
-    100014: Eyes
-    100016: //RootNode
-    100018: Top
-    100020: Wings
-    100022: Texture Group
-    400000: Backdrop Item
-    400002: 'Backdrop Item '
-    400004: BeakBottom
-    400006: BeakTop
-    400008: Bottom
-    400010: Camera
-    400012: Directional Light
-    400014: Eyes
-    400016: //RootNode
-    400018: Top
-    400020: Wings
-    400022: Texture Group
+    100000: BeakBottom
+    100002: BeakTop
+    100004: Bottom
+    100006: Camera
+    100008: Directional Light
+    100010: Eyes
+    100012: //RootNode
+    100014: Top
+    100016: Wings
+    400000: BeakBottom
+    400002: BeakTop
+    400004: Bottom
+    400006: Camera
+    400008: Directional Light
+    400010: Eyes
+    400012: //RootNode
+    400014: Top
+    400016: Wings
     2300000: BeakBottom
     2300002: BeakTop
     2300004: Bottom

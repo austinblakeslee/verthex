@@ -3,43 +3,29 @@ guid: a9a0234dc954e4ba19aea54c0fee2160
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: Backdrop Item
-    100002: 'Backdrop Item '
-    100004: Camera
-    100006: Directional Light
-    100008: Mesh
+    100000: Camera
+    100002: Directional Light
+    100004: Eyes
+    100006: Face
+    100008: LowerJaw
     100010: //RootNode
-    100012: Eyes
-    100014: 'Mesh '
-    100016: Face
-    100018: LowerJaw
-    100020: Texture Group
-    400000: Backdrop Item
-    400002: 'Backdrop Item '
-    400004: Camera
-    400006: Directional Light
-    400008: Mesh
+    100012: Texture Group
+    400000: Camera
+    400002: Directional Light
+    400004: Eyes
+    400006: Face
+    400008: LowerJaw
     400010: //RootNode
-    400012: Eyes
-    400014: 'Mesh '
-    400016: Face
-    400018: LowerJaw
-    400020: Texture Group
-    2300000: Mesh
-    2300002: Eyes
-    2300004: 'Mesh '
-    2300006: Face
-    2300008: LowerJaw
-    3300000: Mesh
-    3300002: Eyes
-    3300004: 'Mesh '
-    3300006: Face
-    3300008: LowerJaw
-    4300000: Mesh
-    4300002: Eyes
-    4300004: 'Mesh '
-    4300006: Face
-    4300008: LowerJaw
+    400012: Texture Group
+    2300000: Eyes
+    2300002: Face
+    2300004: LowerJaw
+    3300000: Eyes
+    3300002: Face
+    3300004: LowerJaw
+    4300000: Eyes
+    4300002: Face
+    4300004: LowerJaw
     7400000: modo_Anim
     9500000: //RootNode
   materials:
