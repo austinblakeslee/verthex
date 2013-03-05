@@ -76,8 +76,8 @@ public class FireAction : DefaultMenuAction,MenuAction {
 	
 	private void hide() {
 		GameObject.FindWithTag("MainCamera").camera.enabled = false;
-		GameObject.FindWithTag("MiniMap").camera.enabled = false;
-		GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = true;
+		//GameObject.FindWithTag("MiniMap").camera.enabled = false;
+		//GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = false;
 		if(TurnOrder.myPlayer == TurnOrder.player1) {
 			GameObject.FindWithTag("p1FireCamera").camera.enabled = true;	
@@ -94,9 +94,9 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		if(TurnOrder.myPlayer == TurnOrder.player2) {
 			GameObject.FindWithTag("p2FireCamera").camera.enabled = false;
 		}
-		GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = false;
+		//GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = false;
 		GameObject.FindWithTag("MainCamera").camera.enabled = true;
-		GameObject.FindWithTag("MiniMap").camera.enabled = true;
+		//GameObject.FindWithTag("MiniMap").camera.enabled = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 	}
 	
