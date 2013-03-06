@@ -95,6 +95,9 @@ public class WeaponAnimator : MonoBehaviour {
 			Transform projectile = null;
 			foreach(Transform child in firingSection.transform) {
 				if(child.tag == "Weapon") {
+					if(child.GetComponent<OrbitingWeapon>() != null) {
+						child.GetComponent<OrbitingWeapon>().orbiting = false;
+					}
 					projectile = child.Find("Projectile");
 				}
 			}
@@ -216,6 +219,10 @@ public class WeaponAnimator : MonoBehaviour {
 						hitSections[i].transform.position = sectionPos[i];
 					}
 					hitSections[sectionCounter-1].transform.Find("HitCam").camera.enabled = false;
+				}
+				OrbitingWeapon ow = projectile.parent.GetComponent<OrbitingWeapon>();
+				if(ow != null) {
+					ow.orbiting = true;
 				}
 			}
 		}
