@@ -31,10 +31,9 @@ public class Builder : MonoBehaviour {
 		if (w.wtype != "Nothing"){
 			weapon = Instantiate(w.GetPrefab()) as GameObject; //I believe the here lies the issue for why building Nothing doesn't work? maybe.
 		//if(weapon != null) {
-			Vector3 localPos = weapon.transform.localPosition;
 			Vector3 localScale = weapon.transform.localScale;
 			weapon.transform.parent = block.transform;
-			weapon.transform.localPosition = localPos;
+			weapon.transform.localPosition = block.transform.Find("WeaponLocation").localPosition;
 			weapon.transform.localScale = localScale;
 		}
 		Section sc = block.GetComponent<Section>();
