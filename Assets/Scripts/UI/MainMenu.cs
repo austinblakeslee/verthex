@@ -27,6 +27,8 @@ public class MainMenu : Menu {
 	public GameObject fight;
 	public GameObject fortify;
 	public GameObject upgrade;
+	public GUISkin squareStyle;
+	//public GUISkin rectStyle;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -44,9 +46,11 @@ public class MainMenu : Menu {
 			build.transform.parent = transform;
 			MenuItem m1 = build.GetComponent<MenuItem>();
 			m1.action = build.GetComponent<SwitchMenu>();
+			m1.guiSkin = squareStyle;
 			build.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			build.GetComponent<SwitchMenu>().toMenu = build;
 			build.GetComponent<BuildMenu>().click = click;
+			build.GetComponent<BuildMenu>().guiSkin = squareStyle;
 			m1.action.click = click;
 			menuItems.Add(m1);
 			numButtons++;
