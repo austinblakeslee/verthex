@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: d450e45675881401781dd1f7b22f7079
+=======
+guid: 5bc996111f5d8044c9626a85bf09bb3e
+>>>>>>> Update prefabs with new cowboy models
 TextureImporter:
   serializedVersion: 2
   mipmaps:

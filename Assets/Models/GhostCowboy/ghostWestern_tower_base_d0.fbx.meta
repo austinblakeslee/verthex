@@ -54,6 +54,11 @@ ModelImporter:
     100096: transform8
     100098: transform9
     100100: WHEELS
+    100102: Camera
+    100104: Directional Light
+    100106: Mesh
+    100108: 'Mesh '
+    100110: Texture Group
     400000: BackGate
     400002: BackL
     400004: BackR
@@ -105,12 +110,24 @@ ModelImporter:
     400096: transform8
     400098: transform9
     400100: WHEELS
+    400102: Camera
+    400104: Directional Light
+    400106: Mesh
+    400108: 'Mesh '
+    400110: Texture Group
     2300000: OuterRing
     2300002: polySurface1
+    2300004: Mesh
+    2300006: 'Mesh '
     3300000: OuterRing
     3300002: polySurface1
+    3300004: Mesh
+    3300006: 'Mesh '
     4300000: OuterRing
     4300002: polySurface1
+    4300004: Mesh
+    4300006: 'Mesh '
+    7400000: modo_Anim
     9500000: //RootNode
   materials:
     importMaterials: 1

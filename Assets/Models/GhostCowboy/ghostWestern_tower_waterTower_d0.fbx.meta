@@ -25,6 +25,11 @@ ModelImporter:
     100038: weaponCamera
     100040: weaponLocation
     100042: waterTower_base
+    100044: Camera
+    100046: Directional Light
+    100048: Mesh
+    100050: 'Mesh '
+    100052: Texture Group
     400000: //RootNode
     400002: pCube1
     400004: polySurface1
@@ -47,21 +52,33 @@ ModelImporter:
     400038: weaponCamera
     400040: weaponLocation
     400042: waterTower_base
+    400044: Camera
+    400046: Directional Light
+    400048: Mesh
+    400050: 'Mesh '
+    400052: Texture Group
     2300000: polySurface7
     2300002: waterTower_body
     2300004: waterTower_legs
     2300006: waterTower_platform
     2300008: waterTower_base
+    2300010: Mesh
+    2300012: 'Mesh '
     3300000: polySurface7
     3300002: waterTower_body
     3300004: waterTower_legs
     3300006: waterTower_platform
     3300008: waterTower_base
+    3300010: Mesh
+    3300012: 'Mesh '
     4300000: polySurface7
     4300002: waterTower_body
     4300004: waterTower_legs
     4300006: waterTower_platform
     4300008: waterTower_base
+    4300010: Mesh
+    4300012: 'Mesh '
+    7400000: modo_Anim
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -79,7 +96,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     swapUVChannels: 0
