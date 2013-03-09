@@ -40,14 +40,12 @@ public class CollapseAnimator : MonoBehaviour {
 			collapsingSection = t.StressCheck();
 		}
 		GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = true;
-		GameObject.FindWithTag("Help").GetComponent<Menu>().on = true;
 		GameObject.FindWithTag("MainCamera").camera.enabled = true;
 		animate = false;
 	}
 	
 	private void Pre() {
 		GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = false;
-		GameObject.FindWithTag("Help").GetComponent<Menu>().on = false;
 		GameObject.FindWithTag("MainCamera").camera.enabled = false;
 		Camera c = collapsingSection.transform.Find("CollapseCam").camera;
 		c.enabled = true;
