@@ -1,32 +1,33 @@
 fileFormatVersion: 2
-guid: a9a0234dc954e4ba19aea54c0fee2160
+guid: 88b6ec9a9b1b9f84994a0be59669f43d
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: Camera
-    100002: Directional Light
-    100004: Eyes
-    100006: Face
-    100008: LowerJaw
-    100010: //RootNode
-    100012: Texture Group
-    400000: Camera
-    400002: Directional Light
-    400004: Eyes
-    400006: Face
-    400008: LowerJaw
-    400010: //RootNode
-    400012: Texture Group
-    2300000: Eyes
-    2300002: Face
-    2300004: LowerJaw
-    3300000: Eyes
-    3300002: Face
-    3300004: LowerJaw
-    4300000: Eyes
-    4300002: Face
-    4300004: LowerJaw
-    7400000: modo_Anim
+    100000: Eyes
+    100002: LeftEye
+    100004: LowerJaw
+    100006: //RootNode
+    100008: RightEye
+    100010: UpperHead
+    400000: Eyes
+    400002: LeftEye
+    400004: LowerJaw
+    400006: //RootNode
+    400008: RightEye
+    400010: UpperHead
+    2300000: LeftEye
+    2300002: LowerJaw
+    2300004: RightEye
+    2300006: UpperHead
+    3300000: LeftEye
+    3300002: LowerJaw
+    3300004: RightEye
+    3300006: UpperHead
+    4300000: LeftEye
+    4300002: RightEye
+    4300004: UpperHead
+    4300006: LowerJaw
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
