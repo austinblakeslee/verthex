@@ -22,8 +22,8 @@ public class TowerSelection : MonoBehaviour {
 	public Texture2D noUpgrade;
 	public Texture2D upgrade;
 	
-	public GUISkin skin;
-	public GUISkin skinSmall;
+	//public GUISkin skin;
+	//public GUISkin skinSmall;
 	
 	public MenuItem fortifyRP;
 	public MenuItem fortifySP;
@@ -99,7 +99,7 @@ public class TowerSelection : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		GUI.skin = skin;
+		//GUI.skin = skin;
 		if(selectedSection != null) {
 			DrawMaterialBox();
 			if(selectedSection.attributes.weapon.GetWeaponType() != "Nothing") {
@@ -147,9 +147,9 @@ public class TowerSelection : MonoBehaviour {
 			height = 30;
 			width = 200;
 			
-			GUI.skin = skinSmall;
+			//GUI.skin = skinSmall;
 			GUI.Label(new Rect(left, top, width, height), selectedSection.attributes.material.GetSectionEffect().GetInfo());
-			GUI.skin = skin;
+			//GUI.skin = skin;
 		//}
 		GUI.EndGroup();
 	}
@@ -242,21 +242,21 @@ public class TowerSelection : MonoBehaviour {
 	
 	[RPC]
 	private void SelectSection(Tower t, int sectionNumber) {
-		print(t);
-		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
+		//Debug.Log ("Section Selected");
+		//MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
 		if(selectedSection != null) {
 			selectedSection.SetColor(Color.white);
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
 			ValueStore.selectedMaterial = null; //For Fortify Menu Update
-			mc.ChangeTarget(t.towerBase.transform);
-			mc.SetCurrentTower(t);	//Allows camera to hold tower info
+			//mc.ChangeTarget(t.towerBase.transform);
+			//mc.SetCurrentTower(t);	//Allows camera to hold tower info
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
 			ValueStore.selectedMaterial = s.attributes.material; //For Fortify Menu Update
-			mc.ChangeTarget(s.transform);
+			//mc.ChangeTarget(s.transform);
 			s.SetColor(TurnOrder.myPlayer.color);
 		}
 		selectedTower = t;
