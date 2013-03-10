@@ -245,19 +245,24 @@ public class TowerSelection : MonoBehaviour {
 		//Debug.Log ("Section Selected");
 		InGameCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<InGameCamera>();
 		if(selectedSection != null) {
-			selectedSection.SetColor(Color.white);
+			selectedSection.Unhighlight();
+		}
+		if(selectedTower != null) {
+			selectedTower.towerBase.Unhighlight();
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
 			ValueStore.selectedMaterial = null; //For Fortify Menu Update
 			mc.ChangeTarget(t.towerBase.transform);
+			t.towerBase.Highlight();
+			
 			//mc.SetCurrentTower(t);	//Allows camera to hold tower info
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
 			ValueStore.selectedMaterial = s.attributes.material; //For Fortify Menu Update
 			mc.ChangeTarget(s.transform);
-			s.SetColor(TurnOrder.myPlayer.color);
+			s.Highlight();
 		}
 		selectedTower = t;
 	}
