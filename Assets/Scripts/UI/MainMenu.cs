@@ -39,7 +39,7 @@ public class MainMenu : Menu {
 
 	public override void Update() {
 		if(!hasLoaded) {
-			Rect buildButtonRect = new Rect(Screen.width - 200,(Screen.height - 165) + ((numButtons-1) *(150/(numButtons))) ,190, (150/(2)));
+			Rect buildButtonRect = new Rect(760,(435) + ((numButtons-1) *(150/(numButtons))) ,190, (150/(2)));
 			build = MakeButton("Build",buildButtonRect);
 			build.AddComponent("SwitchMenu");
 			build.AddComponent ("BuildMenu");
@@ -56,7 +56,7 @@ public class MainMenu : Menu {
 			numButtons++;
 			
 			fight = makeFireButton(numButtons);
-			Rect fortifyButtonRect = new Rect(Screen.width/2 + 130,Screen.height/2 - 120,buttonSize.x, buttonSize.y);
+			Rect fortifyButtonRect = new Rect(610,180,buttonSize.x, buttonSize.y);
 			//fortifyButtonRect = FindPos(numButtons, fortifyButtonRect);
 			fortify = MakeButton("Fortify",fortifyButtonRect);
 			fortify.AddComponent("SwitchMenu");
@@ -69,7 +69,7 @@ public class MainMenu : Menu {
 			fortify.GetComponent<FortifyMenu>().click = click;
 			m3.action.click = click;
 			menuItems.Add(m3);
-			Rect upgradeButtonRect = new Rect(Screen.width/2 + 130,Screen.height/2 - 60 ,buttonSize.x, buttonSize.y);
+			Rect upgradeButtonRect = new Rect(610,240 ,buttonSize.x, buttonSize.y);
 			//upgradeButtonRect = FindPos(numButtons, upgradeButtonRect);
 			upgrade = MakeButton("Upgrade",upgradeButtonRect);
 			upgrade.AddComponent("SwitchMenu");
@@ -82,7 +82,7 @@ public class MainMenu : Menu {
 			upgrade.GetComponent<UpgradeMenu>().click = click;
 			m4.action.click = click;
 			menuItems.Add(m4);
-			Rect passButtonRect = new Rect(Screen.width - 200,(Screen.height - 165) + ((numButtons-1) *(150/(numButtons)))+10,190,150/(2));
+			Rect passButtonRect = new Rect(760,(435) + ((numButtons-1) *(150/(numButtons)))+10,190,150/(2));
 			GameObject pass = MakeButton("Pass",passButtonRect);
 			pass.AddComponent("PassAction");
 			pass.transform.parent = transform;
@@ -173,7 +173,7 @@ public class MainMenu : Menu {
 	}
 	
 	private GameObject makeFireButton(int i) {
-		Rect fightButtonRect = new Rect(Screen.width/2 + 130,Screen.height/2,buttonSize.x, buttonSize.y);
+		Rect fightButtonRect = new Rect(610,300,buttonSize.x, buttonSize.y);
 		//fightButtonRect = FindPos(numButtons, fightButtonRect);
 		GameObject fight = MakeButton("Fight",fightButtonRect);
 		fight.AddComponent("Menu");
@@ -194,7 +194,7 @@ public class MainMenu : Menu {
 		fight.AddComponent ("CollapseAnimator");
 		fight.GetComponent<CollapseAnimator>().collapseParticle = collp;
 		fight.GetComponent<CollapseAnimator>().soundEffect = sound;
-		AudioSource audio = fight.AddComponent<AudioSource>();
+		fight.AddComponent<AudioSource>();
 		fight.transform.parent = transform;
 		MenuItem m2 = fight.GetComponent<MenuItem>();
 		m2.action = fight.GetComponent<FireAction>();

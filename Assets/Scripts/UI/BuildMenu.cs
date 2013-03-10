@@ -40,7 +40,7 @@ public class BuildMenu : Menu {
 			
 			Rect materialButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_MATERIALS; i++) {
-				materialButtonRect = new Rect(Screen.width - 165, (Screen.height - 165) + ( ( i * ((150/(Faction.NUM_MATERIALS))+5))  ), 160, 150/(Faction.NUM_MATERIALS));
+				materialButtonRect = new Rect(795, (435) + ( ( i * ((150/(Faction.NUM_MATERIALS))+5))  ), 160, 150/(Faction.NUM_MATERIALS));
 				//materialButtonRect = FindPos (numButtons, materialButtonRect);
 				GameObject item = MakeButton("", materialButtonRect);
 				item.AddComponent("MaterialCostLabelUpdate");
@@ -49,13 +49,14 @@ public class BuildMenu : Menu {
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
 				m.action = item.GetComponent<MaterialCostLabelUpdate>();
+				m.action.click = click;
 				item.GetComponent<MaterialCostLabelUpdate>().fromMenu = this.gameObject;
 				item.GetComponent<BuildWeaponMenu>().click = click;
 				menuItems.Add(m);
 				materialButtons[i] = m;
 				numButtons++;
 			}
-			Rect backButtonRect = new Rect(Screen.width - 230,Screen.height - 165,60,160);
+			Rect backButtonRect = new Rect(730,435,60,160);
 			//backButtonRect = FindPos(numButtons, backButtonRect);
 			GameObject back = MakeButton("Back",backButtonRect);
 			back.AddComponent("SwitchMenu");
@@ -102,26 +103,26 @@ public class BuildMenu : Menu {
 
 	private Rect FindPos(int i, Rect rect) {
 		if(i == 1 || i == 4 || i == 7) {
-			rect.x = Screen.width - 150;
+			rect.x = 810;
 		}
 		else if(i == 0 || i == 3 || i == 6) {
-			rect.x = Screen.width - 225;
+			rect.x = 735;
 		}
 		else if(i == 2 || i == 5 || i == 8) {
-			rect.x = Screen.width - 75;
+			rect.x = 885;
 		}
 		else {
 			Debug.Log ("Too many buttons!");	
 		}
 		
 		if(i <= 2) {
-			rect.y = Screen.height - 165;
+			rect.y = 435;
 		}
 		else if(i > 2 && i <= 5) {
-			rect.y = Screen.height - 110;
+			rect.y = 490;
 		}
 		else if(i > 5 && i <= 8) {
-			rect.y = Screen.height - 55;
+			rect.y = 545;
 		}
 		
 		return rect;

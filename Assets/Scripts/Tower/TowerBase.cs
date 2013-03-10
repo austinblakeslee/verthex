@@ -37,4 +37,20 @@ public class TowerBase : MonoBehaviour {
 	public int GetTowerNumber(){
 		return this.towerNumber;
 	}
+	
+	public void Highlight() {
+		foreach(Renderer r in GetComponentsInChildren<Renderer>()) {
+			if(r.material.shader.name == "Diffuse") {
+				r.material.shader = Shader.Find("Custom/highlightShader");
+			}
+		}
+	}
+	
+	public void Unhighlight() {
+		foreach(Renderer r in GetComponentsInChildren<Renderer>()) {
+			if(r.material.shader.name == "Custom/highlightShader") {
+				r.material.shader = Shader.Find("Diffuse");
+			}
+		}
+	}
 } 

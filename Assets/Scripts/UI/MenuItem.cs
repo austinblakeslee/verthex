@@ -42,7 +42,6 @@ public class MenuItem : MonoBehaviour {
 	public bool visible = true;
 	public KeyCode hotKey;
 	
-	
 	/*public MenuItem() {
 		text = "";
 	}

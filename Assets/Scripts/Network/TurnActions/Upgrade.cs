@@ -6,8 +6,6 @@ public class Upgrade : TurnAction {
 
 	public int sectionNum;
 	public int upgradeChoice;
-	private int tNum;
-	private int sNum;
 	
 	private static string[] upgradeChoices = new string[10] {"Damage", "AoE", "DoT", "Drain", "Paralyze", "Tag", "Poison", "Alter Weight", "Force Field", "Blind"};
 	
@@ -16,11 +14,9 @@ public class Upgrade : TurnAction {
 	}
 
 	public Upgrade(int t, int n, string u) : base("Upgrade") {
-		this.towerNumber = t; //this is getting changed somewhere. Don't feel like figuring out where, Imma just cheat
-		tNum = t;
+		this.towerNumber = t;
 		this.playerNumber = TurnOrder.myPlayer.playerNumber;
 		this.sectionNum = n;
-		sNum = n; //Same deal
 		this.upgradeChoice = EncodeUpgrade(u);
 		this.cost = 200;
 	}
@@ -33,7 +29,6 @@ public class Upgrade : TurnAction {
 		string[] tokens = actionMessage.Split(TOKEN_SEPARATOR);
 		this.playerNumber = int.Parse(tokens[0]);
 		this.towerNumber = int.Parse(tokens[1]);
-		Debug.Log ("TNum = " + towerNumber);
 
 		this.sectionNum = int.Parse(tokens[FIRST_AVAILABLE_INDEX]);
 		this.upgradeChoice = int.Parse(tokens[FIRST_AVAILABLE_INDEX+1]);

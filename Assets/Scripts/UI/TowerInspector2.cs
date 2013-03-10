@@ -7,22 +7,38 @@ public class TowerInspector2 : MonoBehaviour {
 	public GUIStyle nrStyle;
 	public GUIStyle nyStyle;
 	public GUIStyle ngStyle;
+	public GUIStyle nbStyle;
 	public GUIStyle baseStyle;
 	public GUIStyle nonActive;
 	public GUIStyle active;
+	public bool show;
+	private Vector3 scale;
+	private float ow;
+	private float oh;
 
 	// Use this for initialization
 	void Start () {
+		ow = 960;
+		oh = 600;
 		top = 450;
 		currentPlayer = TurnOrder.myPlayer;
+		show = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		//char star = '\u2606';
+		//Debug.Log (star);
+		currentPlayer = TurnOrder.GetPlayerByNumber(TowerSelection.GetSelectedTower().GetPlayerNum());
 	}
 	
 	void OnGUI() {
+		if(show) {
+		scale.y = Screen.height/oh;
+		scale.x = Screen.width/ow;
+		scale.z = 1;
+		float scaleX = Screen.width/ow;
+		GUI.matrix = Matrix4x4.TRS(new Vector3((scaleX - scale.y)/2 * ow,0,0),Quaternion.identity,scale);
 		GUIStyle p1Style;
 		GUIStyle p2Style;
 		if(currentPlayer == TurnOrder.player1) {
@@ -53,18 +69,36 @@ public class TowerInspector2 : MonoBehaviour {
 				if(height > 0) {
 					for(int i = 0; i < height; i++) {
 						GUIStyle style;
+						string towerStat = "";
+						//towers[j].GetSection(i).attributes.weapon.GetDamage().ToString();
 						//GUIStyle style = GetInspectorStyle(selectedTower, i, false);
+						char star = '\u2605';
+						Debug.Log (star);
 						Section s = towers[j].GetSection(i);
-						string towerStat = towers[j].GetSection(i).attributes.weapon.GetDamage().ToString();
+						string wtype = s.attributes.weapon.GetWeaponType();
+						if(wtype == "Nothing") {
+							towerStat = "";	
+						}
+						else if(wtype == "Blaster" || wtype == "Pistols" || wtype == "Arrows") {
+							towerStat = star + "";
+						}
+						else if(wtype == "Disintegration Beam" || wtype == "Gattling Gun" || wtype == "Spirit 1") {
+							towerStat = star + " " + star;
+						}
+						else {
+							towerStat = star + " " + star + " " + star;
+						}
 						int sp = s.attributes.sp - towers[j].GetWeightAboveSection(i);
-						int maxSP = s.attributes.maxSP;
-						double ratio = (double)sp / (double)maxSP;
+						int initSP = s.attributes.material.initialSP;
+						double ratio = (double)sp / (double)initSP;
 						if(ratio < 0.33) {
 							style = nrStyle;
 						} else if(ratio >= 0.33 && ratio < 0.66) {
 							style = nyStyle;
-						} else {
+						} else if(ratio >= 0.66 && ratio <= 1.01) {
 							style = ngStyle;
+						} else {
+							style = nbStyle;
 						}
 						Rect r;
 						if(height > 3) {
@@ -77,11 +111,11 @@ public class TowerInspector2 : MonoBehaviour {
 				}
 			}
         }
+		}
     }
 	
 	private void RenderButton(Rect r, string text, GUIStyle style, Tower t, int i) {
 		if(GUI.Button (r, text, style)) {
-			Section sc = t.GetSection(i);
 			TowerSelection.LocalSelectSection(t, i); //FIX ME!!!!
 		}
 	}

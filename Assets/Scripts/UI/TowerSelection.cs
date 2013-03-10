@@ -22,13 +22,15 @@ public class TowerSelection : MonoBehaviour {
 	public Texture2D noUpgrade;
 	public Texture2D upgrade;
 	
-	public GUISkin skin;
-	public GUISkin skinSmall;
+	//public GUISkin skin;
+	//public GUISkin skinSmall;
 	
 	public MenuItem fortifyRP;
 	public MenuItem fortifySP;
 	public MenuItem dotButton;
 	public MenuItem aoeButton;
+	
+	public static bool disableCameraPan = false;
 	
 	void Awake() {
 		materialBoxRect = new Rect(230, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
@@ -41,7 +43,6 @@ public class TowerSelection : MonoBehaviour {
 	}
 	
 	public static void Deselect() {
-		print("GetTower[0] in Deselect: " + TurnOrder.myPlayer.GetTower(0).ToString());
 		LocalSelectSection(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum), -1);
 	}
 
@@ -99,7 +100,7 @@ public class TowerSelection : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		GUI.skin = skin;
+		//GUI.skin = skin;
 		if(selectedSection != null) {
 			DrawMaterialBox();
 			if(selectedSection.attributes.weapon.GetWeaponType() != "Nothing") {
@@ -147,9 +148,9 @@ public class TowerSelection : MonoBehaviour {
 			height = 30;
 			width = 200;
 			
-			GUI.skin = skinSmall;
+			//GUI.skin = skinSmall;
 			GUI.Label(new Rect(left, top, width, height), selectedSection.attributes.material.GetSectionEffect().GetInfo());
-			GUI.skin = skin;
+			//GUI.skin = skin;
 		//}
 		GUI.EndGroup();
 	}
@@ -242,22 +243,31 @@ public class TowerSelection : MonoBehaviour {
 	
 	[RPC]
 	private void SelectSection(Tower t, int sectionNumber) {
-		print(t);
-		MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
+		//Debug.Log ("Section Selected");
+		InGameCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<InGameCamera>();
 		if(selectedSection != null) {
-			selectedSection.SetColor(Color.white);
+			selectedSection.Unhighlight();
+		}
+		if(selectedTower != null) {
+			selectedTower.towerBase.Unhighlight();
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
 			ValueStore.selectedMaterial = null; //For Fortify Menu Update
-			mc.ChangeTarget(t.towerBase.transform);
-			mc.SetCurrentTower(t);	//Allows camera to hold tower info
+			if(!disableCameraPan) {
+				mc.ChangeTarget(t.towerBase.transform);
+			}
+			t.towerBase.Highlight();
+			
+			//mc.SetCurrentTower(t);	//Allows camera to hold tower info
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
 			ValueStore.selectedMaterial = s.attributes.material; //For Fortify Menu Update
-			mc.ChangeTarget(s.transform);
-			s.SetColor(TurnOrder.myPlayer.color);
+			if(!disableCameraPan) {
+				mc.ChangeTarget(s.transform);
+			}
+			s.Highlight();
 		}
 		selectedTower = t;
 	}
