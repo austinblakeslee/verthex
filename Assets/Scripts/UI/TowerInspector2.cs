@@ -22,7 +22,8 @@ public class TowerInspector2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		//char star = '\u2606';
+		//Debug.Log (star);
 	}
 	
 	void OnGUI() {
@@ -57,9 +58,25 @@ public class TowerInspector2 : MonoBehaviour {
 				if(height > 0) {
 					for(int i = 0; i < height; i++) {
 						GUIStyle style;
+						string towerStat = "";
+						//towers[j].GetSection(i).attributes.weapon.GetDamage().ToString();
 						//GUIStyle style = GetInspectorStyle(selectedTower, i, false);
+						char star = '\u2605';
+						Debug.Log (star);
 						Section s = towers[j].GetSection(i);
-						string towerStat = towers[j].GetSection(i).attributes.weapon.GetDamage().ToString();
+						string wtype = s.attributes.weapon.GetWeaponType();
+						if(wtype == "Nothing") {
+							towerStat = "";	
+						}
+						else if(wtype == "Blaster" || wtype == "Pistols" || wtype == "Arrows") {
+							towerStat = star + "";
+						}
+						else if(wtype == "Disintegration Beam" || wtype == "Gattling Gun" || wtype == "Spirit 1") {
+							towerStat = star + " " + star;
+						}
+						else {
+							towerStat = star + " " + star + " " + star;
+						}
 						int sp = s.attributes.sp - towers[j].GetWeightAboveSection(i);
 						int initSP = s.attributes.material.initialSP;
 						double ratio = (double)sp / (double)initSP;

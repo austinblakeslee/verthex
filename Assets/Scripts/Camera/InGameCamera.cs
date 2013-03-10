@@ -55,7 +55,7 @@ public class InGameCamera : MonoBehaviour {
 	}
 	
 	public void ChangeTarget(Transform target) {
-		Debug.Log (target.GetComponent<TowerBase>().playerNumber);
+		//Debug.Log (target.GetComponent<TowerBase>().playerNumber);
 		viewingSection = true;
 		targetPos -= focusPos - target.position;
 		focusPos = target.position;
