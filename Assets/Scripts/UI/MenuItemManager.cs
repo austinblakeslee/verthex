@@ -23,7 +23,7 @@ public class MenuItemManager : MonoBehaviour {
 	}
 	
 	public static void UnregisterRect(Rect r) {
-		Debug.Log (r.x+","+r.y+","+r.width+","+r.height);
+		//Debug.Log (r.x+","+r.y+","+r.width+","+r.height);
 		Rect r1 = new Rect(r.x*scaleX,r.y*scaleY,r.width*scaleX,r.height*scaleY);
 		registeredRects.Remove(r1);
 	}
