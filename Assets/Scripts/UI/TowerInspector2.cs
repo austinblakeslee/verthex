@@ -24,6 +24,7 @@ public class TowerInspector2 : MonoBehaviour {
 	void Update () {
 		//char star = '\u2606';
 		//Debug.Log (star);
+		currentPlayer = TurnOrder.GetPlayerByNumber(TowerSelection.GetSelectedTower().GetPlayerNum());
 	}
 	
 	void OnGUI() {
