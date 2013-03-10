@@ -19,6 +19,13 @@ public class Tower {
 
     }
 	
+	public void CheckAlive(){
+		//Called in Player.cs
+		if(sections.Count <= 0) {
+			alive = false;
+		}
+	}
+	
 	public TowerBase GetTowerBase(){
 		return this.towerBase;
 	}
@@ -122,8 +129,5 @@ public class Tower {
     	for(int i=index; i < sections.Count; i++) {
     		sections[i].attributes.height = i;
     	}
-		if(sections.Count <= 0) {
-			alive = false;
-		}
     }
 }
