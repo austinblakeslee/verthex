@@ -7,7 +7,6 @@ public class BuildWeaponMenu : Menu {
 	public Vector2 buttonSize;
 	public Vector2 boxSize;
 	public AudioClip click;
-	private MenuItem[] materialButtons;
 	public MenuItem[] weaponButtons;
 	private int numButtons;
 	public SectionMaterial sm;
@@ -17,7 +16,6 @@ public class BuildWeaponMenu : Menu {
 		buttonSize.y = 50;
 		boxSize.x = 150;
 		boxSize.y = 50;
-		materialButtons = new MenuItem[Faction.NUM_MATERIALS];
 		weaponButtons = new MenuItem[Faction.NUM_WEAPONS];
 	}
 	

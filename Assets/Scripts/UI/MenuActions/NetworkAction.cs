@@ -46,7 +46,6 @@ public class NetworkAction : MonoBehaviour {
 		if(refreshing){
 			if(MasterServer.PollHostList().Length > 0){
 				refreshing = false;
-				Debug.Log(MasterServer.PollHostList().Length);
 				hostData = MasterServer.PollHostList();
 			}
 		}

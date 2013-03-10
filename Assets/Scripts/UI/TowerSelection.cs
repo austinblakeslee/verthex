@@ -41,7 +41,6 @@ public class TowerSelection : MonoBehaviour {
 	}
 	
 	public static void Deselect() {
-		print("GetTower[0] in Deselect: " + TurnOrder.myPlayer.GetTower(0).ToString());
 		LocalSelectSection(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum), -1);
 	}
 
