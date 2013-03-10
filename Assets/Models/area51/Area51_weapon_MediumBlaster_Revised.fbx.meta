@@ -48,8 +48,11 @@ ModelImporter:
     400040: transform8
     400042: transform9
     2300000: polySurface10
+    2300002: //RootNode
     3300000: polySurface10
+    3300002: //RootNode
     4300000: polySurface10
+    4300002: polySurface1
     9500000: //RootNode
   materials:
     importMaterials: 1
