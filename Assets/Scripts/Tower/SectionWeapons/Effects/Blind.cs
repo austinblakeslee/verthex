@@ -22,10 +22,13 @@ public class Blind : WeaponEffect
 			Section s = t.GetSection (center);
 			SectionEffect eff = s.attributes.material.GetSectionEffect();
 			eff.ApplyDamage(s, damage);
-			if (eff.GetEffectType() != "Blinded")
-			{	
-				s.attributes.material.SetSectionEffect(new BlindedEffect(s, missChance));
-			}
+			if (s.attributes.HasWeapon())
+			{
+				if (s.attributes.weapon.GetEffect().GetEffectType() != "Blinded")
+				{
+					s.attributes.weapon.SetWeaponEffect(new Blinded(missChance));
+				}
+			}		
 		}
 		else if(center < 0) {
 			CombatLog.addLine("Attack was too low");
