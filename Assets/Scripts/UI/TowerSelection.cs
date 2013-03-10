@@ -55,6 +55,7 @@ public class TowerSelection : MonoBehaviour {
 				if(hit.collider.tag == "Base")
 				{
 					TowerBase b = hit.collider.GetComponent<TowerBase>();
+					Debug.Log (b.playerNumber + " " + b.towerNumber);
 					Tower baseTow = TurnOrder.GetPlayerByNumber(b.playerNumber).GetTower(b.towerNumber);
 					LocalSelectSection(baseTow, -1);
 					audio.Play ();
@@ -243,20 +244,20 @@ public class TowerSelection : MonoBehaviour {
 	[RPC]
 	private void SelectSection(Tower t, int sectionNumber) {
 		//Debug.Log ("Section Selected");
-		//MainCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<MainCamera>();
+		InGameCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<InGameCamera>();
 		if(selectedSection != null) {
 			selectedSection.SetColor(Color.white);
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
 			ValueStore.selectedMaterial = null; //For Fortify Menu Update
-			//mc.ChangeTarget(t.towerBase.transform);
+			mc.ChangeTarget(t.towerBase.transform);
 			//mc.SetCurrentTower(t);	//Allows camera to hold tower info
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
 			ValueStore.selectedMaterial = s.attributes.material; //For Fortify Menu Update
-			//mc.ChangeTarget(s.transform);
+			mc.ChangeTarget(s.transform);
 			s.SetColor(TurnOrder.myPlayer.color);
 		}
 		selectedTower = t;

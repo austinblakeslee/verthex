@@ -121,7 +121,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		GameObject cam = GameObject.FindWithTag("MainCamera");
 		//cam.GetComponent<MainCamera>().enabled = true;
 		cam.transform.camera.fieldOfView = 20;
-		cam.GetComponent<InGameCamera>().returnPostion();
+		cam.GetComponent<InGameCamera>().returnPosition();
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 		//GameObject.Find ("TopMenu").GetComponent<Menu>().on = true;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<TowerInspector2>().show = true;
