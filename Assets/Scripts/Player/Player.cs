@@ -67,11 +67,19 @@ public class Player {
 	}
 	
 	public bool Loses() {
+		bool lost = false;
+		int loseCount = 0;
 		foreach(Tower t in towers) {
-			if(t.alive) {
-				return false;
-			}
+			t.CheckAlive();
+			if(!t.alive) {
+				loseCount++;
+			}	
 		}
-		return true;
+		
+		if(loseCount == towers.Length){
+			lost = true;
+		}
+
+		return lost;
 	}
 }

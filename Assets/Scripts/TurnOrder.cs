@@ -34,6 +34,7 @@ public class TurnOrder : MonoBehaviour {
 	public static int actionNum = 0;
 	private int displayActionNum = 0;
 	private bool showDebug = false;
+	public bool checksVictory = false;
 	
 	void Start () {
 		instance = this;
@@ -269,9 +270,13 @@ public class TurnOrder : MonoBehaviour {
 	}
 	
 	private void EndTurn() {
-		if(IsBattlePhase()) {
-			CheckVictory();
+		//Only CheckVictory if checksVictory is true
+		if(checksVictory){
+			if(IsBattlePhase()) {
+				CheckVictory();
+			}
 		}
+		
 		ValueStore.helpMessage = "Click a section to select it.";
 		turnNum++;
 		if(!IsBattlePhase() && turnNum != 0) {
