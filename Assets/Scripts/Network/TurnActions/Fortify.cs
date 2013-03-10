@@ -23,6 +23,7 @@ public class Fortify : TurnAction {
 	protected override void ParseActionMessage(string actionMessage) {
 		string[] tokens = actionMessage.Split(TOKEN_SEPARATOR);
 		this.playerNumber = int.Parse(tokens[0]);
+		this.towerNumber = int.Parse(tokens[1]);
 		this.sectionNum = int.Parse(tokens[FIRST_AVAILABLE_INDEX]);
 	}
 	
