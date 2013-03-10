@@ -7,14 +7,17 @@ public class TowerInspector2 : MonoBehaviour {
 	public GUIStyle nrStyle;
 	public GUIStyle nyStyle;
 	public GUIStyle ngStyle;
+	public GUIStyle nbStyle;
 	public GUIStyle baseStyle;
 	public GUIStyle nonActive;
 	public GUIStyle active;
+	public bool show;
 
 	// Use this for initialization
 	void Start () {
 		top = 450;
 		currentPlayer = TurnOrder.myPlayer;
+		show = true;
 	}
 	
 	// Update is called once per frame
@@ -23,6 +26,7 @@ public class TowerInspector2 : MonoBehaviour {
 	}
 	
 	void OnGUI() {
+		if(show) {
 		GUIStyle p1Style;
 		GUIStyle p2Style;
 		if(currentPlayer == TurnOrder.player1) {
@@ -57,14 +61,16 @@ public class TowerInspector2 : MonoBehaviour {
 						Section s = towers[j].GetSection(i);
 						string towerStat = towers[j].GetSection(i).attributes.weapon.GetDamage().ToString();
 						int sp = s.attributes.sp - towers[j].GetWeightAboveSection(i);
-						int maxSP = s.attributes.maxSP;
-						double ratio = (double)sp / (double)maxSP;
+						int initSP = s.attributes.material.initialSP;
+						double ratio = (double)sp / (double)initSP;
 						if(ratio < 0.33) {
 							style = nrStyle;
 						} else if(ratio >= 0.33 && ratio < 0.66) {
 							style = nyStyle;
-						} else {
+						} else if(ratio >= 0.66 && ratio <= 1.01) {
 							style = ngStyle;
+						} else {
+							style = nbStyle;
 						}
 						Rect r;
 						if(height > 3) {
@@ -77,6 +83,7 @@ public class TowerInspector2 : MonoBehaviour {
 				}
 			}
         }
+		}
     }
 	
 	private void RenderButton(Rect r, string text, GUIStyle style, Tower t, int i) {
