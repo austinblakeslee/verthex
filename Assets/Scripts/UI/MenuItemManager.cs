@@ -14,11 +14,11 @@ public class MenuItemManager : MonoBehaviour {
 	public static void RegisterRect(Rect r) {
 		scaleX = ((float)Screen.width)/ow;
 		scaleY = ((float)Screen.height)/oh;
-		Debug.Log ("oldRect: " + r.x+","+r.y+","+r.width+","+r.height);
-		Debug.Log ("ScaleX: " + scaleX + ", ScaleY: " + scaleY);
-		Debug.Log ("OW: " + ow + ", OH: " + oh + ", NW: " + Screen.width + ", NH: " + Screen.height);
+		//Debug.Log ("oldRect: " + r.x+","+r.y+","+r.width+","+r.height);
+		//Debug.Log ("ScaleX: " + scaleX + ", ScaleY: " + scaleY);
+		//Debug.Log ("OW: " + ow + ", OH: " + oh + ", NW: " + Screen.width + ", NH: " + Screen.height);
 		Rect r1 = new Rect(r.x*scaleX,r.y*scaleY,r.width*scaleX,r.height*scaleY);
-		Debug.Log ("newRect: " + r1.x+","+r1.y+","+r1.width+","+r1.height);
+		//Debug.Log ("newRect: " + r1.x+","+r1.y+","+r1.width+","+r1.height);
 		registeredRects.Add(r1);
 	}
 	
