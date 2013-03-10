@@ -26,6 +26,11 @@ public class Tower {
 		}
 	}
 	
+	public bool isAlive(){
+		return alive;
+	}
+	
+	
 	public TowerBase GetTowerBase(){
 		return this.towerBase;
 	}

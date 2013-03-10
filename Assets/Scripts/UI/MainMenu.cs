@@ -123,6 +123,14 @@ public class MainMenu : Menu {
 		else {
 			fortify.GetComponent<MenuItem>().visible = true;
 		}
+		
+		//Don't allow player to build if Tower is not alive
+		if(TowerSelection.GetSelectedTower().isAlive() == false) {
+			build.GetComponent<MenuItem>().visible = false;
+		}else {
+			build.GetComponent<MenuItem>().visible = true;
+		}
+		
 	}
 	
 	private GameObject MakeButton(string text, Rect rect) {
