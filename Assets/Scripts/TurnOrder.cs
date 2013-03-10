@@ -71,6 +71,9 @@ public class TurnOrder : MonoBehaviour {
 		}
 		CombatLog.addLineNoPlayer("Ceasefire ends in " + (ceasefire - turnNum) + " turns.");
 		TowerSelection.Deselect();
+		
+		//Check for victory (Will prohibit building on not alive Towers
+		checksVictory = true;
 	}
 	
 	private Faction MakeFactionForString(string f) {
@@ -306,12 +309,14 @@ public class TurnOrder : MonoBehaviour {
 		return turnNum >= ceasefire;
 	}
 	
-	public static void CheckVictory() { //FIX ME
+	public static void CheckVictory() { 
 		if(IsBattlePhase()) {
 			if(player1.Loses()) {
 				Debug.Log("--------------PLAYER2 WINS----------------");
+				Application.LoadLevel(4);
 			} else if(player2.Loses()) {
 				Debug.Log("--------------PLAYER1 WINS----------------");
+				Application.LoadLevel(3);
 			}
 		}
 	}
