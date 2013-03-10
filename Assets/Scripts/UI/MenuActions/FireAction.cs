@@ -20,6 +20,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		}
 		else if(TurnOrder.IsBattlePhase()) {
 			if(firingSection == null || !TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).GetSections().Contains(firingSection)) {
+				Debug.Log (firingSection);
 				ValueStore.helpMessage = "You must select your own tower section to fire!";
 			}
 			else if (firingSection.attributes.weapon.GetWeaponType() == "Nothing") {
@@ -78,10 +79,11 @@ public class FireAction : DefaultMenuAction,MenuAction {
 	}
 	
 	private void hide() {
-		GameObject.FindWithTag("MainCamera").camera.enabled = false;
-		//GameObject.FindWithTag("MiniMap").camera.enabled = false;
-		//GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = true;
+		//GameObject.FindWithTag("MainCamera").camera.enabled = false;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = false;
+		//GameObject.Find ("TopMenu").GetComponent<Menu>().on = false;
+		GameObject.FindGameObjectWithTag("Player").GetComponent<TowerInspector2>().show = false;
+		GameObject cam = GameObject.FindWithTag("MainCamera");
 		string firingCam = "";
 	//	if (firingSection.attributes.weapon.GetEffect().CanAttackOpponent() && firingSection.attributes.weapon.GetEffect().CanAttackSelf()) //if can attack either opp or self,
 	//	{
@@ -101,27 +103,28 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		{
 			Debug.Log ("Error choosing which Firing Camera to use");
 		}
-		GameObject.FindWithTag(firingCam).camera.enabled = true;	
+		//cam.GetComponent<MainCamera>().enabled = false;
+		cam.transform.position = GameObject.FindWithTag(firingCam).transform.position; 
+		cam.transform.rotation = GameObject.FindWithTag(firingCam).transform.rotation;
+		cam.transform.camera.fieldOfView = 60;
 
-		//if(TurnOrder.myPlayer == TurnOrder.player1) {
-		//	GameObject.FindWithTag("p1FireCamera").camera.enabled = true;	
-		//}
-		//else if(TurnOrder.myPlayer == TurnOrder.player2) {
-		//	GameObject.FindWithTag("p2FireCamera").camera.enabled = true;
-		//}
 	}
 	
 	private void unhide() {
 		//if(TurnOrder.myPlayer == TurnOrder.player1) {
-			GameObject.FindWithTag("p1FireCamera").camera.enabled = false;
+			//GameObject.FindWithTag("p1FireCamera").camera.enabled = false;
 	//	}
 //		if(TurnOrder.myPlayer == TurnOrder.player2) {
-			GameObject.FindWithTag("p2FireCamera").camera.enabled = false;
+			//GameObject.FindWithTag("p2FireCamera").camera.enabled = false;
 //		}
-		//GameObject.FindWithTag("MiniMap").GetComponent<MiniMap>().hidden = false;
-		GameObject.FindWithTag("MainCamera").camera.enabled = true;
-		//GameObject.FindWithTag("MiniMap").camera.enabled = true;
+		//GameObject.FindWithTag("MainCamera").camera.enabled = true;
+		GameObject cam = GameObject.FindWithTag("MainCamera");
+		//cam.GetComponent<MainCamera>().enabled = true;
+		cam.transform.camera.fieldOfView = 20;
+		cam.GetComponent<InGameCamera>().returnPostion();
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
+		//GameObject.Find ("TopMenu").GetComponent<Menu>().on = true;
+		GameObject.FindGameObjectWithTag("Player").GetComponent<TowerInspector2>().show = true;
 	}
 	
 	void OnGUI() {

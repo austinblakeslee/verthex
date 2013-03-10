@@ -219,6 +219,7 @@ public class TurnOrder : MonoBehaviour {
 		showingActions = false;
 		this.inputReady = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
+		GameObject.FindGameObjectWithTag("Player").GetComponent<TowerInspector2>().show = true;
 		for(int i = 0; i < myActions.Length; i++) {
 			myActions[i] = null;
 		}
@@ -254,6 +255,7 @@ public class TurnOrder : MonoBehaviour {
 			foreach (Menu c in GameObject.Find("MainMenu").GetComponentsInChildren<Menu>()) {
 				c.on = false;
 			}
+			GameObject.FindGameObjectWithTag("Player").GetComponent<TowerInspector2>().show = false;
 			
 		} else {
 			foreach (Menu c in GameObject.Find("MainMenu").GetComponentsInChildren<Menu>()) {
