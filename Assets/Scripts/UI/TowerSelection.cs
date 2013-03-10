@@ -30,6 +30,8 @@ public class TowerSelection : MonoBehaviour {
 	public MenuItem dotButton;
 	public MenuItem aoeButton;
 	
+	public static bool disableCameraPan = false;
+	
 	void Awake() {
 		materialBoxRect = new Rect(230, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
 		weaponBoxRect = new Rect(460, Screen.height - weaponBox.y - padding, weaponBox.x, weaponBox.y);
@@ -252,7 +254,9 @@ public class TowerSelection : MonoBehaviour {
 		if(sectionNumber < 0) {
 			selectedSection = null;
 			ValueStore.selectedMaterial = null; //For Fortify Menu Update
-			mc.ChangeTarget(t.towerBase.transform);
+			if(!disableCameraPan) {
+				mc.ChangeTarget(t.towerBase.transform);
+			}
 			t.towerBase.Highlight();
 			
 			//mc.SetCurrentTower(t);	//Allows camera to hold tower info
@@ -260,7 +264,9 @@ public class TowerSelection : MonoBehaviour {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
 			ValueStore.selectedMaterial = s.attributes.material; //For Fortify Menu Update
-			mc.ChangeTarget(s.transform);
+			if(!disableCameraPan) {
+				mc.ChangeTarget(s.transform);
+			}
 			s.Highlight();
 		}
 		selectedTower = t;

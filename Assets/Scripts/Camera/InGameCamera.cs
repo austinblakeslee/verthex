@@ -6,6 +6,7 @@ public class InGameCamera : MonoBehaviour {
 	public Transform cam2Pos;
 	public Transform cam1FocusPos;
 	public Transform cam2FocusPos;
+	private Transform myFocus;
 	public Vector3 focusPos;
 	public Quaternion focusRot;
 	public Vector3 targetPos;
@@ -22,10 +23,12 @@ public class InGameCamera : MonoBehaviour {
 		if(TurnOrder.myPlayer == TurnOrder.player1) {
 			ChangePosition(cam1Pos, 3.0f);
 			focusPos = cam1FocusPos.position;
+			myFocus = cam1FocusPos;
 		}
 		else if(TurnOrder.myPlayer == TurnOrder.player2) {
 			ChangePosition(cam2Pos, 3.0f);
 			focusPos = cam2FocusPos.position;
+			myFocus = cam2FocusPos;
 		}
 	}
 	
@@ -34,7 +37,7 @@ public class InGameCamera : MonoBehaviour {
 		if(changingView) {
 			transform.position = Vector3.Lerp(transform.position,targetPos,Time.deltaTime * speed);
 			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, Time.deltaTime * speed);
-			if(transform.position == targetPos && transform.rotation == targetRot) {
+			if((transform.position - targetPos).magnitude <= 3.0f && Quaternion.Angle(transform.rotation, targetRot) <= 3.0f) {
 				changingView = false;
 				if(initialPos == Vector3.zero) {
 					initialPos = transform.position;
@@ -50,6 +53,9 @@ public class InGameCamera : MonoBehaviour {
 		changingView = false;
 		transform.position = initialPos;
 		transform.rotation = initialRot;
+		targetPos = initialPos;
+		targetRot = initialRot;
+		focusPos = myFocus.position;
 	}
 	
 	
@@ -63,6 +69,7 @@ public class InGameCamera : MonoBehaviour {
 		changingView = true;
 		targetPos = initialPos;
 		targetRot = initialRot;
+		focusPos = myFocus.position;
 	}
 	
 	
