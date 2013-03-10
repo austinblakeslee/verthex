@@ -54,7 +54,6 @@ public class TowerSelection : MonoBehaviour {
 				if(hit.collider.tag == "Base")
 				{
 					TowerBase b = hit.collider.GetComponent<TowerBase>();
-					Debug.Log (b.playerNumber + " " + b.towerNumber);
 					Tower baseTow = TurnOrder.GetPlayerByNumber(b.playerNumber).GetTower(b.towerNumber);
 					LocalSelectSection(baseTow, -1);
 					audio.Play ();
