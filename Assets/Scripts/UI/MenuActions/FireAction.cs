@@ -104,9 +104,10 @@ public class FireAction : DefaultMenuAction,MenuAction {
 			Debug.Log ("Error choosing which Firing Camera to use");
 		}
 		//cam.GetComponent<MainCamera>().enabled = false;
-		cam.transform.position = GameObject.FindWithTag(firingCam).transform.position; 
-		cam.transform.rotation = GameObject.FindWithTag(firingCam).transform.rotation;
+		Transform fCam = GameObject.FindWithTag(firingCam).transform;
 		cam.transform.camera.fieldOfView = 60;
+		cam.GetComponent<InGameCamera>().ChangePosition(fCam, 3.0f);
+		TowerSelection.disableCameraPan = true;
 
 	}
 	
@@ -121,7 +122,8 @@ public class FireAction : DefaultMenuAction,MenuAction {
 		GameObject cam = GameObject.FindWithTag("MainCamera");
 		//cam.GetComponent<MainCamera>().enabled = true;
 		cam.transform.camera.fieldOfView = 20;
-		cam.GetComponent<InGameCamera>().returnPosition();
+		cam.GetComponent<InGameCamera>().returnPosition(3.0f);
+		TowerSelection.disableCameraPan = false;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 		//GameObject.Find ("TopMenu").GetComponent<Menu>().on = true;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<TowerInspector2>().show = true;

@@ -30,6 +30,8 @@ public class TowerSelection : MonoBehaviour {
 	public MenuItem dotButton;
 	public MenuItem aoeButton;
 	
+	public static bool disableCameraPan = false;
+	
 	void Awake() {
 		materialBoxRect = new Rect(230, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
 		weaponBoxRect = new Rect(460, Screen.height - weaponBox.y - padding, weaponBox.x, weaponBox.y);
@@ -41,7 +43,6 @@ public class TowerSelection : MonoBehaviour {
 	}
 	
 	public static void Deselect() {
-		print("GetTower[0] in Deselect: " + TurnOrder.myPlayer.GetTower(0).ToString());
 		LocalSelectSection(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum), -1);
 	}
 
@@ -55,7 +56,6 @@ public class TowerSelection : MonoBehaviour {
 				if(hit.collider.tag == "Base")
 				{
 					TowerBase b = hit.collider.GetComponent<TowerBase>();
-					Debug.Log (b.playerNumber + " " + b.towerNumber);
 					Tower baseTow = TurnOrder.GetPlayerByNumber(b.playerNumber).GetTower(b.towerNumber);
 					LocalSelectSection(baseTow, -1);
 					audio.Play ();
@@ -246,19 +246,28 @@ public class TowerSelection : MonoBehaviour {
 		//Debug.Log ("Section Selected");
 		InGameCamera mc = GameObject.FindWithTag("MainCamera").GetComponent<InGameCamera>();
 		if(selectedSection != null) {
-			selectedSection.SetColor(Color.white);
+			selectedSection.Unhighlight();
+		}
+		if(selectedTower != null) {
+			selectedTower.towerBase.Unhighlight();
 		}
 		if(sectionNumber < 0) {
 			selectedSection = null;
 			ValueStore.selectedMaterial = null; //For Fortify Menu Update
-			mc.ChangeTarget(t.towerBase.transform);
+			if(!disableCameraPan) {
+				mc.ChangeTarget(t.towerBase.transform);
+			}
+			t.towerBase.Highlight();
+			
 			//mc.SetCurrentTower(t);	//Allows camera to hold tower info
 		} else {
 			Section s = t.GetSection(sectionNumber);
 			selectedSection = s;
 			ValueStore.selectedMaterial = s.attributes.material; //For Fortify Menu Update
-			mc.ChangeTarget(s.transform);
-			s.SetColor(TurnOrder.myPlayer.color);
+			if(!disableCameraPan) {
+				mc.ChangeTarget(s.transform);
+			}
+			s.Highlight();
 		}
 		selectedTower = t;
 	}

@@ -33,7 +33,7 @@ public class FortifyMenu : Menu {
 			m3.action = slabel.GetComponent<DefaultMenuAction>();
 			menuItems.Add(m3);
 			Rect confRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 50,boxSize.x,boxSize.y);
-			GameObject confirm = createGUIButton("FortifyAction","Confirm",confRect);
+			createGUIButton("FortifyAction","Confirm",confRect);
 			numButtons++;
 			Rect backRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 5,boxSize.x,boxSize.y);
 			GameObject back = createGUIButton("SwitchMenu","Back",backRect);

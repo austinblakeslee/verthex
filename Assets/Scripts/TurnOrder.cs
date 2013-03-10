@@ -30,7 +30,6 @@ public class TurnOrder : MonoBehaviour {
 	private bool player1Confirm = false;
 	private bool player2Confirm = false;
 	private string networkState = "waitingForActions";
-	private bool inputReady = true;
 	public static int actionNum = 0;
 	private int displayActionNum = 0;
 	private bool showDebug = false;
@@ -60,7 +59,6 @@ public class TurnOrder : MonoBehaviour {
 		{
 			Debug.Log ("Error! There are 0 Player Bases assigned.");
 		}
-		Debug.Log(player1Bases.Length);
 		for(int i=0; i<player1Bases.Length; i++) {
 			player1Bases[i].SetTowerNumber(i);
 			player1Bases[i].SetPlayerNumber(1);
@@ -92,24 +90,24 @@ public class TurnOrder : MonoBehaviour {
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			//playerText.guiSkin = player1Box;
 			playerText.text = "Player 1";
-			if(player1Confirm) {
-				actionsLeft.text = "0";
-			}
-			else {
-				actionsLeft.text = ""+(3-actionNum);
+			if(actionsLeft != null) {
+				if(player1Confirm) {
+					actionsLeft.text = "0";
+				}
+				else {
+					actionsLeft.text = ""+(3-actionNum);
+				}
 			}
 		} else {
 			//playerText.guiSkin = player2Box;
 			playerText.text = "Player 2";
-			if(player2Confirm) {
-				actionsLeft.text = "0";
-			}
-			else {
-				actionsLeft.text = ""+(3-actionNum);
-			}
 		}
-		actionQueue.text = "Actions:\nAction 1: "+myActions[0]+"\nAction 2: "+myActions[1]+"\nAction 3: "+myActions[2];
-		helpText.text = ValueStore.helpMessage;
+		if(actionQueue != null) {
+			actionQueue.text = "Actions:\nAction 1: "+myActions[0]+"\nAction 2: "+myActions[1]+"\nAction 3: "+myActions[2];
+		}
+		if(helpText != null) {
+			helpText.text = ValueStore.helpMessage;
+		}
 		if(Network.isServer) {
 			if(player1ActionsReceived == 3 && player2ActionsReceived == 3) {
 				if(networkState == "waitingForActions") {
@@ -156,7 +154,6 @@ public class TurnOrder : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.D)) {
 			showDebug = !showDebug;
 		}
-		//GameObject.FindWithTag("MainMenu").GetComponent<Menu>().on = inputReady;
 	}
 	
 	[RPC]
@@ -217,7 +214,6 @@ public class TurnOrder : MonoBehaviour {
 	[RPC]
 	private void Resume() {
 		showingActions = false;
-		this.inputReady = true;
 		GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<TowerInspector2>().show = true;
 		for(int i = 0; i < myActions.Length; i++) {

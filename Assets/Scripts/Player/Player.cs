@@ -13,7 +13,6 @@ public class Player {
 		this.playerNumber = number;
 	    this.resources = r;
 		this.towers = new Tower[3];
-		Debug.Log(towers.Length);
 	}
 	
 	public void AddTower(TowerBase b, Faction f, int i) {

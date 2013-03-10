@@ -37,7 +37,6 @@ public class MiniMap : MonoBehaviour {
 		scale.x = Screen.width/ow;
 		scale.z = 1;
 		float scaleX = Screen.width/ow;
-		Matrix4x4 svMat = GUI.matrix;
 		GUI.matrix = Matrix4x4.TRS(new Vector3((scaleX - scale.y)/2 * ow,0,0),Quaternion.identity,scale);
 		if(GUI.Button(p1T1Rect, "1:1"))
 		{

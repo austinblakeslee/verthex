@@ -14,7 +14,6 @@ public class CollapseAnimator : MonoBehaviour {
 	
 	private Section collapsingSection;
 	private Tower t;
-	private float timer = 0.0f;
 	private GameObject particleInstance;
 	private bool collapseSection = false;	
 

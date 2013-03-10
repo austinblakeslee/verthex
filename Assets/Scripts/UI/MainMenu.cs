@@ -194,7 +194,7 @@ public class MainMenu : Menu {
 		fight.AddComponent ("CollapseAnimator");
 		fight.GetComponent<CollapseAnimator>().collapseParticle = collp;
 		fight.GetComponent<CollapseAnimator>().soundEffect = sound;
-		AudioSource audio = fight.AddComponent<AudioSource>();
+		fight.AddComponent<AudioSource>();
 		fight.transform.parent = transform;
 		MenuItem m2 = fight.GetComponent<MenuItem>();
 		m2.action = fight.GetComponent<FireAction>();
