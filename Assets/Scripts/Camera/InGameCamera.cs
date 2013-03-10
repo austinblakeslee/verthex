@@ -4,60 +4,97 @@ using System.Collections;
 public class InGameCamera : MonoBehaviour {
 	public Transform cam1Pos;
 	public Transform cam2Pos;
+	public Transform cam1FocusPos;
+	public Transform cam2FocusPos;
+	private Transform myFocus;
 	public Vector3 focusPos;
 	public Quaternion focusRot;
 	public Vector3 targetPos;
 	public Quaternion targetRot;
 	
-	Vector3 initialPos;
-	Quaternion initialRot;
+	Vector3 initialPos = Vector3.zero;
+	Quaternion initialRot = Quaternion.identity;
 	
-	public bool viewingSection = false;
-	
-	GameObject cam;
+	public bool changingView = false;
+	public float speed = 1.0f;
 	
 	// Use this for initialization
 	void Start () {
-		cam = GameObject.FindWithTag("MainCamera");
 		if(TurnOrder.myPlayer == TurnOrder.player1) {
-			focusPos = cam2Pos.position;
-			targetPos = transform.position;
-			targetRot = transform.rotation;
-			ChangeTarget (cam1Pos);
+			ChangePosition(cam1Pos, 3.0f);
+			focusPos = cam1FocusPos.position;
+			myFocus = cam1FocusPos;
 		}
 		else if(TurnOrder.myPlayer == TurnOrder.player2) {
-			focusPos = cam2Pos.position;
-			initialPos = transform.position;
-			initialRot = transform.rotation;
-			returnPosition ();
+			ChangePosition(cam2Pos, 3.0f);
+			focusPos = cam2FocusPos.position;
+			myFocus = cam2FocusPos;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(viewingSection) {
-			transform.position = Vector3.Lerp(transform.position,targetPos,Time.deltaTime);
-			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, Time.deltaTime);
-			if(transform.position == targetPos && transform.rotation == targetRot) {
-				viewingSection = false;
-				if(initialPos == null) {
+		if(changingView) {
+			transform.position = Vector3.Lerp(transform.position,targetPos,Time.deltaTime * speed);
+			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, Time.deltaTime * speed);
+			if((transform.position - targetPos).magnitude <= 3.0f && Quaternion.Angle(transform.rotation, targetRot) <= 3.0f) {
+				changingView = false;
+				if(initialPos == Vector3.zero) {
 					initialPos = transform.position;
 					initialRot = transform.rotation;
+					ChangeTarget(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).towerBase.transform);
 				}
 			}
 		}
 	}
 	
-	public void returnPosition() {
-		viewingSection = true;
+	//instantly return to initial position
+	public void instantReturnPosition() {
+		changingView = false;
+		transform.position = initialPos;
+		transform.rotation = initialRot;
 		targetPos = initialPos;
 		targetRot = initialRot;
+		focusPos = myFocus.position;
 	}
 	
+	
+	public void returnPosition() {
+		returnPosition(1.0f);
+	}
+	
+	//slowly return to initial position
+	public void returnPosition(float speed) {
+		this.speed = speed;
+		changingView = true;
+		targetPos = initialPos;
+		targetRot = initialRot;
+		focusPos = myFocus.position;
+	}
+	
+	
 	public void ChangeTarget(Transform target) {
-		//Debug.Log (target.GetComponent<TowerBase>().playerNumber);
-		viewingSection = true;
+		ChangeTarget(target, 1.0f);
+	}
+	
+	//change what we're looking at
+	public void ChangeTarget(Transform target, float speed) {
+		this.speed = speed;
+		changingView = true;
 		targetPos -= focusPos - target.position;
 		focusPos = target.position;
+	}
+	
+	
+	public void ChangePosition(Transform target) {
+		ChangePosition(target, 1.0f);
+	}
+	
+	//change position directly
+	public void ChangePosition(Transform target, float speed) {
+		this.speed = speed;
+		changingView = true;
+		targetPos = target.position;
+		targetRot = target.rotation;
 	}
 }

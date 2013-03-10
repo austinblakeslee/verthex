@@ -1,100 +1,111 @@
 using UnityEngine;
 using System.Collections;
 
-public class InGameCamera : MonoBehaviour {
-	public Transform cam1Pos;
-	public Transform cam2Pos;
-	public Transform cam1FocusPos;
-	public Transform cam2FocusPos;
-	private Transform myFocus;
-	public Vector3 focusPos;
-	public Quaternion focusRot;
-	public Vector3 targetPos;
-	public Quaternion targetRot;
-	
-	Vector3 initialPos = Vector3.zero;
-	Quaternion initialRot = Quaternion.identity;
-	
-	public bool changingView = false;
-	public float speed = 1.0f;
-	
+public class TowerInspector2 : MonoBehaviour {
+	public int top;
+	private Player currentPlayer;
+	public GUIStyle nrStyle;
+	public GUIStyle nyStyle;
+	public GUIStyle ngStyle;
+	public GUIStyle nbStyle;
+	public GUIStyle baseStyle;
+	public GUIStyle nonActive;
+	public GUIStyle active;
+	public bool show;
+
 	// Use this for initialization
 	void Start () {
-		if(TurnOrder.myPlayer == TurnOrder.player1) {
-			ChangePosition(cam1Pos, 3.0f);
-			focusPos = cam1FocusPos.position;
-			myFocus = cam1FocusPos;
-		}
-		else if(TurnOrder.myPlayer == TurnOrder.player2) {
-			ChangePosition(cam2Pos, 3.0f);
-			focusPos = cam2FocusPos.position;
-			myFocus = cam2FocusPos;
-		}
+		top = 450;
+		currentPlayer = TurnOrder.myPlayer;
+		show = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(changingView) {
-			transform.position = Vector3.Lerp(transform.position,targetPos,Time.deltaTime * speed);
-			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, Time.deltaTime * speed);
-			if((transform.position - targetPos).magnitude <= 3.0f && Quaternion.Angle(transform.rotation, targetRot) <= 3.0f) {
-				changingView = false;
-				if(initialPos == Vector3.zero) {
-					initialPos = transform.position;
-					initialRot = transform.rotation;
-					ChangeTarget(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).towerBase.transform);
+		//char star = '\u2606';
+		//Debug.Log (star);
+	}
+	
+	void OnGUI() {
+		if(show) {
+		GUIStyle p1Style;
+		GUIStyle p2Style;
+		if(currentPlayer == TurnOrder.player1) {
+			p1Style = active;
+			p2Style = nonActive;
+		}
+		else {
+			p2Style = active;
+			p1Style = nonActive;
+		}
+		if(GUI.Button(new Rect(5,top - 30,110,30),"Player1",p1Style)) {
+			currentPlayer = TurnOrder.player1;
+			TowerSelection.LocalSelectSection(currentPlayer.GetTower (0), -1);
+		}
+		if(GUI.Button(new Rect(115,top - 30,110,30),"Player2",p2Style)) {
+			currentPlayer = TurnOrder.player2;
+			TowerSelection.LocalSelectSection(currentPlayer.GetTower (0), -1);
+		}
+    	if(GameObject.Find("MainMenu/Fight").GetComponent<WeaponAnimator>().getSplitScreen() == false) {
+			Tower[] towers = currentPlayer.GetTowers(); //selectedTower = TowerSelection.GetSelectedTower();
+			for(int j = 0; j < towers.Length; j++) {
+				int height = towers[j].GetSections().Count;
+				Rect b = new Rect((5 * (j+1)) + (j*70),top+120,70,30);
+				if(GUI.Button (b, towers[j].faction.factionName, baseStyle)) {
+					//Section sc = t.GetSection(i);
+					TowerSelection.LocalSelectSection(towers[j], -1); //FIX ME!!!!
+				}
+				if(height > 0) {
+					for(int i = 0; i < height; i++) {
+						GUIStyle style;
+						string towerStat = "";
+						//towers[j].GetSection(i).attributes.weapon.GetDamage().ToString();
+						//GUIStyle style = GetInspectorStyle(selectedTower, i, false);
+						char star = '\u2605';
+						Debug.Log (star);
+						Section s = towers[j].GetSection(i);
+						string wtype = s.attributes.weapon.GetWeaponType();
+						if(wtype == "Nothing") {
+							towerStat = "";	
+						}
+						else if(wtype == "Blaster" || wtype == "Pistols" || wtype == "Arrows") {
+							towerStat = star + "";
+						}
+						else if(wtype == "Disintegration Beam" || wtype == "Gattling Gun" || wtype == "Spirit 1") {
+							towerStat = star + " " + star;
+						}
+						else {
+							towerStat = star + " " + star + " " + star;
+						}
+						int sp = s.attributes.sp - towers[j].GetWeightAboveSection(i);
+						int initSP = s.attributes.material.initialSP;
+						double ratio = (double)sp / (double)initSP;
+						if(ratio < 0.33) {
+							style = nrStyle;
+						} else if(ratio >= 0.33 && ratio < 0.66) {
+							style = nyStyle;
+						} else if(ratio >= 0.66 && ratio <= 1.01) {
+							style = ngStyle;
+						} else {
+							style = nbStyle;
+						}
+						Rect r;
+						if(height > 3) {
+							r = new Rect((5 * (j+1)) + (j*70),(top+(120))-(150/(height)*(i+1)),70,150/(height));
+						} else {
+							r = new Rect((5 * (j+1)) + (j*70),(top+(120))-(30*(i+1)),70,30);
+						}
+						RenderButton(r, towerStat, style, towers[j], i);
+					}
 				}
 			}
+        }
 		}
-	}
+    }
 	
-	//instantly return to initial position
-	public void instantReturnPosition() {
-		changingView = false;
-		transform.position = initialPos;
-		transform.rotation = initialRot;
-		targetPos = initialPos;
-		targetRot = initialRot;
-		focusPos = myFocus.position;
-	}
-	
-	
-	public void returnPosition() {
-		returnPosition(1.0f);
-	}
-	
-	//slowly return to initial position
-	public void returnPosition(float speed) {
-		this.speed = speed;
-		changingView = true;
-		targetPos = initialPos;
-		targetRot = initialRot;
-		focusPos = myFocus.position;
-	}
-	
-	
-	public void ChangeTarget(Transform target) {
-		ChangeTarget(target, 1.0f);
-	}
-	
-	//change what we're looking at
-	public void ChangeTarget(Transform target, float speed) {
-		this.speed = speed;
-		changingView = true;
-		targetPos -= focusPos - target.position;
-		focusPos = target.position;
-	}
-	
-	
-	public void ChangePosition(Transform target) {
-		ChangePosition(target, 1.0f);
-	}
-	
-	//change position directly
-	public void ChangePosition(Transform target, float speed) {
-		this.speed = speed;
-		changingView = true;
-		targetPos = target.position;
-		targetRot = target.rotation;
+	private void RenderButton(Rect r, string text, GUIStyle style, Tower t, int i) {
+		if(GUI.Button (r, text, style)) {
+			TowerSelection.LocalSelectSection(t, i); //FIX ME!!!!
+		}
 	}
 }
