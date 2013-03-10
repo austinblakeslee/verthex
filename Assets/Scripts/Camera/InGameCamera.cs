@@ -18,18 +18,25 @@ public class InGameCamera : MonoBehaviour {
 	public bool changingView = false;
 	public float speed = 1.0f;
 	
+	private bool firstTransition = true;
+	
 	// Use this for initialization
 	void Start () {
 		if(TurnOrder.myPlayer == TurnOrder.player1) {
 			ChangePosition(cam1Pos, 3.0f);
+			initialPos = cam1Pos.position;
+			initialRot = cam1Pos.rotation;
 			focusPos = cam1FocusPos.position;
 			myFocus = cam1FocusPos;
 		}
 		else if(TurnOrder.myPlayer == TurnOrder.player2) {
 			ChangePosition(cam2Pos, 3.0f);
+			initialPos = cam2Pos.position;
+			initialRot = cam2Pos.rotation;
 			focusPos = cam2FocusPos.position;
 			myFocus = cam2FocusPos;
 		}
+		TowerSelection.disableCameraPan = true;
 	}
 	
 	// Update is called once per frame
@@ -39,9 +46,9 @@ public class InGameCamera : MonoBehaviour {
 			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, Time.deltaTime * speed);
 			if((transform.position - targetPos).magnitude <= 3.0f && Quaternion.Angle(transform.rotation, targetRot) <= 3.0f) {
 				changingView = false;
-				if(initialPos == Vector3.zero) {
-					initialPos = transform.position;
-					initialRot = transform.rotation;
+				if(firstTransition) {
+					firstTransition = false;
+					TowerSelection.disableCameraPan = false;
 					ChangeTarget(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).towerBase.transform);
 				}
 			}
