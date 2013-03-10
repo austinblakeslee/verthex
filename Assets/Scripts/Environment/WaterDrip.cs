@@ -13,7 +13,9 @@ public class WaterDrip : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(mySection == TowerSelection.GetSelectedSection()) {
-			particleSystem.Play();
+			if(particleSystem.isStopped) {
+				particleSystem.Play();
+			}
 		} else {
 			particleSystem.Stop();
 		}
