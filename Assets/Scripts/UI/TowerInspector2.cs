@@ -12,9 +12,14 @@ public class TowerInspector2 : MonoBehaviour {
 	public GUIStyle nonActive;
 	public GUIStyle active;
 	public bool show;
+	private Vector3 scale;
+	private float ow;
+	private float oh;
 
 	// Use this for initialization
 	void Start () {
+		ow = 960;
+		oh = 600;
 		top = 450;
 		currentPlayer = TurnOrder.myPlayer;
 		show = true;
@@ -29,6 +34,11 @@ public class TowerInspector2 : MonoBehaviour {
 	
 	void OnGUI() {
 		if(show) {
+		scale.y = Screen.height/oh;
+		scale.x = Screen.width/ow;
+		scale.z = 1;
+		float scaleX = Screen.width/ow;
+		GUI.matrix = Matrix4x4.TRS(new Vector3((scaleX - scale.y)/2 * ow,0,0),Quaternion.identity,scale);
 		GUIStyle p1Style;
 		GUIStyle p2Style;
 		if(currentPlayer == TurnOrder.player1) {

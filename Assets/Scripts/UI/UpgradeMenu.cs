@@ -29,8 +29,8 @@ public class UpgradeMenu : Menu {
 		{
 			scriptName1 = "ParalyzeAction";
 			scriptName2 = "AlterWeightAction";
-			Rect upgradeRect1 = new Rect(Screen.width/2 + 180,Screen.height/2 - 120,boxSize.x,boxSize.y);
-			Rect upgradeRect2 = new Rect(Screen.width/2 + 180,Screen.height/2 - 80,boxSize.x,boxSize.y);
+			Rect upgradeRect1 = new Rect(660,180,boxSize.x,boxSize.y);
+			Rect upgradeRect2 = new Rect(660,220,boxSize.x,boxSize.y);
 
 			upgradeButton1 = createGUIButton(scriptName1,"Poison",upgradeRect1);
 			numButtons++;
@@ -83,11 +83,11 @@ public class UpgradeMenu : Menu {
 		}
 		if(!hasLoaded) {
 
-			Rect damRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 40,boxSize.x,boxSize.y);
+			Rect damRect = new Rect(660,260,boxSize.x,boxSize.y);
 			createGUIButton("DamageAction","Upgrade",damRect);
 			numButtons++;
 
-			Rect backRect = new Rect(Screen.width/2 + 180,Screen.height/2 - 0,boxSize.x,boxSize.y);
+			Rect backRect = new Rect(660,300,boxSize.x,boxSize.y);
 			GameObject back = createGUIButton("SwitchMenu","Back",backRect);
 			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
 			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;

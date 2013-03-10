@@ -9,6 +9,9 @@ public class Menu : MonoBehaviour {
 	public bool disabled;
 	public int yOffset, xOffset = 0;
 	public GUISkin guiSkin = null;
+	private Vector3 scale;
+	private float ow = 960;
+	private float oh = 600;
 	
 	private bool hotKey = false;
 	private int hotMenuItem;
@@ -26,6 +29,11 @@ public class Menu : MonoBehaviour {
 	}
 	// draw menu components
 	void OnGUI() {
+		scale.y = Screen.height/oh;
+		scale.x = Screen.width/ow;
+		scale.z = 1;
+		float scaleX = Screen.width/ow;
+		GUI.matrix = Matrix4x4.TRS(new Vector3((scaleX - scale.y)/2 * ow,0,0),Quaternion.identity,scale);
 		foreach (MenuItem m in menuItems) {
 			GUI.skin = m.guiSkin ? m.guiSkin : guiSkin;
 		

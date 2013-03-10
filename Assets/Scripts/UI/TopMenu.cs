@@ -30,13 +30,13 @@ public class TopMenu : Menu {
 			MenuItem m3 = actions.GetComponent<MenuItem>();
 			menuItems.Add(m3);
 			this.gameObject.GetComponent<TurnOrder>().actionsLeft = m3;
-			Rect queueButtonRect = new Rect(Screen.width - 230,5,225,75);
+			Rect queueButtonRect = new Rect(730,5,225,75);
 			GameObject queue = MakeBox("",queueButtonRect);
 			queue.transform.parent = transform;
 			MenuItem m4 = queue.GetComponent<MenuItem>();
 			menuItems.Add(m4);
 			this.gameObject.GetComponent<TurnOrder>().actionQueue = m4;
-			Rect helpButtonRect = new Rect(Screen.width/2 - 125,5,250,75);
+			Rect helpButtonRect = new Rect(355,5,250,75);
 			GameObject help = MakeBox("",helpButtonRect);
 			help.transform.parent = transform;
 			MenuItem m5 = help.GetComponent<MenuItem>();
