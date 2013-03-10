@@ -9,7 +9,7 @@ public class Upgrade : TurnAction {
 	private int tNum;
 	private int sNum;
 	
-	private static string[] upgradeChoices = new string[9] {"Damage", "AoE", "DoT", "Drain", "Paralyze", "Tag", "Poison", "Alter Weight", "Force Field"};
+	private static string[] upgradeChoices = new string[10] {"Damage", "AoE", "DoT", "Drain", "Paralyze", "Tag", "Poison", "Alter Weight", "Force Field", "Blind"};
 	
 	public Upgrade(string actionMessage) : base("Upgrade") {
 		ParseActionMessage(actionMessage);
@@ -94,6 +94,10 @@ public class Upgrade : TurnAction {
 		else if (upgrade == "Force Field")
 		{
 			weapon.SetWeaponEffect(new ApplyForceField());
+		}
+		else if (upgrade == "Blind")
+		{
+			weapon.SetWeaponEffect(new Blind());
 		}
 		else{
 			Debug.Log ("Error - Upgrade is probably tagged improperly");

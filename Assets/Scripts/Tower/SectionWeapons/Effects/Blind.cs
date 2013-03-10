@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AimCritStrike : WeaponEffect
+public class Blind : WeaponEffect
 {
 	protected List<Section> taggedSections = new List<Section>();
-	protected int critStrikeDamageModifier = 50;//Percentage of bonus damage a crit strike will do.
+	protected int missChance = 50;//Percentage of bonus damage a crit strike will do.
 			
-	public AimCritStrike() : base() {
-		this.effectType = "Tag Section";
+	public Blind() : base() {
+		this.effectType = "Blind";
 	}
 	public override List<Section> GetDamagedSections(Tower t, int center) {
 		List<Section> secs = new List<Section>();
@@ -22,11 +22,10 @@ public class AimCritStrike : WeaponEffect
 			Section s = t.GetSection (center);
 			SectionEffect eff = s.attributes.material.GetSectionEffect();
 			eff.ApplyDamage(s, damage);
-			if (eff.GetEffectType() != "Tagged")
+			if (eff.GetEffectType() != "Blinded")
 			{	
-				s.attributes.material.SetSectionEffect(new Tagged(critStrikeDamageModifier));
+				s.attributes.material.SetSectionEffect(new BlindedEffect(s, missChance));
 			}
-
 		}
 		else if(center < 0) {
 			CombatLog.addLine("Attack was too low");

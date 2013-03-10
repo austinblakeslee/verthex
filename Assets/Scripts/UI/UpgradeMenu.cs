@@ -61,7 +61,9 @@ public class UpgradeMenu : Menu {
 			{
 				scriptName1 = "TagAction";
 				goName1 = "Tag Section";
-				goName2 = "";
+				scriptName2 = "BlindAction";
+				goName2 = "Blind";
+				
 			}
 			else if (TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Area 51")
 			{
@@ -74,16 +76,7 @@ public class UpgradeMenu : Menu {
 				CombatLog.addLine("Error - Faction name not matched properly.");
 			}
 			upgradeButton1 = editUpgradeButton(upgradeButton1, oldScriptName1, scriptName1, goName1);
-			if (goName2 != "")
-			{	
-
-				upgradeButton2 = editUpgradeButton(upgradeButton2, oldScriptName2, scriptName2, goName2);
-
-			}
-			else{
-				CombatLog.addLine("Here");
-		
-			}
+			upgradeButton2 = editUpgradeButton(upgradeButton2, oldScriptName2, scriptName2, goName2);
 		}
 		if(!hasLoaded) {
 
@@ -167,12 +160,18 @@ public class UpgradeMenu : Menu {
 	}
 	private GameObject editUpgradeButton(GameObject upgradeButton, string oldScriptName, string scriptName, string goName)
 	{
-		Destroy(upgradeButton.GetComponent(oldScriptName));
-		upgradeButton.AddComponent(scriptName);
-		MenuItem m = upgradeButton.GetComponent<MenuItem>();
-		m.action = upgradeButton.GetComponent(scriptName) as DefaultMenuAction;
-		m.action.click = click;		
-		m.text = goName;
-		return upgradeButton;
+		if(goName != ""){
+			Destroy(upgradeButton.GetComponent(oldScriptName));
+			upgradeButton.AddComponent(scriptName);
+			MenuItem m = upgradeButton.GetComponent<MenuItem>();
+			m.action = upgradeButton.GetComponent(scriptName) as DefaultMenuAction;
+			m.action.click = click;		
+			m.text = goName;
+			return upgradeButton;
+		}
+		else{
+			//Return a disabled button
+			return null;
+		}
 	}
 }
