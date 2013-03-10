@@ -49,6 +49,7 @@ public class BuildMenu : Menu {
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
 				m.action = item.GetComponent<MaterialCostLabelUpdate>();
+				m.action.click = click;
 				item.GetComponent<MaterialCostLabelUpdate>().fromMenu = this.gameObject;
 				item.GetComponent<BuildWeaponMenu>().click = click;
 				menuItems.Add(m);

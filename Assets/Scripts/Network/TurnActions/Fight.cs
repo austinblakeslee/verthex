@@ -41,7 +41,7 @@ public class Fight : TurnAction {
 		Player firingPlayer = TurnOrder.GetPlayerByNumber(playerNumber);
 		Player target = TurnOrder.GetPlayerByNumber(targetPlayer);
 		Section sc = firingPlayer.GetTower(towerNumber).GetSection(firingSection);
-		int index = sc.attributes.height;
+		//int index = sc.attributes.height;
 		//int hitCenter = index + targetSection;
 		int hitCenter = targetSection;
 		

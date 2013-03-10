@@ -88,7 +88,6 @@ public class TowerInspector2 : MonoBehaviour {
 	
 	private void RenderButton(Rect r, string text, GUIStyle style, Tower t, int i) {
 		if(GUI.Button (r, text, style)) {
-			Section sc = t.GetSection(i);
 			TowerSelection.LocalSelectSection(t, i); //FIX ME!!!!
 		}
 	}

@@ -9,16 +9,13 @@ public class InGameCamera : MonoBehaviour {
 	public Vector3 targetPos;
 	public Quaternion targetRot;
 	
-	Vector3 initialPos;
-	Quaternion initialRot;
+	Vector3 initialPos = Vector3.zero;
+	Quaternion initialRot = Quaternion.identity;
 	
 	public bool viewingSection = false;
 	
-	GameObject cam;
-	
 	// Use this for initialization
 	void Start () {
-		cam = GameObject.FindWithTag("MainCamera");
 		if(TurnOrder.myPlayer == TurnOrder.player1) {
 			focusPos = cam2Pos.position;
 			targetPos = transform.position;
@@ -40,7 +37,7 @@ public class InGameCamera : MonoBehaviour {
 			transform.rotation = Quaternion.Lerp (transform.rotation, targetRot, Time.deltaTime);
 			if(transform.position == targetPos && transform.rotation == targetRot) {
 				viewingSection = false;
-				if(initialPos == null) {
+				if(initialPos == Vector3.zero) {
 					initialPos = transform.position;
 					initialRot = transform.rotation;
 				}

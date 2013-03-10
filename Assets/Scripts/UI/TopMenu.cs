@@ -10,7 +10,7 @@ public class TopMenu : Menu {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
 		if(!hasLoaded) {	
 			Rect playerButtonRect = new Rect(5, 5, 250, 50);
 			GameObject player = MakeBox("",playerButtonRect);

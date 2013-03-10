@@ -7,8 +7,6 @@ public class BuildConfirmMenu : Menu {
 	public Vector2 buttonSize;
 	public Vector2 boxSize;
 	public AudioClip click;
-	private MenuItem[] materialButtons;
-	public MenuItem[] weaponButtons;
 	private int numButtons;
 	public SectionMaterial sm;
 	public SectionWeapon sw;
@@ -17,16 +15,11 @@ public class BuildConfirmMenu : Menu {
 		buttonSize.y = 50;
 		boxSize.x = 160;
 		boxSize.y = 30;
-		materialButtons = new MenuItem[Faction.NUM_MATERIALS];
-		weaponButtons = new MenuItem[Faction.NUM_WEAPONS];
 	}
 	
 	public override void Update() {
 		ValueStore.selectedMaterial = sm;
 		ValueStore.selectedWeapon = sw;
-		if(hasLoaded) {
-			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
-		}
 		if(!hasLoaded) {
 			GameObject values = new GameObject("BuildValues");
 			values.AddComponent("GameValues");
