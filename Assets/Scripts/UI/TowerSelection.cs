@@ -63,7 +63,7 @@ public class TowerSelection : MonoBehaviour {
 				}				
 				else if(hit.collider == null || hit.collider.tag != "Section")
 				{
-					Deselect ();
+					//Deselect (); commenting out until later
 					return;
 				}
 				Section s = hit.collider.GetComponent<Section>();
@@ -74,7 +74,7 @@ public class TowerSelection : MonoBehaviour {
 			}
 			else
 			{
-				Deselect();
+				//Deselect(); commenting out until later
 			}
 			}
 		}
