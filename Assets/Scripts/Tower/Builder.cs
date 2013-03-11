@@ -25,11 +25,27 @@ public class Builder : MonoBehaviour {
 			spawnPoint.transform.Translate(0,25,0);
 		}
 		block = Instantiate(m.GetPrefab(),spawnPoint.transform.position,Quaternion.identity) as GameObject;
+		if(player.playerNumber == 1)
+		{
+			block.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+		}
+		else if(player.playerNumber ==2)
+		{
+			block.transform.rotation = Quaternion.AngleAxis(-90, Vector3.up);
+		}
 		block.transform.Find("FireCam").camera.enabled = false;
 		block.transform.Find("HitCam").camera.enabled = false;
 		block.transform.Find("CollapseCam").camera.enabled = false;
 		if (w.wtype != "Nothing"){
 			weapon = Instantiate(w.GetPrefab()) as GameObject; //I believe the here lies the issue for why building Nothing doesn't work? maybe.
+			if(player.playerNumber == 1)
+			{
+				weapon.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+			}
+			else if(player.playerNumber ==2)
+			{
+				weapon.transform.rotation = Quaternion.AngleAxis(-90, Vector3.up);
+			}
 		//if(weapon != null) {
 			Vector3 localScale = weapon.transform.localScale;
 			weapon.transform.parent = block.transform;
