@@ -13,6 +13,7 @@ public class UpgradeMenu : Menu {
 	private GameObject upgradeButton2;
 	private string scriptName1 = "";
 	private string scriptName2 = "";
+	public GUISkin squareStyle;
 	
 	void Start() {
 		on = false;
@@ -82,15 +83,16 @@ public class UpgradeMenu : Menu {
 			}
 		}
 		if(!hasLoaded) {
-
+			this.guiSkin = squareStyle;
 			Rect damRect = new Rect(660,260,boxSize.x,boxSize.y);
 			createGUIButton("DamageAction","Upgrade",damRect);
 			numButtons++;
 
 			Rect backRect = new Rect(660,300,boxSize.x,boxSize.y);
 			GameObject back = createGUIButton("SwitchMenu","Back",backRect);
-			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;
+			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
+			backSM.fromMenu = this.gameObject;
+			backSM.toMenu = this.transform.parent.gameObject;
 			numButtons++;
 			hasLoaded = true;
 		}

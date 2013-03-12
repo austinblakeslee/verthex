@@ -93,7 +93,7 @@ public class NetworkAction : MonoBehaviour {
 			}
 			if(hostData != null && hostData.Length > 0){
 				for(int i = 0; i<hostData.Length; i++){
-					if(GUI.Button( new Rect(buttonX * 1.5f + buttonW, buttonY*1.2f + (buttonH * i), buttonW*3, buttonH*0.5f), hostData[i].gameName + " - " + "Players: " + hostData[i].connectedPlayers)){
+					if(GUI.Button( new Rect(buttonX * 1.5f + buttonW, buttonY*1.2f + (buttonH * i) + 20, buttonW*7, buttonH*0.5f), hostData[i].gameName + " - " + "Players: " + hostData[i].connectedPlayers)){
 						Network.Connect(hostData[i]);
 						//Set gameType to Online to determine player turns/control
 						GameType.setGameType(gameType);

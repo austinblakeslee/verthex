@@ -10,6 +10,7 @@ public class BuildWeaponMenu : Menu {
 	public MenuItem[] weaponButtons;
 	private int numButtons;
 	public SectionMaterial sm;
+	public GUISkin squareStyle;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -34,23 +35,34 @@ public class BuildWeaponMenu : Menu {
 			}
 		}
 		if(!hasLoaded) {
+			this.guiSkin = squareStyle;
 			GameObject values = new GameObject("BuildValues");
 			values.AddComponent("GameValues");
 			values.transform.parent = transform;
 			numButtons=0;
+			GameObject next = new GameObject("BuildConfirmMenu");
+			next.AddComponent("BuildConfirmMenu");
+			next.transform.parent = transform;
+			BuildConfirmMenu nextBCM = next.GetComponent<BuildConfirmMenu>();
+			nextBCM.click = click;
+			nextBCM.squareStyle = squareStyle;
 			Rect weaponButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_WEAPONS; i++) {
 				weaponButtonRect = new Rect(795, (435) + ( ( i * ((150/(Faction.NUM_WEAPONS))+5))  ), 160, 150/(Faction.NUM_WEAPONS));
 				//weaponButtonRect = FindPos(numButtons, weaponButtonRect);
 				GameObject item = MakeButton("", weaponButtonRect);
 				item.AddComponent("WeaponCostLabelUpdate");
-				item.GetComponent<WeaponCostLabelUpdate>().weaponName = "";
+				WeaponCostLabelUpdate itemWCLU = item.GetComponent<WeaponCostLabelUpdate>();
+				itemWCLU.weaponName = "";
 				item.AddComponent("BuildConfirmMenu");
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
-				m.action = item.GetComponent<WeaponCostLabelUpdate>();
-				item.GetComponent<WeaponCostLabelUpdate>().fromMenu = this.gameObject;
-				item.GetComponent<BuildConfirmMenu>().click = click;
+				m.action = itemWCLU;
+				//m.guiSkin = squareStyle;
+				itemWCLU.fromMenu = this.gameObject;
+				itemWCLU.toMenu = next;
+				//item.GetComponent<BuildConfirmMenu>().click = click;
+				//item.GetComponent<BuildConfirmMenu>().squareStyle = squareStyle;
 				menuItems.Add(m);
 				weaponButtons[i] = m;
 				//weaponButtonRect.xMin += buttonSize.x + 15;
@@ -64,12 +76,14 @@ public class BuildWeaponMenu : Menu {
 			//backButtonRect = FindPos(numButtons, backButtonRect);
 			GameObject back = MakeButton("Back",backButtonRect);
 			back.AddComponent("SwitchMenu");
+			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
 			back.transform.parent = transform;
 			MenuItem m1 = back.GetComponent<MenuItem>();
-			m1.action = back.GetComponent<SwitchMenu>();
-			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;
+			m1.action = backSM;
+			backSM.fromMenu = this.gameObject;
+			backSM.toMenu = this.transform.parent.gameObject;
 			m1.action.click = click;
+			//m1.guiSkin = squareStyle;
 			menuItems.Add(m1);
 			numButtons++;
 			hasLoaded = true;
