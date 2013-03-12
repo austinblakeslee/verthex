@@ -73,7 +73,6 @@ public class TowerInspector2 : MonoBehaviour {
 						//towers[j].GetSection(i).attributes.weapon.GetDamage().ToString();
 						//GUIStyle style = GetInspectorStyle(selectedTower, i, false);
 						char star = '\u2605';
-//						Debug.Log (star);
 						Section s = towers[j].GetSection(i);
 						string wtype = s.attributes.weapon.GetWeaponType();
 						if(wtype == "Nothing") {
