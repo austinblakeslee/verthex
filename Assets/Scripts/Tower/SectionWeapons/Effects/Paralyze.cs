@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Paralyze : WeaponEffect {
 
-	public Paralyze() : base() {
+	public Paralyze(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Paralyze";
 	}
 	

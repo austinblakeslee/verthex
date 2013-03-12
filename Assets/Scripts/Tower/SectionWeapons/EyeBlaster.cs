@@ -9,6 +9,6 @@ public class EyeBlaster : SectionWeapon {
         this.weight = 60;
         this.wtype = "Eye Blaster";
 		this.range = 1;
-    	this.maxUpgradeEffect = new AreaOfEffect();
+    	this.maxUpgradeEffect = new AreaOfEffect(this);
 	}
 }

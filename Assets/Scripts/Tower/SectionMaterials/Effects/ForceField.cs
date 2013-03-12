@@ -6,6 +6,7 @@ public class ForceFieldEffect : SectionEffect
 {
 	public int forceFieldStrength = 40;
 	public int numTurns = 3;
+	public GameObject forceFieldVisual;
 	public ForceFieldEffect(Section effectedSection, int fieldStrength) : base(effectedSection)
 	{
 		this.effectType = "Force Field";
@@ -20,7 +21,7 @@ public class ForceFieldEffect : SectionEffect
 		{
 			//destroy force field visually
 			s.attributes.sp -= (power - forceFieldStrength);
-			s.attributes.material.SetSectionEffect(new DefaultSectionEffect());
+			s.attributes.material.SetSectionEffect(new DefaultSectionEffect(s));
 		}
 		else{
 			//display forceField being attacked
@@ -31,7 +32,7 @@ public class ForceFieldEffect : SectionEffect
 	public override void EndTurnEffect(){
 		if (numTurns <= 0)
 		{
-			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());
+			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect(appliedSection));
 		}
 		numTurns --;
 		Debug.Log ("Force Field Strength: " + forceFieldStrength);

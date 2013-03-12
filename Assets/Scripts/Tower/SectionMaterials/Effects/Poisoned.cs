@@ -30,7 +30,7 @@ public class Poisoned : SectionEffect
 	public override void EndTurnEffect(){
 		if (numTurns <= 0)
 		{
-			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());
+			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect(appliedSection));
 		}
 		numTurns --;
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Drain : WeaponEffect {
 	private int drainPercentage = 40;
-	public Drain() : base() {
+	public Drain(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Drain";
 	}
 	

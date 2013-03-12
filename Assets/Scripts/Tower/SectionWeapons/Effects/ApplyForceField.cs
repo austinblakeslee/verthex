@@ -7,11 +7,11 @@ public class ApplyForceField : WeaponEffect
 	protected List<Section> taggedSections = new List<Section>();
 	protected int forceFieldStrength = 50;//Percentage of protection the force field will offer
 			
-	public ApplyForceField() : base() {
+	public ApplyForceField(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Force Field";
 		canAttackSelf = true;
 	}
-	public ApplyForceField(int _forceFieldStrength) : this()
+	public ApplyForceField(int _forceFieldStrength, SectionWeapon effectedWeapon) : this(effectedWeapon)
 	{
 		forceFieldStrength = _forceFieldStrength;
 	}

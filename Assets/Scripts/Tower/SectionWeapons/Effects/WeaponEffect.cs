@@ -8,9 +8,11 @@ public abstract class WeaponEffect {
 	protected int upgradeLevel;
 	protected bool canAttackSelf = false;
 	protected bool canAttackOpponent = true;
+	public SectionWeapon appliedWeapon;
 	
-	public WeaponEffect() {
+	public WeaponEffect(SectionWeapon effectedWeapon) {
 		upgradeLevel = 0;
+		appliedWeapon = effectedWeapon;
 	}
 	
 	public abstract List<Section> GetDamagedSections(Tower t, int center);

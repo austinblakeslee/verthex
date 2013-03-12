@@ -6,14 +6,11 @@ public class Burned : SectionEffect
 {
 	public int damagePerTurn;
 	public int numTurns = 3;
-	public Section burnedSection;
-	public Burned() : base() {
-		this.effectType = "Burned";
-		//visually show Initial Burn
-	}
-	public Burned(int _damagePerTurn, Section _burnedSection) : this()
+
+	public Burned(int _damagePerTurn, Section _burnedSection)
 	{
-		burnedSection = _burnedSection;
+		this.effectType = "Burned";
+		appliedSection = _burnedSection;
 		damagePerTurn = _damagePerTurn;
 	}
 	
@@ -22,12 +19,12 @@ public class Burned : SectionEffect
 		//Damage (damagePerTurn);
 		if (numTurns <= 0)
 		{
-			burnedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());	//destroy this script/apply DefaultEffect to the section 
+			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect(appliedSection));	//destroy this script/apply DefaultEffect to the section 
 		}
 		numTurns --;
 		Debug.Log ("Burn Damage per turn: " + damagePerTurn);
 		Debug.Log("Num turns left: " + numTurns);
-		ApplyDamage(burnedSection, damagePerTurn);
+		ApplyDamage(appliedSection, damagePerTurn);
 		//Display burn stuff
 
 	}

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PoisonSplash : WeaponEffect {
 
-	public PoisonSplash() : base() {
+	public PoisonSplash(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Poison Splash";
 	}
 	

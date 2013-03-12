@@ -10,7 +10,8 @@ public class Arrows : SectionWeapon {
         this.range = 1; //what exactly is range?
         this.wtype = "Arrows";
     	this.range = 3;
-		this.maxUpgradeEffect = new PoisonSplash();
+		this.maxUpgradeEffect = new PoisonSplash(this);
+		this.weaponEffect = new Paralyze(this);
 
 	}
 }

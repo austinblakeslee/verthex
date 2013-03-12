@@ -6,6 +6,7 @@ public class BlindedEffect : SectionEffect
 {
 	public int missPercentage = 50;
 	public int numTurns = 3;
+	public GameObject blindedVisualEffect;
 	
 	public BlindedEffect(Section effectedSection, int blindPercentage) : base(effectedSection)
 	{
@@ -56,7 +57,7 @@ public class BlindedEffect : SectionEffect
 	public override void EndTurnEffect(){
 		if (numTurns <= 0)
 		{
-			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect());
+			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect(appliedSection));
 		}
 		numTurns --;
 		Debug.Log("Num turns Blinded left: " + numTurns);

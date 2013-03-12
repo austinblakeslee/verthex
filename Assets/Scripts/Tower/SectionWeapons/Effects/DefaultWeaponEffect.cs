@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class DefaultWeaponEffect : WeaponEffect {
 
-	public DefaultWeaponEffect() : base() {
+	public DefaultWeaponEffect(SectionWeapon effectedWeapon) : base(effectedWeapon) { 
 		this.effectType = "none";
+		
 	}
 	
 	public override List<Section> GetDamagedSections(Tower t, int center) {

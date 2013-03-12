@@ -6,11 +6,11 @@ public class Blinded : WeaponEffect {
 	public int numAttacks = 3;
 	public int missPercentage = 50;
 	
-	public Blinded() : base() {
+	public Blinded(SectionWeapon effectedWeapon) : base(effectedWeapon){
 		this.effectType = "Blinded";
 	}
 	
-	public Blinded(int blindPercentage) : base()
+	public Blinded(int blindPercentage, SectionWeapon effectedWeapon) : base(effectedWeapon)
 	{
 		missPercentage = blindPercentage;
 	}
@@ -18,7 +18,6 @@ public class Blinded : WeaponEffect {
 	
 	public override List<Section> GetDamagedSections(Tower t, int center) {
 		int ranNum1 = Random.Range(1, Mathf.RoundToInt(100/missPercentage) + 1);
-		bool missedCompletely = false;
 		List<Section> list = new List<Section>();
 
 		if (ranNum1 == 1)//If missed, miss
@@ -58,15 +57,13 @@ public class Blinded : WeaponEffect {
 			section.attributes.material.GetSectionEffect().ApplyDamage(section, damage);
 		} else if(center < 0) {
 			CombatLog.addLine("Attack was too low");
-			CombatLog.addLine("Fill the aim bar more.");
 		} else if(center >= t.GetSections().Count) {
 			CombatLog.addLine("Attack was too high");
-			CombatLog.addLine("Lower the aim bar.");
 		}
 		numAttacks--;
 		if (numAttacks <= 0)
 		{
-			self.GetSection(firingSec).attributes.weapon.SetWeaponEffect(new DefaultWeaponEffect());
+			self.GetSection(firingSec).attributes.weapon.SetWeaponEffect(new DefaultWeaponEffect(self.GetSection(firingSec).attributes.weapon));
 		}
 	}
 	

@@ -9,7 +9,7 @@ public class AlterWeight : WeaponEffect
 	protected int numTimesModifiable = 2;
 	protected Dictionary<Section, int> modifiedSecs;
 			
-	public AlterWeight() : base() {
+	public AlterWeight(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Weight Modification";
 		canAttackSelf = true;
 		modifiedSecs = new Dictionary<Section, int>();

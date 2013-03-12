@@ -9,6 +9,6 @@ public class GattlingGun : SectionWeapon {
         this.weight = 30;
 		this.range = 2;
         this.wtype = "Gattling Gun";
-    	this.maxUpgradeEffect = new Burn();
+    	this.maxUpgradeEffect = new Burn(this);
 	}
 }

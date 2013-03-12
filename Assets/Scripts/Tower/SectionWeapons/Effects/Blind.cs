@@ -6,10 +6,13 @@ public class Blind : WeaponEffect
 {
 	protected List<Section> taggedSections = new List<Section>();
 	protected int missChance = 50;//Percentage of bonus damage a crit strike will do.
-			
-	public Blind() : base() {
+	
+	
+	public Blind(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Blind";
 	}
+	
+	
 	public override List<Section> GetDamagedSections(Tower t, int center) {
 		List<Section> secs = new List<Section>();
 		secs.Add(t.GetSection(center));
@@ -26,22 +29,19 @@ public class Blind : WeaponEffect
 			{
 				if (s.attributes.weapon.GetEffect().GetEffectType() != "Blinded")
 				{
-					s.attributes.weapon.SetWeaponEffect(new Blinded(missChance));
+					s.attributes.weapon.SetWeaponEffect(new Blinded(missChance, s.attributes.weapon));
 				}
 			}		
 		}
 		else if(center < 0) {
 			CombatLog.addLine("Attack was too low");
-			CombatLog.addLine("Fill the aim bar more.");
 		} else if(center >= t.GetSections().Count) {
 			CombatLog.addLine("Attack was too high");
-			CombatLog.addLine("Lower the aim bar.");
 		}
 	}
 	
 	public override string GetInfo(int damage)
 	{
-		return "Deals " + damage + " single target damage, and tags the target section for bonus damage on the next attack.";
-
+		return "Deals " + damage + " single target damage, and blinds the target section.";
 	}
 }

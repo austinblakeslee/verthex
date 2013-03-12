@@ -9,7 +9,7 @@ public class SectionMaterial {
 	public int SPPerRepair;
 	public int costPerRepair;
 	public string mtype = "abstract";
-	public SectionEffect sectionEffect = new DefaultSectionEffect();
+	public SectionEffect sectionEffect = new DefaultSectionEffect(new Section());
 
 	
 	public static string[] materials = new string[3] {"Wood", "Stone", "Steel"};

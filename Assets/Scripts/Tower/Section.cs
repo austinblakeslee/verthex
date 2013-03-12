@@ -32,7 +32,7 @@ public class Section : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	public void Unhighlight() {
 		foreach(Renderer r in GetComponentsInChildren<Renderer>()) {
 			if(r.material.shader.name == "Custom/highlightShader") {

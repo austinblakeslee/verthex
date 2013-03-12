@@ -7,7 +7,7 @@ public class DamageOverTime : WeaponEffect {
 	private List<float> initialDamage = new List<float> {0.5f, 0.5f, 0.6f, 0.8f};
 	private List<float> dotDamage = new List<float> {0.6f, 0.7f, 0.8f, 0.8f};
 
-	public DamageOverTime() : base() {
+	public DamageOverTime(SectionWeapon effectedWeapon) : base(effectedWeapon) { 
 		this.effectType = "Burn";
 	}
 	

@@ -15,8 +15,8 @@ public class SectionWeapon {
 	protected int upgradeLevel = 0;
 	protected List<float> damageUpgrades = new List<float> {1.0f, 1.25f, 1.5f, 1.75f, 2.0f};
 	protected List<int> rangeUpgrades = new List<int>{0,0,1,1,2};
-	protected WeaponEffect maxUpgradeEffect = new DefaultWeaponEffect();
-	protected WeaponEffect weaponEffect = new DefaultWeaponEffect();
+	protected WeaponEffect maxUpgradeEffect = new DefaultWeaponEffect(new SectionWeapon());
+	protected WeaponEffect weaponEffect = new DefaultWeaponEffect(new SectionWeapon());
 	
 	public static string[] weapons = new string[4] {"Nothing", "Ballista", "Catapult", "Cannon"}; //?
 	

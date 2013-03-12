@@ -7,7 +7,7 @@ public class AimCritStrike : WeaponEffect
 	protected List<Section> taggedSections = new List<Section>();
 	protected int critStrikeDamageModifier = 50;//Percentage of bonus damage a crit strike will do.
 			
-	public AimCritStrike() : base() {
+	public AimCritStrike(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Tag Section";
 	}
 	public override List<Section> GetDamagedSections(Tower t, int center) {
@@ -24,7 +24,7 @@ public class AimCritStrike : WeaponEffect
 			eff.ApplyDamage(s, damage);
 			if (eff.GetEffectType() != "Tagged")
 			{	
-				s.attributes.material.SetSectionEffect(new Tagged(critStrikeDamageModifier));
+				s.attributes.material.SetSectionEffect(new Tagged(critStrikeDamageModifier, s));
 			}
 
 		}
