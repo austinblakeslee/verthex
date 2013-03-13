@@ -43,7 +43,7 @@ public class TowerSelection : MonoBehaviour {
 	}
 	
 	public static void Deselect() {
-		LocalSelectSection(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum), -1);
+		LocalSelectSection(selectedTower, -1);
 	}
 
 	void Update () {

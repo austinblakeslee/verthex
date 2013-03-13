@@ -135,7 +135,7 @@ public class MainMenu : Menu {
 		}
 		
 		//Don't allow player to build if Tower is not alive
-		if(TowerSelection.GetSelectedTower().isAlive() == false) {
+		if(TowerSelection.GetSelectedTower() == null || TowerSelection.GetSelectedTower().isAlive() == false) {
 			build.GetComponent<MenuItem>().visible = false;
 		}else {
 			build.GetComponent<MenuItem>().visible = true;

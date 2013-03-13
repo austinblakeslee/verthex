@@ -49,7 +49,7 @@ public class InGameCamera : MonoBehaviour {
 				if(firstTransition) {
 					firstTransition = false;
 					TowerSelection.disableCameraPan = false;
-					ChangeTarget(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).towerBase.transform);
+					ChangeTarget(TurnOrder.myPlayer.GetTower(1).towerBase.transform);
 				}
 			}
 		}

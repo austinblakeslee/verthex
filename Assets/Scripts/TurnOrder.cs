@@ -70,10 +70,10 @@ public class TurnOrder : MonoBehaviour {
 			player2.AddTower(player2Bases[i], factions[i], i);
 		}
 		CombatLog.addLineNoPlayer("Ceasefire ends in " + (ceasefire - turnNum) + " turns.");
-		TowerSelection.Deselect();
 		
 		//Check for victory (Will prohibit building on not alive Towers
 		checksVictory = true;
+		TowerSelection.LocalSelectSection(myPlayer.GetTower(1), -1);
 	}
 	
 	private Faction MakeFactionForString(string f) {
@@ -263,7 +263,6 @@ public class TurnOrder : MonoBehaviour {
 			GameObject.Find("MainMenu").GetComponent<Menu>().on = true;
 			actionNum++;
 		}
-		TowerSelection.LocalSelectSection(myPlayer.GetTower(actionNum), -1);
 	}
 	
 	public static void SendAction(TurnAction action) {
@@ -290,7 +289,7 @@ public class TurnOrder : MonoBehaviour {
 		player1.AccrueResources();
 		player2.AccrueResources();
 		actionNum = 0;
-		TowerSelection.Deselect();
+		TowerSelection.LocalSelectSection(myPlayer.GetTower(1), -1);
 		
 		//Activate each sections end turn effect
 		for(int i = 0; i < 3; i++){

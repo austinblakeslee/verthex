@@ -12,7 +12,7 @@ public class BuildAction : DefaultMenuAction,MenuAction {
 			if(TurnOrder.myPlayer.GetResources() >= s.GetCost()) {
 				//myMenu.on = false;
 				ValueStore.helpMessage = "";
-				TurnOrder.SendAction(new Build(TurnOrder.actionNum, m, w));
+				TurnOrder.SendAction(new Build(TowerSelection.GetSelectedTower().towerNum, m, w));
 			} else {
 				ValueStore.helpMessage = "You don't have enough RP to do that!";
 			}

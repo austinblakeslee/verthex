@@ -26,7 +26,7 @@ public class BuildMenu : Menu {
 			b.sm = ValueStore.selectedMaterial;
 		}
 		if(hasLoaded) {
-			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
+			Tower t = TowerSelection.GetSelectedTower();
 			for(int i=0; i<Faction.NUM_MATERIALS; i++) {
 				string text = t.faction.materials[i];
 				materialButtons[i].text = text + ": $" + SectionComponentFactory.GetMaterial(text).cost;

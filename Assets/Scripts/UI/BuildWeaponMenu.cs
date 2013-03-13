@@ -27,7 +27,7 @@ public class BuildWeaponMenu : Menu {
 			b.sw = ValueStore.selectedWeapon;
 		}
 		if(hasLoaded) {
-			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
+			Tower t = TowerSelection.GetSelectedTower();
 			for(int i=0; i<Faction.NUM_WEAPONS; i++) {
 				string text = t.faction.weapons[i];
 				weaponButtons[i].text = text + ": $" + SectionComponentFactory.GetWeapon(text).cost;

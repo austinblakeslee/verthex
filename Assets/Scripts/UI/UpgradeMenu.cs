@@ -40,27 +40,27 @@ public class UpgradeMenu : Menu {
 			numButtons++;
 			firstUpdate = false;
 		}
-		if(lastFrameActionNum != TurnOrder.actionNum){	
-			lastFrameActionNum = TurnOrder.actionNum;
+		if(lastFrameActionNum != TowerSelection.GetSelectedTower().towerNum){	
+			lastFrameActionNum = TowerSelection.GetSelectedTower().towerNum;
 			
 			string oldScriptName1 = scriptName1;
 			string oldScriptName2 = scriptName2;
 			string goName1 = "";
 			string goName2 = "";
-			if (TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Totem")
+			if (TowerSelection.GetSelectedTower().faction.factionName == "Totem")
 			{
 				scriptName1 = "ParalyzeAction";
 				goName1 = "Paralyze";
 				scriptName2 = "AlterWeightAction";
 				goName2 = "Alter Weight";
 			}
-			else if(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Cowboys")
+			else if(TowerSelection.GetSelectedTower().faction.factionName == "Cowboys")
 			{
 				scriptName1 = "TagAction";
 				goName1 = "Tag Section";
 				goName2 = "";
 			}
-			else if (TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Area 51")
+			else if (TowerSelection.GetSelectedTower().faction.factionName == "Area 51")
 			{
 				scriptName1 = "DrainAction";
 				goName1 = "Drain";
