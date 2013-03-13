@@ -2,17 +2,19 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Paralyzed : SectionEffect
+public class Paralyzed : SectionEffect 
 {
 	public int numTurns = 2;
-	public GameObject visuallyParalyzed;
+	public GameObject paralyzedVisual;
 
-	public Paralyzed(Section section) : base(section)
+	public Paralyzed(Section s) : base(s)
 	{
 		this.effectType = "Paralyzed";
 		CombatLog.addLine("Weapon is stunned.  It won't deal damage until it is repaired.");
-		Debug.Log(section.transform.position);
-		section.attributes.weapon.fire = false; //makes damage = 0... Will change to more permanent solution later
+		CombatLog.addLine("Paralyzed Section Transform" + s.transform.position);
+		s.attributes.weapon.fire = false; //makes damage = 0... Will change to more permanent solution later
+		paralyzedVisual = GameObject.Instantiate(GameValues.visualEffects["paralyzedVisual"], new Vector3(s.transform.position.x,  s.transform.position.y+s.transform.localScale.y/2, s.transform.position.z), s.transform.rotation) as GameObject;
+
 	}
 		
 	public override void EndTurnEffect(){
@@ -20,6 +22,8 @@ public class Paralyzed : SectionEffect
 		{
 			appliedSection.attributes.weapon.fire = true; 
 			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect(appliedSection));
+			Object.Destroy(paralyzedVisual);
+
 			//TODO - Destroy this script so it's not just floating in memory forever			
 		}
 		else

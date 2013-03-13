@@ -10,9 +10,12 @@ public abstract class WeaponEffect {
 	protected bool canAttackOpponent = true;
 	public SectionWeapon appliedWeapon;
 	
-	public WeaponEffect(SectionWeapon effectedWeapon) {
-		upgradeLevel = 0;
+	public WeaponEffect(SectionWeapon effectedWeapon) : this() {
 		appliedWeapon = effectedWeapon;
+	}
+	public WeaponEffect()
+	{
+		upgradeLevel = 0;
 	}
 	
 	public abstract List<Section> GetDamagedSections(Tower t, int center);

@@ -4,9 +4,13 @@ using System.Collections.Generic;
 
 public class DefaultSectionEffect : SectionEffect
 {
-	public DefaultSectionEffect(Section effectedSection) : base() {
-		this.effectType = "Default";
+	public DefaultSectionEffect(Section effectedSection) : this() {
 		appliedSection = effectedSection;
+	}
+	public DefaultSectionEffect()
+	{
+		this.effectType = "Default";
+
 	}
 	public override void PreAttack(Section s)
 	{
