@@ -2,19 +2,7 @@ fileFormatVersion: 2
 guid: 0904bddcc1fde1842bac72e8e7c35f57
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - hitParticle: {fileID: 100000, guid: 5d047ae0fa740c94c8c9d326fb3f8484, type: 2}
-  - missFont: {fileID: 12800000, guid: 577c71f42f1b804409037901ffd36785, type: 3}
-  - ballistaFire: {fileID: 8300000, guid: d479c20cb02af1e41bd46b2adfda7cec, type: 3}
-  - ballistaHit: {fileID: 8300000, guid: 5b696611e10dad746b18275d2ab8587c, type: 3}
-  - catapultFire: {fileID: 8300000, guid: 329753138908a38468c6463fb28c8b6f, type: 3}
-  - catapultHit: {fileID: 8300000, guid: 955f7dc346831c14496dd8a5c6c382ac, type: 3}
-  - cannonFire: {fileID: 8300000, guid: b706cfc2c7572764ba29612803a7d69d, type: 3}
-  - cannonHit: {fileID: 8300000, guid: cc626a279b4268044b9209226ebbad42, type: 3}
-  - missSound: {fileID: 8300000, guid: 8b0310040525cca43aaabebea9f433a5, type: 3}
-  - splitScreenTexture: {fileID: 2800000, guid: 088276172d03f54428ec37b3d48d523b,
-      type: 3}
-  - damageText: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

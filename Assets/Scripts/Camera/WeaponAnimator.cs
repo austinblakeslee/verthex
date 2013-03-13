@@ -32,8 +32,19 @@ public class WeaponAnimator : MonoBehaviour {
 	public AudioClip ballistaHit;
 	public AudioClip catapultFire;
 	public AudioClip catapultHit;
+	
+	//Actual Sounds we're using
+	public AudioClip arrowsFire;
+	public AudioClip blasterFire;
 	public AudioClip cannonFire;
 	public AudioClip cannonHit;
+	public AudioClip disintegrationFire;
+	public AudioClip eyeFire;
+	public AudioClip gattlingFire;
+	public AudioClip pistolFire;
+	public AudioClip spirit1Fire;
+	public AudioClip spirit2Fire;
+	
 	public AudioClip missSound;
 	
 	public Texture2D splitScreenTexture;
@@ -62,16 +73,52 @@ public class WeaponAnimator : MonoBehaviour {
 	public void PlayFiringWeaponSound() {
 		AudioClip c = null;
 		string weaponType = firingSection.GetComponent<Section>().attributes.weapon.GetWeaponType();
-		if(weaponType == "Ballista") {
+		if(weaponType == "Arrows")
+		{
+			c = arrowsFire;
+		}
+		else if(weaponType == "Ballista")
+		{
 			c = ballistaFire;
-		} else if(weaponType == "Catapult") {
+		}
+		else if(weaponType == "Blaster")
+		{
+			c = blasterFire;
+		}
+		else if(weaponType == "Catapult")
+		{
 			c = catapultFire;
-		} else if(weaponType == "Cannon") {
+		}
+		else if(weaponType == "Cannon")
+		{
 			c = cannonFire;
 		}
-		if (GetComponent("Audio Source") != null){
-			AudioSource.PlayClipAtPoint(c, new Vector3(0,0,0));
+		else if(weaponType == "Disintegration Beam")
+		{
+			c = disintegrationFire;
 		}
+		else if(weaponType == "Eye Blaster")
+		{
+			c = eyeFire;
+		}
+		else if(weaponType == "Gattling Gun")
+		{
+			c = gattlingFire;
+		}
+		else if(weaponType == "Pistols")
+		{
+			c = pistolFire;
+		}
+		else if(weaponType == "Spirit 1")
+		{
+			c = spirit1Fire;
+		}
+		else if(weaponType == "Spirit 2")
+		{
+			c = spirit2Fire;
+		}
+		
+		AudioSource.PlayClipAtPoint(cannonFire, new Vector3(0,0,0));
 	}
 	
 	public void PlayWeaponHitSound() {
