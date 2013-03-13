@@ -18,13 +18,13 @@ public class Poisoned : SectionEffect
 	{
 		int damageToDo = appliedSection.attributes.weapon.GetDamage() * poisonDamagePercentage / 100;	
 		Tower t = appliedSection.attributes.myTower;
-		if (appliedSection.attributes.height >= 1)
+		if (appliedSection.attributes.height > 1)
 		{
-			ApplyDamage(t.GetSection((appliedSection.attributes.height - 1)), damageToDo);
+			ApplyDamage(t.GetSection((appliedSection.attributes.height - 0)), damageToDo);
 		}
 		if(appliedSection.attributes.height >= 0 && appliedSection.attributes.height < t.GetHeight()) {
 			Debug.Log ("Not on top");
-			ApplyDamage(t.GetSection((appliedSection.attributes.height + 1)), damageToDo);
+			ApplyDamage(t.GetSection((appliedSection.attributes.height)), damageToDo);
 		}
 	}
 	
