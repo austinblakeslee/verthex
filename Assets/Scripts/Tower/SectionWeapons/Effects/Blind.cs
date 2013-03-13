@@ -29,7 +29,7 @@ public class Blind : WeaponEffect
 			{
 				if (s.attributes.weapon.GetEffect().GetEffectType() != "Blinded")
 				{
-					s.attributes.weapon.SetWeaponEffect(new Blinded(missChance, s.attributes.weapon));
+					s.attributes.weapon.SetWeaponEffect(new Blinded(missChance, s.attributes.weapon, s));
 				}
 			}		
 		}

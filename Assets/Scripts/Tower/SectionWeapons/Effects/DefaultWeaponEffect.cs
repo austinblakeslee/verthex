@@ -8,6 +8,11 @@ public class DefaultWeaponEffect : WeaponEffect {
 		this.effectType = "none";
 		
 	}
+	public DefaultWeaponEffect()
+	{
+		this.effectType = "none";
+		upgradeLevel = 0;
+	}
 	
 	public override List<Section> GetDamagedSections(Tower t, int center) {
 		List<Section> list = new List<Section>();

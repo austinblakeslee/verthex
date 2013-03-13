@@ -5,9 +5,12 @@ using System.Collections.Generic;
 public class Blinded : WeaponEffect {
 	public int numAttacks = 3;
 	public int missPercentage = 50;
+	public Section appliedSection;
+	public GameObject blindedVisual;
 	
-	public Blinded(SectionWeapon effectedWeapon) : base(effectedWeapon){
+	public Blinded(int blindPercentage, SectionWeapon effectedWeapon, Section s) : base(effectedWeapon){
 		this.effectType = "Blinded";
+		blindedVisual = GameObject.Instantiate(GameValues.visualEffects["blindedVisual"], new Vector3(s.transform.position.x,  s.transform.position.y+s.transform.localScale.y/2, s.transform.position.z), s.transform.rotation) as GameObject;
 	}
 	
 	public Blinded(int blindPercentage, SectionWeapon effectedWeapon) : base(effectedWeapon)
@@ -64,6 +67,7 @@ public class Blinded : WeaponEffect {
 		if (numAttacks <= 0)
 		{
 			self.GetSection(firingSec).attributes.weapon.SetWeaponEffect(new DefaultWeaponEffect(self.GetSection(firingSec).attributes.weapon));
+			Object.Destroy(blindedVisual);
 		}
 	}
 	

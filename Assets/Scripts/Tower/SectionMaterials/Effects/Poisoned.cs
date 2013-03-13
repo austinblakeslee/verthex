@@ -6,11 +6,12 @@ public class Poisoned : SectionEffect
 {
 	public int numTurns = 3;
 	public int poisonDamagePercentage = 35;
+	public GameObject poisonedVisual;
 
-	public Poisoned(Section effectedSection) : base(effectedSection)
+	public Poisoned(Section s) : base(s)
 	{
 		this.effectType = "Poisoned";
-		//visually show Confusion/Poison	}
+		poisonedVisual = GameObject.Instantiate(GameValues.visualEffects["poisonedVisual"], new Vector3(s.transform.position.x,  s.transform.position.y+s.transform.localScale.y/2, s.transform.position.z), s.transform.rotation) as GameObject;
 	}	
 	
 	public override void PreAttack(Section s)
@@ -31,6 +32,8 @@ public class Poisoned : SectionEffect
 		if (numTurns <= 0)
 		{
 			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect(appliedSection));
+			Object.Destroy(poisonedVisual);
+
 		}
 		numTurns --;
 

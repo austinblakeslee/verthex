@@ -12,7 +12,7 @@ public class BlindedEffect : SectionEffect
 	{
 		this.effectType = "Blinded";
 		missPercentage = blindPercentage;
-
+		blindedVisualEffect = GameObject.Instantiate(GameValues.visualEffects["blindedVisual"], effectedSection.transform.position, effectedSection.transform.rotation) as GameObject; 
 	}
 		
 	public override void ApplyDamage(Section s, int power)
