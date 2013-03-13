@@ -53,7 +53,7 @@ public class TurnOrder : MonoBehaviour {
 		turnNum = 0;
 		actionNum = 0;
 
-		ceasefire = 1;
+		ceasefire = 2;
 		Faction[] factions = new Faction[3] { new Totem(), new Cowboys(), new Area51() };
 		if (player1Bases.Length == 0)
 		{
