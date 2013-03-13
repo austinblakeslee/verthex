@@ -5,7 +5,7 @@ public class PassAction : DefaultMenuAction,MenuAction {
 	
 	public override void Action() {
 		PlayClickSound();
-		TurnOrder.SendAction(new Pass(TurnOrder.actionNum));
+		TurnOrder.SendAction(new Pass(TowerSelection.GetSelectedTower().towerNum));
 	}
 	
 }

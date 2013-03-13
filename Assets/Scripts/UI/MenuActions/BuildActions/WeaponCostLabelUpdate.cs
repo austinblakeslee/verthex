@@ -5,11 +5,12 @@ public class WeaponCostLabelUpdate : DefaultMenuAction,MenuAction {
 
 	public string weaponName;
 	public GameObject fromMenu = null;
+	public GameObject toMenu = null;
 	
 	public override void Action() {
 		ValueStore.selectedWeapon = SectionComponentFactory.GetWeapon(weaponName);
 		fromMenu.GetComponent<Menu>().on = false;
-		this.gameObject.GetComponent<BuildConfirmMenu>().on = true;
+		toMenu.GetComponent<Menu>().on = true;
 
 	}
 }

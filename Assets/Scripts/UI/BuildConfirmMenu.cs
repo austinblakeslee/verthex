@@ -10,6 +10,8 @@ public class BuildConfirmMenu : Menu {
 	private int numButtons;
 	public SectionMaterial sm;
 	public SectionWeapon sw;
+	public GUISkin squareStyle;
+	
 	void Start() {
 		buttonSize.x = 60;
 		buttonSize.y = 50;
@@ -21,6 +23,7 @@ public class BuildConfirmMenu : Menu {
 		ValueStore.selectedMaterial = sm;
 		ValueStore.selectedWeapon = sw;
 		if(!hasLoaded) {
+			this.guiSkin = squareStyle;
 			GameObject values = new GameObject("BuildValues");
 			values.AddComponent("GameValues");
 			values.transform.parent = transform;
@@ -29,22 +32,25 @@ public class BuildConfirmMenu : Menu {
 			//confirmButtonRect = FindPos(numButtons, confirmButtonRect);
 			GameObject confirm = MakeButton("Confirm",confirmButtonRect);
 			confirm.AddComponent("BuildAction");
+			BuildAction confirmBA = confirm.GetComponent<BuildAction>();
 			confirm.transform.parent = transform;
 			MenuItem m0 = confirm.GetComponent<MenuItem>();
-			m0.action = confirm.GetComponent<BuildAction>();
+			m0.action = confirmBA;
 			m0.action.click = click;
-			confirm.GetComponent<BuildAction>().myMenu = this;
+			//m0.guiSkin = squareStyle;
+			confirmBA.myMenu = this;
 			menuItems.Add(m0);
 			numButtons++;
 			Rect backButtonRect = new Rect(730,435,60,160);
 			//backButtonRect = FindPos(numButtons, backButtonRect);
 			GameObject back = MakeButton("Back",backButtonRect);
 			back.AddComponent("SwitchMenu");
+			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
 			back.transform.parent = transform;
 			MenuItem m1 = back.GetComponent<MenuItem>();
-			m1.action = back.GetComponent<SwitchMenu>();
-			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;
+			m1.action = backSM;
+			backSM.fromMenu = this.gameObject;
+			backSM.toMenu = this.transform.parent.gameObject;
 			m1.action.click = click;
 			menuItems.Add(m1);
 			numButtons++;

@@ -1,10 +1,13 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class FireAction : DefaultMenuAction,MenuAction {
 
 	public bool isActive = false;
+	public int firingTowerNum;
 	public Menu fightMenu;
 	public List<Menu> toHide;
 	
@@ -19,7 +22,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 			PlayClickSound();
 		}
 		else if(TurnOrder.IsBattlePhase()) {
-			if(firingSection == null || !TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).GetSections().Contains(firingSection)) {
+			if(firingSection == null || Array.IndexOf(TurnOrder.myPlayer.GetTowers(), TowerSelection.GetSelectedTower()) == -1) {
 				Debug.Log (firingSection);
 				ValueStore.helpMessage = "You must select your own tower section to fire!";
 			}
@@ -29,6 +32,7 @@ public class FireAction : DefaultMenuAction,MenuAction {
 			else {
 				//need to change it from showing PowerBar to showing arrows (or something equivalent) for who you want to attack
 				audio.Play();
+				firingTowerNum = TowerSelection.GetSelectedTower().towerNum;
 				isActive = true;
 				hide ();
 				TowerSelection.Deselect();
@@ -53,7 +57,6 @@ public class FireAction : DefaultMenuAction,MenuAction {
 			if(CheckTarget()) {
 				isActive = false;
 				unhide ();
-				int firingTowerNum = TurnOrder.actionNum;
 				int firingSectionNum = firingSection.attributes.height;
 				Tower targetTower = TowerSelection.GetSelectedTower();
 				int targetSectionNum = TowerSelection.GetSelectedSection().attributes.height;

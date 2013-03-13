@@ -13,6 +13,7 @@ public class UpgradeMenu : Menu {
 	private GameObject upgradeButton2;
 	private string scriptName1 = "";
 	private string scriptName2 = "";
+	public GUISkin squareStyle;
 	
 	void Start() {
 		on = false;
@@ -39,21 +40,21 @@ public class UpgradeMenu : Menu {
 			numButtons++;
 			firstUpdate = false;
 		}
-		if(lastFrameActionNum != TurnOrder.actionNum){	
-			lastFrameActionNum = TurnOrder.actionNum;
+		if(lastFrameActionNum != TowerSelection.GetSelectedTower().towerNum){	
+			lastFrameActionNum = TowerSelection.GetSelectedTower().towerNum;
 			
 			string oldScriptName1 = scriptName1;
 			string oldScriptName2 = scriptName2;
 			string goName1 = "";
 			string goName2 = "";
-			if (TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Totem")
+			if (TowerSelection.GetSelectedTower().faction.factionName == "Totem")
 			{
 				scriptName1 = "ParalyzeAction";
 				goName1 = "Paralyze";
 				scriptName2 = "AlterWeightAction";
 				goName2 = "Alter Weight";
 			}
-			else if(TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Cowboys")
+			else if(TowerSelection.GetSelectedTower().faction.factionName == "Cowboys")
 			{
 				scriptName1 = "TagAction";
 				goName1 = "Tag Section";
@@ -61,7 +62,7 @@ public class UpgradeMenu : Menu {
 				goName2 = "Blind";
 				
 			}
-			else if (TurnOrder.myPlayer.GetTower(TurnOrder.actionNum).faction.factionName == "Area 51")
+			else if (TowerSelection.GetSelectedTower().faction.factionName == "Area 51")
 			{
 				scriptName1 = "DrainAction";
 				goName1 = "Drain";
@@ -75,15 +76,16 @@ public class UpgradeMenu : Menu {
 			upgradeButton2 = editUpgradeButton(upgradeButton2, oldScriptName2, scriptName2, goName2);
 		}
 		if(!hasLoaded) {
-
+			this.guiSkin = squareStyle;
 			Rect damRect = new Rect(660,260,boxSize.x,boxSize.y);
 			createGUIButton("DamageAction","Upgrade",damRect);
 			numButtons++;
 
 			Rect backRect = new Rect(660,300,boxSize.x,boxSize.y);
 			GameObject back = createGUIButton("SwitchMenu","Back",backRect);
-			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;
+			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
+			backSM.fromMenu = this.gameObject;
+			backSM.toMenu = this.transform.parent.gameObject;
 			numButtons++;
 			hasLoaded = true;
 		}

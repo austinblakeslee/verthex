@@ -10,6 +10,7 @@ public class BuildMenu : Menu {
 	private MenuItem[] materialButtons;
 	public MenuItem[] weaponButtons;
 	private int numButtons;
+	public GUISkin squareStyle;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -25,7 +26,7 @@ public class BuildMenu : Menu {
 			b.sm = ValueStore.selectedMaterial;
 		}
 		if(hasLoaded) {
-			Tower t = TurnOrder.myPlayer.GetTower(TurnOrder.actionNum);
+			Tower t = TowerSelection.GetSelectedTower();
 			for(int i=0; i<Faction.NUM_MATERIALS; i++) {
 				string text = t.faction.materials[i];
 				materialButtons[i].text = text + ": $" + SectionComponentFactory.GetMaterial(text).cost;
@@ -33,25 +34,35 @@ public class BuildMenu : Menu {
 			}
 		}
 		if(!hasLoaded) {
+			this.guiSkin = squareStyle;
 			GameObject values = new GameObject("BuildValues");
 			values.AddComponent("GameValues");
 			values.transform.parent = transform;
 			numButtons=0;
-			
+			GameObject next = new GameObject("BuildWeaponMenu");
+			next.AddComponent("BuildWeaponMenu");
+			next.transform.parent = transform;
+			BuildWeaponMenu nextBWM = next.GetComponent<BuildWeaponMenu>();
+			nextBWM.click = click;
+			nextBWM.squareStyle = squareStyle;
 			Rect materialButtonRect = new Rect(100, 100, buttonSize.x, buttonSize.y);
 			for(int i=0; i< Faction.NUM_MATERIALS; i++) {
 				materialButtonRect = new Rect(795, (435) + ( ( i * ((150/(Faction.NUM_MATERIALS))+5))  ), 160, 150/(Faction.NUM_MATERIALS));
 				//materialButtonRect = FindPos (numButtons, materialButtonRect);
 				GameObject item = MakeButton("", materialButtonRect);
 				item.AddComponent("MaterialCostLabelUpdate");
-				item.GetComponent<MaterialCostLabelUpdate>().materialName = "";
-				item.AddComponent("BuildWeaponMenu");
+				MaterialCostLabelUpdate itemMCLU = item.GetComponent<MaterialCostLabelUpdate>();
+				itemMCLU.materialName = "";
+				//item.AddComponent("BuildWeaponMenu");
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
-				m.action = item.GetComponent<MaterialCostLabelUpdate>();
+				m.action = itemMCLU;
+				//m.guiSkin = squareStyle;
 				m.action.click = click;
-				item.GetComponent<MaterialCostLabelUpdate>().fromMenu = this.gameObject;
-				item.GetComponent<BuildWeaponMenu>().click = click;
+				itemMCLU.fromMenu = this.gameObject;
+				itemMCLU.toMenu = next;
+				//item.GetComponent<BuildWeaponMenu>().click = click;
+				//item.GetComponent<BuildWeaponMenu>().squareStyle = squareStyle;
 				menuItems.Add(m);
 				materialButtons[i] = m;
 				numButtons++;
@@ -60,12 +71,14 @@ public class BuildMenu : Menu {
 			//backButtonRect = FindPos(numButtons, backButtonRect);
 			GameObject back = MakeButton("Back",backButtonRect);
 			back.AddComponent("SwitchMenu");
+			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
 			back.transform.parent = transform;
 			MenuItem m1 = back.GetComponent<MenuItem>();
-			m1.action = back.GetComponent<SwitchMenu>();
-			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;
+			m1.action = backSM;
+			backSM.fromMenu = this.gameObject;
+			backSM.toMenu = this.transform.parent.gameObject;
 			m1.action.click = click;
+			//m1.guiSkin = squareStyle;
 			menuItems.Add(m1);
 			numButtons++;
 			hasLoaded = true;
@@ -101,7 +114,7 @@ public class BuildMenu : Menu {
 		return item;
 	}
 
-	private Rect FindPos(int i, Rect rect) {
+	/*private Rect FindPos(int i, Rect rect) {
 		if(i == 1 || i == 4 || i == 7) {
 			rect.x = 810;
 		}
@@ -126,5 +139,5 @@ public class BuildMenu : Menu {
 		}
 		
 		return rect;
-	}
+	}*/
 }

@@ -7,6 +7,7 @@ public class FortifyMenu : Menu {
 	public Vector2 boxSize;
 	public AudioClip click;
 	private int numButtons;
+	public GUISkin squareStyle;
 	
 	void Start() {
 		on = false;
@@ -18,6 +19,7 @@ public class FortifyMenu : Menu {
 	
 	public override void Update() {
 		if(!hasLoaded) {
+			this.guiSkin = squareStyle;
 			Rect rpLabelRect = new Rect(660,180,boxSize.x,boxSize.y);
 			GameObject rlabel = MakeBox ("RP",rpLabelRect);
 			rlabel.AddComponent("FortifyCostLabel");
@@ -37,8 +39,9 @@ public class FortifyMenu : Menu {
 			numButtons++;
 			Rect backRect = new Rect(660,295,boxSize.x,boxSize.y);
 			GameObject back = createGUIButton("SwitchMenu","Back",backRect);
-			back.GetComponent<SwitchMenu>().fromMenu = this.gameObject;
-			back.GetComponent<SwitchMenu>().toMenu = this.transform.parent.gameObject;
+			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
+			backSM.fromMenu = this.gameObject;
+			backSM.toMenu = this.transform.parent.gameObject;
 			numButtons++;
 			hasLoaded = true;
 		}
@@ -71,33 +74,6 @@ public class FortifyMenu : Menu {
 		m.visible = true;
 		m.text = "";
 		return item;
-	}
-
-	private Rect FindPos(int i, Rect rect) {
-		if(i == 1 || i == 4 || i == 7) {
-			rect.x = 810;
-		}
-		else if(i == 0 || i == 3 || i == 6) {
-			rect.x = 735;
-		}
-		else if(i == 2 || i == 5 || i == 8) {
-			rect.x = 885;
-		}
-		else {
-			Debug.Log ("Too many buttons!");	
-		}
-		
-		if(i <= 2) {
-			rect.y = 435;
-		}
-		else if(i > 2 && i <= 5) {
-			rect.y = 490;
-		}
-		else if(i > 5 && i <= 8) {
-			rect.y = 545;
-		}
-		
-		return rect;
 	}
 	
 	private GameObject createGUIButton(string scriptName, string goName, Rect itemButtonRect) {

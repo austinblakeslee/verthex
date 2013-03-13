@@ -34,7 +34,7 @@ public class MenuItemManager : MonoBehaviour {
 	
 	public static bool MouseIsInGUI() {
 		Vector3 mp = Input.mousePosition;
-		Debug.Log (Input.mousePosition.x + " = " + (Screen.height - Input.mousePosition.y));
+		//Debug.Log (Input.mousePosition.x + " = " + (Screen.height - Input.mousePosition.y));
 		Vector2 xy = new Vector2(mp.x,  Screen.height - mp.y); //mouse and GUI screen coords are inversed vertically: Screen.height -
 		foreach (Rect r in registeredRects) {
 			if(r.Contains(xy)) {

@@ -13,7 +13,7 @@ public class FortifyAction : DefaultMenuAction,MenuAction {
 			} else if(s.attributes.material.maxSP == s.attributes.sp) {
 				ValueStore.helpMessage = "This section's SP has reached the maximum available to this material!";
 			} else {
-				TurnOrder.SendAction(new Fortify(TurnOrder.actionNum, s.attributes.height));
+				TurnOrder.SendAction(new Fortify(TowerSelection.GetSelectedTower().towerNum, s.attributes.height));
 			}
 		} else {
 			ValueStore.helpMessage = "You must select a section to fortify!";

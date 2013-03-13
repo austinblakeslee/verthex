@@ -10,7 +10,7 @@ public class TowerInspector2 : MonoBehaviour {
 	public GUIStyle nbStyle;
 	public GUIStyle baseStyle;
 	public GUIStyle nonActive;
-	public GUIStyle active;
+	public GUIStyle veryActive;
 	public bool show;
 	private Vector3 scale;
 	private float ow;
@@ -42,11 +42,11 @@ public class TowerInspector2 : MonoBehaviour {
 		GUIStyle p1Style;
 		GUIStyle p2Style;
 		if(currentPlayer == TurnOrder.player1) {
-			p1Style = active;
+			p1Style = veryActive;
 			p2Style = nonActive;
 		}
 		else {
-			p2Style = active;
+			p2Style = veryActive;
 			p1Style = nonActive;
 		}
 		if(GUI.Button(new Rect(5,top - 30,110,30),"Player1",p1Style)) {
