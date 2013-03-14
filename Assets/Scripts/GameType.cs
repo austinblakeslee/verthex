@@ -4,8 +4,9 @@ using System.Collections;
 //This is used to set whether it is a Local or Online game.
 //If Local, all turns can be played from the same machine.
 public class GameType : MonoBehaviour {
-	private static string gameType;
-	
+	private static string gameType = "Deathmatch";
+	private static string playerNums = "3v3";
+ 
 	public static void setGameType(string type) {
 		gameType = type;
 	}

@@ -37,8 +37,16 @@ public class TurnOrder : MonoBehaviour {
 	
 	void Start () {
 		instance = this;
-		player1 = new Player(1, player1Color, GameValues.intValues["baseResources"]);
-		player2 = new Player(2, player2Color, GameValues.intValues["baseResources"]);
+		if (GameType.getGameType() != "Survival")
+		{
+			player1 = new Player(1, player1Color, GameValues.intValues["baseResources"]);
+			player2 = new Player(2, player2Color, GameValues.intValues["baseResources"]);
+		}
+		else
+		{
+			player1 = new Player(1, player1Color, GameValues.intValues["baseResources"] * 8);
+			player2 = new Player(2, player2Color, GameValues.intValues["baseResources"] * 8);	
+		}
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			myPlayer = player1;
 			otherPlayer = player2;
@@ -286,8 +294,10 @@ public class TurnOrder : MonoBehaviour {
 			ceasefireIcon.visible = false;
 			CombatLog.addLineNoPlayer("!!! CEASEFIRE HAS ENDED !!!");
 		}
-		player1.AccrueResources();
-		player2.AccrueResources();
+		if (GameType.getGameType() != "Survival"){
+			player1.AccrueResources();
+			player2.AccrueResources();
+		}
 		actionNum = 0;
 		TowerSelection.LocalSelectSection(myPlayer.GetTower(1), -1);
 		
