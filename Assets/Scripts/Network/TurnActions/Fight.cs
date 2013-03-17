@@ -50,6 +50,8 @@ public class Fight : TurnAction {
 		int damage = sc.attributes.weapon.GetDamage();
 		//check firing sections pre-attack
 		firingPlayer.GetTower(towerNumber).GetSection(firingSection).attributes.material.GetSectionEffect().PreAttack(firingPlayer.GetTower(towerNumber).GetSection(firingSection));
+		//apply damage
 		sc.attributes.weapon.GetEffect().DoDamage(target.GetTower(targetTower), hitCenter, damage, firingPlayer.GetTower(towerNumber), firingSection);
+
 	}
 }

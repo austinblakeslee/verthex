@@ -23,6 +23,7 @@ public class Section : MonoBehaviour {
 			damaged = false;
 			RemoveDamage();
 		}
+		attributes.material.GetSectionEffect().Update();
 	}
 	
 	public void Highlight() {
