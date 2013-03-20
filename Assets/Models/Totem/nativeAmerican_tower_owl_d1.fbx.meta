@@ -9,12 +9,22 @@ ModelImporter:
     100006: RightEye
     100008: UpperHead
     100010: UpperHead 1
+    100012: group
+    100014: GUI_popUp
+    100016: nativeAmerican_tower_owl_d1
+    100018: pasted__group
+    100020: pasted__pasted__group
     400000: HeadBottom
     400002: LeftEye
     400004: //RootNode
     400006: RightEye
     400008: UpperHead
     400010: UpperHead 1
+    400012: group
+    400014: GUI_popUp
+    400016: nativeAmerican_tower_owl_d1
+    400018: pasted__group
+    400020: pasted__pasted__group
     2300000: HeadBottom
     2300002: LeftEye
     2300004: RightEye

@@ -7,10 +7,14 @@ ModelImporter:
     100002: //RootNode
     100004: waterTower_body
     100006: waterTower_legs
+    100008: group
+    100010: GUI_popUp
     400000: Default
     400002: //RootNode
     400004: waterTower_body
     400006: waterTower_legs
+    400008: group
+    400010: GUI_popUp
     2300000: Default
     2300002: waterTower_body
     2300004: waterTower_legs

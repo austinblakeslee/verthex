@@ -13,6 +13,9 @@ ModelImporter:
     100014: saloon_shutter_topleft_left
     100016: saloon_shutter_topright_left
     100018: saloon_shutter_topright_right
+    100020: ghostWestern_tower_saloon_d0
+    100022: group
+    100024: GUI_popUp
     400000: //RootNode
     400002: Saloon
     400004: saloon_door_left
@@ -23,6 +26,9 @@ ModelImporter:
     400014: saloon_shutter_topleft_left
     400016: saloon_shutter_topright_left
     400018: saloon_shutter_topright_right
+    400020: ghostWestern_tower_saloon_d0
+    400022: group
+    400024: GUI_popUp
     2300000: //RootNode
     2300002: Saloon
     2300004: saloon_door_left

@@ -11,6 +11,12 @@ ModelImporter:
     100010: //RootNode
     100012: Nose
     100014: Texture Group
+    100016: group
+    100018: GUI_popUp
+    100020: Head
+    100022: LeftEye
+    100024: nativeAmerican_tower_bison_d0
+    100026: RightEye
     400000: Base
     400002: Camera
     400004: Directional Light
@@ -19,19 +25,35 @@ ModelImporter:
     400010: //RootNode
     400012: Nose
     400014: Texture Group
+    400016: group
+    400018: GUI_popUp
+    400020: Head
+    400022: LeftEye
+    400024: nativeAmerican_tower_bison_d0
+    400026: RightEye
     2300000: Base
     2300002: Eyes
     2300004: Horns
     2300006: Nose
+    2300008: Head
+    2300010: LeftEye
+    2300012: RightEye
     3300000: Base
     3300002: Eyes
     3300004: Horns
     3300006: Nose
+    3300008: Head
+    3300010: LeftEye
+    3300012: RightEye
     4300000: Base
     4300002: Nose
     4300004: Eyes
     4300006: Horns
+    4300008: RightEye
+    4300010: LeftEye
+    4300012: Head
     7400000: modo_Anim
+    7400002: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1

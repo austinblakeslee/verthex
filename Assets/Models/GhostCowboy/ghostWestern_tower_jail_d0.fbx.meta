@@ -18,6 +18,14 @@ ModelImporter:
     100024: Mesh
     100026: 'Mesh '
     100028: Texture Group
+    100030: Default
+    100032: Default1
+    100034: ghostWestern_tower_jail_d0_032Jail_building
+    100036: ghostWestern_tower_jail_d0_032Jail_building1
+    100038: group
+    100040: GUI_popUp
+    100042: jail_door_032ghostWestern_tower_jail_d0
+    100044: jail_door_032ghostWestern_tower_jail_d1
     400000: //RootNode
     400002: pCube3
     400004: pCube4
@@ -33,6 +41,14 @@ ModelImporter:
     400024: Mesh
     400026: 'Mesh '
     400028: Texture Group
+    400030: Default
+    400032: Default1
+    400034: ghostWestern_tower_jail_d0_032Jail_building
+    400036: ghostWestern_tower_jail_d0_032Jail_building1
+    400038: group
+    400040: GUI_popUp
+    400042: jail_door_032ghostWestern_tower_jail_d0
+    400044: jail_door_032ghostWestern_tower_jail_d1
     2300000: pCube3
     2300002: pCube4
     2300004: jail_base
@@ -41,6 +57,12 @@ ModelImporter:
     2300010: jail_platform
     2300012: Mesh
     2300014: 'Mesh '
+    2300016: Default
+    2300018: Default1
+    2300020: ghostWestern_tower_jail_d0_032Jail_building
+    2300022: ghostWestern_tower_jail_d0_032Jail_building1
+    2300024: jail_door_032ghostWestern_tower_jail_d0
+    2300026: jail_door_032ghostWestern_tower_jail_d1
     3300000: pCube3
     3300002: pCube4
     3300004: jail_base
@@ -49,6 +71,12 @@ ModelImporter:
     3300010: jail_platform
     3300012: Mesh
     3300014: 'Mesh '
+    3300016: Default
+    3300018: Default1
+    3300020: ghostWestern_tower_jail_d0_032Jail_building
+    3300022: ghostWestern_tower_jail_d0_032Jail_building1
+    3300024: jail_door_032ghostWestern_tower_jail_d0
+    3300026: jail_door_032ghostWestern_tower_jail_d1
     4300000: pCube3
     4300002: pCube4
     4300004: jail_base
@@ -57,6 +85,12 @@ ModelImporter:
     4300010: jail_platform
     4300012: Mesh
     4300014: 'Mesh '
+    4300016: Default
+    4300018: jail_door_032ghostWestern_tower_jail_d0
+    4300020: ghostWestern_tower_jail_d0_032Jail_building
+    4300022: jail_door_032ghostWestern_tower_jail_d1
+    4300024: ghostWestern_tower_jail_d0_032Jail_building1
+    4300026: Default1
     7400000: Take 001
     7400002: modo_Anim
     9500000: //RootNode

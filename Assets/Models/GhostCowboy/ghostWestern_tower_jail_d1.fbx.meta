@@ -10,6 +10,8 @@ ModelImporter:
     100008: //RootNode
     100010: jail_door_032ghostWestern_tower_jail_d0
     100012: jail_door_032ghostWestern_tower_jail_d1
+    100014: group
+    100016: GUI_popUp
     400000: Default
     400002: Default1
     400004: ghostWestern_tower_jail_d0_032Jail_building
@@ -17,6 +19,8 @@ ModelImporter:
     400008: //RootNode
     400010: jail_door_032ghostWestern_tower_jail_d0
     400012: jail_door_032ghostWestern_tower_jail_d1
+    400014: group
+    400016: GUI_popUp
     2300000: Default
     2300002: Default1
     2300004: ghostWestern_tower_jail_d0_032Jail_building
