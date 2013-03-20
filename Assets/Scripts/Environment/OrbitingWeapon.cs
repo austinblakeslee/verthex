@@ -24,8 +24,9 @@ public class OrbitingWeapon : MonoBehaviour {
 			transform.RotateAround(orbitee.position, orbitee.up, orbitSpeed * Time.deltaTime);
 			transform.Translate(0, oscillateSpeed * Time.deltaTime * Mathf.Sin(3.0f + Time.time), 0);
 		} else {
-			transform.position = originalPosition;
-			transform.rotation = originalRotation;
+			Transform location = orbitee.Find("WeaponLocation");
+			transform.position = location.position;
+			transform.rotation = location.rotation;
 		}
 	}
 }
