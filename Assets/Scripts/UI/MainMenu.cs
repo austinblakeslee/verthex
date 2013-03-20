@@ -34,6 +34,11 @@ public class MainMenu : Menu {
 	private MenuItem m3;
 	private MenuItem m4;
 	private MenuItem m5;
+	/*public Texture2D buildTexture;
+	public Texture2D upgradeTexture;
+	public Texture2D fortifyTexture;
+	public Texture2D fightTexture;
+	public Texture2D passTexture;*/
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -267,4 +272,14 @@ public class MainMenu : Menu {
 		menuItems.Add(m2);
 		return fight;
 	}
+	
+	/*void OnGUI() {
+		if(this.on == true) {
+			GUI.Label (new Rect(730,20,75,75),buildTexture);
+			GUI.Label (new Rect(380,20,75,75),upgradeTexture);
+			GUI.Label (new Rect(380,20,75,75),fortifyTexture);
+			GUI.Label (new Rect(380,20,75,75),fightTexture);
+			GUI.Label (new Rect(730,20,75,75),passTexture);
+		}
+	}*/
 }

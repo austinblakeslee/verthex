@@ -104,6 +104,14 @@ public class TurnOrder : MonoBehaviour {
 		} else {
 			//playerText.guiSkin = player2Box;
 			playerText.text = "Player 2";
+			if(actionsLeft != null) {
+				if(player1Confirm) {
+					actionsLeft.text = "0";
+				}
+				else {
+					actionsLeft.text = ""+(3-actionNum);
+				}
+			}
 		}
 		if(actionQueue != null) {
 			actionQueue.text = "Actions:\nAction 1: "+myActions[0]+"\nAction 2: "+myActions[1]+"\nAction 3: "+myActions[2];
