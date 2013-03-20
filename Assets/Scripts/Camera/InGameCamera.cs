@@ -53,6 +53,14 @@ public class InGameCamera : MonoBehaviour {
 				}
 			}
 		}
+		if(Input.GetKeyDown(KeyCode.UpArrow)) {
+			transform.TransformDirection(Vector3.up);
+			transform.Translate(0,10,0);
+		}
+		else if(Input.GetKeyDown(KeyCode.DownArrow)) {
+			transform.TransformDirection(Vector3.down);
+			transform.Translate(0,-10,0);
+		}
 	}
 	
 	//instantly return to initial position
