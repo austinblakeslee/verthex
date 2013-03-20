@@ -11,6 +11,8 @@ public class BuildMenu : Menu {
 	public MenuItem[] weaponButtons;
 	private int numButtons;
 	public GUISkin squareStyle;
+	MenuItem m;
+	MenuItem m1;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -26,11 +28,16 @@ public class BuildMenu : Menu {
 			b.sm = ValueStore.selectedMaterial;
 		}
 		if(hasLoaded) {
+			/*m1.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m1.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));*/
 			Tower t = TowerSelection.GetSelectedTower();
 			for(int i=0; i<Faction.NUM_MATERIALS; i++) {
 				string text = t.faction.materials[i];
 				materialButtons[i].text = text + ": $" + SectionComponentFactory.GetMaterial(text).cost;
 				materialButtons[i].GetComponent<MaterialCostLabelUpdate>().materialName = text;
+				materialButtons[i].tooltip = "Health: " + SectionComponentFactory.GetMaterial(text).GetInitialSP() + "\nWeight: " + SectionComponentFactory.GetMaterial(text).GetWeight();
+				materialButtons[i].tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+				materialButtons[i].tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
 			}
 		}
 		if(!hasLoaded) {
@@ -57,6 +64,12 @@ public class BuildMenu : Menu {
 				item.transform.parent = transform;
 				MenuItem m = item.GetComponent<MenuItem>();
 				m.action = itemMCLU;
+				m.tooltipSkin = squareStyle;
+				m.SetTooltipLabel(false);
+				m.tooltipHeight = 40;
+				m.tooltipWidth = 100;
+				m.tooltipLeftRel = -105;
+				m.tooltipTopRel = 0;
 				//m.guiSkin = squareStyle;
 				m.action.click = click;
 				itemMCLU.fromMenu = this.gameObject;
@@ -73,8 +86,15 @@ public class BuildMenu : Menu {
 			back.AddComponent("SwitchMenu");
 			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
 			back.transform.parent = transform;
-			MenuItem m1 = back.GetComponent<MenuItem>();
+			m1 = back.GetComponent<MenuItem>();
 			m1.action = backSM;
+			/*m1.tooltipSkin = squareStyle;
+			m1.SetTooltipLabel(false);
+			m1.tooltip = "Go back to the previous screen.";
+			m1.tooltipHeight = 75;
+			m1.tooltipWidth = 100;
+			m1.tooltipLeftRel = -105;
+			m1.tooltipTopRel = 0;*/
 			backSM.fromMenu = this.gameObject;
 			backSM.toMenu = this.transform.parent.gameObject;
 			m1.action.click = click;

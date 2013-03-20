@@ -27,10 +27,10 @@ public class CeasfireIcon : MonoBehaviour {
 		float scaleX = Screen.width/ow;
 		GUI.matrix = Matrix4x4.TRS(new Vector3((scaleX - scale.y)/2 * ow,0,0),Quaternion.identity,scale);
 		if(TurnOrder.ceasefire > TurnOrder.turnNum) {
-			GUI.Label (new Rect(Screen.width/2-130,20,200,200),cfIcon);
+			GUI.Label (new Rect(Screen.width/2-100,20,200,200),cfIcon);
 		}
 		else if (TurnOrder.ceasefire == TurnOrder.turnNum)  {
-			GUI.Label (new Rect(Screen.width/2-130,20,200,200),nocfIcon);
+			GUI.Label (new Rect(Screen.width/2-100,20,200,200),nocfIcon);
 		}
 	}
 }

@@ -35,7 +35,7 @@ public class Drain : WeaponEffect {
 	}
 	
 	public override string GetInfo(int damage) {
-		return "Deals " + damage + " single-target damage.";
+		return "Gives you some damage dealt as back health.";
 	}
 	public void Heal(int damage, int center, Tower t){
 		int heal = (damage*drainPercentage)/100; //40 percent

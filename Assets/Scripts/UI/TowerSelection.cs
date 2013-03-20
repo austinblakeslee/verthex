@@ -30,11 +30,15 @@ public class TowerSelection : MonoBehaviour {
 	public MenuItem dotButton;
 	public MenuItem aoeButton;
 	
+	private Vector3 scale;
+	private float ow = 960;
+	private float oh = 600;
+	
 	public static bool disableCameraPan = false;
 	
 	void Awake() {
-		materialBoxRect = new Rect(230, Screen.height - materialBox.y - padding, materialBox.x, materialBox.y);
-		weaponBoxRect = new Rect(460, Screen.height - weaponBox.y - padding, weaponBox.x, weaponBox.y);
+		materialBoxRect = new Rect(230, 600 - materialBox.y - padding, materialBox.x, materialBox.y);
+		weaponBoxRect = new Rect(460, 600 - weaponBox.y - padding, weaponBox.x, weaponBox.y);
 		instance = this;
 	}
 	
@@ -100,6 +104,11 @@ public class TowerSelection : MonoBehaviour {
 	}
 	
 	void OnGUI() {
+		scale.y = Screen.height/oh;
+		scale.x = Screen.width/ow;
+		scale.z = 1;
+		float scaleX = Screen.width/ow;
+		GUI.matrix = Matrix4x4.TRS(new Vector3((scaleX - scale.y)/2 * ow,0,0),Quaternion.identity,scale);
 		//GUI.skin = skin;
 		if(selectedSection != null) {
 			DrawMaterialBox();

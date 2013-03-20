@@ -27,10 +27,13 @@ public class MenuItem : MonoBehaviour {
 	public Vector2 scrollPosition = Vector2.zero;
 	public int scrollBoxHeight;
 	public GUISkin guiSkin = null;
+	private Vector3 scale;
+	private float ow = 960;
+	private float oh = 600;
 	
 	// tooltip stuff
 	public string tooltip = "";
-	public int tooltipTopRel, tooltipLeftRel, tooltipWidth, tooltipHeight;
+	public float tooltipTopRel, tooltipLeftRel, tooltipWidth, tooltipHeight;
 	public GUISkin tooltipSkin = null;
 	private bool tooltipOn = false;
 	public enum TooltipType{
@@ -132,9 +135,23 @@ public class MenuItem : MonoBehaviour {
 		}
 	}
 	
+	public void SetTooltipLabel(bool label) {
+		if(label) {
+			ttType = TooltipType.Label;
+		}
+		else {
+			ttType = TooltipType.Box;
+		}
+	}
+	
 	// FOR TOOLTIPS
 	// I know this is an ugly way to do it but it's by far the simplest possible way
 	void OnGUI() {
+		scale.y = Screen.height/oh;
+		scale.x = Screen.width/ow;
+		scale.z = 1;
+		float scaleX = Screen.width/ow;
+		GUI.matrix = Matrix4x4.TRS(new Vector3((scaleX - scale.y)/2 * ow,0,0),Quaternion.identity,scale);
 		if (tooltipOn){
 			GUI.skin = tooltipSkin ? tooltipSkin : guiSkin;
 			GUI.depth = -5;
@@ -142,12 +159,14 @@ public class MenuItem : MonoBehaviour {
 				// GOD I'M GOOD
 				GUI.Label(new Rect(leftI, topI, widthI, heightI), new GUIContent("", tooltip));
 				if (GUI.tooltip == tooltip){
-					GUI.Box(new Rect (leftI+tooltipLeftRel, topI+tooltipTopRel, tooltipWidth, tooltipHeight), GUI.tooltip);
+					GUI.Box(new Rect (tooltipLeftRel - tooltipWidth, tooltipTopRel - tooltipHeight, tooltipWidth, tooltipHeight), GUI.tooltip);
+					//(leftI+tooltipLeftRel, topI+tooltipTopRel, tooltipWidth, tooltipHeight)
 				}
 			}
 			else{
 				GUI.Label(new Rect(leftI, topI, widthI, heightI), new GUIContent("", tooltip));
-				GUI.Label(new Rect (leftI+tooltipLeftRel, topI+tooltipTopRel, tooltipWidth, tooltipHeight), GUI.tooltip);
+				GUI.Label(new Rect (tooltipLeftRel - tooltipWidth, tooltipTopRel - tooltipHeight, tooltipWidth, tooltipHeight), GUI.tooltip);
+				//(leftI+tooltipLeftRel, topI+tooltipTopRel, tooltipWidth, tooltipHeight)
 			}
 		}
 	}

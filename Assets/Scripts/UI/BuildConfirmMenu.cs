@@ -11,6 +11,7 @@ public class BuildConfirmMenu : Menu {
 	public SectionMaterial sm;
 	public SectionWeapon sw;
 	public GUISkin squareStyle;
+	MenuItem m1;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -22,6 +23,10 @@ public class BuildConfirmMenu : Menu {
 	public override void Update() {
 		ValueStore.selectedMaterial = sm;
 		ValueStore.selectedWeapon = sw;
+		//if(hasLoaded) {
+			//m1.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			//m1.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));	
+		//}
 		if(!hasLoaded) {
 			this.guiSkin = squareStyle;
 			GameObject values = new GameObject("BuildValues");
@@ -47,8 +52,15 @@ public class BuildConfirmMenu : Menu {
 			back.AddComponent("SwitchMenu");
 			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
 			back.transform.parent = transform;
-			MenuItem m1 = back.GetComponent<MenuItem>();
+			m1 = back.GetComponent<MenuItem>();
 			m1.action = backSM;
+			/*m1.tooltipSkin = squareStyle;
+			m1.SetTooltipLabel(false);
+			m1.tooltip = "Go back to the previous screen.";
+			m1.tooltipHeight = 75;
+			m1.tooltipWidth = 100;
+			m1.tooltipLeftRel = -105;
+			m1.tooltipTopRel = 0;*/
 			backSM.fromMenu = this.gameObject;
 			backSM.toMenu = this.transform.parent.gameObject;
 			m1.action.click = click;

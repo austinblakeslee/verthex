@@ -54,7 +54,7 @@ public class ApplyForceField : WeaponEffect
 	
 	public override string GetInfo(int damage)
 	{
-		return "Deals " + damage + " single target damage, and tags the target section for bonus damage on the next attack.";
+		return "Prevents some damage to upgraded sections.";
 
 	}
 }

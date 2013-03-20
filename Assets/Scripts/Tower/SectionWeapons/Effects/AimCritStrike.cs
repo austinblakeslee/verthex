@@ -39,7 +39,7 @@ public class AimCritStrike : WeaponEffect
 	
 	public override string GetInfo(int damage)
 	{
-		return "Deals " + damage + " single target damage, and tags the target section for bonus damage on the next attack.";
+		return "Deals single target damage, and tags the target section for bonus damage on the next attack.";
 
 	}
 }

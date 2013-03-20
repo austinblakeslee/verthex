@@ -11,6 +11,8 @@ public class BuildWeaponMenu : Menu {
 	private int numButtons;
 	public SectionMaterial sm;
 	public GUISkin squareStyle;
+	MenuItem m;
+	MenuItem m1;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -27,11 +29,16 @@ public class BuildWeaponMenu : Menu {
 			b.sw = ValueStore.selectedWeapon;
 		}
 		if(hasLoaded) {
+			/*m1.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m1.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));*/
 			Tower t = TowerSelection.GetSelectedTower();
 			for(int i=0; i<Faction.NUM_WEAPONS; i++) {
 				string text = t.faction.weapons[i];
 				weaponButtons[i].text = text + ": $" + SectionComponentFactory.GetWeapon(text).cost;
 				weaponButtons[i].GetComponent<WeaponCostLabelUpdate>().weaponName = text;
+				weaponButtons[i].tooltip = "Damage: " + SectionComponentFactory.GetWeapon(text).GetDamage() + "\nRange: " + SectionComponentFactory.GetWeapon(text).GetRange() + "\nWeight: " + SectionComponentFactory.GetWeapon(text).GetWeight();
+				weaponButtons[i].tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+				weaponButtons[i].tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
 			}
 		}
 		if(!hasLoaded) {
@@ -56,8 +63,14 @@ public class BuildWeaponMenu : Menu {
 				itemWCLU.weaponName = "";
 				item.AddComponent("BuildConfirmMenu");
 				item.transform.parent = transform;
-				MenuItem m = item.GetComponent<MenuItem>();
+				m = item.GetComponent<MenuItem>();
 				m.action = itemWCLU;
+				m.tooltipSkin = squareStyle;
+				m.SetTooltipLabel(false);
+				m.tooltipHeight = 60;
+				m.tooltipWidth = 100;
+				m.tooltipLeftRel = -105;
+				m.tooltipTopRel = 0;
 				//m.guiSkin = squareStyle;
 				itemWCLU.fromMenu = this.gameObject;
 				itemWCLU.toMenu = next;
@@ -78,8 +91,15 @@ public class BuildWeaponMenu : Menu {
 			back.AddComponent("SwitchMenu");
 			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
 			back.transform.parent = transform;
-			MenuItem m1 = back.GetComponent<MenuItem>();
+			m1 = back.GetComponent<MenuItem>();
 			m1.action = backSM;
+			/*m1.tooltipSkin = squareStyle;
+			m1.SetTooltipLabel(false);
+			m1.tooltip = "Go back to the previous screen.";
+			m1.tooltipHeight = 75;
+			m1.tooltipWidth = 100;
+			m1.tooltipLeftRel = -105;
+			m1.tooltipTopRel = 0;*/
 			backSM.fromMenu = this.gameObject;
 			backSM.toMenu = this.transform.parent.gameObject;
 			m1.action.click = click;

@@ -36,7 +36,7 @@ public class Paralyze : WeaponEffect {
 	}
 	
 	public override string GetInfo(int damage) {
-		return "Deals " + damage + " single-target damage.";
+		return "Causes hit sections to waste next attack.";
 	}
 	
 	public void Stun(Tower t, int center){

@@ -29,6 +29,11 @@ public class MainMenu : Menu {
 	public GameObject upgrade;
 	public GUISkin squareStyle;
 	//public GUISkin rectStyle;
+	private MenuItem m1;
+	private MenuItem m2;
+	private MenuItem m3;
+	private MenuItem m4;
+	private MenuItem m5;
 	
 	void Start() {
 		buttonSize.x = 60;
@@ -38,6 +43,18 @@ public class MainMenu : Menu {
 	}
 
 	public override void Update() {
+		if(hasLoaded) {
+			m1.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m1.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
+			m2.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m2.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
+			m3.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m3.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
+			m4.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m4.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
+			m5.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m5.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
+		}
 		if(!hasLoaded) {
 			Rect buildButtonRect = new Rect(760,(435) + ((numButtons-1) *(150/(numButtons))) ,190, (150/(2)));
 			build = MakeButton("Build",buildButtonRect);
@@ -46,9 +63,17 @@ public class MainMenu : Menu {
 			SwitchMenu buildSM = build.GetComponent<SwitchMenu>();
 			BuildMenu buildBM = build.GetComponent<BuildMenu>();
 			build.transform.parent = transform;
-			MenuItem m1 = build.GetComponent<MenuItem>();
+			m1 = build.GetComponent<MenuItem>();
 			m1.action = buildSM;
 			m1.guiSkin = squareStyle;
+			m1.tooltipSkin = squareStyle;
+			m1.SetTooltipLabel(false);
+			m1.tooltip = "Click here to build a tower section on the selected tower.";
+			m1.tooltipHeight = 75;
+			m1.tooltipWidth = 100;
+			m1.tooltipLeftRel = -105;
+			m1.tooltipTopRel = 0;
+			//m1.setTooltipOn(false);
 			buildSM.fromMenu = this.gameObject;
 			buildSM.toMenu = build;
 			buildBM.click = click;
@@ -66,9 +91,16 @@ public class MainMenu : Menu {
 			SwitchMenu fortifySM = fortify.GetComponent<SwitchMenu>();
 			FortifyMenu fortifyFM = fortify.GetComponent<FortifyMenu>();
 			fortify.transform.parent = transform;
-			MenuItem m3 = fortify.GetComponent<MenuItem>();
+			m3 = fortify.GetComponent<MenuItem>();
 			m3.action = fortifySM;
 			m3.guiSkin = squareStyle;
+			m3.tooltipSkin = squareStyle;
+			m3.SetTooltipLabel(false);
+			m3.tooltip = "Fortify sections to add health to them.";
+			m3.tooltipHeight = 75;
+			m3.tooltipWidth = 100;
+			m3.tooltipLeftRel = -105;
+			m3.tooltipTopRel = 0;
 			fortifySM.fromMenu = this.gameObject;
 			fortifySM.toMenu = fortify;
 			fortifyFM.click = click;
@@ -83,9 +115,16 @@ public class MainMenu : Menu {
 			SwitchMenu upgradeSM = upgrade.GetComponent<SwitchMenu>();
 			UpgradeMenu upgradeUM = upgrade.GetComponent<UpgradeMenu>();
 			upgrade.transform.parent = transform;
-			MenuItem m4 = upgrade.GetComponent<MenuItem>();
+			m4 = upgrade.GetComponent<MenuItem>();
 			m4.action = upgradeSM;
 			m4.guiSkin = squareStyle;
+			m4.tooltipSkin = squareStyle;
+			m4.SetTooltipLabel(false);
+			m4.tooltip = "Upgrade adds special effects to weapons.";
+			m4.tooltipHeight = 75;
+			m4.tooltipWidth = 100;
+			m4.tooltipLeftRel = -105;
+			m4.tooltipTopRel = 0;
 			upgradeSM.fromMenu = this.gameObject;
 			upgradeSM.toMenu = upgrade;
 			upgradeUM.click = click;
@@ -96,9 +135,16 @@ public class MainMenu : Menu {
 			GameObject pass = MakeButton("Pass",passButtonRect);
 			pass.AddComponent("PassAction");
 			pass.transform.parent = transform;
-			MenuItem m5 = pass.GetComponent<MenuItem>();
+			m5 = pass.GetComponent<MenuItem>();
 			m5.action = pass.GetComponent<PassAction>();
 			m5.action.click = click;
+			m5.tooltipSkin = squareStyle;
+			m5.SetTooltipLabel(false);
+			m5.tooltip = "Click to use an action and pass.";
+			m5.tooltipHeight = 75;
+			m5.tooltipWidth = 100;
+			m5.tooltipLeftRel = -105;
+			m5.tooltipTopRel = 0;
 			menuItems.Add(m5);
 			numButtons++;
 			hasLoaded = true;
@@ -140,7 +186,6 @@ public class MainMenu : Menu {
 		}else {
 			build.GetComponent<MenuItem>().visible = true;
 		}
-		
 	}
 	
 	private GameObject MakeButton(string text, Rect rect) {
@@ -208,8 +253,15 @@ public class MainMenu : Menu {
 		fightCA.soundEffect = sound;
 		fight.AddComponent<AudioSource>();
 		fight.transform.parent = transform;
-		MenuItem m2 = fight.GetComponent<MenuItem>();
+		m2 = fight.GetComponent<MenuItem>();
 		m2.action = fight.GetComponent<FireAction>();
+		m2.tooltipSkin = squareStyle;
+		m2.SetTooltipLabel(false);
+		m2.tooltip = "Click Fight to attack enemy towers.";
+		m2.tooltipHeight = 75;
+		m2.tooltipWidth = 100;
+		m2.tooltipLeftRel = -105;
+		m2.tooltipTopRel = 0;
 		//m2.guiSkin = squareStyle;
 		m2.action.click = click;
 		menuItems.Add(m2);

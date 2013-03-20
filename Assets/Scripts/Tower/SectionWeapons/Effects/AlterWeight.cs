@@ -71,7 +71,7 @@ public class AlterWeight : WeaponEffect
 	
 	public override string GetInfo(int damage)
 	{
-		return "Deals " + damage + " single target damage, and tags the target section for bonus damage on the next attack.";
+		return "Aims at your own tower, and lowers weight of targeted section.";
 
 	}
 }

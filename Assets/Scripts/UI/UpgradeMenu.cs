@@ -13,7 +13,10 @@ public class UpgradeMenu : Menu {
 	private GameObject upgradeButton2;
 	private string scriptName1 = "";
 	private string scriptName2 = "";
+	private string info1 = "";
+	private string info2 = "";
 	public GUISkin squareStyle;
+	MenuItem m1, m2;
 	
 	void Start() {
 		on = false;
@@ -35,7 +38,6 @@ public class UpgradeMenu : Menu {
 
 			upgradeButton1 = createGUIButton(scriptName1,"Poison",upgradeRect1);
 			numButtons++;
-			
 			upgradeButton2 = createGUIButton(scriptName2, "Alter Weight", upgradeRect2);
 			numButtons++;
 			firstUpdate = false;
@@ -51,21 +53,27 @@ public class UpgradeMenu : Menu {
 			{
 				scriptName1 = "ParalyzeAction";
 				goName1 = "Paralyze";
+				info1 = "Weapon is stunned. It won't deal damage until it is repaired.";
 				scriptName2 = "AlterWeightAction";
 				goName2 = "Alter Weight";
+				info2 = "Aims at your own tower, and lowers weight of targeted section.";
 			}
 			else if(TowerSelection.GetSelectedTower().faction.factionName == "Cowboys")
 			{
 				scriptName1 = "TagAction";
 				goName1 = "Tag Section";
+				info1 = "Deals single target damage, and tags the target section for bonus damage on the next attack.";
 				goName2 = "";
+				info2 = "";
 			}
 			else if (TowerSelection.GetSelectedTower().faction.factionName == "Area 51")
 			{
 				scriptName1 = "DrainAction";
 				goName1 = "Drain";
+				info1 = "Gives you some damage dealt as back health.";
 				scriptName2 = "ForceFieldAction";
 				goName2 = "Force Field";
+				info2 = "Prevents some damage to upgraded sections.";
 			}
 			else{
 				CombatLog.addLine("Error - Faction name not matched properly.");
@@ -81,11 +89,12 @@ public class UpgradeMenu : Menu {
 				CombatLog.addLine("Here");
 		
 			}
+			
 		}
 		if(!hasLoaded) {
 			this.guiSkin = squareStyle;
 			Rect damRect = new Rect(660,260,boxSize.x,boxSize.y);
-			createGUIButton("DamageAction","Upgrade",damRect);
+			createGUIButton("DamageAction","Upgrade Damage",damRect);
 			numButtons++;
 
 			Rect backRect = new Rect(660,300,boxSize.x,boxSize.y);
@@ -94,7 +103,15 @@ public class UpgradeMenu : Menu {
 			backSM.fromMenu = this.gameObject;
 			backSM.toMenu = this.transform.parent.gameObject;
 			numButtons++;
+			m1 = upgradeButton1.GetComponent<MenuItem>();
+			m2 = upgradeButton2.GetComponent<MenuItem>();
 			hasLoaded = true;
+		}
+		if(hasLoaded) {
+			m1.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m1.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
+			m2.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+			m2.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
 		}
 		base.Update();
 	}
@@ -171,6 +188,18 @@ public class UpgradeMenu : Menu {
 		m.action = upgradeButton.GetComponent(scriptName) as DefaultMenuAction;
 		m.action.click = click;		
 		m.text = goName;
+		m.tooltipSkin = squareStyle;
+		m.SetTooltipLabel(false);
+		if(upgradeButton == upgradeButton1) {
+			m.tooltip = info1;
+		}
+		else if(upgradeButton == upgradeButton2) {
+			m.tooltip = info2;	
+		}
+		m.tooltipHeight = 100;
+		m.tooltipWidth = 100;
+		m.tooltipLeftRel = -105;
+		m.tooltipTopRel = 0;
 		return upgradeButton;
 	}
 }
