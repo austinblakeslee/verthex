@@ -7,20 +7,10 @@ ModelImporter:
     100002: LeftEye
     100004: //RootNode
     100006: RightEye
-    100008: group
-    100010: GUI_popUp
-    100012: nativeAmerican_tower_bison_d1
-    100014: pasted__group
-    100016: Texture Group
     400000: Head
     400002: LeftEye
     400004: //RootNode
     400006: RightEye
-    400008: group
-    400010: GUI_popUp
-    400012: nativeAmerican_tower_bison_d1
-    400014: pasted__group
-    400016: Texture Group
     2300000: Head
     2300002: LeftEye
     2300004: RightEye

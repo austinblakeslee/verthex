@@ -47,8 +47,6 @@ ModelImporter:
     100082: transform5
     100084: transform6
     100086: transform7
-    100088: group
-    100090: GUI_popUp
     400000: //RootNode
     400002: forcefield
     400004: satellie1
@@ -93,8 +91,6 @@ ModelImporter:
     400082: transform5
     400084: transform6
     400086: transform7
-    400088: group
-    400090: GUI_popUp
     2300000: forcefield
     2300002: satellieDish1
     2300004: satellieDish2

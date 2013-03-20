@@ -12,15 +12,6 @@ ModelImporter:
     100012: //RootNode
     100014: Top
     100016: Wings
-    100018: group
-    100020: GUI_popUp
-    100022: HeadBottom
-    100024: LeftEye
-    100026: nativeAmerican_tower_owl_d0
-    100028: pasted__group
-    100030: RightEye
-    100032: UpperHead
-    100034: UpperHead 1
     400000: BeakBottom
     400002: BeakTop
     400004: Bottom
@@ -30,47 +21,25 @@ ModelImporter:
     400012: //RootNode
     400014: Top
     400016: Wings
-    400018: group
-    400020: GUI_popUp
-    400022: HeadBottom
-    400024: LeftEye
-    400026: nativeAmerican_tower_owl_d0
-    400028: pasted__group
-    400030: RightEye
-    400032: UpperHead
-    400034: UpperHead 1
     2300000: BeakBottom
     2300002: BeakTop
     2300004: Bottom
     2300006: Eyes
     2300008: Top
     2300010: Wings
-    2300012: HeadBottom
-    2300014: LeftEye
-    2300016: RightEye
-    2300018: UpperHead 1
     3300000: BeakBottom
     3300002: BeakTop
     3300004: Bottom
     3300006: Eyes
     3300008: Top
     3300010: Wings
-    3300012: HeadBottom
-    3300014: LeftEye
-    3300016: RightEye
-    3300018: UpperHead 1
     4300000: Bottom
     4300002: Top
     4300004: BeakTop
     4300006: BeakBottom
     4300008: Eyes
     4300010: Wings
-    4300012: HeadBottom
-    4300014: RightEye
-    4300016: LeftEye
-    4300018: UpperHead
     7400000: modo_Anim
-    7400002: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1

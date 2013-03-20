@@ -30,9 +30,6 @@ ModelImporter:
     100048: Mesh
     100050: 'Mesh '
     100052: Texture Group
-    100054: Default
-    100056: group
-    100058: pasted__GUI_popUp
     400000: //RootNode
     400002: pCube1
     400004: polySurface1
@@ -60,9 +57,6 @@ ModelImporter:
     400048: Mesh
     400050: 'Mesh '
     400052: Texture Group
-    400054: Default
-    400056: group
-    400058: pasted__GUI_popUp
     2300000: polySurface7
     2300002: waterTower_body
     2300004: waterTower_legs
@@ -70,7 +64,6 @@ ModelImporter:
     2300008: waterTower_base
     2300010: Mesh
     2300012: 'Mesh '
-    2300014: Default
     3300000: polySurface7
     3300002: waterTower_body
     3300004: waterTower_legs
@@ -78,7 +71,6 @@ ModelImporter:
     3300008: waterTower_base
     3300010: Mesh
     3300012: 'Mesh '
-    3300014: Default
     4300000: polySurface7
     4300002: waterTower_body
     4300004: waterTower_legs
@@ -86,7 +78,6 @@ ModelImporter:
     4300008: waterTower_base
     4300010: Mesh
     4300012: 'Mesh '
-    4300014: Default
     7400000: modo_Anim
     9500000: //RootNode
   materials:

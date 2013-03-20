@@ -9,22 +9,12 @@ ModelImporter:
     100006: //RootNode
     100008: RightEye
     100010: UpperHead
-    100012: group
-    100014: GUI_popUp
-    100016: nativeAmerican_tower_coyote_d0
-    100018: pasted__group
-    100020: Texture Group
     400000: Eyes
     400002: LeftEye
     400004: LowerJaw
     400006: //RootNode
     400008: RightEye
     400010: UpperHead
-    400012: group
-    400014: GUI_popUp
-    400016: nativeAmerican_tower_coyote_d0
-    400018: pasted__group
-    400020: Texture Group
     2300000: LeftEye
     2300002: LowerJaw
     2300004: RightEye

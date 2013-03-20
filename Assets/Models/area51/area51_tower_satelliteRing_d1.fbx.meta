@@ -25,8 +25,6 @@ ModelImporter:
     100038: satellieDishBot5
     100040: weaponCamera
     100042: weaponLocation
-    100044: group3
-    100046: GUI_popUp
     400000: //RootNode
     400002: group1
     400004: group2
@@ -49,8 +47,6 @@ ModelImporter:
     400038: satellieDishBot5
     400040: weaponCamera
     400042: weaponLocation
-    400044: group3
-    400046: GUI_popUp
     2300000: pasted__forcefield
     2300002: pasted__SatelliteBase
     2300004: satellieDish1

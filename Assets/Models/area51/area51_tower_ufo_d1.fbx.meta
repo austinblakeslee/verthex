@@ -11,8 +11,6 @@ ModelImporter:
     100010: ufo_body
     100012: weaponCamera
     100014: weaponLocation
-    100016: group1
-    100018: GUI_popUp
     400000: //RootNode
     400002: body
     400004: forcefield
@@ -21,8 +19,6 @@ ModelImporter:
     400010: ufo_body
     400012: weaponCamera
     400014: weaponLocation
-    400016: group1
-    400018: GUI_popUp
     2300000: body
     2300002: forcefield
     2300004: glass_dome
