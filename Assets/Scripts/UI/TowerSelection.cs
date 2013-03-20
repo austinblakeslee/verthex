@@ -37,8 +37,8 @@ public class TowerSelection : MonoBehaviour {
 	public static bool disableCameraPan = false;
 	
 	void Awake() {
-		materialBoxRect = new Rect(230, 600 - materialBox.y - padding, materialBox.x, materialBox.y);
-		weaponBoxRect = new Rect(460, 600 - weaponBox.y - padding, weaponBox.x, weaponBox.y);
+		materialBoxRect = new Rect(250, 600 - weaponBox.y , weaponBox.x, weaponBox.y);
+		weaponBoxRect = new Rect(475, 600 - weaponBox.y , weaponBox.x, weaponBox.y);
 		instance = this;
 	}
 	

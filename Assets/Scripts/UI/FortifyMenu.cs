@@ -20,24 +20,24 @@ public class FortifyMenu : Menu {
 	public override void Update() {
 		if(!hasLoaded) {
 			this.guiSkin = squareStyle;
-			Rect rpLabelRect = new Rect(660,180,boxSize.x,boxSize.y);
+			Rect rpLabelRect = new Rect(760,255,boxSize.x,boxSize.y);
 			GameObject rlabel = MakeBox ("RP",rpLabelRect);
 			rlabel.AddComponent("FortifyCostLabel");
 			rlabel.transform.parent = transform;
 			MenuItem m1 = rlabel.GetComponent<MenuItem>();
 			m1.action = rlabel.GetComponent<DefaultMenuAction>();
 			menuItems.Add(m1);
-			Rect weaponsLabelRect = new Rect(660,215,boxSize.x,boxSize.y);
+			Rect weaponsLabelRect = new Rect(760,295,boxSize.x,boxSize.y);
 			GameObject slabel = MakeBox ("SP",weaponsLabelRect);
 			slabel.AddComponent("FortifyHealthLabel");
 			slabel.transform.parent = transform;
 			MenuItem m3 = slabel.GetComponent<MenuItem>();
 			m3.action = slabel.GetComponent<DefaultMenuAction>();
 			menuItems.Add(m3);
-			Rect confRect = new Rect(660,250,boxSize.x,boxSize.y);
+			Rect confRect = new Rect(760,335,boxSize.x,boxSize.y);
 			createGUIButton("FortifyAction","Confirm",confRect);
 			numButtons++;
-			Rect backRect = new Rect(660,295,boxSize.x,boxSize.y);
+			Rect backRect = new Rect(760,375,boxSize.x,boxSize.y);
 			GameObject back = createGUIButton("SwitchMenu","Back",backRect);
 			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
 			backSM.fromMenu = this.gameObject;

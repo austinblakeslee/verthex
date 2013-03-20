@@ -34,14 +34,9 @@ public class MainMenu : Menu {
 	private MenuItem m3;
 	private MenuItem m4;
 	private MenuItem m5;
-	/*public Texture2D buildTexture;
-	public Texture2D upgradeTexture;
-	public Texture2D fortifyTexture;
-	public Texture2D fightTexture;
-	public Texture2D passTexture;*/
 	
 	void Start() {
-		buttonSize.x = 60;
+		buttonSize.x = 160;
 		buttonSize.y = 50;
 		this.on = true;
 		numButtons = 1;
@@ -88,7 +83,7 @@ public class MainMenu : Menu {
 			numButtons++;
 			
 			fight = makeFireButton(numButtons);
-			Rect fortifyButtonRect = new Rect(610,180,buttonSize.x, buttonSize.y);
+			Rect fortifyButtonRect = new Rect(760,255,buttonSize.x, buttonSize.y);
 			//fortifyButtonRect = FindPos(numButtons, fortifyButtonRect);
 			fortify = MakeButton("Fortify",fortifyButtonRect);
 			fortify.AddComponent("SwitchMenu");
@@ -112,7 +107,7 @@ public class MainMenu : Menu {
 			fortifyFM.squareStyle = squareStyle;
 			m3.action.click = click;
 			menuItems.Add(m3);
-			Rect upgradeButtonRect = new Rect(610,240 ,buttonSize.x, buttonSize.y);
+			Rect upgradeButtonRect = new Rect(760,315,buttonSize.x, buttonSize.y);
 			//upgradeButtonRect = FindPos(numButtons, upgradeButtonRect);
 			upgrade = MakeButton("Upgrade",upgradeButtonRect);
 			upgrade.AddComponent("SwitchMenu");
@@ -233,7 +228,7 @@ public class MainMenu : Menu {
 	}
 	
 	private GameObject makeFireButton(int i) {
-		Rect fightButtonRect = new Rect(610,300,buttonSize.x, buttonSize.y);
+		Rect fightButtonRect = new Rect(760,375,buttonSize.x, buttonSize.y);
 		//fightButtonRect = FindPos(numButtons, fightButtonRect);
 		GameObject fight = MakeButton("Fight",fightButtonRect);
 		fight.AddComponent("Menu");
@@ -273,13 +268,4 @@ public class MainMenu : Menu {
 		return fight;
 	}
 	
-	/*void OnGUI() {
-		if(this.on == true) {
-			GUI.Label (new Rect(730,20,75,75),buildTexture);
-			GUI.Label (new Rect(380,20,75,75),upgradeTexture);
-			GUI.Label (new Rect(380,20,75,75),fortifyTexture);
-			GUI.Label (new Rect(380,20,75,75),fightTexture);
-			GUI.Label (new Rect(730,20,75,75),passTexture);
-		}
-	}*/
 }
