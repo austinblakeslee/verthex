@@ -12,7 +12,6 @@ public class ForceFieldEffect : SectionEffect
 	{
 		this.effectType = "Force Field";
 		forceFieldStrength = fieldStrength;
-		forceFieldVisual = GameObject.Instantiate(GameValues.visualEffects["forceFieldVisual"] as GameObject, s.transform.Find("Center").position, s.transform.rotation) as GameObject;
 
 	}
 		
@@ -49,6 +48,11 @@ public class ForceFieldEffect : SectionEffect
 	 public override void Destruct ()
 	{
 		Object.Destroy(forceFieldVisual);
+	}
+	public override void Construct ()
+	{
+		if (forceFieldVisual == null)
+			forceFieldVisual = GameObject.Instantiate(GameValues.visualEffects["forceFieldVisual"] as GameObject, appliedSection.transform.Find("Center").position, appliedSection.transform.rotation) as GameObject;
 	}
 }
 

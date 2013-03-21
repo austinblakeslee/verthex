@@ -10,7 +10,6 @@ public class Blinded : WeaponEffect {
 	
 	public Blinded(int blindPercentage, SectionWeapon effectedWeapon, Section s) : base(effectedWeapon){
 		this.effectType = "Blinded";
-		blindedVisual = GameObject.Instantiate(GameValues.visualEffects["blindedVisual"] as GameObject, s.transform.Find("Center").position, s.transform.rotation) as GameObject;
 	}
 	
 	public Blinded(int blindPercentage, SectionWeapon effectedWeapon) : base(effectedWeapon)
@@ -77,6 +76,13 @@ public class Blinded : WeaponEffect {
 	public override void Destruct()
 	{
 		Object.Destroy(blindedVisual);
+	}
+	public override void Construct()
+	{
+		if (blindedVisual == null)
+		{
+			blindedVisual = GameObject.Instantiate(GameValues.visualEffects["blindedVisual"] as GameObject, appliedSection.transform.Find("Center").position, appliedSection.transform.rotation) as GameObject;
+		}
 	}
 	
 }

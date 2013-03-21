@@ -16,7 +16,6 @@ public class Tagged : SectionEffect
 		//visually show the tag
 		CombatLog.addLine("Section is tagged for a crit strike" );
 		critStrikeBonusPercentage = critBonusPercent;
-		taggedVisualEffect = GameObject.Instantiate(GameValues.visualEffects["taggedVisual"] as GameObject, new Vector3(s.transform.Find("Center").position.x,  s.transform.Find("Center").position.y, s.transform.Find("Center").position.z + 40), s.transform.rotation) as GameObject;
 	}	
 	public override void ApplyDamage (Section s, int power)
 	{
@@ -37,5 +36,10 @@ public class Tagged : SectionEffect
 	{
 		Object.Destroy(taggedVisualEffect);
 	}
-	
+	public override void Construct ()
+	{
+		if (taggedVisualEffect == null)
+			taggedVisualEffect = GameObject.Instantiate(GameValues.visualEffects["taggedVisual"] as GameObject, new Vector3(appliedSection.transform.Find("Center").position.x,  appliedSection.transform.Find("Center").position.y, appliedSection.transform.Find("Center").position.z + 40), appliedSection.transform.rotation) as GameObject;
+
+	}
 }

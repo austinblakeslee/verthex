@@ -41,6 +41,8 @@ public abstract class SectionEffect {
 		return upgradeLevel;
 	}
 	public virtual void Destruct(){}
+	public virtual void Construct(){}
+	
 	public virtual void Update(){}
 	
 }

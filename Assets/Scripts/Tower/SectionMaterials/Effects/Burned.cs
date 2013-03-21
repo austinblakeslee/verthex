@@ -14,7 +14,6 @@ public class Burned : SectionEffect
 		appliedSection = s;
 		damagePerTurn = _damagePerTurn;
 		numTurns = turns;
-		burnedVisualEffect = GameObject.Instantiate(GameValues.visualEffects["burnedVisual"] as GameObject, s.transform.Find("Center").position, s.transform.rotation) as GameObject;
 	}
 	
 	
@@ -40,5 +39,11 @@ public class Burned : SectionEffect
 	{
 		Object.Destroy(burnedVisualEffect);
 	}
+	public override void Construct()
+	{
+		if (burnedVisualEffect == null)
+			burnedVisualEffect = GameObject.Instantiate(GameValues.visualEffects["burnedVisual"] as GameObject, appliedSection.transform.Find("Center").position, appliedSection.transform.rotation) as GameObject;
+	}
+	
 	
 }

@@ -45,4 +45,12 @@ public class Poisoned : SectionEffect
 	{
 			Object.Destroy(poisonedVisual);
 	}
+	public override void Construct ()
+	{
+		if (poisonedVisual == null)
+			poisonedVisual = GameObject.Instantiate(GameValues.visualEffects["poisonedVisual"] as GameObject, appliedSection.transform.Find("Center").position, appliedSection.transform.rotation) as GameObject;
+
+			
+	}
+	
 }

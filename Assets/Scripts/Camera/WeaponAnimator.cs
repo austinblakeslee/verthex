@@ -238,6 +238,8 @@ public class WeaponAnimator : MonoBehaviour {
 						shakeSpeed = -shakeSpeed;
 						shakeDelta = 0.0f;
 					}
+					hitSection.attributes.material.GetSectionEffect().Construct();
+					hitSection.attributes.weapon.GetEffect().Construct();
 				}
 			} else if(animationStage == "miss") {
 				AudioSource.PlayClipAtPoint(missSound, new Vector3(0,0,0));

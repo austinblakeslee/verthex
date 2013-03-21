@@ -43,4 +43,5 @@ public abstract class WeaponEffect {
 		return canAttackSelf;
 	}
 	public virtual void Destruct(){}
+	public virtual void Construct(){}
 }

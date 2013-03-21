@@ -12,7 +12,6 @@ public class BlindedEffect : SectionEffect
 	{
 		this.effectType = "Blinded";
 		missPercentage = blindPercentage;
-		blindedVisualEffect = GameObject.Instantiate(GameValues.visualEffects["blindedVisual"] as GameObject, effectedSection.transform.Find("Center").position, effectedSection.transform.rotation) as GameObject; 
 	}
 		
 	public override void ApplyDamage(Section s, int power)
@@ -71,6 +70,13 @@ public class BlindedEffect : SectionEffect
 	public override void Destruct ()
 	{
 		Object.Destroy(blindedVisualEffect);
+	}
+	public override void Construct()
+	{
+		if (blindedVisualEffect == null)
+		{
+			blindedVisualEffect = GameObject.Instantiate(GameValues.visualEffects["blindedVisual"] as GameObject, appliedSection.transform.Find("Center").position, appliedSection.transform.rotation) as GameObject; 
+		}
 	}
 }
 
