@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Cannon : SectionWeapon {
     public Cannon () {
-        this.damage = 90;
+        this.damage = 180;
         this.spcost = 200;
-        this.cost = 400;
+        this.cost = 500;
         this.weight = 80;
         this.wtype = "Cannon";
 		this.range = 1;

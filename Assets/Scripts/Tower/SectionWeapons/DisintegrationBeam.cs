@@ -4,7 +4,7 @@ using System.Collections;
 public class DisintegrationBeam : SectionWeapon {
     public DisintegrationBeam
      () {
-        this.damage = 60;
+        this.damage = 110;
         this.spcost = 50;
         this.cost = 250;
         this.weight = 30;

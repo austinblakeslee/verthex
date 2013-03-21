@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Spirit2 : SectionWeapon {
     public Spirit2 () {
-        this.damage = 70;
+        this.damage = 150;
         this.spcost = 200;
         this.cost = 300;
         this.weight = 80;

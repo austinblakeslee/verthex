@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GattlingGun : SectionWeapon {
     public GattlingGun () {
-        this.damage = 75;
+        this.damage = 135;
         this.spcost = 50;
         this.cost = 250;
         this.weight = 30;

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EyeBlaster : SectionWeapon {
     public EyeBlaster () {
-        this.damage = 80;
+        this.damage = 160;
         this.spcost = 200;
         this.cost = 350;
         this.weight = 60;
