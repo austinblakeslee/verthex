@@ -10,5 +10,7 @@ public class SatelliteRing : SectionMaterial {
         this.SPPerRepair = 100;
         this.costPerRepair = 50;
         this.mtype = "Satellite Ring";
+		this.texture = GameValues.textures["satelliteRing"];
+
     }
 }

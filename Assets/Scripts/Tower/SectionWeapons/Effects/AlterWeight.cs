@@ -9,7 +9,7 @@ public class AlterWeight : WeaponEffect
 	protected int numTimesModifiable = 2;
 	protected Dictionary<Section, int> modifiedSecs;
 			
-	public AlterWeight() : base() {
+	public AlterWeight(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Weight Modification";
 		canAttackSelf = true;
 		modifiedSecs = new Dictionary<Section, int>();
@@ -71,7 +71,7 @@ public class AlterWeight : WeaponEffect
 	
 	public override string GetInfo(int damage)
 	{
-		return "Aims at your own tower, and lowers weight of targeted section.";
+		return "Deals " + damage + " single target damage, and tags the target section for bonus damage on the next attack.";
 
 	}
 }

@@ -11,5 +11,7 @@ public class Coyote : SectionMaterial {
         this.costPerRepair = 75;
         this.mtype = "Coyote";
 		//this.sectionEffect = new ForceFieldEffect(80);
+		this.texture = GameValues.textures["coyote"];
+
     }
 }

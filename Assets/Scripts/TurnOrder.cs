@@ -37,8 +37,16 @@ public class TurnOrder : MonoBehaviour {
 	
 	void Start () {
 		instance = this;
-		player1 = new Player(1, player1Color, GameValues.intValues["baseResources"]);
-		player2 = new Player(2, player2Color, GameValues.intValues["baseResources"]);
+		if (GameType.getGameType() != "Survival")
+ 		{
+ 			player1 = new Player(1, player1Color, GameValues.intValues["baseResources"]);
+ 			player2 = new Player(2, player2Color, GameValues.intValues["baseResources"]);
+ 		}
+ 		else
+ 		{
+ 			player1 = new Player(1, player1Color, GameValues.intValues["baseResources"] * 8);
+ 			player2 = new Player(2, player2Color, GameValues.intValues["baseResources"] * 8);	
+ 		}
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			myPlayer = player1;
 			otherPlayer = player2;
@@ -53,7 +61,7 @@ public class TurnOrder : MonoBehaviour {
 		turnNum = 0;
 		actionNum = 0;
 
-		ceasefire = 2;
+		ceasefire = 1;
 		Faction[] factions = new Faction[3] { new Totem(), new Cowboys(), new Area51() };
 		if (player1Bases.Length == 0)
 		{
@@ -105,13 +113,13 @@ public class TurnOrder : MonoBehaviour {
 			//playerText.guiSkin = player2Box;
 			playerText.text = "Player 2";
 			if(actionsLeft != null) {
-				if(player1Confirm) {
-					actionsLeft.text = "0";
-				}
-				else {
-					actionsLeft.text = ""+(3-actionNum);
-				}
-			}
+ 				if(player1Confirm) {
+ 					actionsLeft.text = "0";
+ 				}
+ 				else {
+ 					actionsLeft.text = ""+(3-actionNum);
+ 				}
+ 			}
 		}
 		if(actionQueue != null) {
 			actionQueue.text = "Actions:\nAction 1: "+myActions[0]+"\nAction 2: "+myActions[1]+"\nAction 3: "+myActions[2];
@@ -294,8 +302,10 @@ public class TurnOrder : MonoBehaviour {
 			ceasefireIcon.visible = false;
 			CombatLog.addLineNoPlayer("!!! CEASEFIRE HAS ENDED !!!");
 		}
-		player1.AccrueResources();
-		player2.AccrueResources();
+		if (GameType.getGameType() != "Survival"){
+			player1.AccrueResources();
+ 			player2.AccrueResources();
+		}
 		actionNum = 0;
 		TowerSelection.LocalSelectSection(myPlayer.GetTower(1), -1);
 		

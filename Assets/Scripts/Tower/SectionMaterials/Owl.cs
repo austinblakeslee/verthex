@@ -10,5 +10,6 @@ public class Owl : SectionMaterial {
         this.SPPerRepair = 100;
         this.costPerRepair = 50;
         this.mtype = "Owl";
+		this.texture = GameValues.textures["owl"];
     }
 }

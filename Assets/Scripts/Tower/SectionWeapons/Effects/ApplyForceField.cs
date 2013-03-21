@@ -7,11 +7,11 @@ public class ApplyForceField : WeaponEffect
 	protected List<Section> taggedSections = new List<Section>();
 	protected int forceFieldStrength = 50;//Percentage of protection the force field will offer
 			
-	public ApplyForceField() : base() {
+	public ApplyForceField(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Force Field";
 		canAttackSelf = true;
 	}
-	public ApplyForceField(int _forceFieldStrength) : this()
+	public ApplyForceField(int _forceFieldStrength, SectionWeapon effectedWeapon) : this(effectedWeapon)
 	{
 		forceFieldStrength = _forceFieldStrength;
 	}
@@ -29,6 +29,7 @@ public class ApplyForceField : WeaponEffect
 			//if force field is not already applied and you're attacking your own tower, apply forceField
 			if (s.attributes.material.GetSectionEffect().GetEffectType() != "Force Field" && t.GetPlayerNum() == self.GetPlayerNum())
 			{	
+				s.attributes.material.GetSectionEffect().Destruct();
 				s.attributes.material.SetSectionEffect(new ForceFieldEffect(s, forceFieldStrength));
 				CombatLog.addLine("own " + s.attributes.myTower.faction + " section has FF.");
 			}
@@ -54,7 +55,7 @@ public class ApplyForceField : WeaponEffect
 	
 	public override string GetInfo(int damage)
 	{
-		return "Prevents some damage to upgraded sections.";
+		return "Deals " + damage + " single target damage, and tags the target section for bonus damage on the next attack.";
 
 	}
 }

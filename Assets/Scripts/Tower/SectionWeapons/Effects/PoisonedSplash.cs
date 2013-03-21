@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PoisonedSplash : WeaponEffect {
 	protected int poisonedDamageModifier = 30;//Percentage of bonus damage a crit strike will do.
 
-	public PoisonedSplash() : base() {
+	public PoisonedSplash(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Posioned";
 	}
 	

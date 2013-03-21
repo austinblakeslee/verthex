@@ -10,5 +10,8 @@ public class UFO : SectionMaterial {
         this.SPPerRepair = 50;
         this.costPerRepair = 75;
         this.mtype = "UFO";
+		
+		this.texture = GameValues.textures["ufo"];
+
     }
 }

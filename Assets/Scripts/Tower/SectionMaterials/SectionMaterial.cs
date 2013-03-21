@@ -10,6 +10,8 @@ public class SectionMaterial {
 	public int costPerRepair;
 	public string mtype = "abstract";
 	public SectionEffect sectionEffect = new DefaultSectionEffect();
+	public Texture texture;
+
 
 	
 	public static string[] materials = new string[3] {"Wood", "Stone", "Steel"};

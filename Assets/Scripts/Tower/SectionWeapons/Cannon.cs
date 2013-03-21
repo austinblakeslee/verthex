@@ -9,6 +9,6 @@ public class Cannon : SectionWeapon {
         this.weight = 80;
         this.wtype = "Cannon";
 		this.range = 1;
-		this.maxUpgradeEffect = new Burn();
+		this.maxUpgradeEffect = new Burn(this);
     }
 }

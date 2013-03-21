@@ -10,7 +10,7 @@ public class Spirit2 : SectionWeapon {
         this.range = 3;
         this.wtype = "Spirit 2";
 		this.range = 2;
-		this.maxUpgradeEffect = new PoisonSplash();
+		this.maxUpgradeEffect = new PoisonSplash(this);
 
     }
 }

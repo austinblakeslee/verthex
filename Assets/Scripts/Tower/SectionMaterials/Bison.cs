@@ -11,5 +11,6 @@ public class Bison : SectionMaterial {
         this.costPerRepair = 75;
         this.mtype = "Bison";
 		//this.sectionEffect = new Burned(20);
+		this.texture = GameValues.textures["bison"];
     }
 }

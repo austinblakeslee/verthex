@@ -34,10 +34,11 @@ public class UpgradeMenu : Menu {
 			scriptName1 = "ParalyzeAction";
 			scriptName2 = "AlterWeightAction";
 			Rect upgradeRect1 = new Rect(760,255,boxSize.x,boxSize.y);
-			Rect upgradeRect2 = new Rect(760,295,boxSize.x,boxSize.y);
+ 			Rect upgradeRect2 = new Rect(760,295,boxSize.x,boxSize.y);
 
 			upgradeButton1 = createGUIButton(scriptName1,"Poison",upgradeRect1);
 			numButtons++;
+			
 			upgradeButton2 = createGUIButton(scriptName2, "Alter Weight", upgradeRect2);
 			numButtons++;
 			firstUpdate = false;
@@ -62,16 +63,18 @@ public class UpgradeMenu : Menu {
 			{
 				scriptName1 = "TagAction";
 				goName1 = "Tag Section";
-				info1 = "Deals single target damage, and tags the target section for bonus damage on the next attack.";
-				goName2 = "";
-				info2 = "";
+				info1 = "Deals single target damage, and tags the target section for bonus damage.";
+				scriptName2 = "BlindAction";
+				goName2 = "Blind";
+				info2 = "Deals single target damage, and reduces the accuracy of the targeted section.";
+				
 			}
 			else if (TowerSelection.GetSelectedTower().faction.factionName == "Area 51")
 			{
 				scriptName1 = "DrainAction";
 				goName1 = "Drain";
-				info1 = "Gives you some damage dealt as back health.";
 				scriptName2 = "ForceFieldAction";
+				info1 = "Gives you some damage dealt as health.";
 				goName2 = "Force Field";
 				info2 = "Prevents some damage to upgraded sections.";
 			}
@@ -79,17 +82,7 @@ public class UpgradeMenu : Menu {
 				CombatLog.addLine("Error - Faction name not matched properly.");
 			}
 			upgradeButton1 = editUpgradeButton(upgradeButton1, oldScriptName1, scriptName1, goName1);
-			if (goName2 != "")
-			{	
-
-				upgradeButton2 = editUpgradeButton(upgradeButton2, oldScriptName2, scriptName2, goName2);
-
-			}
-			else{
-				CombatLog.addLine("Here");
-		
-			}
-			
+			upgradeButton2 = editUpgradeButton(upgradeButton2, oldScriptName2, scriptName2, goName2);
 		}
 		if(!hasLoaded) {
 			this.guiSkin = squareStyle;
@@ -97,22 +90,23 @@ public class UpgradeMenu : Menu {
 			createGUIButton("DamageAction","Upgrade Damage",damRect);
 			numButtons++;
 
-			Rect backRect = new Rect(760,375,boxSize.x,boxSize.y);
+			Rect backRect = new Rect(760,375,boxSize.x,boxSize.y);			
 			GameObject back = createGUIButton("SwitchMenu","Back",backRect);
 			SwitchMenu backSM = back.GetComponent<SwitchMenu>();
 			backSM.fromMenu = this.gameObject;
 			backSM.toMenu = this.transform.parent.gameObject;
 			numButtons++;
+			
 			m1 = upgradeButton1.GetComponent<MenuItem>();
 			m2 = upgradeButton2.GetComponent<MenuItem>();
 			hasLoaded = true;
 		}
 		if(hasLoaded) {
 			m1.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
-			m1.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
-			m2.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
+ 			m1.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
+ 			m2.tooltipLeftRel = (Input.mousePosition.x * (960f/Screen.width));
 			m2.tooltipTopRel = (600) - ((Input.mousePosition.y) * (600f/Screen.height));
-		}
+	  	}
 		base.Update();
 	}
 	

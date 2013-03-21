@@ -10,5 +10,8 @@ public class JailCell : SectionMaterial {
         this.SPPerRepair = 50;
         this.costPerRepair = 75;
         this.mtype = "Jail Cell";
-    }
+    		this.texture = GameValues.textures["jailCell"];
+
+	}
+	
 }

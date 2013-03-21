@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Burn : WeaponEffect {
 	public int burnPercentage = 40;
-	public Burn() : base() {
+	public Burn(SectionWeapon effectedWeapon) : base(effectedWeapon) { 
 		this.effectType = "Burn";
 	}
 	

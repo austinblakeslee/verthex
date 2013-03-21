@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Drain : WeaponEffect {
 	private int drainPercentage = 40;
-	public Drain() : base() {
+	public Drain(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Drain";
 	}
 	
@@ -35,7 +35,7 @@ public class Drain : WeaponEffect {
 	}
 	
 	public override string GetInfo(int damage) {
-		return "Gives you some damage dealt as back health.";
+		return "Deals " + damage + " single-target damage.";
 	}
 	public void Heal(int damage, int center, Tower t){
 		int heal = (damage*drainPercentage)/100; //40 percent

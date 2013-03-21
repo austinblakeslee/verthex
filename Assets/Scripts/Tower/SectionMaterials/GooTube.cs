@@ -10,5 +10,7 @@ public class GooTube : SectionMaterial {
         this.SPPerRepair = 75;
         this.costPerRepair = 75;
         this.mtype = "Goo Tube";
-    }
+ 		this.texture = GameValues.textures["gooTube"];
+
+	}
 }

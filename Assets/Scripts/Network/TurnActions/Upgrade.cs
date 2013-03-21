@@ -7,7 +7,7 @@ public class Upgrade : TurnAction {
 	public int sectionNum;
 	public int upgradeChoice;
 	
-	private static string[] upgradeChoices = new string[9] {"Damage", "AoE", "DoT", "Drain", "Paralyze", "Tag", "Poison", "Alter Weight", "Force Field"};
+	private static string[] upgradeChoices = new string[10] {"Damage", "AoE", "DoT", "Drain", "Paralyze", "Tag", "Poison", "Alter Weight", "Force Field", "Blind"};
 	
 	public Upgrade(string actionMessage) : base("Upgrade") {
 		ParseActionMessage(actionMessage);
@@ -59,36 +59,40 @@ public class Upgrade : TurnAction {
 			if(weapon.GetEffect().GetEffectType() == "Multi") {
 				weapon.GetEffect().Upgrade();
 			} else {
-				weapon.SetWeaponEffect(new AreaOfEffect());
+				weapon.SetWeaponEffect(new AreaOfEffect(weapon));
 			}
 		} else if(upgrade == "DoT") {
 			if(weapon.GetEffect().GetEffectType() == "Burn") {
 				weapon.GetEffect().Upgrade();
 			} else if(weapon.GetEffect().GetEffectType() == "none") {
-				weapon.SetWeaponEffect(new Burn());
+				weapon.SetWeaponEffect(new Burn(weapon));
 			}
 		} else if (upgrade == "Tag")
 		{
-			weapon.SetWeaponEffect(new AimCritStrike());
+			weapon.SetWeaponEffect(new AimCritStrike(weapon));
 		} else if (upgrade == "Drain")
 		{
-			weapon.SetWeaponEffect(new Drain());
+			weapon.SetWeaponEffect(new Drain(weapon));
 		}
 		else if (upgrade == "Paralyze")
 		{
-			weapon.SetWeaponEffect (new Paralyze());
+			weapon.SetWeaponEffect (new Paralyze(weapon));
 		}
 		else if (upgrade == "Poison")
 		{
-			weapon.SetWeaponEffect(new PoisonSplash());
+			weapon.SetWeaponEffect(new PoisonSplash(weapon));
 		}
 		else if (upgrade == "Alter Weight")
 		{
-			weapon.SetWeaponEffect(new AlterWeight());
+			weapon.SetWeaponEffect(new AlterWeight(weapon));
 		}
 		else if (upgrade == "Force Field")
 		{
-			weapon.SetWeaponEffect(new ApplyForceField());
+			weapon.SetWeaponEffect(new ApplyForceField(weapon));
+		}
+		else if (upgrade == "Blind")
+		{
+			weapon.SetWeaponEffect(new Blind(weapon));
 		}
 		else{
 			Debug.Log ("Error - Upgrade is probably tagged improperly");

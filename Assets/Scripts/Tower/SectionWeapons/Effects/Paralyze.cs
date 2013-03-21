@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Paralyze : WeaponEffect {
 
-	public Paralyze() : base() {
+	public Paralyze(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Paralyze";
 	}
 	
@@ -23,7 +23,8 @@ public class Paralyze : WeaponEffect {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
 			//t.DamageSection(center, damage);
 			t.GetSection (center).attributes.material.GetSectionEffect().ApplyDamage(t.GetSection(center), damage);
-
+		
+			t.GetSection(center).attributes.material.GetSectionEffect().Destruct();
 			t.GetSection(center).attributes.material.SetSectionEffect(new Paralyzed(t.GetSection(center)));
 			CombatLog.addLine("Section is paralyzed");
 		} else if(center < 0) {
@@ -36,7 +37,7 @@ public class Paralyze : WeaponEffect {
 	}
 	
 	public override string GetInfo(int damage) {
-		return "Causes hit sections to waste next attack.";
+		return "Deals " + damage + " single-target damage.";
 	}
 	
 	public void Stun(Tower t, int center){

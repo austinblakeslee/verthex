@@ -7,7 +7,7 @@ public class AreaOfEffect : WeaponEffect {
 	private List<int> numTargets = new List<int> {2, 3, 4, 5};
 	private List<float> percentDamage = new List<float> {0.5f, 0.4f, 0.35f, 0.32f};
 
-	public AreaOfEffect() : base() {
+	public AreaOfEffect(SectionWeapon effectedWeapon) : base(effectedWeapon){
 		this.effectType = "Multi";
 	}
 	

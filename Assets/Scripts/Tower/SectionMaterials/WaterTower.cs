@@ -10,5 +10,7 @@ public class WaterTower : SectionMaterial {
         this.SPPerRepair = 100;
         this.costPerRepair = 50;
         this.mtype = "Water Tower";
+		this.texture = GameValues.textures["waterTower"];
+
     }
 }
