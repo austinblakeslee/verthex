@@ -146,14 +146,14 @@ public class TowerSelection : MonoBehaviour {
 		/* section material label */
 		left = 15;
 		top = 15;
-		height = 30;
+		height = 40;
 		width = 50;
 		GUI.Label(new Rect(left, top, width, height), selectedSection.attributes.material.mtype);
 		
 		/* dot effect */
 		//if(selectedSection.attributes.material.GetSectionEffect().GetType() != "Default") {
 			left = 15;
-			top = 45;
+			top = 50;
 			height = 30;
 			width = 200;
 			
