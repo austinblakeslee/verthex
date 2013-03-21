@@ -208,8 +208,11 @@ public class WeaponAnimator : MonoBehaviour {
 					GameObject.Instantiate(hitParticle, hitSection.transform.position, hitSection.transform.rotation);
 					//Create Damage Text to display on screen
 					damageText.text = firingSection.GetComponent<Section>().attributes.weapon.GetDamage().ToString();
-					cloneDamageText = Instantiate(damageText, damageLocale, Quaternion.identity);
-					PlayWeaponHitSound();
+					cloneDamageText = null;
+					if (!firingSection.attributes.weapon.GetEffect().CanAttackSelf()){
+						cloneDamageText = Instantiate(damageText, damageLocale, Quaternion.identity);
+						PlayWeaponHitSound();
+					}
 					animationStage = "hitPause";
 				} else {
 					animationStage = "end";
@@ -220,7 +223,8 @@ public class WeaponAnimator : MonoBehaviour {
 					sectionCounter++;
 					animationStage = "hit";
 					fireTime = 0;
-					Destroy(cloneDamageText);
+					if (cloneDamageText != null)
+						Destroy(cloneDamageText);
 				} else {
 					fireTime += Time.deltaTime;
 					projectile.Translate(new Vector3(0, 0, projectileSpeed));
