@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ApplyForceField : WeaponEffect
 {
 	protected List<Section> taggedSections = new List<Section>();
-	protected int forceFieldStrength = 50;//Percentage of protection the force field will offer
+	protected int forceFieldStrength = 100;//Percentage of protection the force field will offer
 			
 	public ApplyForceField(SectionWeapon effectedWeapon) : base(effectedWeapon) {
 		this.effectType = "Force Field";

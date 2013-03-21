@@ -6,12 +6,15 @@ public class Burned : SectionEffect
 {
 	public int damagePerTurn;
 	public int numTurns = 3;
+	public GameObject burnedVisualEffect;
 
-	public Burned(int _damagePerTurn, Section _burnedSection)
+	public Burned(int _damagePerTurn, Section s, int turns)
 	{
 		this.effectType = "Burned";
-		appliedSection = _burnedSection;
+		appliedSection = s;
 		damagePerTurn = _damagePerTurn;
+		numTurns = turns;
+		burnedVisualEffect = GameObject.Instantiate(GameValues.visualEffects["burnedVisual"] as GameObject, s.transform.Find("Center").position, s.transform.rotation) as GameObject;
 	}
 	
 	
@@ -19,6 +22,7 @@ public class Burned : SectionEffect
 		//Damage (damagePerTurn);
 		if (numTurns <= 0)
 		{
+			Destruct ();
 			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect(appliedSection));	//destroy this script/apply DefaultEffect to the section 
 		}
 		numTurns --;
@@ -30,6 +34,11 @@ public class Burned : SectionEffect
 	}
 	public override string GetInfo ()
 	{
-		return "Burned for " + (numTurns+1) + " more turns.";
+		return "Burned for " + (numTurns) + " more turns.";
 	}
+	public override void Destruct ()
+	{
+		Object.Destroy(burnedVisualEffect);
+	}
+	
 }

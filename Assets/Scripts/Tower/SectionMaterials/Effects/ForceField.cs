@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ForceFieldEffect : SectionEffect
 {
-	public int forceFieldStrength = 40;
+	public int forceFieldStrength = 100;
 	public int numTurns = 2;
 	public GameObject forceFieldVisual;
 	

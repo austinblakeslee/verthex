@@ -33,10 +33,10 @@ public class SectionWeapon {
 	}
 	
 	public void Upgrade() {//UpgradeLevel()
-		if (upgradeLevel < maxUpgradeLevel){
+		if (upgradeLevel+1 < maxUpgradeLevel){
 		 	upgradeLevel++;
 		}
-		if (upgradeLevel == maxUpgradeLevel){
+		if (upgradeLevel+1 == maxUpgradeLevel){
 			SetWeaponEffect(maxUpgradeEffect);
 		}
 	}

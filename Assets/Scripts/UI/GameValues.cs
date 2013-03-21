@@ -30,6 +30,7 @@ public class GameValues : MonoBehaviour {
 	public GameObject blindedVisual;
 	public GameObject taggedVisual;
 	public GameObject poisonedVisual;
+	public GameObject burnedVisual;
 	public Texture owl;
 	public Texture bison;
 	public Texture coyote;
@@ -54,6 +55,7 @@ public class GameValues : MonoBehaviour {
 			visualEffects.Add ("blindedVisual", blindedVisual);
 			visualEffects.Add ("taggedVisual", taggedVisual);
 			visualEffects.Add ("poisonedVisual", poisonedVisual);
+			visualEffects.Add("burnedVisual", burnedVisual);
 			
 			textures.Add("owl", owl);
 			textures.Add ("bison", bison);

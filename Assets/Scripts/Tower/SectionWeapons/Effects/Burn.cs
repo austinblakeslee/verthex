@@ -20,8 +20,9 @@ public class Burn : WeaponEffect {
 		List<Section> sections = GetDamagedSections(t, center);
 		if(sections.Count >= 1) {
 			CombatLog.addLine("Hit section " + (center+1) + " for " + damage + " damage.");
-			t.GetSection(center).attributes.material.GetSectionEffect().ApplyDamage(t.GetSection(center), damage);
-			t.GetSection(center).attributes.material.SetSectionEffect(new Burned((damage * burnPercentage / 100), t.GetSection(center)));
+			t.GetSection(center).attributes.material.GetSectionEffect().ApplyDamage(t.GetSection(center), damage);		
+			t.GetSection(center).attributes.material.GetSectionEffect().Destruct();
+			t.GetSection(center).attributes.material.SetSectionEffect(new Burned(damage/3, t.GetSection(center), 2));
 			CombatLog.addLine("Section is burned");
 		} else if(center < 0) {
 			CombatLog.addLine("Attack was too low");

@@ -44,8 +44,8 @@ public class TurnOrder : MonoBehaviour {
  		}
  		else
  		{
- 			player1 = new Player(1, player1Color, GameValues.intValues["baseResources"] * 8);
- 			player2 = new Player(2, player2Color, GameValues.intValues["baseResources"] * 8);	
+ 			player1 = new Player(1, player1Color, GameValues.intValues["baseResources"] * 9);
+ 			player2 = new Player(2, player2Color, GameValues.intValues["baseResources"] * 9);	
  		}
 		if(Network.isServer || GameType.getGameType() == "Local") {
 			myPlayer = player1;
