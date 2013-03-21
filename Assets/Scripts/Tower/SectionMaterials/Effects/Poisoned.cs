@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Poisoned : SectionEffect
 {
-	public int numTurns = 3;
+	public int numAttacks = 1;
 	public int poisonDamagePercentage = 35;
 	public GameObject poisonedVisual;
 
@@ -18,28 +18,28 @@ public class Poisoned : SectionEffect
 	{
 		int damageToDo = appliedSection.attributes.weapon.GetDamage() * poisonDamagePercentage / 100;	
 		Tower t = appliedSection.attributes.myTower;
-		if (appliedSection.attributes.height > 1)
+		if (appliedSection.attributes.height >= 1)
 		{
-			ApplyDamage(t.GetSection((appliedSection.attributes.height - 0)), damageToDo);
+			ApplyDamage(t.GetSection((appliedSection.attributes.height - 1)), damageToDo);
 		}
-		if(appliedSection.attributes.height >= 0 && appliedSection.attributes.height < t.GetHeight()) {
-			Debug.Log ("Not on top");
-			ApplyDamage(t.GetSection((appliedSection.attributes.height)), damageToDo);
+		if(appliedSection.attributes.height >= 0 && appliedSection.attributes.height < t.GetHeight()-1) {
+			Debug.Log (appliedSection.attributes.height + " = height");
+			ApplyDamage(t.GetSection((appliedSection.attributes.height)+1), damageToDo);
 		}
+		numAttacks--;
 	}
 	
 	public override void EndTurnEffect(){
-		if (numTurns <= 0)
+		if (numAttacks <= 0)
 		{
 			appliedSection.attributes.material.SetSectionEffect(new DefaultSectionEffect(appliedSection));
 			Destruct();
 		}
-		numTurns --;
 
 	}
 	public override string GetInfo ()
 	{
-		return "Poisoned for " + (numTurns+1) + " more turns.";
+		return "Poisoned for " + (numAttacks) + " more attacks.";
 	}
 	public override void Destruct ()
 	{

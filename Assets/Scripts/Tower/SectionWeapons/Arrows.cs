@@ -11,6 +11,5 @@ public class Arrows : SectionWeapon {
         this.wtype = "Arrows";
     	this.range = 3;
 		this.maxUpgradeEffect = new PoisonSplash(this);
-		this.weaponEffect = new Paralyze(this);
 	}
 }

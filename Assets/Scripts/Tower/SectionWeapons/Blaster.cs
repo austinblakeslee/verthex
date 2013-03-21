@@ -10,6 +10,5 @@ public class Blaster : SectionWeapon {
         this.wtype = "Blaster";
     	this.range = 3;
 		this.maxUpgradeEffect = new AreaOfEffect(this);
-		this.weaponEffect = new ApplyForceField(this);
 	}
 }

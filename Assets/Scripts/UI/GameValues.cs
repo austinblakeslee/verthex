@@ -34,7 +34,7 @@ public class GameValues : MonoBehaviour {
 	public Texture bison;
 	public Texture coyote;
 	public Texture gooTube;
-	public Texture sateliteRing;
+	public Texture satelliteRing;
 	public Texture ufo;
 	public Texture waterTower;
 	public Texture saloon;
@@ -59,7 +59,7 @@ public class GameValues : MonoBehaviour {
 			textures.Add ("bison", bison);
 			textures.Add("coyote",coyote);
 			textures.Add("gooTube", gooTube);
-			textures.Add("sateliteRing", sateliteRing);
+			textures.Add("satelliteRing", satelliteRing);
 			textures.Add("ufo", ufo);
 			textures.Add("waterTower", waterTower);
 			textures.Add("saloon", saloon);

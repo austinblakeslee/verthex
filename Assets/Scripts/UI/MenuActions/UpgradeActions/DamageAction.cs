@@ -8,7 +8,7 @@ public class DamageAction : DefaultMenuAction,MenuAction {
 		if(s != null) {
 			int cost = 200;
 			Player p = TurnOrder.myPlayer;
-			if(s.attributes.weapon.GetUpgradeLevel() >= s.attributes.weapon.maxUpgradeLevel) {
+			if(s.attributes.weapon.GetUpgradeLevel()+1 >= s.attributes.weapon.maxUpgradeLevel) {
 				ValueStore.helpMessage = "Damage cannot be upgraded further.";
 			} else if(cost > p.GetResources()) {
 				ValueStore.helpMessage = "You don't have enough RP to do that!";

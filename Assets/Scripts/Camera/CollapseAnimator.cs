@@ -58,6 +58,8 @@ public class CollapseAnimator : MonoBehaviour {
 		AudioSource.PlayClipAtPoint(soundEffect, new Vector3(0,0,0));
 		GameObject.Instantiate(collapseParticle, collapsingSection.transform.position, collapsingSection.transform.rotation);
 		collapseSection = true;
+		collapsingSection.attributes.weapon.GetEffect().Destruct();
+		collapsingSection.attributes.material.GetSectionEffect().Destruct();
 	}
 	
 	public static void Animate(Tower t) {
