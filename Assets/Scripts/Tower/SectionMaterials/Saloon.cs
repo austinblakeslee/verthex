@@ -8,7 +8,7 @@ public class Saloon : SectionMaterial {
         this.cost = 150;
         this.weight = 30;//0.05;
         this.SPPerRepair = 75;
-        this.costPerRepair = 75;
+        this.costPerRepair = 150;
         this.mtype = "Saloon";
 		this.texture = GameValues.textures["saloon"];
 
